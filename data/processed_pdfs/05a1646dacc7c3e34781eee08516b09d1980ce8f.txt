@@ -1,0 +1,29 @@
+Synthesis of heparin immobilized-magnetically addressable cellulose nanofibers for biomedical applications
+
+Composite fibers digested using heparinase I,II and III enzyme overnight and the resulting disaccharide mixture was then passed through a column to achieve chromatographic separation. Finally, the eluates were subjected to mass spectrometry.  All the composite fibers (Cellulose-Magnetite-Heparin monofilament fibers, Cellulose-Magnetite-Heparin core-shell fibers and Cellulose/Heparin Magnetite core-shell fibers) showed all the disaccharide peaks correspond to the disaccharide peaks of the heparin standard.
+
+S3
+Table S1. Molecular weights of disaccharide fragments of heparin standard.
+
+S4
+Figure S2. TEM image of Cellulose-Magnetite-Heparin core-shell fiber that shows its 
+co-axial structure. (Fiber diameter ~415 nm with ~110 nm core diameter)
+
+S5
+Figure S3. TEM images of Cellulose-Magnetite-Heparin monofilament fibers 
+showing Fe3O4 NPs distributed throughout the interior of the fibers
+
+S6
+Figure S4. High resolution FTIR spectrum of Cellulose-Magnetite-Heparin core-shell 
+fibers (Shows two small peaks at 1207 cm-1and 1411 cm-1 that correspond to S=O 
+symmetric and asymmetric stretching vibrations respectively)
+Figure S5. EDX of electrospun cellulose nanofibers.
+
+S7
+Figure S6. The EDX spectrum of Cellulose-Magnetite core-shell fibers showed a 
+small peak around 1.74 keV. This is due to the to the silicon present inside the SiLi 
+detector.
+
+S8
+Figure S7. The EDX spectra of all of the heparin containing fibers showed 
+characteristic peaks for sulfur confirming the presence of heparin on the fiber

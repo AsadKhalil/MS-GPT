@@ -1,0 +1,349 @@
+Fungal Induced Protein Hyperacetylation Identified by Acetylome Profiling  Maize defense acetylome
+
+Lysine acetylation is a key post-translational modification that regulates diverse proteins involved in a range of biological processes. The role of histone acetylation in plant defense is well established and it is known that pathogen effector proteins encoding acetyltransferses can directly acetylate host proteins to alter immunity. However, it is unclear whether endogenous plant enzymes can modulate protein acetylation during an immune response. Here we investigate how the effector molecule HC-toxin, a histone deacetylase inhibitor, produced by Cochliobolus carbonum race 1 promotes pathogen virulence in maize through altering protein acetylation. Using mass spectrometry we globally quantified the abundance of 3,636 proteins and the levels of acetylation at 2,791 sites in maize plants treated with HC-toxin as well as HC-toxin deficient or producing strains of C. carbonum. Analyses of these data demonstrate that acetylation is a widespread post-translational modification impacting proteins encoded by many intensively studied maize genes. Furthermore, the application of exogenous HC-toxin enabled us to show that the activity of plant-encoded enzymes can be modulated to alter acetylation of non-histone proteins during an immune response. Collectively, these results provide a resource for further mechanistic studies examining the regulation of protein function and offer insight into the complex immune response triggered by virulent C. carbonum.
+
+Protein lysine acetylation is an evolutionarily conserved reversible covalent modification. While lysine acetylation was discovered on histones more than 50 years ago it has long been known that non-histone proteins are also acetylated. Recently mass spectrometry based global acetylation profiling methods have been developed, leading to the realization that lysine acetylation is a major post-translational modification that impacts a wide-range of proteins. Acetylation of lysine residues is a covalent attachment typically added to or removed from proteins by histone acetyltransferase and histone deacetylase enzymes, respectively. Alternatively, recent studies have demonstrated that protein acetylation is not only controlled enzymatically, but that it is also modulated non-enzymatically by metabolic intermediates including Acetyl-CoA and NAD+.  It is becoming increasingly apparent that modulation of protein acetylation plays a central role during host-pathogen interactions. Much of the research thus far has focused on how alterations in histone acetylation alter plant immunity. Modulation of histone acetylation was first implicated in plant immunity when it was discovered that the effector molecule HC-toxin, secreted by Cochliobolus carbonum race 1, functioned as a histone deacetylase inhibitor in fungi, plants, and animals. Additionally, mutation or overexpression of HATs or HDACs in Arabidopsis and rice alters plant immunity and has been interpreted to be a direct result of modulating histone acetylation status and thus affecting transcription at specific defense gene promoters.  Pathogen infection also triggers alterations in host non-histone protein acetylation status and immunity. To date pathogen induced non-histone protein acetylation has been shown to be a result of pathogen effector molecules functioning as acetyltransferase enzymes that act directly on host proteins. This raises the question of whether plant HATs or HDACs directly modulate acetylation status of non-histone proteins during pathogen infection.  In this study we used mass spectrometry to quantify global changes in protein abundance and acetylation levels triggered by pathogen infection. Critically, through the application of exogenous HC-toxin and C. carbonum strains we demonstrate that the activity of plant encoded enzymes can be modulated to alter both histone and non-histone protein acetylation. Additionally, we provide the first global acetylome for maize and significantly expand the number of acetylation sites identified in plants. Acetylated proteins carry out a wide-range of functions and include numerous well-studied maize proteins. Thus, the data presented here will enable new research approaches to understand the post-translational regulation and function of both defense and non-defense related proteins.
+
+RESULTS Mapping the Maize Acetylome We used mass spectrometry-based proteomics to globally identify acetylated proteins and uncover specific acetylation levels altered during pathogen infection. We profiled Hm1A mutant maize plants, which are susceptible to the fungal pathogen, C. carbonum race 1. Plants were treated with 1) mock, 2) exogenous HC-toxin, 3) an HC-toxin deficient (Tox-) strain of C. carbonum and 4) HC-toxin producing (Tox+) strains of C. carbonum. To capture early signaling events we collected tissue at 22 hrs, which is before visual symptoms develop during a susceptible infection. These treatments were chosen to globally map protein acetylation sites in maize leaves and to measure changes induced by C. carbonum or HC-toxin. Total protein was extracted from the samples and tryptic peptides were labeled with iTRAQ reagents to quantify non-modified protein abundance. In parallel, we enriched acetylated peptides with an antibody that recognizes acetyl-lysine and then quantified the immunopurified peptides using spectral counting. Using stringent cutoffs to maintain a low false discovery rate 0.1% peptide level FDR, we compared the levels of 3,636 non-modified proteins and 2,791 acetylation sites originating from 912 acetylated proteins. The 2,791 sites are more than double the number of previously reported acetylation sites and therefore significantly expand our knowledge of plant acetylomes.  Acetylation is a Global Protein Modification To gain insight into the composition of the maize acetylome we examined the distribution of acetylated proteins within MapMan functional categories. While acetylation is now regarded as a widespread post-translational modification we were surprised that 32 of the 35 major MapMan bins (i.e. functional categories) contained acetylated proteins. Bins that did not contain acetylated proteins are the sparsely populated bins "fermentation", "polyamine metabolism", and "microRNA, natural antisense" comprised of 59, 41 and 3 proteins, respectively, which is a small percentage of the 63,542 MapMan annotated proteins. Therefore, it is possible that sampling additional tissues and/or deeper acetylome profiling may reveal that proteins in these functional categories are also acetylated.  We found that the third largest bin is "RNA", which contains proteins annotated to be involved in RNA splicing and transcriptional regulation. While earlier studies have described acetylated plant transcription factors the prevalence of this functional category is greater than previously reported. Potentially, the increased identification of transcriptional regulatory proteins is due to increased acetylome depth.  We observed acetylation of a wide-range of "classical" maize genes, which are a set of maize genes that have been intensively studied. For example, photosynthetic proteins including light harvesting proteins (LHCB3, LHCB7, LHCB9) as well as the small and large subunits of Rubisco (RBCL, SSU3) are acetylated, which is consistent with the acetylation of homologous proteins in Arabidopsis. We observed acetylation of phosphoenolpyruvate carboxylase (PEP1, PEP4) proteins.
+
+phytodienoic acid reductase OPR1 were detected as acetylated proteins. We also identified acetylation of starch biosynthetic enzymes including sucrose syntase1 SUS1, UDP-glucose pyrophosphorylase1 UGP1, ADP Glucose Pyrophosphorylase Small Subunit Leaf1 AGPSLZM, and starch branching enzyme 3 SBE3. Finally, genes involved in transcriptional regulation such as ramosa1 enhancer locus 2 REL2, a transcriptional co-repressor, are acetylated. Taken together these data demonstrate acetylation of a diverse set of proteins and opens the door for new lines of investigation into the regulation of intensively studied maize proteins.  Pathogen Infection Alters Histone and Non-Histone Protein Acetylation  To better understand how pathogen infection remodels the host proteome we quantified non-modified protein abundance and acetylation levels. We first verified our acetylation measurements using a commercial antibody that recognizes tetra acetylated histone 4 H4K5/8/12/16. We found that the H4 tetra acetylation pattern quantified using mass spectrometry matched the pattern determined using western blotting. While it has previously been shown that H4 acetylation increases following HC-toxin treatment the specific sites of acetylation were not previously identified. Our results demonstrate that H4 tetra acetylation induced by HC-toxin or Tox+ infection occurs on H4 lysine residues 5,8,12 and 16.  Globally, we determined that 171 and 116 proteins increased or decreased in abundance following treatment with HC-toxin or infection by C. carbonum strains. Additionally, 62 acetylated peptides (155 sites) increased following treatment while only 9 acetylated peptides (12 sites) decreased. Furthermore, the majority of hyperacetylation events occurred in either the HC-toxin or Tox+ treatments but not in response to Tox- infection. This observation is consistent with HC-toxin functioning as an HDACi to promote protein hyperacetylation.  To gain insight into how HC-toxin induced hyperacetylation promotes C. carbonum virulence we performed Gene Ontology overrepresentation analyses. First, we examined GO categories overrepresented among the acetylated peptides that were altered in abundance following HC-toxin treatment or infection with C. carbonum strains. Strikingly, there are numerous GO categories related to transcriptional regulation over-represented in the HC-toxin and Tox+ treatments. However, there were no GO categories associated with transcriptional regulation among the acetylated peptides that respond to Tox- infection. Furthermore, defense related GO terms were only present among the Tox+ responding acetylated peptides. Taken together these data suggest that virulent C. carbonum utilizes HC-toxin to reprogram the transcriptional response to infection resulting in an inappropriate defense response. Furthermore, another non-mutually exclusive possibility is that acetylation of defense proteins by Tox+ infection results in inactivation of their function and suppresses host defense.  Tryptophan Biosynthetic Proteins are Induced by HC-toxin
+
+To uncover biological processes that may be responding to HC-toxin induced acetylation of transcriptional regulators we used our protein abundance data as a proxy for transcript levels. We identified GO enrichment for a number of biosynthetic processes that are specific to HC-toxin and Tox+ treatments. We were intrigued by enrichment of GO terms related to tryptophan biosynthesis in HC-toxin and Tox+ treated plants and examined these genes further. This analysis revealed that proteins required for every step in the biosynthesis of tryptophan from chorismate were increased in HC-toxin and/or Tox+ treatments. The only protein that peaked following Tox- inoculation was a single isoform of indole-3-glycerol-phosphate synthase. While further research is necessary to verify that HC-toxin transcriptionally activates expression of tryptophan genes, these findings suggest that C. carbonum alters tryptophan biosynthesis in order to promote infection.  DISCUSSION  In this study we used global mass spectrometry-based acetylome profiling in maize to identify over 2,700 acetylation sites arising from 912 proteins following exposure to HC toxin, a naturally occurring HDACi. These acetylated proteins represent a wide-range of functional categories suggesting that this post-translational modification can regulate diverse biological processes. Notably, we discovered that many well-characterized maize proteins are acetylated, including proteins responsible for major commercial traits including starch and oil biosynthesis. These novel descriptions of acetylation sites enable new approaches to study the potential regulation of well-characterized proteins and agronomically important traits.  Pathogen infection has been shown to induce non-histone protein acetylation and to alter host immunity. However, the induced non-histone protein acetylation events previously identified are a result of pathogen effector molecules functioning as acetyltransferase enzymes that act on host proteins. Here, through the application of the exogenous HDACi HC-toxin and C. carbonum strains we demonstrate that the activity of plant-encoded histone deacetylase enzymes can be modulated resulting in both histone and non-histone protein hyperacetylation. Thus, endogenous plant enzymes can modulate the acetylation of host non-histone proteins during immune signaling.  We observed that proteins associated with transcriptional regulation are hyperacetylated specifically in response to HC-toxin and Tox+ treatment. These transcriptional regulatory proteins are not limited to histones and include transcription factors, chromatin remodeling enzymes and chromatin modifying enzymes. The role of transcription factors in plant defense is well documented and the importance of both chromatin remodeling and modifying enzymes is now recognized. Furthermore, acetylation of these types of transcriptional regulatory proteins is known to both reduce or enhance their function. This suggests that the observed HC-toxin induced hyperacetylation will result in alteration of the transcriptional response during pathogen infection thereby promoting pathogen virulence either through induction of an inappropriate immune response and/or induction of a suppressor(s) of defense.
+
+Finally, by measuring protein abundance levels we determined that treatment with either HC-toxin or Tox+ C. carbonum results in increased abundance of metabolism related proteins. We are particularly intrigued by the observed increase in proteins in the tryptophan biosynthesis pathway, which may promote susceptibility through several mechanisms. For example, an upregulation of the tryptophan biosynthesis pathway may result in increased auxin biosynthesis thereby reducing plant resistance. Consistently, auxin is known to promote either susceptibility or resistance, depending on the pathogen and host. In addition, an increase in tryptophan biosynthesis may result in increased levels of benzoxazinoids, which are a class of defensive secondary metabolites found in grass species. In this scenario benzoxazinoids would represent inappropriate defensive metabolites to C. carbonum and their induction would thereby reduce resources necessary for maize to mount an effective defense response. As we did not directly measure auxin or benzoxazinoid biosynthetic proteins or the metabolites themselves future work will need to address whether either metabolite directly functions in promoting C. carbonum virulence.  MATERIALS and METHODS  Plant Material  Zea mays plants in which the Hm1A allele was introgressed into the B73 inbred were used for all experiments. Plants were grown in a growth chamber in a 16h light/ 8h dark photoperiod at temperatures of 28C (day) and 24C (night). Leaves 2,3 and 4 of fifteen-day-old plants were sprayed mid-day till runoff with either mock (0.1% Tween-20), 100 uM HC-toxin (Sigma) or 400,000 spores/ml of HC-toxin deficient (Tox-) or HC-toxin producing (Tox+) strains of Cochlibolus carbonum race 1. Following treatment plants were bagged to increase humidity and placed back in the growth chamber for 22 hrs at which point tissue was collected and flash-frozen. Four biological replicates were used for each treatment.  Proteomics  Peptide preparation, and non-modified protein profiling by mass spectrometry are based on previously described methods. For acetylated peptide enrichment, 2 mg of anti-acetyl-lysine antibody immobilized on agarose beads (ImmuneChem-ICP0388) was added to ~10 mg of maize peptides in 50 mM Tris-HCL pH 7.4. Samples for each biological replicate series (ex. Mock_Rep1, HC-toxin_Rep1, Tox-_Rep1 and Tox+_Rep1) were processed in parallel. The antibody-peptide mixture was incubated for 1 hr with rotation at 4C on a 0.2 uM centrifugal device (Microsep MCPM02C68). Following incubation the beads were washed 3 times with 50 mM Tris-HCL pH 7.4 and then acetyl peptides were eluted using 1.5 ml of 0.1% trifluoracetic acid. The antibody-conjugated beads were washed 2 times with 50 mM Tris-HCL pH 7.4 and then used for a second round of immunoprecipitation of the same sample (i.e. the original flow-through). The 2 enrichments for a given sample were then pooled and passed over a Sep-Pak C18 column (Waters WAT054960) prior to liquid chromatography-mass spectrometry (LC-MS/MS). Full proteomic methods are detailed in SI Materials and Methods.
+
+FOOTNOTES 
+Data deposition: The raw spectra for the proteome data have been deposited in the Mass 
+spectrometry Interactive Virtual Environment (MassIVE) repository 
+(massive.ucsd.edu/ProteoSAFe/static/massive.jsp) under the accession ID 
+MSV000079681. 
+Author contributions: JWW, ZS and SPB designed research; JWW, ZS and MRM 
+performed research; JWW and ZS analyzed data; JWW wrote the paper. 
+ 
+ACKNOWLEDGMENTS 
+We thank Dior Kelly for critical and thoughtful comments regarding this manuscript, and 
+Gurmukh Johal for seeds of B73 with introgressed Hm1A. This work was supported by a 
+new-faculty start-up grant to JW from Iowa State University, NIH NRSA F32GM096707 
+to JWW, and National Science Foundation Grant 0924023 to SPB. 
+ 
+REFERENCES 
+1.  
+Allfrey VG, Faulkner R, Mirsky AE (1964) Acetylation and methylation of 
+histones and their possible role in the regulation of RNA synthesis. Proc Natl Acad 
+Sci U S A 51:786-94. 
+2.  
+Verdin E, Ott M (2014) 50 years of protein acetylation: from gene regulation to 
+epigenetics, metabolism and beyond. Nat Rev Mol Cell Biol 16(4):258-264. 
+3.  
+Phillips DM (1963) The presence of acetyl groups of histones. Biochem J 87:258-
+63. 
+4.  
+Sterner R, Vidali G, Heinrikson RL, Allfrey VG (1978) Postsynthetic modification 
+of high mobility group proteins. Evidence that high mobility group proteins are 
+acetylated. J Biol Chem 253(21):7601-7604. 
+5.  
+Choudhary C, et al. (2009) Lysine Acetylation Targets Protein Complexes and Co-
+Regulates Major Cellular Functions. Science (80- ) 325(5942):834-840. 
+6.  
+Wang Q, et al. (2010) Acetylation of Metabolic Enzymes Coordinates Carbon 
+Source Utilization and Metabolic Flux. Science (80- ) 327(5968):1004-1007. 
+7.  
+Finkemeier I, Laxa M, Miguet L, Howden AJM, Sweetlove LJ (2011) Proteins of 
+Diverse Function and Subcellular Location Are Lysine Acetylated in Arabidopsis. 
+Plant Physiol 155(4):1779-1790. 
+8.  
+Wu X, et al. (2011) Lysine Acetylation Is a Widespread Protein Modification for 
+Diverse Proteins in Arabidopsis. Plant Physiol 155(4):1769-1778. 
+9.  
+Nallamilli BRR, et al. (2014) Global analysis of lysine acetylation suggests the 
+involvement of protein acetylation in diverse biological processes in rice (Oryza 
+sativa). PLoS One 9(2):e89283. 
+10.  
+Smith-Hammond CL, Swatek KN, Johnston ML, Thelen JJ, Miernyk JA (2014) 
+Initial description of the developing soybean seed protein Lys-N(e)-acetylome. J 
+Proteomics 96:56-66. 
+11.  
+Melo-Braga MN, et al. (2012) Modulation of protein phosphorylation, N-
+glycosylation and Lys-acetylation in grape (Vitis vinifera) mesocarp and exocarp 
+owing to Lobesia botrana infection. Mol Cell Proteomics 11(10):945-56. 
+12.  
+Fang X, et al. (2015) Global analysis of lysine acetylation in strawberry leaves. 
+Front Plant Sci 6. doi:10.3389/fpls.2015.00739. 
+13.  
+Chen Y, et al. (2012) Quantitative acetylome analysis reveals the roles of SIRT1 in
+.
+CC-BY-NC-ND 4.0 International license
+a
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under 
+The copyright holder for this preprint (which was not
+this version posted June 5, 2016. 
+; 
+https://doi.org/10.1101/057174
+doi: 
+bioRxiv preprint
+
+regulating diverse substrates and cellular pathways.
+
+Target WRKY Transcription Factors. Cell 161(5):1089-1100. 
+32.  
+Tasset C, et al. (2010) Autoacetylation of the <italic>Ralstonia 
+solanacearum</italic> Effector PopP2 Targets a Lysine Residue Essential for 
+RRS1-R-Mediated Immunity in Arabidopsis. PLoS Pathog 6(11):e1001202. 
+33.  
+Johal GS, Briggs SP (1992) Reductase activity encoded by the HM1 disease 
+resistance gene in maize. Science (80- ) 258(5084):985-987. 
+34.  
+Ross PL, et al. (2004) Multiplexed Protein Quantitation in Saccharomyces 
+cerevisiae Using Amine-reactive Isobaric Tagging Reagents. Mol Cell Proteomics 
+3(12):1154-1169. 
+35.  
+Liu H, Sadygov RG, Yates JR (2004) A Model for Random Sampling and 
+Estimation of Relative Protein Abundance in Shotgun Proteomics. Anal Chem 
+76(14):4193-4201. 
+36.  
+Thimm O, et al. (2004) mapman: a user-driven tool to display genomics data sets 
+onto diagrams of metabolic pathways and other biological processes. Plant J 
+37(6):914-939. 
+37.  
+Schnable JC, Freeling M (2011) Genes Identified by Visible Mutant Phenotypes 
+Show Increased Bias toward One of Two Subgenomes of Maize. PLoS One 
+6(3):e17855. 
+38.  
+Nemchenko A, Kunze S, Feussner I, Kolomiets M (2006) Duplicate maize 13-
+lipoxygenase genes are differentially regulated by circadian rhythm, cold stress, 
+wounding, pathogen infection, and hormonal treatments. J Exp Bot 57(14):3767-
+79. 
+39.  
+Zhang J, et al. (2005) Genomic Analysis of the 12-oxo-phytodienoic Acid 
+Reductase Gene Family of Zea mays. Plant Mol Biol 59(2):323-343. 
+40.  
+Hannah LC, et al. (2001) Maize genes encoding the small subunit of ADP-glucose 
+pyrophosphorylase. Plant Physiol 127(1):173-83. 
+41.  
+James MG, Denyer K, Myers AM (2003) Starch synthesis in the cereal endosperm. 
+Curr Opin Plant Biol 6(3):215-222. 
+42.  
+Walley JW, et al. (2013) Reconstruction of protein networks from an atlas of 
+maize seed proteotypes. Proc Natl Acad Sci U S A 110(49):E4808-4817. 
+43.  
+Gallavotti A, et al. (2010) The control of axillary meristem fate in the maize 
+ramosa pathway. Development 137(17):2849-56. 
+44.  
+Ma K-W, Flores C, Ma W (2011) Chromatin configuration as a battlefield in plant-
+bacteria interactions. Plant Physiol. doi:10.1104/pp.111.182295. 
+45.  
+Walley JW, et al. (2008) The Chromatin Remodeler SPLAYED Regulates Specific 
+Stress Signaling Pathways. PLoS Pathog 4(12):e1000237. 
+46.  
+Gu W, Roeder RG (1997) Activation of p53 Sequence-Specific DNA Binding by 
+Acetylation of the p53 C-Terminal Domain. Cell 90(4):595-606. 
+47.  
+Thompson PR, et al. (2004) Regulation of the p300 HAT domain via a novel 
+activation loop. Nat Struct Mol Biol 11(4):308-15. 
+48.  
+Yuan H, et al. (2012) MYST protein acetyltransferase activity requires active site 
+lysine autoacetylation. EMBO J 31(1):58-70. 
+49.  
+Charles GM, et al. (2011) Site-specific acetylation mark on an essential chromatin-
+remodeling complex promotes resistance to replication stress. Proc Natl Acad Sci 
+U S A 108(26):10620-5. 
+50.  
+Navarro L, et al. (2006) A Plant miRNA Contributes to Antibacterial Resistance
+.
+CC-BY-NC-ND 4.0 International license
+a
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under 
+The copyright holder for this preprint (which was not
+this version posted June 5, 2016. 
+; 
+https://doi.org/10.1101/057174
+doi: 
+bioRxiv preprint
+
+by Repressing Auxin Signaling. Science (80- ) 312(5772):436-439. 
+51.  
+Chen Z, et al. (2007) Pseudomonas syringae type III effector AvrRpt2 alters 
+Arabidopsis thaliana auxin physiology. Proc Natl Acad Sci 104(50):20131-20136. 
+52.  
+Llorente F, et al. (2008) Repression of the Auxin Response Pathway Increases 
+Arabidopsis Susceptibility to Necrotrophic Fungi. Mol Plant 1(3):496-509. 
+53.  
+Kazan K, Manners JM (2009) Linking development to defense: auxin in plant-
+pathogen interactions. Trends Plant Sci 14(7):373-382. 
+54.  
+Mutka AM, Fawley S, Tsao T, Kunkel BN (2013) Auxin promotes susceptibility 
+to Pseudomonas syringae via a mechanism independent of suppression of salicylic 
+acid-mediated defenses. Plant J 74(5):746-54. 
+55.  
+Frey M, Schullehner K, Dick R, Fiesselmann A, Gierl A (2009) Benzoxazinoid 
+biosynthesis, a model for evolution of secondary metabolic pathways in plants. 
+Phytochemistry 70(15-16):1645-51. 
+56.  
+Huffaker A, et al. (2011) Novel acidic sesquiterpenoids constitute a dominant class 
+of pathogen-induced phytoalexins in maize. Plant Physiol 156(4):2082-97. 
+57.  
+Ahmad S, et al. (2011) Benzoxazinoid Metabolites Regulate Innate Immunity 
+against Aphids and Fungi in Maize. Plant Physiol. doi:10.1104/pp.111.180224. 
+58.  
+Huffaker A, Dafoe NJ, Schmelz EA (2011) ZmPep1, an Ortholog of Arabidopsis 
+Elicitor Peptide 1, Regulates Maize Innate Immunity and Enhances Disease 
+Resistance. Plant Physiol:pp.110.166710. 
+59.  
+Chintamanani S, Multani DS, Ruess H, Johal GS (2008) Distinct Mechanisms 
+Govern the Dosage-Dependent and Developmentally Regulated Resistance 
+Conferred by the Maize Hm2 Gene. Mol Plant-Microbe Interact 21(1):79-86. 
+60.  
+Walley J, et al. (2015) Plastid-produced interorgannellar stress signal MEcPP 
+potentiates induction of the unfolded protein response in endoplasmic reticulum. 
+Proc Natl Acad Sci U S A 112(19):6212-6217.
+.
+CC-BY-NC-ND 4.0 International license
+a
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under 
+The copyright holder for this preprint (which was not
+this version posted June 5, 2016. 
+; 
+https://doi.org/10.1101/057174
+doi: 
+bioRxiv preprint
+
+FIGURE LEGENDS 
+ 
+Figure 1. Overview of treatments and proteome profiling. A) Susceptible Hm1A plants 
+were exposed to mock, 100 uM HC-toxin, HC-toxin deficient (Tox-), or HC-toxin 
+producing (Tox+) strains of Cochlibolus carbonum race 1. For each condition four 
+biological replicates were collected 22 hrs post treatment to quantify protein abundance 
+(iTRAQ) and acetylation levels (spectral counting). B) Summary of sampled spectra, 
+peptides, acetylated peptides, and identified proteins.  
+ 
+Figure 2. Diverse maize proteins are acetylated. Proteins from 32 out of 35 Major 
+MapMan bins are acetylated.  
+ 
+Figure 3. Dynamics of protein abundance and acetylation during immune response. A) 
+Spectral counts of the peptide corresponding to H4 tetra acetylation of lysines 5,8,12 and 
+16. Data are means of 4 independent biological replicates +- SEM. B) Western blot 
+confirmation of H4 tetra acetylation quantified by proteomics. C) Overlap of protein 
+abundance changes in response to treatments. D) Overlap of acetylated peptides that 
+change in response to treatments. E) Number of acetylation sites that are altered, relative 
+to mock, by HC-toxin, Tox- or Tox+ treatment. F) Number of GO categories related to 
+Transcriptional Response, Defense, any other process ("Other") that are over-represented 
+in HC-toxin, Tox-, or Tox+ treatment.  
+ 
+ Figure 4. HC-toxin increases the levels of tryptophan biosynthetic proteins. All detected
+proteins related to each step in tryptophan biosynthesis are shown. Heatmaps represent 
+the relative abundance of each protein following treatment by HC-toxin, Tox-, or Tox+ 
+relative to mock treatment.
+.
+CC-BY-NC-ND 4.0 International license
+a
+certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under 
+The copyright holder for this preprint (which was not
+this version posted June 5, 2016. 
+; 
+https://doi.org/10.1101/057174
+doi: 
+bioRxiv preprint
+
+Collected Spectra Identified Spectra  Proteins Non-Modified Proteome (FDR) Acetylome  (FDR) B Distinct Peptides 4,499,409 15,636,094 353,491 (0.02%) 441,336 (0.01%) 15,145 (0.09%) 13,258 (0.08%) AcK Spectrum  AcK Peptides  AcK Sites NA 69,277 (0.03%) 2,292 (0.1%) NA NA 2,791 3,636 912 Mock HCT Tox- Tox+ hm1 iTRAQ Non-Modified Proteome Ac Lysine Immunopurification Spectral Count A 22 hrs
+
+1- PS  2- major CHO metabolism  3- minor CHO metabolism  4- glycolysis  5- fermentation  6- gluconeogenesis  7- OPP  8- TCA / org  9-mito. electron trans./ATP syn.  10- cell wall  11- lipid metabolism  12- N-metabolism  13- amino acid metabolism  14- S-assimilation  15- metal handling  16- secondary metabolism  17- hormone metabolism  18- Co-factor and vitamine met.  19- tetrapyrrole synthesis  20- stress  21- redox  22- polyamine metabolism  23- nucleotide metabolism  24- Biodeg. of Xenobiotics  25- C1-metabolism  26- misc  27- RNA  28- DNA  29- protein  30- signalling  31- cell  32- micro RNA, antisense etc  33- development  34- transport  35- not assigned
+
+0
+15
+30
+45
+60
+HCT
+Transcriptional Reg.
+Defense 
+Other
+# of GO Catagories
+Tox+
+Tox-
+F
+HCT
+Tox+
+Tox-
+0
+20
+40
+60
+80
+100
+Increased
+Decreased
+Acetylation Sites
+E
+D
+HCT
+Tox+
+Ac Peptides
+Increase
+Tox-
+25
+0
+19
+14
+1
+1
+2
+Ac Peptides
+Decrease
+HCT
+Tox+
+Tox-
+1
+0
+2
+5
+0
+1
+0
+HCT
+Tox+
+Non-modified Protein
+Increase
+Tox-
+36
+37
+34
+36
+22
+6
+1
+Non-modified Protein
+Decrease
+HCT
+Tox+
+Tox-
+12
+13
+13
+48
+16
+12
+2
+C
+Anti-H4 Tetra 
+Acetylated
+anti-H4
+Tox-
+Mock
+HCT
+Tox+
+0
+300
+600
+900
+Mock
+HCT
+Tox -
+Tox +
+Spectral Counts
+Acetylated H4
+(GkGGkGLGkGGAkR)
+A
+B
+Fig. 3
+
+Chorismate Anthranilate synthase Anthranilate Anthranilate Phosphoribosyltransferase Indole-3-glycerol phosphate 5-phosphoribosylanthranilate 1-(o-carboxyphenylamino)-1-deoxyribulose-5-phosphate Indole Tryptophan Phosphoribosylanthranilate Isomerase Indole-3-glycerol-phosphate synthase Tryptophan Synthase a Tryptophan Synthase b GRMZM2G325131 GRMZM2G161337 ORP2 ORP1 GRMZM5G841619 GRMZM2G169516 GRMZM2G145870 GRMZM2G152984 GRMZM2G051219 GRMZM2G100864 GRMZM2G029573 Benzoxazinoids HCT/Mock Tox-/Mock Tox+/Mock Min Max Auxin

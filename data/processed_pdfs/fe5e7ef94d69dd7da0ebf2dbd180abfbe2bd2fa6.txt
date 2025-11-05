@@ -1,0 +1,1152 @@
+Combining High-throughput MALDI-TOF Mass Spectrometry and Isoelectric Focusing Gel Electrophoresis for Virtual 2D Gel-based Proteomics
+
+The virtual two-dimensional gel electrophoresis/mass spectrometry (virtual 2D gel/MS) technology combines the premier, high-resolution capabilities of 2D gel electrophoresis with the sensitivity and high mass accuracy of mass spectrometry (MS). Intact proteins separated by isoelectric focusing (IEF) gel electrophoresis are imaged from immobilized pH gradient (IPG) polyacrylamide gels (the first dimension of classic 2D-PAGE) by matrix-assisted laser desorption/ionization (MALDI) MS. Obtaining accurate intact masses from sub-picomole-level proteins embedded in 2D-PAGE gels or in IPG strips is desirable to elucidate how the protein of one spot identified as protein 'A' on a 2D gel differs from the protein of another spot identified as the same protein, whenever tryptic peptide maps fail to resolve the issue. This task, however, has been extremely challenging and is, in fact, rarely attempted. Virtual 2D gel/MS provides access to these intact masses.  Modifications to our matrix deposition procedure improve the reliability with which IPG gels can be prepared; the new procedure is described. Development of this MALDI MS imaging (MSI) method for high-throughput with integrated 'top-down' MS to elucidate protein isoforms from complex biological samples is described and it is demonstrated that a 4-cm IPG gel segment can now be imaged in approximately 5 minutes. Gel-wide chemical and enzymatic methods with further interrogation by MALDI MS/MS provide identifications, sequence-related information, and post-translational/transcriptional modification information. The MSI-based virtual 2D gel/MS platform may potentially link the benefits of 'top-down' and 'bottom-up' proteomics.
+
+1. Introduction 1.1. Top-down and bottom-up proteomics; top-down and bottom-up mass spectrometry High-sensitivity, high-throughput protein analysis (i.e., proteomics) is essential in the post-genome world to complement advances in DNA and RNA sequencing and genetic engineering. Great strides have been made in identifying proteins from complex mixtures, supported by two decades of developments in mass spectrometry (MS) and ultra-small-scale high performance liquid chromatography (HPLC). These achievements in protein identification rely on the free availability of stockpiled nucleic acid sequences from a multitude of organisms. Beyond DNA, RNA, and protein sequence, lies an invaluable fourth dimension of information regarding the architecture of life: protein processing and modification. That fourth dimension is important because modifications to thousands of component proteins in a cell may change with the cell cycle, environmental conditions, developmental stage, and metabolic state. Markers reflecting health, environmental exposure, and disease can be encoded in this fourth dimension of information. Modifications can alter protein localization, activity, lifetime, and how that protein interacts with other molecules. Modifications are not necessarily homogeneously distributed in a protein population, making the discovery and quantification of each modification an almost insurmountable task and one that depends on many factors including protein concentration and dynamic range of the sample under investigation.  For complex mixtures, we classify experimental approaches that sort (separate) intact proteins prior to analysis as 'top-down' proteomics and approaches that cleave proteins within a complex mixture, prior to analysis, as 'bottom-up' proteomics. We shall apply 'top-down' MS and 'bottom-up' MS to describe the nature of the analyte introduced to the mass spectrometer. Hence, the reversed phase HPLC delivery of intact proteins from a ribosome mixture to a mass spectrometer for mass analysis, precursor ion selection, electron capture dissociation (ECD), and analysis of the product ions (MS/MS) would constitute top-down proteomics and top-down MS, but collecting HPLC fractions from the ribosomal preparation and subjecting each fraction (isolated protein) to trypsin digestion followed by liquid chromatography-tandem MS (LC-MS/MS) of the peptides would, in our usage, constitute top-down proteomics and bottom-up MS.
+
+Bottom-up proteomics integrates the cleaved products detected from all protein forms (proteoforms) produced by a gene into a single peptide map of the full-length gene product (potentially revealing, but not eliminating, any splice variants that might be present) to tabulate and quantify expressed proteins efficiently. Bottom-up proteomics avoids the difficulties (e.g., sample losses, extreme diversity in solubility and chromatographic properties) inherent in handling intact proteins by separating/analyzing smaller, easier to handle peptides, instead. In exchange for sensitivity and speed, however, bottom-up proteomic methods sever links to the protein fragments' heritage, erasing much of the means to characterize splicing variants, and co- and post-translational modifications. Thus, bottom-up proteomics tends to assume that prior to the analysis, proteins existed as predicted by the genome sequence, i.e., full-length and unmodified, or with a small number of predictable modifications. Bottom-up proteomic approaches to globally analyze post-translational modifications usually seek evidence for a small number of modifications from the proteome, sometimes pre-enriching in advance for select modifications (e.g., with antibodies). In these global analyses it is rarely possible to establish that all instances of a particular modification have been detected in a given protein, to determine how many proteoforms are present, or even to establish whether all abundant proteoforms have been detected. Error-tolerant or unrestricted searches have some ability to reveal unanticipated modifications, but are challenged by the extraordinarily large search space of all proteins/all modifications in concert with the finite information content of tandem mass spectra. The vagaries of undersampling (too many peptides to measure for the instrument duty cycle) limit even the ability to establish that certain modifications are not abundantly present (failure to detect a peptide does not necessarily allow us to conclude that it is absent). Nevertheless, valuable lists of (some) modified proteins with (some) modified sites are generated. Quantifying the levels of modified versus unmodified proteins is more challenging.  Top-down proteomics, particularly when pursued with polyacrylamide gel electrophoresis (PAGE)-based platforms, can complement the bottom-up proteomic approaches for addressing the problems described above. By revealing the minimum number of proteoforms present in a sample, and separating many distinct forms for individual analyses, an analyst is better able to differentiate splice variants that are present from those that are not present and to quickly estimate the number of distinct species present. Error-tolerant searches can be more sensitive
+
+than in bottom-up proteomics, because they must query only a small number of candidate proteins. Top-down proteomic methods can expose large deviations from predictions, e.g., migration in the SDS-PAGE size dimension inconsistent with a given molecular weight, focusing far from the predicted isoelectric point (pI), or non-binding of appropriate antibodies. Deviant products can be flagged for additional analyses likely to yield new discoveries, while products found to be consistent with predictions (e.g., molecular masses matching theoretical) can be considered characterized. The ability to quantitatively track one or more proteoforms (by staining intensity or autoradiography) from multiple samples and to excise these proteoforms for chemical analysis (e.g., protein identification or carbohydrate composition) is a strength of top-down proteomics.  Top-down proteomics/top-down mass spectrometry has been very successfully pursued by combining Gel Elution Liquid-based Fractionation Entrapment Electrophoresis (GELFrEE) fractionation, protein precipitation, and reversed phase HPLC with electrospray ionization (ESI) and MS/MS. GELFrEE fractionates proteins on a preparative scale by continuous electrophoresis in polyacrylamide tube gels. The method is compatible with hydrophilic and hydrophobic proteins, although ultimately the top-down platform's protein compatibility is limited by its reversed phase HPLC dimension downstream.  Our interest lies in linking accurate molecular masses to denaturing isoelectric focusing (IEF) and to two-dimensional (2D)-PAGE analyses (of which IEF constitutes the first dimension).  With the advent of immobilized pH gradient (IPG) gels, IEF offers the highest resolution available in the proteomics toolbox, capable of separating protein isoforms whose isoelectric points differ by only 0.001 pH units.  IPGs, which are commercially available, stable, and highly reproducible, have been produced to span only 0.1 pH unit and can successfully separate proteins that differ by only one amino acid substitution.  1.2. The virtual 2D gel  In the 'virtual 2D gel' MS platform, complex protein mixtures are separated by high resolution IEF using IPG gels, incubated with MALDI matrix, and dried. Resolved proteins are laser-desorbed and ionized directly from the 'xerogel' for mass measurement. Proteins over
+
+100 kDa have been measured by this method, as well as small polypeptides (<10 kDa), which are often lost in the second dimension of the SDS gel. The term 'virtual 2D gel/MS' is appropriate because denaturing IEF also comprises the first dimension of traditional 2D gels, with protein size (by SDS-PAGE) as the second dimension. Indeed, the IEF separations for virtual 2D gel analysis have been performed under identical conditions to those employed for 2D PAGE (i.e., employing urea, thiourea, CHAPS or Triton X-100 detergent, carrier ampholytes, etc.) to ensure that the information provided relates directly to classical 2D gels. MALDI MS replaces SDS-PAGE as the second dimension, but the mass accuracy for protein intact masses provided by MS is superior to SDS gels. The common IEF axis links classical and virtual 2D gels such that an intact mass and other MS-derived information can be permanently associated with particular 2D gel spots and with other analyses linked to that spot (e.g., glycan analysis, radioactivity to elucidate synthesis or degradation rate, antibody binding, lectin binding, protein identity from in-gel digestion, etc.). We consider the most important capability of virtual 2D gels to be revealing the intact molecular masses of proteins focusing at each isoelectric point for comparison to classical 2D gel images and the corresponding protein identities of spots (generally obtained by trypsin digestion and LC-MS/MS analyses). Combining protein identity with intact mass readily highlights modified, processed, or otherwise unexpected protein forms. It enables researchers to triage which spots of interest contain proteins in expected forms (no additional characterization effort needed) and which differ (with the mass perhaps suggesting possibilities for those differences; e.g., +42 Da suggests an acetylation or trimethylation). Protein-level quantitation, provided by staining or radiography via classical 2D gels, provides a useful complement to any peptide-level quantitation available from in-gel digests or bottom-up proteomics.  The early work that developed the concept of the virtual 2D gel/MS platform was performed using MALDI-time-of-flight (MALDI-TOF) instruments utilizing 20Hz-UV lasers for desorption/ionization. Today's availability of high-speed MALDI-TOF MSI instruments equipped with kHz-repetition rate lasers along with improvements in preparing matrix-embedded dry gels (xerogels) pave the way for the virtual 2D gel/MS platform to become easier to implement. Methods for establishing this platform are discussed in this article.
+
+2. Methods 2.1. Protein extract preparation Sample preparation for IEF differs from that for SDS-PAGE, primarily by avoiding ionic salts and anionic or cationic detergents. Here, pelleted cells were stored at -80oC until lysis and extract preparation. At that time, cells were thawed and rapidly resuspended in 300 L of 0.3% SDS (w/v), 10 mM Tris, pH 7.5, and 0.2 M dithiothreitol (DTT). Solutions were incubated in a boiling water bath for 2 minutes and subsequently cooled on ice. To the cooled solutions were added 30 L of DNAse/RNAse cocktail and the mixtures were incubated on ice for 10 min. Following incubation, 1200 L of lysis buffer, 138 mg urea, and 50 mg thiourea were added to the solutions and the mixtures were vortexed extensively. The lysis buffer contained 7 M urea, 2 M thiourea, 50 mM DTT, 1.54% Pharmalyte(tm) 3-10 carrier ampholytes (v/v; GE Healthcare, Piscataway, NJ), and 2.55% CHAPS (w/v). Protein extract concentrations, assessed with the NI(tm) (Non-Interfering(tm)) Protein Assay (G-Biosciences), were typically 1-5 mg/mL. Extracts were aliquoted for storage at -80oC.  2.2. IEF with IPG gels Isoelectric focusing employed precast IPG strips (ReadyStrip(tm), Bio-Rad, Hercules, CA or Immobiline(tm) DryStrip, GE Healthcare) spanning pH 4-7 or 3-10 in 18 cm. Samples (20-200 g) were loaded by passive in-gel rehydration or by cup-loading. For the former method, the desired load of extract was mixed with sufficient rehydration buffer (6 M urea, 1.7 M thiourea, 12 mM DTT, 1% Pharmalyte(tm) 3-10 (v/v), 0.5% CHAPS (w/v), 5% glycerol, and 10% isopropanol) to yield a 350 uL volume in which to swell each dehydrated gel overnight. For cup-loading, each IPG strip was incubated overnight in 350 uL of rehydration buffer; extract was applied the next day during focusing. Gels were focused for 65-80 kilovolt-hours on a Multiphor II flatbed electrophoresis assembly (GE Healthcare) equipped with an EPS 3501XL power supply (GE Healthcare). Following IEF, polyacrylamide gels were stored at -80oC, until processed for direct MS, whole-gel trypsin digestion, or SDS-PAGE second dimension electrophoresis.
+
+Focused IPG gels were removed from the freezer and allowed to rest for a few minutes at room temperature. Once thawed, the gels were removed from the storage container with tweezers and placed gel side up on damp paper towels. Excess mineral oil (remaining from the IEF) was drained off the gels by lifting an edge of the polyester Mylar backing with tweezers. Each gel surface was blotted once, gently, with a damp paper towel. Scissor cuts were made at the edges of each gel support/backing to provide unique identifiers. Gel strips were incubated for 15 minutes in a glass tray containing 200 mL of wash solution (49.9% H2O /50% acetonitrile (ACN)/0.1% trifluoroacetic acid (TFA)), mixing slowly on a lab rocker. The large volume of liquid removes or reduces the amounts of several substances essential to high-resolution electrophoresis but detrimental to MALDI MS: detergents, urea, thiourea, ampholytes, and residual mineral oil. Despite this washing, CHAPS detergent clusters often appeared below m/z 5000. After incubation, each gel was withdrawn from the wash solution with tweezers and placed gel side up atop a clean surface. Each gel surface was gently blotted with damp, water-moistened filter paper (Whatman grade 4) to remove mineral oil residue remaining on the surface. Often, fibers from the filter paper stuck to portions of the gel after blotting, but these did not hinder analysis.  Sinapinic acid solutions were prepared at least 2 days in advance to ensure saturation. Liquid solutions were withdrawn from any undissolved matrix immediately before they were dispensed for gel incubation. Two saturated sinapinic acid/1.5% sorbitol (v/w) matrix formulations were prepared in quantities sufficient to ensure availability of 15 mL of each per IPG strip. The solvent for the first solution was 25% ACN/74.9% H2O/0.1% TFA (v/v/v, henceforth referred to as 1:3 matrix solution), while the second solution solvent was 33.3% ACN/66.6% H2O/0.1% TFA (henceforth referred to as 1:2 matrix solution).  Each filter paper-blotted gel was placed, gel side up, in an individual plastic tray (220 mm x 15 mm x 5 mm, length x width x depth) atop a laboratory rotating platform. About 13-15 mL of 1:3 matrix was dispensed to each tray and gel incubation proceeded for 10 minutes, mixing at low
+
+With tweezers, gels were removed from the matrix solutions and transferred to empty trays, covered, and left overnight (12 hours or greater) at room temperature. The next day, the dry, matrix-treated gels were placed in clean trays atop the rotating platform and ~15 mL of the 1:2 matrix solution was dispensed. Gels incubated in the solutions for 10 minutes, rotating at low speed, after which the gels were removed from the solutions with tweezers and transferred to empty trays, covered to prevent dust from settling on them, and left overnight for the matrix to crystallize and the gels to dry thoroughly. Whole gel trypsin digestions were performed employing protocols described previously.  2.4 Mounting dry, matrix-treated IEF strips and MALDI MS Dry IEF strips were cut into two 9cm-long pieces and secured to the sample stage with electrically conductive, double-sided transfer tape (Adhesives Research, Glen Rock, PA), cognizant of anode/cathode orientation. Positions of the crystallized gel segments (not the Mylar support) and their cathode/anode orientation were recorded. Isoelectric points may be calculated at various distances along the IPG strip from manufacturer-provided plots of pH vs. distance along the gel. Dried gels trap considerable moisture and air greatly extending the time for vacuum pump-down. Thus, gels newly attached to sample targets were placed in a vacuum desiccator and exposed to vacuum for at least 20 minutes prior to loading them in the mass spectrometer.  Mass spectra were acquired with UV irradiation on Bruker Daltonics AutoFlex(tm) Speed and Ultraflex(tm) MALDI time-of-flight mass spectrometers with accompanying software (e.g., FlexControl(tm), FlexImaging(tm) and FlexAnalysis(tm)). Gels were imaged by acquiring data at raster sizes of 200-600um.  3. Results and discussion 3.1. Processing IEF gel strips for MALDI MS
+
+In previous efforts, focused, washed IEF strips (Immobiline(tm) DryStrip) had been incubated in saturated matrix dissolved in 50% ACN/49.9% H2O/0.1% TFA or 33.3% ACN/66.6% H2O/0.1% TFA (i.e., 1:1 or 1:2 matrix solution). Initial dried gels produced by this matrix-deposition method were stable under vacuum and laser irradiation for extended time periods. However, later many of the Immobiline(tm) DryStrip gels for which matrix had been deposited by these methods were found to be unstable (as were ReadyStrip(tm) gels); those xerogels detached from the Mylar backing after several hours under vacuum. The source of the newly reduced stability was unclear, although we suspected that it arose from differences in the manufacturing processes. Because producing gels that remain attached to their backing (or that can be reliably detached without cracking) was essential, we explored additives for inclusion in matrix solutions to improve xerogel flexibility without degrading MS resolution and sensitivity. Glycerol is a well-known stabilizer for polyacrylamide gels, minimizing their shrinkage and curling during drying, but high concentrations also degrade MALDI MS. We explored glycerol addition from 1-10% v/v, but found that amounts sufficient to maintain xerogel adherence to the Mylar backing rendered the matrix crystallization unreliable. Next, we considered saccharide additives, because they are known plasticizers and their presence in analyte solutions is often innocuous, or even helpful to protein analyses. Fucose additives have some history of benefitting MALDI MS analyses, but we selected, instead, the monosaccharide sorbitol to avoid potential covalent modifications. As a non-reducing sugar, sorbitol cannot form Schiff bases with amines. Also, sorbitol addition to a few percent does not hinder (and sometimes improves) MALDI MS analyses.  Experience preparing and analyzing matrix-deposited xerogels led us to consider what properties accounted for gels delivering good ion intensities at many spatial positions versus poorer performing gels. One property appeared to be the type and speed of matrix crystallization. Inspections of many crystallized gels yielding good and poor ion intensities for >= 20 kDa proteins suggested that clear, 'chopstick'-shaped crystals obtained by slow crystallization seemed to have a higher success rate, and that employing ACN:H2O solvent ratios below 1:1 (v/v) provided some advantage, although matrix crystallization is notoriously hard to control. Gel incubation in 1:3 ACN:H2O, was more likely to deliver the desired crystal form than 1:2, but
+
+crystals from the former were typically deposited sparsely (or not at all) across the gel. These observations led to the double matrix incubation described in the Methods section. Microcrystals from a first incubation in the 1:3 matrix solution (with lower sinapinic acid solubility) serve as seeds for the second crystallization from the 1:2 solution.  An optical image of a sinapinic acid-treated gel segment spanning ~1 pH unit, a spectral image generated by averaging individual mass spectra acquired across that pH span, and spectra acquired at discrete isoelectric points are illustrated for a cell lysate from the archaeon Methanosarcina mazei. The 26 most intense ion signals over that segment are indicated by colored lines with their corresponding pIs (gel positions) indicated by color highlights. From the colored regions, an indication of spatial resolution in the pI dimension can be gleaned, suggesting that the most abundant proteins were detected across regions up to 3.5 mm wide. From silver-stained IPG gels, we expect well-behaved proteins to focus to < 1 mm; hence, we conclude that the washing and matrix treatments employed here reduced the resolution of the separation, albeit to a manageable level. Because the colored bands do not scale with intensity, the FWHM of the MS-detected bands may be somewhat narrower.  Electrostatic spray ionization (ESTASI), an ambient ionization method was previously applied to analyses from IPG gels, although that work is not directly comparable, in so far as the IEF was performed under native conditions; i.e., without the urea, thiourea, surfactants, and ampholytes important to denaturing IEF and, correspondingly, to 2D-PAGE and theoretically predictable isoelectric points. For ESTASI, a spatial resolution of ~3 mm was calculated, based on modeling the electric field for the ESTASI assembly; the resolution attainable experimentally was not reported.  Available high repetition rate lasers and automation packages designed for MSI simplify and speed up data acquisition compared to our previous efforts in imaging IEF gels. Now, a 4 cm x 0.3 cm section of a gel can be imaged in 5 min or less. The pH range of ~5.4-6.1 from an IPG strip loaded with 200 ug of a whole cell lysate of Syntrophus.
+
+aciditrophicus. Spectra were acquired with 1000 shots per position at a 500 m step size (x and y). Five spectra were obtained at each isoelectric point (at discrete positions along the 0.3 cm strip width) and summed. The resulting 2D gel-like image generated with the Bruker WARP-LC application. Data for the image was acquired in approximately 5 min.  It is clear that many protein masses in addition to the 5 highlighted ones are revealed by MS and that multiple species often appear at the same pI, as expected from classically stained 2D gels prepared with the same sample load of 200 ug.  Previous ESTASI analyses from IPG strips loaded with a mixture of 4 ug of myoglobin, 4 ug of cytochrome c, and 400 ug of Escherichia coli soluble proteins revealed multiply charged ions for myoglobin and cytochrome c at their migration positions, with charge state envelopes suitable for calculating their molecular mass. For the loaded E. coli proteins, however, it was not clear if molecular weights could be determined from the 3 spectra presented, but ion signals were observed. This comparison suggests that, at present, MALDI interrogation of IPG-IEF gels may be more sensitive than ESTASI.  Trypsin digestions of IEF-separated proteins (reduced and alkylated in gel after focusing) can be performed gel-wide by depositing enzyme solution onto the gel surface. Diffusion of the proteolytic products is limited by scoring the wet gel with a knife or razor blade prior to depositing the enzyme. Each gel segment remains attached to the polyester strip, but diffusion is limited to the section length. Preliminary experiments demonstrated the feasibility of obtaining in-gel digestion products in this manner. Here, we applied the approach to a richer region of an IEF gel, to assess whether protein identification remained feasible from mixtures with higher complexity.  A classical, stained 2D gel from Syntrophus aciditrophicus with the pH 5.30 region boxed. Analysis of the corresponding region from a trypsin-treated, matrix-embedded IPG strip yielded the complicated peptide map (multiplex mass map). The proteins identified from this map were SYN0546, RSYN1909, RSYN0983, and
+
+RSYN2636 with sequence coverages of 34%, 22%, 18%, and 17% respectively. Observing these proteins together at this position on the digested IPG strip recapitulates their vertical position (pI 5.30) on the fluorescently stained 2D gel, and allows observed peptides to be correlated to proteoform intact masses, 2D gel staining intensities, and any additional information derived from excised spots.  At present, the sensitivity for analyzing peptides from these whole-gel digests trails that from in-gel digestion of excised bands by about two orders of magnitude. Nevertheless, detected peptides can be subjected to further analysis by MS/MS, for an 1146.6 Da peptide from RSYN2636. Correlating the intact masses measured for selected isoelectric points to protein identities, peptide maps, and MS/MS spectra has been fruitful in revealing protein heterogeneity, as in the case of RSYN2636, which migrates as multiple 2D gel spots and appears at sizes ranging from 30 to 70 kDa. The many variations, potentially reflecting read-through events, are nearly invisible to analyses employing only bottom-up proteomics. However, data linking intact protein separations to intact and proteolytic peptide mass analyses can not only begin to characterize these proteoforms, but should also provide means to monitor changes in their relative abundance with changes in cultivation conditions.  Another example of useful information accessible to virtual 2D gel electrophoresis is its elucidation of protein heterogeneity. This mass spectrum was obtained at pI 4.66 from an IEF separation of human saliva in which 30 ug of protein had been loaded onto the gel. The spectrum reveals several distinct proteins, including a quite heterogeneous 17 kDa species. Based on corresponding analyses from 2D gel spots and comparisons to previous 2D gel studies, the protein is identified as prolactin-inducible protein (PIP). The spacing between the 17 kDa peaks is ~144 Da, indicating the presence of repeated deoxyhexose saccharides, consistent with the rich fucosylation of this protein.
+
+Gel-free, bottom-up proteomics is exquisitely powerful, but the information that it provides often stands alone, because most biological studies examine proteins rather than peptides. Certainly much can be inferred about proteins from their peptides, but direct protein analyses provide a means to check those inferences, and can alert us to unexpected mass discrepancies that can lead to new discoveries. Developments in faster data acquisition and gel preparation presented here should make virtual 2D gel electrophoresis better able to complement previous, current, and future proteomic studies of the same or similar samples, by matching accurate protein masses to all of the other accumulated information on 2D-PAGE-separated proteins. This MALDI MS approach remains one of the most sensitive means to obtain intact masses for proteins embedded in polyacrylamide.  Acknowledgments Support from the US National Institutes of Health (R01GM104610, S10RR025600) and the US Department of Energy Office of Science, Office of Biological and Environmental Research program (UCLA/DOE Institute for Genomics and Proteomics; Award Number DE-FC02-02ER63421) is acknowledged.
+
+15
+[8] R.R. Ogorzalek Loo, C. Mitchell, T. Stevenson, J.A. Loo, P.C. Andrews,  Techniques in 
+Protein Chemistry VII, Academic Press, San Diego, CA, 1996, pp. 305-313. 
+[9] L.V. Bindschedler, L.J. McGuffin, T.A. Burgis, P.D. Spanu, R. Cramer, Methods, 54 (2011) 
+432-441. 
+[10] B. Canas, C. Pineiro, E. Calvo, D. Lopez-Ferrer, J.M. Gallardo, Journal of Chromatography 
+A, 1153 (2007) 235-258. 
+[11] Y. Chen, Z. Guo, X. Wang, C. Qiu, Journal of Chromatography A, 1184 (2008) 191-219. 
+[12] A. Gorg, A. Klaus, C. Luck, F. Welland, W. Weiss,  A Laboratory Manual, Technical 
+University of Munich, Freising-Weihenstephan, Germany, 2007, pp. 166. 
+[13] L. Jiang, L. He, M. Fountoulakis, Journal of Chromatography A, 1023 (2004) 317-320. 
+[14] T. Rabilloud, C. Lelong, Journal of Proteomics, 74 (2011) 1829-1841. 
+[15] R.J. Simpson, Proteins and proteomics : a laboratory manual, Cold Spring Harbor 
+Laboratory Press, Cold Spring Harbor, NY, 2003. 
+[16] H. Wang, S. Hanash, Mass spectrometry reviews, 24 (2005) 413-426. 
+[17] E.P. Wright, M.A. Partridge, M.P. Padula, V.J. Gauci, C.S. Malladi, J.R. Coorssen, 
+PROTEOMICS, 14 (2014) 872-889. 
+[18] T. Rabilloud, M. Chevallet, S. Luche, C. Lelong, PROTEOMICS, 8 (2008) 3965-3973. 
+[19] A. Gorg, O. Drews, C. Luck, F. Weiland, W. Weiss, ELECTROPHORESIS, 30 (2009) 
+S122-S132. 
+[20] A. Gorg, W. Weiss, M.J. Dunn, Proteomics, 4 (2004) 3665-3685. 
+[21] L.A. Kane, C.K. Yung, G. Agnetti, I. Neverova, J.E. Van Eyk, Proteomics, 6 (2006) 5683-
+5687. 
+[22] C. Lamberti, E. Pessione, M.G. Giuffrida, R. Mazzoli, C. Barello, A. Conti, C. Giunta, 
+Electrophoresis, 28 (2007) 1633-1638. 
+[23] O. Carrette, P.R. Burkhard, J.-C. Sanchez, D.F. Hochstrasser, Nat. Protocols, 1 (2006) 812-
+823. 
+[24] G. Healthcare,  Related Documents, User Manual, gelifesciences.com, 2006, pp. 
+http://www.gelifesciences.com/webapp/wcs/stores/servlet/productById/en/GELifeSciences-
+us/18101806. 
+[25] P. Meleady, 2011, pp. 123-137. 
+[26] R.R. Ogorzalek Loo, L. Yam, J.A. Loo, V.N. Schumaker, ELECTROPHORESIS, 25 (2004) 
+2384-2391. 
+[27] GE Healthcare Life Sciences2000. 
+[28] Bio-Rad Laboratories, Inc.2011. 
+[29] H. Chen, P. Boontheung, R.R. Ogorzalek Loo, Y. Xie, J.A. Loo, J.-y. Rao, M.D. Collins, 
+Birth Defects Research Part A: Clinical and Molecular Teratology, 82 (2008) 187-199. 
+[30] R.R. Ogorzalek Loo, J.A. Loo, Anal. Chem., 79 (2007) 1115-1125. 
+[31] A.M. Distler, J. Allison, Analytical Chemistry, 73 (2001) 5000-5003. 
+[32] A.I. Gusev, W.R. Wilkinson, A. Proctor, D.M. Hercules, Analytical Chemistry, 67 (1995) 
+1034-1041. 
+[33] C. Koester, J.A. Castoro, C.L. Wilkins, J. Am. Chem. Soc., 114 (1992) 7572-7574. 
+[34] M. Shahgholi, B.A. Garcia, N.H.L. Chiu, P.J. Heaney, K. Tang, Nucleic Acids Research, 29 
+(2001) e91/91-e91/10. 
+[35] L. Qiao, E. Tobolkina, B. Liu, H.H. Girault, Anal. Chem., 85 (2013) 4745-4752. 
+[36] C.-M. Huang, Archives of Oral Biology, 49 (2004) 951-962.
+
+16
+[37] J. Schaller, K. Akiyama, H. Kimura, D. Hess, M. Affolter, E.R. Rickli, FEBS J., 196 (1991) 
+743-750. 
+[38] R. Vitorino, M.J.C. Lobo, A.J. Ferrer-Correia, J.R. Dubin, K.B. Tomer, P.M. Domingues, 
+F.M.L. Amado, Proteomics, 4 (2004) 1109-1115.
+
+Fig
+iso
+dep
+at e
+cor
+MW
+ana
+mo
+gur
+ele
+pos
+each
+rres
+W a
+alys
+odif
+re 1
+ctri
+ited
+h is
+spon
+and
+sis. 
+fica
+1. V
+ic f
+d, d
+soe
+ndi
+d pI
+Ap
+ation
+Virt
+focu
+drie
+lect
+ng 
+I inf
+pply
+n in
+tual
+usin
+ed g
+tric
+po
+form
+yin
+nfor
+l 2D
+ng 
+gels
+c po
+siti
+mat
+ng a
+rma
+D g
+(IE
+s ar
+oint
+ons
+tion
+alter
+atio
+gel/M
+EF) 
+re a
+t. Pr
+s on
+n, o
+rna
+on.
+MS
+ele
+anal
+rote
+n cl
+or c
+ative
+S sc
+ectr
+lyze
+ein
+lass
+can
+e pr
+chem
+rop
+ed b
+ide
+sica
+be 
+rote
+me
+phor
+by M
+enti
+al 2
+ob
+ein
+. Pr
+resi
+MA
+ifica
+2D 
+tain
+ch
+rote
+is o
+ALD
+atio
+gel
+ned
+hem
+ein 
+on
+DI 
+ons
+ls (I
+d by
+mistr
+17
+mi
+an 
+MS
+can
+IEF
+y in
+ries
+ixtu
+im
+S to
+n be
+F/SD
+n-ge
+s w
+ures
+mmo
+o pr
+e ob
+DS-
+el d
+ith
+s ar
+obil
+rovi
+bta
+-PA
+dige
+MS
+re s
+lize
+ide 
+ine
+AGE
+estio
+S/M
+sepa
+d p
+int
+d fr
+E), 
+on 
+MS
+arat
+pH
+tact
+from
+can
+and
+ana
+ted 
+gra
+t m
+m ex
+n b
+d M
+alys
+in 
+adie
+ass
+xist
+be p
+MAL
+sis
+the
+ent 
+ses
+ting
+prop
+LDI
+can
+e fi
+(IP
+for 
+g in
+pos
+I-T
+n p
+irst
+PG)
+pro
+nfor
+ed 
+OF
+rov
+dim
+) g
+otei
+rma
+fro
+F/TO
+vide
+men
+gel.
+ins 
+ation
+om
+OF 
+e ad
+nsio
+M
+foc
+n fo
+acc
+MS
+ddit
+on b
+atri
+cus
+or t
+cura
+S/M
+tion
+by 
+ix-
+ed 
+the
+ate 
+MS
+nal
+
+Fig
+to 
+targ
+sur
+not
+num
+len
+gur
+the
+get 
+rfac
+t on
+mbe
+ngth
+re 2
+e M
+sp
+ce-d
+nly
+er o
+h an
+2. S
+MAL
+ots 
+distr
+on 
+of p
+nd t
+ina
+LDI
+for
+ribu
+the
+prot
+thic
+apin
+I ta
+r ea
+utio
+e ge
+teof
+ckne
+nic a
+arge
+asie
+on o
+el su
+form
+ess
+acid
+et w
+er n
+of s
+urfa
+ms 
+of
+d-cr
+with
+navi
+sina
+face
+are
+the
+rys
+h d
+igat
+apin
+e, bu
+e us
+e dri
+tall
+doub
+tion
+nic
+ut a
+sual
+ied
+lize
+ble 
+n. T
+aci
+also
+lly 
+ge
+ed IP
+sid
+The
+id c
+o em
+obt
+l.
+PG
+ded 
+e hi
+crys
+mbe
+tain
+G ge
+ad
+ghl
+stal
+edd
+ned
+els o
+dhes
+ligh
+s. I
+ded 
+fro
+18
+on a
+sive
+hted
+Ima
+in t
+om
+a M
+e ta
+d ar
+age
+the 
+IPG
+MAL
+ape
+rea 
+(C
+gel
+G g
+LD
+. G
+is m
+) re
+l. T
+gels
+I ta
+Gel
+ma
+evea
+The 
+ wi
+arge
+seg
+gni
+als 
+hig
+ith m
+et. (
+gme
+ified
+tha
+ghe
+ma
+(A)
+ents
+d in
+at m
+st s
+trix
+) Cr
+s ar
+n (B
+matr
+sign
+x de
+ryst
+re a
+B) t
+rix 
+nal
+epo
+talli
+alig
+to b
+dep
+inte
+osite
+ized
+gne
+bett
+pos
+ens
+ed t
+d g
+d t
+ter 
+sits 
+sity
+thro
+els 
+o a
+dis
+are
+and
+oug
+adh
+a ro
+spla
+e pr
+d la
+ghou
+her
+ow 
+ay t
+rese
+arge
+ut t
+red 
+of 
+the 
+ent
+est 
+the
+
+Fig
+loa
+wh
+spe
+by 
+spe
+gur
+aded
+here
+ectr
+lin
+ectr
+re 3
+d w
+e sp
+ra a
+nes,
+ra fr
+3. (A
+with
+peci
+acqu
+the
+rom
+A) 
+h a
+ific 
+uire
+e co
+m se
+Ima
+wh
+ion
+ed a
+olor
+elec
+age
+hoe
+n si
+acro
+rs o
+cted
+e of
+el c
+igna
+oss 
+of w
+d re
+f an
+cell
+als 
+the
+whic
+egio
+n IP
+lys
+we
+e co
+ch 
+ons
+PG-
+sate
+ere d
+omp
+cor
+of t
+IEF
+e o
+dete
+plet
+rres
+the
+F g
+f M
+ecte
+te g
+pon
+ ge
+el s
+Meth
+ed.
+gel
+nd t
+l se
+sect
+han
+(B
+seg
+to t
+egm
+tion
+nosa
+) In
+gme
+the 
+men
+19
+n th
+arc
+nteg
+ent.
+reg
+nt.
+hat 
+cina
+grat
+. Th
+gion
+wa
+a m
+ted
+he 2
+ns h
+s an
+maze
+ma
+26 
+high
+naly
+ei. 
+ass 
+mo
+hlig
+yze
+Co
+spe
+ost i
+ghte
+ed b
+lore
+ectr
+inte
+ed i
+by M
+ed 
+rum
+ense
+in (
+MA
+hig
+m ob
+e io
+(A)
+ALD
+ghli
+btai
+on s
+. (C
+DI M
+ight
+ined
+sign
+C)-(
+MS
+ts r
+d by
+nals
+(E)
+S. T
+refl
+y su
+s ar
+MA
+The 
+ect 
+um
+re in
+AL
+ge
+re
+mmin
+ndi
+DI
+l w
+gio
+ng 
+icat
+ma
+was
+ons 
+all 
+ted
+ass
+
+Fig
+bac
+m
+ima
+gur
+cter
+m. F
+age
+re 4
+rial 
+Five
+e wa
+4. Fr
+lys
+e sp
+as a
+rom
+sate
+pec
+acqu
+m a
+e, s
+ctra
+uire
+40-
+spec
+we
+ed i
+-mm
+ctra
+ere 
+in a
+m s
+a w
+ob
+app
+sect
+ere
+btai
+rox
+tion
+e ac
+ned
+xim
+n of
+cqui
+d p
+mate
+f a 1
+ired
+er 
+ly 5
+17-c
+d (1
+iso
+5 m
+cm 
+100
+ele
+min.
+IPG
+00 s
+ctri
+20
+G g
+shot
+ic p
+gel
+ts p
+poin
+stri
+per
+nt a
+ip (p
+po
+and
+pI 4
+ositi
+d su
+4-7)
+ion)
+umm
+) of
+) at
+med
+f a S
+t st
+d. T
+Syn
+ep 
+The
+ntro
+siz
+e re
+oph
+es 
+esul
+us a
+(x 
+ltin
+aci
+and
+ng 2
+ditr
+d y)
+2D
+rop
+) of
+ge
+phic
+f 5
+el-li
+cus
+00 
+ke
+
+Fig
+of 
+obt
+inte
+RS
+and
+pro
+IPG
+gur
+pH
+tain
+ern
+SYN
+d R
+otei
+G g
+re 5
+H 5
+ned 
+al 
+N05
+RSY
+n R
+gel.
+5. (l
+.30
+fro
+sta
+546 
+YN2
+RSY
+left)
+0 lie
+om 
+anda
+(,
+263
+YN2
+) Sy
+es 
+an 
+ards
+, 34
+6 (
+263
+ypr
+wit
+in-
+s a
+4%
+*, 
+36,
+ro-R
+thin
+-ge
+achi
+cov
+17%
+the
+Rub
+n th
+l tr
+ieve
+ver
+% c
+e -
+by-s
+he b
+rypt
+ed 
+rage
+cove
+sub
+stai
+box
+tic 
+rm
+e), R
+era
+bun
+ined
+x in
+dig
+ms
+RSY
+ge)
+nit o
+d 2D
+ndic
+gest
+ma
+YN
+). (i
+of a
+D-g
+cate
+t of
+ass 
+N19
+inse
+an e
+gel
+ed. 
+f pr
+acc
+09 
+et) M
+elec
+of 
+(ri
+rote
+cur
+(
+MA
+ctron
+21
+a ly
+ight
+eins
+raci
+, 22
+ALD
+n tr
+ysat
+t) M
+s at 
+es 
+2%
+DI M
+rans
+te o
+Mu
+pI
+of 
+% co
+MS
+sfer
+of S
+ultip
+I 5.3
+<2
+over
+S/M
+r fla
+Syn
+plex
+30 
+25
+rag
+MS o
+avo
+trop
+x v
+on 
+pp
+e), 
+of a
+opro
+phu
+virtu
+the
+m. 
+RS
+an 1
+otei
+us a
+ual
+e IP
+Pr
+SYN
+114
+in,
+acid
+2D
+PG 
+rote
+N09
+46.6
+obt
+ditr
+D g
+str
+eins
+983
+6 D
+tain
+roph
+gel/M
+rip. 
+s id
+(#
+a tr
+ned
+hicu
+MS
+Ca
+den
+, 18
+ryp
+dir
+us. 
+S pe
+alib
+ntifi
+8%
+tic 
+rect
+Th
+epti
+brati
+ied 
+% co
+pep
+tly f
+he re
+ide 
+ion
+in
+over
+ptid
+from
+egi
+m
+n wi
+clu
+rage
+de f
+m t
+on 
+map
+ith 
+ude
+e), 
+for 
+the
+
+Fig
+gly
+7) l
+gur
+ycos
+loa
+re 6
+syla
+ded
+6. P
+atio
+d w
+Prol
+on. 
+with
+lact
+Spe
+30
+tin-i
+ectr
+ug
+ind
+rum
+g of
+duci
+m ac
+f pro
+ible
+cqu
+otei
+e pr
+uired
+in.
+rote
+d fr
+ein
+rom
+(17
+m a
+7 kD
+pos
+Da)
+sitio
+22
+) fro
+on
+om
+cor
+m hu
+rres
+uma
+spon
+an s
+ndi
+sali
+ng
+iva 
+to p
+rev
+pI 4
+veal
+4.66
+ls h
+6 o
+hete
+on a
+erog
+an I
+gen
+PG
+neity
+G ge
+y d
+el (p
+due
+pH
+to 
+4-
+
+Graphical Abstract

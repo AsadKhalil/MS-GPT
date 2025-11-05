@@ -1,0 +1,1374 @@
+Phosphorylation barcodes direct biased chemokine signaling at CXCR3
+
+2
+AFFILIATIONS: 
+13
+1Department of Biochemistry, Duke University, Durham, NC, 27710, USA 
+14
+2Department of Dermatology, Massachusetts General Hospital, Boston, MA, 02114, USA 
+15
+3Department of Dermatology, Brigham and Women's Hospital, Boston, MA, 02115, USA 
+16
+4Department of Dermatology, Beth Israel Deaconess Medical Center, Boston, MA, 02215, USA 
+17
+5Dermatology Program, Boston Children's Hospital, Boston, MA, 02115, USA 
+18
+6Harvard Medical School, Boston, MA, 02115, USA 
+19
+7Biological Sciences Division, Pacific Northwest National Laboratory, Richland, WA, 99354, USA 
+20
+8Research Programme on Biomedical Informatics (GRIB), Department of Experimental and Health Sciences of 
+21
+Pompeu Fabra University (UPF)-Hospital del Mar Medical Research Institute (IMIM), Barcelona, 08003, 
+22
+Spain 
+23
+9Trinity College, Duke University, Durham, NC, 27710, USA 
+24
+10R&D Research, GlaxoSmithKline, Collegeville, PA, 19426, USA  
+25
+11Department of Pharmaceutical Sciences, Tohoku University, Sendai, 980-8577, Japan 
+26
+12Department of Medicine, Duke University, Durham, NC 27710 USA 
+27
+13Department of Biomedical Engineering, Duke University, Durham, NC, 27710, USA 
+28
+14College of Information Sciences and Technology, The Pennsylvania State University, University Park, PA, 
+29
+16802, USA 
+30
+31
+CORRESPONDENCE 
+32
+sudarshan.rajagopal@duke.edu 
+ 
+33
+1 
+ 2 
+ 3 
+ 4 
+ 5 
+ 6 
+ 7 
+ 8 
+ 9 
+10 
+11 
+12 
+13 
+14 
+15 
+16 
+17 
+18 
+19 
+20 
+21 
+22 
+23 
+24 
+25 
+26 
+27 
+28 
+29 
+30 
+31 
+32 
+33 
+34 
+35 
+36 
+37 
+38 
+39 
+40 
+41 
+42 
+43 
+44 
+45 
+46 
+47 
+48 
+49 
+50 
+51 
+52 
+53 
+54 
+55 
+56 
+57 
+58 
+59 
+60 
+61 
+62 
+63 
+64 
+65
+.
+CC-BY-NC 4.0 International license
+available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+The copyright holder for this preprint
+this version posted March 14, 2023. 
+; 
+https://doi.org/10.1101/2023.03.14.532634
+doi: 
+bioRxiv preprint
+
+G protein-coupled receptor (GPCR) biased agonism, the activation of some signaling pathways over others, is thought to largely be due to differential receptor phosphorylation, or "phosphorylation barcodes." At chemokine receptors, ligands act as "biased agonists" with complex signaling profiles, which contributes to the limited success in pharmacologically targeting these receptors. Here, mass spectrometry-based global phosphoproteomics revealed that CXCR3 chemokines generate different phosphorylation barcodes associated with differential transducer activation. Chemokine stimulation resulted in distinct changes throughout the kinome in global phosphoproteomic studies. Mutation of CXCR3 phosphosites altered b-arrestin conformation in cellular assays and was confirmed by molecular dynamics simulations. T cells expressing phosphorylation-deficient CXCR3 mutants resulted in agonist- and receptor-specific chemotactic profiles. Our results demonstrate that CXCR3 chemokines are non-redundant and act as biased agonists through differential encoding of phosphorylation barcodes and lead to distinct physiological processes.
+
+KEYWORDS: beta-arrestin, G protein-coupled receptor, biased agonism, chemokine, CXCR3, phosphoproteomics, chemotaxis, MAP kinase, mass spectrometry, molecular dynamics
+
+INTRODUCTION  G protein-coupled receptors are the most common transmembrane receptors in the human genome and the target of approximately one third of all FDA-approved drugs. GPCRs elicit cellular responses by coupling to heterotrimeric G proteins, recruiting GPCR kinases, and binding to b-arrestin adaptor proteins. Certain GPCR ligands can promote or inhibit different GPCR conformational states, leading to distinct G protein or b-arrestin signaling outputs; i.e. display biased agonism. Efforts are underway to design biased agonists that preferentially activate certain signaling pathways to maximize clinical efficacy and reduce off-target effects. However, the molecular determinants of biased signaling and the degree to which different ligands can modulate intracellular signaling cascades remain unclear.  Altering intracellular GPCR amino acid residue phosphorylation patterns can lead to different signaling events and is one mechanism for encoding biased agonism. For example, preventing phosphorylation of certain residues impairs receptor endocytosis but not b-arrestin recruitment. Specific GPCR phosphorylation patterns also differentially alter the affinity of GPCR-b-arrestin interactions. GPCR agonists are thought to regulate b-arrestin function by encoding distinct phosphorylation events through selective interaction with different GRKs. This phosphorylation barcode hypothesis is supported by mutagenesis studies in both cellular and animal models. Biophysical data also support that different C-terminal phosphorylation patterns induce distinct b-arrestin conformational states, and may expose b-arrestin binding sites for some downstream effectors but not others.  However, it is unclear if different C-terminal residues are phosphorylated or if the same residues are phosphorylated at differing stoichiometric ratios, a distinction critical to understanding how GPCR is mechanistically encoded. In addition, few studies have identified distinct phosphopeptides or associated changes.
+
+in phosphorylation barcodes with changes in physiology. There remains limited evidence that specific phosphopeptide patterns promote changes in receptor signaling with downstream physiological effects, and understanding how ligands generate such signaling profiles is critical to understanding cellular signal transduction.  The physiological relevance of endogenous biased signaling can be difficult to assess as the majority of GPCR biased agonists are synthetic. However, many endogenous biased agonists have been identified in the chemokine system, which consists of approximately 20 receptors and 50 chemokine ligands. Unlike other GPCR subfamilies, chemokine receptors are promiscuous and often bind multiple chemokines with high affinity. For example, the chemokine receptor CXCR3, primarily expressed on activated T cells, binds three endogenous ligands, CXCL9, CXCL10, and CXCL11, and plays an important role in inflammatory diseases and cancer. Like most other chemokine receptors, CXCR3 signals through both Gai family G proteins and b-arrestins. CXCL11 is b-arrestin-biased compared to CXCL9 and CXCL10, with each chemokine displaying distinct profiles of G protein signaling, b-arrestin recruitment and receptor internalization. Synthetic CXCR3 biased agonists have shown distinct physiological effects in a mouse model of allergic contact dermatitis, with a b-arrestin-biased agonist promoting inflammation through increased T cell recruitment. CXCR3 is well-suited for studying the mechanisms underlying biased agonism and its physiological impact.  It is unclear how receptors with multiple endogenous ligands encode divergent cellular signaling and function. Here we demonstrate that endogenous chemokines of CXCR3 encode unique phosphorylation barcode ensembles (different phosphopeptides at different stoichiometries). These differential phosphorylation ensembles lead to different patterns of transducer and kinome activation with subsequent distinctive chemotactic patterns. Through mutagenic studies, we determined that CXCR3 biased signaling is encoded through the receptor core and differential phosphorylation of the receptor C-terminal tail.
+
+CXCR3 chemokines promote different receptor phosphorylation barcode ensembles. CXCR3 chemokines (CXCL9, CXCL10, CXCL11) promote different levels of receptor phosphorylation. However, it is not known whether this is due to differences of phosphorylation levels at the same sites or at different sites on the C-terminus, or both. To determine if the endogenous CXCR3 chemokines produce different phosphorylation barcode ensembles, we utilized state-of-the-art mass spectrometry with combinatorial phosphopeptide reference libraries with heavy isotope labeled reference standards corresponding to potential CXCR3 serine and threonine phosphorylation patterns as previously described. This approach allowed us to not only identify but also quantify the relative abundance of specific phosphopeptides after chemokine stimulation. Wild-type human CXCR3-overexpressing HEK293 cells were stimulated with CXCL9, CXCL10, CXCL11 or vehicle control, followed by tryptic digestion and tandem mass tag labelling, allowing samples to be pooled and greatly improving measurement precision as well as eliminating variability from batch effects. After ion metal affinity chromatography enrichment, TMT-labeled peptides were analyzed using liquid chromatography and tandem mass spectrometry for phosphopeptide identification. Phosphosites of interest were further validated by targeted proteomics with the addition of a synthetic library of 128 heavy isotope-labeled C-terminal phosphopeptides prior to IMAC enrichment. This enabled us to confidently differentiate and quantify adjacent phosphosites, providing high-resolution insights into the ensemble of receptor phosphopeptides following chemokine stimulation.  We identified several specific phosphopeptides following chemokine treatment. We detected that every putative serine or threonine phosphorylation site on the RDSSWSETSEASYSGL tryptic peptide could be phosphorylated, although the levels of these phosphopeptides differed depending on chemokine treatment. For example, the abundance of the singly phosphorylated peptide DSSWSETSEASYpSGL (S366) significantly increased following treatment with CXCL9 but did not change with CXCL10 or CXCL11, providing direct evidence that the chemokines encode distinct GPCR phosphorylation ensembles. We additionally detected a decrease in abundance of singly phosphorylated peptides at S355, S356, and T360 following treatment with all chemokines, consistent with a loss of some singly phosphorylated peptides following ligand treatment, as the ensemble of barcodes shift towards those that were multiply phosphorylated.
+
+Phosphorylation barcode ensembles direct G protein activation, b-arrestin recruitment, and receptor internalization  To study the effects of different phosphorylation barcode ensembles on cellular signaling, we screened a variety of phosphorylation-deficient CXCR3 mutants, either serine/threonine to alanine mutants or truncation mutants, using G protein and b-arrestin assays. Based on this screen, we selected four phosphorylation deficient receptors to interrogate in detail. These receptors maintained cell surface expression similar to wild-type CXCR3.  We first employed the TRUPATH bioluminescence resonance energy transfer assay to assess G protein activation. Most C-terminal mutations did not impact CXCR3 G protein activation, with similar profiles of CXCL11 and CXCL10 and reduced potency and Emax of CXCL9, as previously described. We did observe a significant left shift in the EC50 of the truncation mutant CXCR3-L344X at CXCL10 and CXCL11, consistent with increased G protein signaling. When experiments were repeated in b-arrestin-1/2 CRISPR KO cells, CXCR3-WT potency was also left shifted and indistinguishable from the truncation mutant, consistent with CXCR3-L344X increased G protein signaling being due to a loss of b-arrestin-mediated desensitization. Notably, we observed an approximately 50% decrease in G protein activation at the phosphorylation deficient mutant CXCR3-S355A/S356A, which was not due to increased b-arrestin desensitization, and was partially rescued using a phosphomimetic mutant, CXCR3-S355D/S356D, consistent with receptor phosphorylation at specific sites impacting G protein activation.  We next examined b-arrestin recruitment. Consistent with prior work, CXCL11 was significantly more effective in recruiting b-arrestin to CXCR3-WT compared to CXCL9 and CXCL10. All phosphodeficient mutant receptors treated with CXCL11 demonstrated significantly less recruitment of b-arrestin when compared to CXCR3-WT. In contrast, few mutant receptors treated with CXCL9 and CXCL10 demonstrated changes in b-arrestin recruitment relative to wild type. Differential b-arrestin recruitment was observed between chemokines at CXCR3-WT, CXCR3-S355A/S356A, and CXCR3-T360A/S361A.
+
+we observed no difference between chemokines in their ability to recruit b-arrestin to receptor mutants lacking the most putative C-terminal phosphorylation sites (CXCR3-4xA and CXCR3-L344X). This is consistent with CXCR3 C-terminal phosphorylation sites being critical for differences in b-arrestin recruitment between chemokines.  we next explored the impact of phosphodeficient CXCR3 receptors on b-arrestin function. b-arrestins are known to regulate GPCR endocytosis by interacting with the clathrin adaptor protein AP-2. Therefore, we hypothesized that CXCR3 C-terminal mutations would impair receptor internalization. We used confocal microscopy to monitor CXCR3 and b-arrestin localization following chemokine treatment. CXCL11 promoted the translocation of CXCR3-WT and b-arrestin-2 to endosomes. CXCL10 also promoted CXCR3-WT:b-arrestin puncta, but not to the magnitude of CXCL11. CXCL9 did not promote either CXCR3-WT:b-arrestin puncta or receptor internalization. Consistent with our hypothesis, CXCL10 or CXCL11 treatment of phosphorylation-deficient CXCR3 mutants impaired internalization.  To further evaluate and quantify internalization, we utilized a BRET-based assay to measure receptor trafficking to early endosomes. CXCL9 treatment did not induce significant CXCR3-WT endosomal trafficking. While CXCL10 promoted receptor internalization, none of the phosphorylation-deficient mutants internalized after CXCL10 treatment. In contrast, CXCL11 treatment led to a different endosomal trafficking pattern at mutant receptors, with CXCR3-S355A/S356A, -T360A/S361A, and -4xA internalizing ~50% of the level of CXCR3-WT, while CXCR3-L344X did not internalize at all. We confirmed these findings with an orthogonal BRET assay to assess CXCR3 trafficking away from the plasma membrane following chemokine treatment. These results are consistent with ligand- and receptor-specific effects on internalization: while removing selected phosphosites is sufficient to seemingly eliminate CXCL10-mediated internalization, removal is not sufficient to completely inhibit CXCL11-mediated internalization. In contrast, the receptor C-terminus is required for receptor internalization with CXCL10 and CXCL11, despite partial b-arrestin recruitment to the CXCR3-L344X mutant.  GRK2 and GRK3 are differentially recruited to CXCR3 following ligand stimulation
+
+We next investigated the kinases critical to differential CXCR3 phosphorylation barcode ensembles. While multiple kinases have been identified that phosphorylate GPCRs, the GRKs are established to be the primary drivers of GPCR phosphorylation. There are seven identified GRK isoforms, of which GRK2, 3, 5, and 6 are ubiquitously expressed in mammalian tissues. Because CXCR3 is primarily expressed on leukocytes, we investigated GRKs 2, 3, 5 and 6 recruitment to CXCR3 following chemokine treatment using a previously validated nanoBiT complementation assay. We observed that GRK2 and GRK3 were recruited to all CXCR3 mutant receptors following chemokine treatment with similar kinetic profiles. In contrast, we did not observe appreciable recruitment of GRK5 or GRK6 to CXCR3-WT or mutant receptors, and confirmed it was not due to competition between GRK isoforms by demonstrating a lack of GRK5 and 6 recruitment in GRK2/3/5/6 knock out cells. At CXCR3-WT, CXCL9, CXCL10, and CXCL11 demonstrated similar maximal recruitment of GRK2 and GRK3. The effects of CXCR3 C-terminal mutations were variable, with effects that were both chemokine- and receptor-dependent. At CXCR3-L344X, GRK2 and GRK3 recruitment was largely preserved with CXCL9 stimulation, but significantly reduced with CXCL10 or CXCL11 treatment. Surprisingly, two phosphodeficient mutants enhanced GRK recruitment to the receptor. To investigate this, we generated the phosphomimetic mutants CXCR3-T360D/S361D and CXCR3-4xD and found that they displayed decreased recruitment of GRK2 and GRK3, similar to that of CXCR3-WT. These results suggest that basal phosphorylation of specific residues in the C-terminus inhibit GRK recruitment. Together, these experiments demonstrate that GRK recruitment depends on both the specific C-terminal residue as well as the ligand used to activate the receptor.  b-arrestin conformation is dependent on ligand identity and receptor phosphorylation status. We next investigated how chemokines modulate b-arrestin conformation. Previous work has shown that b-arrestins adopt multiple conformational states when engaged with the receptor core and C-terminus, and that these different states are important for b-arrestin-dependent signaling. We used a
+
+previously validated intramolecular fluorescent arsenical hairpin (FlAsH) BRET assay to assess b-arrestin conformation at all five mutant CXCR3 receptors treated with CXCL9, CXCL10, or CXCL11. Data are presented as radar plots, enabling simultaneous visualization of all FlAsH biosensors at each receptor-ligand combination. At CXCR3-WT, we found that CXCL9 did not induce a significant conformational change compared to vehicle, while both CXCL10 and CXCL11 promoted significant changes in the b-arrestin C-domain and C-terminus. Minimal conformational changes were noted in the N-domain of b-arrestin.  Analyzing conformational signatures by chemokine, phosphorylation-deficient mutants had no significant effect on b-arrestin conformational signatures following treatment with CXCL9 but had significant effects on the conformations when stimulated with CXCL10 and CXCL11. Analyzing conformational signatures by mutant, CXCR3-S355A/S356A abolished all chemokine-specific b-arrestin conformational signatures. In contrast, CXCR3-T360A/S361A promoted a b-arrestin-2 conformational signature nearly identical to CXCR3-WT. CXCR3-4xA had decreased conformational changes in the b-arrestin C-domain compared to CXCR3-WT, but with preserved conformational changes at the C-terminus. At CXCR3-L344X, nearly all conformational differences between chemokines were lost, with only small differences observed in the b-arrestin C-terminus between chemokines. These data suggest that, even in the absence of a C-terminus, the chemokines are still able to promote distinct b-arrestin-2 conformational signatures through the receptor core. Phosphorylation sites in the C-terminus play a central role in determining b-arrestin 2 conformation, with sites such as S355 and S356 being critical for biased G protein activation, b-arrestin recruitment, and b-arrestin conformation.  These data further show that the conformational status of the N-domain depends on the identity of the chemokine and receptor, but that these effects are largely independent of each other. However, the totality of conformational data demonstrates that the conformational signature of the C-domain and C-terminus of b-arrestin is distinctively dependent on the combination, rather than additive effects of chemokine identity and CXCR3 phosphorylation status.
+
+Molecular Dynamic Studies of b-arrestin  To better characterize the conformational changes of b-arrestin observed using FlAsH probes, we performed structural modeling and computer simulation. The exact location of probes 1-3 in the N-domain and probes 4-5 in the structured beta-sheets of the C-domain are highlighted in our structural model of b-arrestin-2 fused to RLuc. As probe 6 is located within the distal C-tail, a highly flexible region which currently has not been crystallized, it is absent from our structural model and further analysis.  According to the BRET data, the signal from probes 1-3 was similar in the presence of different chemokines or C-tail mutations. This suggests that the relative position of the N-domain and RLuc to each other do not significantly change in those conditions.  In contrast, we observed that probes 4 and 5 located in the C-domain are sensitive to different chemokines and C-tail mutations. This indicates that structural changes induced in b-arrestin 2 by the receptor and the type of chemokine ligand result in a significant positional change of the C-domain with respect to the RLuc-fused N-domain. Such observed conformational changes are likely the result of receptor-induced activation of b-arrestin 2.  Interestingly, previous studies have highlighted that this activation of arrestin is linked to a twist of the C-terminal domain in respect to the N-domain. This transition can be quantified using the interdomain rotation angle, with higher values of this angle being linked to more active-like conformations of b-arrestin and vice versa.  To investigate whether the interdomain twist correlates with the distance between probes 4 or 5 and the RLuc anchor point (Arg8), we monitored both descriptors in b-arrestin simulations starting from an active-like conformation.  As we did not include either the receptor or a C-tail in the system, such a setup allows b-arrestin to spontaneously inactivate and to sample interdomain rotation angles from 20 (active-like state) to 0 degrees (inactive-like state).  Importantly, our simulations confirm that there is indeed a correlation between the RLuc-probe 4/5 distances and the interdomain rotation angles (R=0.54 for probe 4 and R=0.65 for probe 5). This suggests that these probes are sensitive to the activation state of b-arrestin 2. In contrast, the distances for probes 1-3 in the N-domain did not show any correlation with the value of the interdomain twist.
+
+To further verify this finding, we simulated b-arrestin 2 in complex with each of the studied CXCR3 C-tail variants and monitored their interdomain rotation angles. We found that the WT samples primarily conformations with a rotation angle of 14deg. A similar ensemble of conformations was also observed for the T360A/S361A mutant (peak 11deg). Interestingly, the 4xA mutant showed a reduction in rotation angle whereas the strongest shift towards low rotation angles was found for the S355A/S356A and L344X mutants (peaks at 6deg and 4deg). The order of adopted rotation angles is consistent with the magnitude of BRET signal for FlAsH probes 4 and 5, demonstrating that these probes are useful tools to approximate b-arrestin activation. b-arrestin structural dynamics provides a potential explanation for the induced conformational differences by specific C-tail mutants. We found that in the WT receptor, two negatively charged residues present in the C-tail (phosphorylated S358 and E359) form a bifurcated interaction with the positively charged residue K295 located in the lariat loop of b-arrestin 2. We observed that in systems which explore more active-like conformations (e.g., WT and T360A/S361A), there were, on average, more interactions between the lariat loop and the C-tail in comparison to systems that explored more inactive-like states. Importantly, these findings are consistent with previous studies that have demonstrated that polar interactions of the C-tail with the lariat loop are functionally important and promote active-like conformations of b-arrestin.  Global LC-MS proteomic and phosphoproteomic analyses reveal substantial variation in intracellular signaling between CXCL9, CXCL10, and CXC11. To further understand the breadth of intracellular signaling promoted by CXCR3 chemokines, we interrogated the global proteome of HEK293 cells treated with CXCL9, CXCL10, or CXCL11. We successfully identified over 150,000 total peptides corresponding to approximately 11,000 proteins. Of these peptides, approximately 30,000 were also identified as phosphopeptides corresponding to approximately 5,500 unique phosphoproteins. The majority of identified phosphosites were phosphoserines and phosphothreonines, with a high degree of reproducibility across replicates. We identified approximately 1,500 phosphopeptides that underwent significant changes in abundance following chemokine treatment. We then performed a clustering analysis of those phosphopeptides to uncover coregulated signaling pathways.
+
+similar between the three chemokines, while other clusters demonstrated significant differences between treatments. Gene ontology term enrichment was performed on the significantly divergent phosphopeptides to assess the biological processes, molecular functions, and cellular compartments regulated by CXCR3. These analyses reveal differential regulation of cellular transcription, post-translational modifications, cytoskeletal rearrangements, and cellular migration (among others) between chemokines. Additionally, the nucleus, cytoplasm, cytoskeleton, and cell-cell junctions were the most identified cellular compartments found in our gene ontology analysis. These data also show that CXCR3 chemokines do not signal in a purely redundant manner and display a striking degree of heterogeneity across signaling pathways associated with multiple cellular functions and compartments.  Biased CXCR3 phosphorylation serves as a mechanism underlying differential regulation of the kinome. We next investigated the kinases responsible for generating chemokine-specific phosphorylation-dependent signaling networks. Kinase enrichment analyses revealed that our dataset was largely enriched for phosphopeptides substrates targeted by cyclin dependent kinases (CDKs) and mitogen-activated protein kinases (MAPKs). We next used Modification Motifs, a motif-based sequence analysis tool, to identify enriched amino acid motifs flanking the phosphoserines and phosphothreonines that were differentially regulated in our dataset. Four major consensus sequences were identified: pS/pT-P which is a conserved target sequence of CDKs and MAPKs, R-X-X-pS/pT which is targeted by protein kinase B (Akt), pS/pT-L, and pS/pT-X-X-E which is targeted by casein kinase 2. These findings are consistent with previous studies demonstrating that CXCR3 activates the MAPK extracellular signal-related kinase (ERK) and Akt, among others, but also reveal unexplored CXCR3 signaling networks.  Next, we manually identified differentially phosphorylated kinases in our global phosphoproteomic data that are known to be regulated by GPCRs, or that were identified in bioinformatics analyses. The MAPKs ERK1, RAF1 and JNK, as well as SRC kinase family were phosphorylated in a chemokine-specific pattern, whereas BRAF and CSNK2 demonstrated similar phosphorylation patterns across CXCL9, CXCL10, and CXCL11. To understand if this biased regulation of the kinome is regulated by CXCR3 receptor.
+
+phosphorylation, we studied ERK1/2 phosphorylation following chemokine treatment of cells expressing either CXCR3-WT or a phosphodeficient CXCR3 mutant. At CXCR3-WT, we saw a significant increase in phosphorylated ERK1/2 (pERK), consistent with our mass spectrometry results. At 5 minutes, we observed a maximum increase in pERK levels over CXCR3-WT at CXCR3-4xA and CXCR3-L344X when stimulated with CXCL10 and CXCL11, but not CXCL9. At 30 and 60 minutes, pERK levels declined, consistent with prior observations at other GPCRs. This differential phosphorylation of ERK1/2 by the three chemokines was observed at all mutant CXCR3 receptors, including CXCR3-L344X.  T cell chemotaxis is regulated by biased CXCR3 phosphorylation barcode ensembles. We last investigated if the biased chemokine signaling pathways observed in HEK293 cells impact physiologically relevant cellular functions. Given that CXCR3 plays a central role in T cell function, we interrogated the effect of CXCR3 phosphorylation barcodes on T cell chemotaxis. We first used CRISPR/Cas9 to knock out the endogenous CXCR3 in Jurkat cells, an immortalized human T lymphocyte cell line, generating CXCR3 knockout (CXCR3-KO) Jurkats. We rescued CXCR3 receptors of interest, both wild-type and mutants, with lentiviral constructs to generate stably expressing CXCR3+ Jurkat cell lines. We confirmed similar receptor expression levels between wild-type and mutant CXCR3+ Jurkat lines.  We then performed chemotaxis assays with these cell lines. Due to the promiscuous nature of the chemokine system, we first confirmed that CXCR3-KO Jurkats exhibit no measurable chemotaxis compared to vehicle treatment, demonstrating that the observed chemotactic response is mediated by CXCR3 and not by other chemokine receptors. CXCR3+ Jurkat cells migrated with different chemotactic indices to CXCL9, CXCL10, or CXCL11, consistent with a biased response across chemokines. Statistically, there were effects induced both by ligand and by receptor. We observed a slight but significant decrease in chemotactic function at CXCR3-S355A/S356A and CXCR3-T360A/S361A with CXCL11, but not with CXCL9 nor CXCL10. Conversely, we observed a significant increase in chemotaxis with CXCL11 at CXCR3-4xA and CXCR3-L344X, although with different patterns. While chemotaxis at CXCR3-4xA displayed the same pattern by chemokine as CXCR3-WT (CXCL11 > CXCL9 > CXCL10), chemotaxis at CXCR3-L344X displayed
+
+Only minor differences between all chemokines, although all displayed significantly more chemotaxis than at CXCR3-WT. Associating T cell chemotaxis with transducer efficacy. The biased pattern of chemotaxis at all receptors except L344X was different than that observed at proximal GPCR signaling assays, i.e., G protein activation and b-arrestin recruitment. To ascertain if G protein or b-arrestin signaling was directly related to chemotactic function, we performed univariate linear regressions on these data and found no significant linear relationship between G protein or b-arrestin signaling efficacy and chemotactic function. We then performed a principal component analysis of G protein signaling and b-arrestin signaling versus chemotactic function and similarly found no obvious clustering of data by ligand or receptor. A univariate linear regression of MAPK activation versus chemotactic function did demonstrate a significant positive linear relationship. We then performed a second principal component analysis of all major assays conducted in this study and were able to demonstrate clustering of the chemokines at CXCR3-L344X. These analyses demonstrated that G protein and b-arrestin signaling alone or together do not comprehensively describe the observed variance in our functional assays. Further addition of other signaling data, GRK recruitment, FlAsH conformational assays, moderately enhanced our ability to describe the variance in cellular chemotaxis, however, only at CXCR3-L344X. For receptors with a C-terminal tail, their chemotactic profiles did not cluster after PCA analysis, consistent with the C-terminus contributing to a biased response even when differences in transducer coupling are accounted for. Together, these data support a working model in which biased chemokines promote bias through the receptor core and through different CXCR3 phosphorylation barcode ensembles that regulate both proximal and distal aspects of GPCR signaling that impact T cell chemotaxis in a complex fashion.  DISCUSSION. Here we report how different chemokines for the same receptor direct distinct signaling pathways. We conclusively demonstrate that the endogenous chemokines of CXCR3 have biased patterns of signaling and are nonredundant in their activation of different intracellular kinase cascades and chemotactic profiles.
+
+initiation through G proteins and b-arrestins, well-conserved effectors across the GPCR superfamily, is directed by CXCR3 C-terminus phosphorylation, whereby the different chemokines encode distinct phosphorylation ensembles. Disrupting discrete CXCR3 phosphorylation patterns interfered with signaling downstream of certain CXCR3 chemokines, but not others, depending on the phosphorylation site. Disrupting certain phosphosites also altered T cell function as assessed by chemotaxis, and this complex physiological output could not be entirely defined by the activity of proximal G protein or b-arrestin transducers alone.  Using multiple high-resolution mass spectrometry approaches, we found that different chemokines promoted different CXCR3 phosphorylation barcode ensembles. Limitations of mass spectrometry-based approaches in studying the phosphorylation of transmembrane receptors include their relative low abundance, difficulty in isolation, and sample handling demands. To overcome these challenges, we incorporated and validated a combinatorial phosphopeptide library with heavy isotope-labeled reference standards, allowing us to simultaneously analyze wild-type, untagged CXCR3 under different chemokine treatment conditions. We found that perturbations in specific phosphorylation patterns impact proximal and distal aspects of GPCR signaling, as well as chemotaxis. At GPCRs more broadly, there is limited work investigating the phosphorylation patterns generated by endogenous ligands, as most studies have relied on synthetic ligands. In addition, there is a desire to develop biased therapeutics which preferentially activate signaling pathways to increase therapeutic efficacy while simultaneously decreasing side effects, and our findings could provide an initial methodology to screen ligands for a desired physiological output. Our results demonstrate that the GPCR C-terminus is critically important in the regulation of proximal signaling effectors, and that the final cellular phenotype is dependent on the integration of multiple signaling pathways downstream of these interactions.  We found that both the receptor core and distinct phosphorylation patterns in the tail contribute to the allosteric regulation of b-arrestin conformation. b-arrestins can engage GPCRs through independent interactions with the receptor core and C-terminus. We found that all chemokine agonists similarly recruited b-arrestin to the receptor core in the absence of a C-terminus but maintained the ability to promote different b-arrestin conformations. Additionally, although b-arrestin-2 could still recruit to CXCR3-L344X, the receptor did not internalize, highlighting the importance of the
+
+b-arrestin-2 interaction with the receptor C-terminus in promoting receptor internalization as previously described. Our findings agree with recent studies demonstrating that not all phosphorylation sites on a GPCR C-terminus impact b-arrestin recruitment and function. PCA analysis of signaling and chemotaxis data support a model in which chemokines promote bias through both the receptor core and CXCR3 phosphorylation barcode ensembles that regulate both proximal and distal aspects of GPCR signaling.  While previous studies demonstrated that certain C-terminal phosphorylation sites are involved in b-arrestin conformation, many of these studies have been limited to in vitro and in silico methods. Here, we demonstrate in a cellular context that the b-arrestin conformation formed at a GPCR is dependent on the specific combination of both the ligand and the receptor phosphorylation pattern.  Importantly, the conformational diversity seen in the C-domain and C-terminus of b-arrestin cannot be explained simply through the additive effects of ligand and receptor identity. Rather, the unique interaction between the ligand and receptor phosphorylation pattern ultimately promotes b-arrestin to adopt a specific ensemble of conformations, highlighting the complex structural diversity a single GPCR can impose upon proximal effector proteins like b-arrestin. Modeling and molecular dynamics simulations suggest that b-arrestin conformations vary in the degree of interdomain rotation between the N- and C-domains. This motion has been previously described to be a crucial step in b-arrestin activation. Our results show that certain chemokines and C-tail mutants shift the conformational equilibrium of b-arrestin towards active-like conformations. Furthermore, a more detailed analysis suggests that a specific pattern of interaction of the receptor C-tail with the lariat loop region of b-arrestin contributes towards this transition.  This work also provides a comprehensive assessment of the roles biased agonists and receptor phosphorylation serve in directing downstream signaling. Not only did we observed that chemokines induce distinct phosphoproteomic signaling profiles through a single receptor, but we also demonstrate how specific changes in CXCR3 phosphorylation barcodes impact the biased regulation of the phosphoproteome and MAPK signaling. We identified a relationship between MAPK activation and chemotactic function, even though these assays were performed in different cell types, consistent with previous studies. Our data suggests that a systems-level approach integrating upstream and downstream signaling
+
+effectors will be critical to the development of novel therapeutics with a desired phenotype, rather than an approach that relies solely on specific proximal transducers. Because protein-protein interfaces are frequent pharmacologic targets and commonly regulated via phosphorylation, this investigative framework extends to many other domains of pharmacology and cellular signaling. Therefore, this study has important implications in understanding the pluridimensional efficacy of the chemokine system, the GPCR superfamily, and all receptors more broadly.  Our findings prompt many avenues for future study. Importantly, there are technical limitations that must be overcome to better determine the abundance of highly phosphorylated C-terminal peptides. Accurate determination of the stoichiometry of physiologically relevant phosphorylation barcodes is critical to understanding how these ensembles direct GPCR effector function under native conditions. Additionally, further work is needed to elucidate the detailed mechanism underlying the generation of these barcode ensembles - while we provide evidence demonstrating biased interactions of GRKs with CXCR3, it remains unclear how these ligands target the GRKs and other kinases to specific locations within the C-terminus and receptor core. Notably, there is heterogenous expression of the GRKs and other kinases throughout the human body; therefore, it is pertinent to understand how receptor phosphorylation may change depending on the effectors present to interact with a GPCR. Also, while there is evidence of specific signaling cascades directly dependent on G protein or b-arrestin activation, more complex cellular phenotypes are likely dependent on the combination of these and other GPCR signaling partners. For example, there is burgeoning evidence of GPCR signaling pathways that extend beyond that canonical G protein versus b-arrestin paradigm, specifically, those that integrate these pathways together. Using systems-level approaches to characterize these processes will be critical to understanding the coordination of signaling through different GPCR transducers.  While it was a long-held belief that signaling in the chemokine system was redundant, we conclusively demonstrate that signaling through the three endogenous chemokine agonists of CXCR3, CXCL9, CXC10, and CXCL11 is not redundant. These three chemokines (1) encode distinct receptor phosphorylation patterns, (2) promote strikingly divergent signaling profiles as assessed by ~30,000 phosphopeptides corresponding to ~5,500 unique phosphoproteins, and (3) promote distinct phosphosite-dependent physiological effects as assessed by chemotaxis. We have previously shown in a mouse model of
+
+contact hypersensitivity that a b-arrestin-biased CXCR3 agonist can increase inflammation whereas a G protein-biased CXCR3 agonist did not, further supporting the physiological relevance of biased signaling at CXCR3. Additionally, T cells derived from b-arrestin-2 KO mice demonstrate impaired chemotactic response in the presence of either a b-arrestin-biased or G protein biased CXCR3 agonist.  Taken as a whole, our findings suggest that cellular functions such as chemotaxis are not merely encoded by the amount of b-arrestin recruited to the receptor, rather, it is influenced by specific b-arrestin conformations induced by a receptor. The non-redundant nature of chemokine signaling at CXCR3 likely applies to the remainder of the chemokine system, although further work is necessary to confirm this hypothesis.
+
+ACKNOWLEDGEMENTS We thank R.J. Lefkowitz for guidance, mentorship, and thoughtful feedback throughout this work; N. Nazo for laboratory assistance; R. Shammas for assistance with FlAsH experiments. Funding: This work was supported by T32GM007171, the Duke Medical Scientist Training Program, AHA 20PRE35120592, 1R01GM122798, K08HL114643, Burroughs Wellcome Career Award for Medical Scientists, National Center of Science, Poland - 2017/27/N/NZ2/02571, P41GM103493, 1R01GM139858. A.I. was funded by Japan Society for the Promotion of Science KAKENHI grants 21H04791, 21H05113, JPJSBP120213501 and JPJSBP120218801; FOREST Program JPMJFR215T and JST Moonshot Research and Development Program JPMJMS2023 from Japan Science and Technology Agency; The Uehara Memorial Foundation; and Daiichi Sankyo Foundation of Life Science. Work was performed in the Environmental Molecular Sciences Laboratory, a U. S. Department of Energy Office of Biological and Environmental Research national scientific user facility located at Pacific Northwest National Laboratory in Richland, Washington. Pacific Northwest National Laboratory is operated by Battelle for the U.S. Department of Energy under Contract No. DE-AC05-76RLO 1830.  AUTHOR CONTRIBUTIONS Conceptualization, D.S.E., J.S.S., and S.R; Methodology, D.S.E., J.S.S., J.M.J, R.D.S., S.R., T.M.S., and J.D.S; Investigation, D.S.E., J.S.S., C.H., N.B., J.G., T.S., C.T., N.K., C.D.N., A.M.M., T.M.S, K.K., I.C., K.Z., A.W., P.A., N.M.K., O.H; Resources, K.K., A.I; Writing - Original Draft, D.S.E., J.S.S., and S.R; Writing - Reviewing & Editing, D.S.E., J.S.S., and S.R; Visualization, D.S.E., J.S.S., and S.R; Supervision and Funding Acquisition, S.R.  DECLARATION OF INTERESTS The authors declare no competing interests.
+
+One or more of the authors of this paper self-identifies as an underrepresented ethnic minority in science. While citing references scientifically relevant for this work, we also actively worked to promote gender balance in our references list.
+
+23
+MAIN FIGURE TITLES AND LEGENDS 
+491
+492
+Figure 1: Detection of CXCR3 C-terminal phosphopeptides using mass spectrometry 
+493
+(A) Snake diagram of CXCR3 highlighting green putative C-terminal phosphorylation sites (S, T, and Y). (B) 
+494
+Schematic of experimental design of receptor phosphoproteomics experiment. (C) Singly, doubly, and triply 
+495
+phosphorylated CXCR3 C-terminal peptides identified through mass spectrometry. Identified phosphopeptides 
+496
+are noted in red. (D) Abundance of singly phosphorylated DSSWSETSEASYpSGL peptide measured in HEK293 
+497
+cells following stimulation with vehicle control or CXCL9, CXCL10, or CXCL11 at 100 nM for 5 minutes. Mean +- 
+498
+SEM, n=2 technical replicates of 6 pooled biological replicates. (E) Diagram of designed CXCR3 
+499
+phosphorylation-deficient receptor mutants of interest. *P<.05, by one-way ANOVA, Tukey's post hoc analysis. 
+500
+See S1 for additional mass spectrometry data and signaling and expression data of CXCR3 phosphorylation 
+501
+deficient mutants. 
+502
+503
+Figure 2: G protein dissociation, b-arrestin-2 recruitment, and receptor internalization of CXCR3 and 
+504
+receptor mutants 
+505
+(A) Schematic of TRUPATH assay to detect G protein dissociation following receptor stimulation using BRET 
+506
+(Olsen et al., 2020). (B, C, and D) G protein dissociation of receptors treated with listed chemokine in HEK293 
+507
+cells. (E and F) G protein dissociation of CXCR3-WT and CXCR3-S355A/S356A in HEK293 cells. (G) G protein 
+508
+dissociation of CXCR3-WT and CXCR3-L344X in wild-type HEK293 cells (WT HEK293) and b-arrestin-1/2 knock 
+509
+out cells (barr 1/2 KO). (H) Schematic of BRET assay to detect b-arrestin-2 recruitment to the receptor. (I, J, and 
+510
+K) b-arrestin-2 recruitment of receptors treated with listed chemokine in HEK293 cells. (L) Representative 
+511
+confocal microscopy images of HEK293 cells transfected with receptor-GFP and b-arrestin-2-RFP following 
+512
+treatment with vehicle control or the listed chemokine for 45 minutes. Images are representative of three 
+513
+biological replicates. (M) Schematic of BRET assay to detect receptor internalization to endosomes. (N) BRET 
+514
+data of receptor internalization following stimulation with the listed chemokine. Data are the average of BRET 
+515
+values from 20-30 minutes following ligand stimulation. For (A-G) TRUPATH assays, data shown are the mean 
+516
++- SEM of BRET values 5 to 10 minutes following ligand stimulation, n=3. * denotes statistically significant 
+517
+1 
+ 2 
+ 3 
+ 4 
+ 5 
+ 6 
+ 7 
+ 8 
+ 9 
+10 
+11 
+12 
+13 
+14 
+15 
+16 
+17 
+18 
+19 
+20 
+21 
+22 
+23 
+24 
+25 
+26 
+27 
+28 
+29 
+30 
+31 
+32 
+33 
+34 
+35 
+36 
+37 
+38 
+39 
+40 
+41 
+42 
+43 
+44 
+45 
+46 
+47 
+48 
+49 
+50 
+51 
+52 
+53 
+54 
+55 
+56 
+57 
+58 
+59 
+60 
+61 
+62 
+63 
+64 
+65
+.
+CC-BY-NC 4.0 International license
+available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+The copyright holder for this preprint
+this version posted March 14, 2023. 
+; 
+https://doi.org/10.1101/2023.03.14.532634
+doi: 
+bioRxiv preprint
+
+24
+differences between Emax of specified receptor and CXCR3-WT. # denotes statistically significant differences 
+518
+between EC50 of specified receptor and CXCR3-WT. For b-arrestin-2 recruitment, data shown are the mean +- 
+519
+SEM, n=3. *denotes statistically significant differences between EMax of CXCR3-WT and all other receptors at 
+520
+CXCL11, and of CXCR3-WT and CXCR3-4xA at CXCL9. # denotes statistically significant differences between 
+521
+EC50 of CXCR3-WT and CXCR3-S355A/S356A at CXCL10. For internalization BRET assays (N), data are the 
+522
+mean +- SEM, n=4. *P<.05 by two-way ANOVA, Dunnett's post hoc testing between CXCR3-WT and all other 
+523
+receptor mutants. See S2 and S3 for further data assessing G protein dissociation, b-arrestin-2 recruitment, and 
+524
+receptor internalization. 
+525
+526
+Figure 3: GRK Recruitment and b-arrestin-2 conformational dynamics 
+527
+Agonist dose-dependent data and kinetic data of maximum treatment dose of (A-C) GRK2 and (D-F) GRK3 
+528
+recruitment to receptor as measured by a split nanoluciferase assay. Data are grouped by treatment condition. 
+529
+Mean +- SEM, n=3-4. (G) Schematic of FlAsH assay to detect b-arrestin-2 conformational dynamics following 
+530
+receptor stimulation using intramolecular BRET (Lee et al., 2016). (H) Location of N-terminal RLuc and CCPGCC 
+531
+FlAsH-EDT2 binding motifs on b-arrestin-2. (I-K) Radar plots of FlAsH 1-6 grouped by treatment. (L-P) Radar 
+532
+plots of FlAsH 1-6 grouped by receptor. Mean, n=5. For FlAsH BRET (I-P), data is the average of five consecutive 
+533
+reads taken approximately 10 minutes after the addition of ligand. See S4-S5 for additional GRK recruitment 
+534
+data and S6 for raw FlAsH data. 
+535
+536
+Figure 4:  Impact of the phosphorylation pattern on b-arrestin-2 b-arrestin-2 conformational dynamics  
+537
+(A) Structural model of the construct used in the FlAsH BRET conformational assay. The positions of Probes 1-
+538
+5 are depicted as red spheres. Shown are the correlations between the distance of studied FlAsH probes to the 
+539
+RLuc domain and the interdomain rotation angle of b-arrestin 2. As the RLuc domain is absent in the simulated 
+540
+system, distance from the studied probes was approximated to a residue in the beginning of the N-terminal 
+541
+domain (the attachment point of the RLuc), depicted as a green sphere. B) The b-arrestin 2/WT-CXCR3 C-tail 
+542
+complex. Negatively charged residues (Asp, Glu or phosphorylated Ser and Thr) on the C-tail are depicted in 
+543
+licorice and their Ca atoms are highlighted with red spheres. Positions mutated within this study are labeled. The 
+544
+1 
+ 2 
+ 3 
+ 4 
+ 5 
+ 6 
+ 7 
+ 8 
+ 9 
+10 
+11 
+12 
+13 
+14 
+15 
+16 
+17 
+18 
+19 
+20 
+21 
+22 
+23 
+24 
+25 
+26 
+27 
+28 
+29 
+30 
+31 
+32 
+33 
+34 
+35 
+36 
+37 
+38 
+39 
+40 
+41 
+42 
+43 
+44 
+45 
+46 
+47 
+48 
+49 
+50 
+51 
+52 
+53 
+54 
+55 
+56 
+57 
+58 
+59 
+60 
+61 
+62 
+63 
+64 
+65
+.
+CC-BY-NC 4.0 International license
+available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+The copyright holder for this preprint
+this version posted March 14, 2023. 
+; 
+https://doi.org/10.1101/2023.03.14.532634
+doi: 
+bioRxiv preprint
+
+insert provides a detailed depiction of the lariat loop region of b-arrestin 2 (blue) and interactions with negatively charged residues of the C-tail. Bar charts demonstrate the stability of polar interactions between K294 of the lariat loop and S358 and E359 of the C-tail. Values for the WT and T360AS361A systems are colored in red. Density plots depicting interdomain rotation angles assumed by b-arrestin-2 during MD simulations with C-tail mutants.
+
+blots of pERK1/2 levels at 5, 30, and 60 minutes. Mean +- SEM, n=4. *P<.05 by two-way ANOVA, Dunnet's post hoc testing denotes comparisons between a specific ligand/receptor combination to the same ligand at CXCR3-WT.
+
+Further information and requests for resources and reagents should be directed to and will be fulfilled by the lead contact, Sudarshan Rajagopal (Sudarshan.rajagopal@duke.edu).  All plasmids generated in this study will be distributed upon request.  The RAW MS data and the identified results from Maxquant have been deposited in Japan ProteOme STandard Repository https://repository.jpostdb.org/ The accession codes: JPST001599 for jPOST and PXD034033 for ProteomeXchange. The access link is https://repository.jpostdb.org/preview/1101419412628c1a4318aa7 and access key is 6844. Molecular dynamics simulations have been deposited in GPCRmd https://submission.gpcrmd.org/dynadb/publications/1485/ with the ID 1485.  XL-10 Gold ultracompetent E. coli (Agilent) were used to express all constructs used in this manuscript.  Human Embryonic Kidney (HEK293, b-arrestin 1/2 knockout) cells were grown in minimum essential media (MEM) supplemented with 10% fetal bovine serum (FBS) and 1% penicillin/streptomycin at 37degC and 5% CO2. b-arrestin 1/2 KO HEK293 cells and GRK 2/3/5/6 KO HEK293 cells were provided by Asuka Inoue and validated.
+
+as previously described. Jurkat cells were cultured in RPMI 1640 supplemented with 10% FBS and 1% penicillin/streptomycin at 37degC and 5% CO2.  METHOD DETAILS Cell culture and transfection Human embryonic kidney cells (HEK293, GRK 2/3/5/6 knockout, b-arrestin 1/2 knockout) were maintained at 37oC and 5% CO2, in minimum essential medium supplemented with 1% penicillin/streptomycin and 10% fetal bovine serum (FBS). For BRET and luminescence studies, HEK293 cells were transiently transfected via an optimized calcium-phosphate protocol. In the calcium phosphate transfection method, cell culture media was replaced 30 minutes prior to transfection. Plasmids were suspended in water, and calcium chloride was added to the plasmid constructs to a final concentration of 250 uM. An equal volume of 2x HEPES-buffered saline solution (10 mM D-Glucose, 40 mM HEPES, 10 mM potassium chloride, 270 mM sodium chloride, 1.5 mM disodium hydrogen phosphate dihydrate) was added to the solution, allowed to incubate for two minutes, and subsequently added to the cells. For mass spectrometry studies and confocal microscopy, constructs were overexpressed in HEK293 cells using FuGENE 6 according to the manufacturer's instructions. For TGF-a shedding assay cells, were transiently transfected using Lipofectamine 2000 according to the manufacturer's instructions.  Generation of constructs Cloning of constructs was performed using conventional techniques such as restriction enzyme and ligation methods. CXCR3 C-terminal phosphomutant constructs were generated using a QuikChange Lightening Mutagenesis Kit. Linkers between the fluorescent proteins or luciferases and the cDNAs for receptors, transducers, kinases, or other proteins were flexible and ranged between 2 and 17 amino acids.  Cell lysis and protein extractions
+
+For protein extraction, cell pellets were resuspended in cell lysis buffer (100 mM NH4HCO3, pH 8.0, 8 M urea, 75 mM sodium chloride (NaCl), 10 mM sodium fluoride (NaF), 1% phosphatase inhibitor cocktail 2 (Sigma P 5726), 1% phosphatase inhibitor cocktail 3 (Sigma P 0044), pH 8.0) and sonicated in an ice-bath for 3 mins followed by homogenization using a hand-held SpiralPestle(tm) and MicroTube Homogenizer (BioSpec products, Bartlesville, OK) on ice until complete visual homogenization was achieved. Cell lysates were centrifuged, and the protein concentrations were measured with a Pierce BCA protein assay (Thermo Fisher Scientific). Proteins were reduced with 5 mM dithiothreitol for one hour at 37degC and subsequently alkylated with 20 mM iodoacetamide for one hour at 25degC in the dark. Samples were diluted 1:8 with 50 mM NH4HCO3 and digested with sequencing-grade modified trypsin (Promega, V5117) at a 1:50 enzyme-to-substrate ratio. After three hours of digestion at 37degC, the digested samples were acidified with 100% formic acid (FA) to 1% of the final concentration of FA and centrifuged for 15 minutes at 1,500 xg at 4degC before transferring samples into new tubes leaving the resulting pellet behind. Digested samples were desalted using a 4-probe positive pressure Gilson GX-274 ASPEC(tm) system (Gilson Inc., Middleton, WI) with Discovery C18 100 mg/1 mL solid phase extraction tubes (Supelco, St.Louis, MO), using the following protocol: 3 mL of methanol was added for conditioning followed by 2 mL of 0.1% trifluoroacetic acid (TFA) in H2O. The samples were then loaded onto each column followed by 4 mL of 95:5 H2O:acetonitrile (ACN), 0.1% TFA. Samples were eluted with 1 mL 80:20 ACN:H2O, 0.1% TFA. The samples were completely dried using a SpeedVac vacuum concentrator.  TMT-10 labeling of peptides. The dried tryptic peptides were dissolved with 500 mM HEPES (pH 8.5) and then labeled with 10-plex Tandem Mass Tag(tm) (TMT) reagents (Thermo Fisher Scientific) in 100% ACN. A ratio of TMT to peptide amount of 10:1 (w/w) was used (i.e., 500 mg of peptides labeled by 5 mg of TMT reagent). After incubation for one hour at room temperature, the reaction was terminated by adding 5% hydroxylamine for 15 minutes at room temperature. The TMT-labeled peptides were then acidified with 0.5% FA. Peptides labeled by different TMT reagents were then mixed, dried using a SpeedVac vacuum concentrator, reconstituted with 3% ACN, 0.1% FA and desalted again with C18 SPE.
+
+Peptide fractionation and enrichment  The peptides were further fractionated using a reversed-phase Waters XBridge C18 column (250 mm x 4.6 mm column packed with 3.5-mm particles) on an Agilent 1200 HPLC System (solvent A: 5 mM ammonium formate, pH 10, 2% ACN; solvent B: 5 mM ammonium formate, pH 10, 90% ACN) operating at a flow rate of 1 mL/min. Peptides were separated by a gradient mixture from 0% B to 16% B in six minutes, 40% B in 60 minutes, 44% B in 4 min and ramped to 60% B in five minutes. The 60% B mixture was kept for 14 min. Fractions were collected into a 96 well plate during the fractionation run with a total of 96 fractions at the 1-minute time interval. The 96 fractions were subsequently concatenated into 24 fractions by combining 4 fractions that are 24 fractions apart (for example, combining fractions 1, 25, 49, and 73; 2, 26, 50, and 74; and so on). For proteome analysis, 5% of each concatenated fraction was dried down and re-suspended in 2% acetonitrile, 0.1% formic acid to a peptide concentration of 0.1 mg/mL for LC-MS/MS analysis. The rest of the fractions (95%) were further concatenated into 12 fractions (for example, by combining fractions 1 and 13; 3 and 15; and so on), dried down, and phosphopeptides enriched using immobilized metal affinity chromatography (IMAC).  Phosphopeptide enrichment using IMAC  The procedure for IMAC phosphopeptide enrichment has previously been reported. Briefly, Fe3+-NTA-agarose beads were freshly prepared using the Ni-NTA Superflow agarose beads (QIAGEN, #30410) for phosphopeptide enrichment. For each of the 12 fractions, peptides were reconstituted in 500 mL IMAC binding/wash buffer (80% ACN, 0.1% TFA) and incubated with 20 mL of the 50% bead suspension for 30 minutes at RT. After incubation, the beads were sequentially washed with 50 mL of the wash buffer (1X), 50 mL of 50% ACN, 0.1% TFA (1X), 50 mL of the wash buffer (1X), and 50 mL of 1% FA (1X) on the stage tip packed with 2 discs of Empore C18 material (Empore Octadecyl C18, 47 mm; Supleco, 66883-U). Phosphopeptides were eluted from the beads onto the C18 disc using 70 mL of the elution buffer (500 mM K2HPO4, pH 7.0). Sixty microliters of 50% ACN, 0.1% FA was used for the elution of phosphopeptides from the C18 stage tips after two washes with 100 mL of 1% FA. Samples were dried using a Speed-Vac and later reconstituted with 12 mL of 3% ACN, 0.1% FA for LC-MS/MS analysis.
+
+LC-MS/MS Analysis Lyophilized global and phosphorylated peptides were reconstituted in 12 mL of 0.1% FA with 2% ACN and 5 mL of the resulting sample was analyzed by LC-MS/MS using a Q-Exactive HF Quadrupole-Orbitrap Mass Spectrometer connected to a nanoACQUITY UPLC system using buffer A: 0.1% FA with 3% ACN and buffer B: 0.1% FA in 90% ACN. Peptides were separated by a gradient mixture with an analytical column (75 mm i.d. x 25 cm) packed using 1.9-mm ReproSil C18 and with a column heater set at 50 degC. The analytical column was equilibrated to 98% buffer A and 2% buffer B and maintained at a constant column flow of 200 nL/min. Data were acquired in a data dependent mode with a full MS scan (350-1800 m/z) at a resolution of 60K with AGC setting set to 4x105. The isolation window for MS/MS was set at 0.7 m/z and optimal HCD fragmentation was performed at a normalized collision energy of 30% with AGC set as 1x105 and a maximum ion injection time of 105 ms. The MS/MS spectra were acquired at a resolution of 50K. The dynamic exclusion time was set at 45 s.  MS Data Analysis The raw MS/MS data were processed with MaxQuant. The MS/MS spectra were searched against a human UniProt database using a fasta file dated April 12, 2017 with 20,198 sequences. The search type was set to Reporter ion MS2 for isobaric label measurements. A peptide search was performed with full tryptic digestion (Trypsin) and allowed a maximum of two missed cleavages. Carbamidomethyl on C was set as a fixed modification; acetylation on protein N-term and oxidation on M were set as variable modifications for global proteome analysis. Acetylation on protein N-term, oxidation on M and Phospho on STY were set as variable modifications for phosphoproteome analysis. The false discovery rate was set to 1% at the level of proteins, peptides, and modifications; no additional filtering was performed. The intensities of all ten TMT reporter ions were extracted from MaxQuant outputs and the abundances of TMT were firstly log2 transformed. The phosphoproteome data were further processed by the Ascore algorithm for phosphorylation site localization, and the top-scoring sequences were reported. The Perseus was used for statistical analyses.
+
+Flow cytometry was utilized to assess wild-type CXCR3 and CXCR3 mutant receptor cell surface expression in HEK293 cells. HEK293 cells seeded in six-well plates were transfected with wild-type CXCR3 or the indicated CXCR3 mutant using the calcium phosphate method. Forty-eight hours later, the cells were collected, washed with ice cold phosphate buffered saline (PBS), and subsequently centrifuged at 600 g for 4 minutes at 4 oC. Supernatant was aspirated and cells were resuspended in ice cold PBS and counted. 1E6 cells were transferred to a new tube and resuspended in 100 mL of blocking buffer (PBS + 3% FBS + 10mM EDTA + 5% Normal Human Serum) on ice for 5 to 10 minutes. PE conjugated anti-Human CD183 (CXCR3) antibody was added per the manufacturers guidelines and cells were incubated for 20 to 30 minutes at room temperature in the dark. Cells were centrifuged once more, supernatant aspirated, and fixed in 300 uL of 0.4% paraformaldehyde and were assessed using a BD LSRII flow cytometer. Flow cytometry was performed in the Duke Human Vaccine Institute Research Flow Cytometry Facility (Durham, NC). FACS was utilized to select Jurkat cells expressing wild-type CXCR3 or the indicated CXCR3 mutant. Following lentiviral transduction and subsequent puromycin selection, Jurkat cells were collected and washed in Hank's Balanced Salt Solution (HBSS) with 2.5% FBS and 1.5 uM EDTA. Cells were then labelled with APC conjugated anti-Human CD183 (CXCR3) antibody for 25 minutes on ice in the dark. Cells were then washed with HBSS with 2.5% FBS and 1.5 uM EDTA and resuspended with DNase. Cells were then strained through a sterile 30 um filter and sorted on an Astrios (Beckman Coulter) sorter. Analyses were conducted with FlowJo version 10 software.  G protein activity of various CXCR3 phosphorylation deficient mutants was assessed by the TGF-a shedding assay. HEK293 cells were transiently transfected using Lipofectamine 2000 (Thermo Fisher Scientific) with wild-type CXCR3 or the indicated CXCR3 mutant receptor, modified TGF-a-containing alkaline phosphatase (AP-TGF-a), and the Gai1 or Gai3 subunit or the negative control Gac. 24 hours later, cells were detached and reseeded in HBSS with 5 mM HEPES in a clear-bottomed, white-walled, Costar 96-well plate (Corning Inc., Corning, NY).
+
+indicated concentration of CXCL11 for one hour. Conditioned medium (CM) containing the shed AP-TGF-a was transferred to a new 96-well plate. Both the cells and CM were treated with para-nitrophenylphosphate (p-NPP, 100 mM; Sigma-Aldrich, St. Louis, MO) substrate for one hour. The conversion of p-NPP to para-nitrophenol (p-NP) was measured at an optical density at 405 nm (OD405) in a BioTek Synergy Neo2 plate reader immediately after p-NPP addition and then after a 1-hour incubation. Ga activity was calculated by determining p-NP amounts by absorbance using the following equation: 100 *( OD405,CM OD405,CM+ OD405,Cell ) where DOD405 = OD405 at 1hr - OD405 at 0 hours and DOD405, cell and DOD405, CM represent the changes in absorbance after one hour in the cell and CM plates, respectively. Data were normalized to the negative control Gac.  Split luciferase and BRET assays HEK293 cells seeded in six-well plates (~750000 cells/well) were transfected with the appropriate constructs using the calcium-phosphate protocol. TRUPATH assays to assess G protein dissociation utilized wild-type CXCR3 or the indicated CXCR3 mutant, Gai1-RLuc8, Gg9-GFP2, and Gb3 at equal amounts. b-arrestin-2 recruitment was assessed using wild-type CXCR3 or the indicated CXCR3 mutant tagged with a C-terminal RLuc2 and a b-arrestin-2-mKO. Receptor internalization was assessed using wild-type CXCR3 or the indicated CXCR3 mutant tagged with a C-terminal RLuc2 and either a Myrpalm tagged mVenus to assess proximity to the cellular membrane, or a 2x-Fyve tagged mVenus to assess proximity to the early endosome. GRK recruitment was assessed using a split luciferase assay where wild-type CXCR3 or the indicated CXCR3 mutant was tagged with a SmBiT and GRK2, GRK3, GRK5, or GRK6 was tagged with a LgBiT. Twenty-four hours after transfection, cells were washed with PBS, collected with trypsin, and plated onto clear-bottomed, white-walled, Costar 96-well plates at 50000 to 100000 cells/well in BRET medium (clear minimum essential medium [Gibco] supplemented with 2% fetal bovine serum, 10 mM HEPES, 1x GlutaMax [Gibco], and 1x Antibiotic-Antimycotic [Gibco]). The following day, media was removed, and cells were incubated at 37°C with 80 mL of HBSS supplemented with 20 mM HEPES and 3 mM coelenterazine-400a (Cayman Chemical, Ann Arbor, MI) for TRUPATH or 3 uM coelenterazine h for all other BRET or split luciferase assays (Cayman Chemical, Ann Arbor, MI) for 10 to 15 minutes. For TRUPATH, plates were read with a BioTek Synergy Neo2 plate reader set
+
+at 37degC with a standard 400 nm emission filter and 510 nm long pass filter. For all other BRET assays, a standard 480 nm RLuc emission filter and 530 nm (for experiment using mVenus) or custom 542 nm (for experiments using mKO) long pass filter was utilized. Cells were stimulated with either vehicle control (HBSS with 20 mM HEPES) or the indicated concentration of chemokine. All readings were performed using a kinetic protocol. For split luciferase experiments, plates were read before and after ligand treatment to calculate a change in luminescence after ligand stimulation and subsequently normalized to vehicle treatment. For BRET experiments, the BRET ratio was calculated by dividing the acceptor signal by the luciferase signal, and a net BRET ratio was calculated by normalizing to vehicle treatment.  Intramolecular Fluorescent Arsenical Hairpin (FlAsH) BRET of -arrestin-2 FlAsH BRET experiments were carried out using a modified protocol as previously described. FlAsH 3 serves as a negative control as insertion of the CCPGCC motif at this location significantly impacts b-arrestin recruitment to the receptor and does not demonstrate significant changes in BRET efficiency following ligand stimulation. HEK293 cells seeded in six-well plates were transfected with wild-type CXCR3 or the indicated CXCR3 mutant and FlAsH 1, 2, 3, 4, 5, or 6 using the calcium-phosphate protocol. Twenty-four hours after transfection, cells were washed with PBS, collected with trypsin, and plated onto clear-bottomed, rat-tail collagen coated, white-walled, Costar 96-well plates at 50000 to 100000 cells/well in supplemented MEM. The following day, cells were washed with 50 uL of HBSS and incubated in biarsenical labelling reagent FlAsH-EDT2 at a final concentration of 2.5 uM for 45 minutes at room temperature in the dark. Cells were then washed once with a 250 uM BAL wash buffer (2,3-dimercaptopropanol) and incubated with HBSS with 20 mM HEPES. Cells were stimulated by either vehicle control (HBSS with 20 mM HEPES) or chemokine for eight minutes. Immediately before reading the plate, cells were treated with coelenterazine h and read on a BioTek Synergy Neo2 plate reader set at 37degC using standard 480 nm and 530 nm emission filters. Net BRET values were calculated as described by averaging six consecutive BRET values and normalizing to vehicle control. Two-way ANOVA was performed at each FlAsH construct to determine if there was a significant ligand, receptor, or interaction term. If a significant interaction term was detected, Tukey's post hoc testing was performed for multiple comparisons between receptor:ligand combinations at the specified FlAsH construct.
+
+The model of the CXCR3 C-tail/ b-arrestin 2 complex was based on the structure of b-arrestin 1 in complex with the V2R C-tail. The sequence of b-arrestin 2 was modified to match the isoform used in the FlAsH in vitro experiments. The complexes were solvated (TIP3P water) and neutralized using a 0.15 M concentration of NaCl ions. Parameters for simulations were obtained from the Charmm36M forcefield. Simulations were run using the ACEMD3 engine. All systems underwent a 40ns equilibration in conditions of constant pressure (NPT ensemble, pressure maintained with Berendsen barostat, 1.01325 bar), using a timestep of 2fs. During this stage mobility restraints were applied to the backbone. This was followed with 3 x 1.5us of simulation for each system in conditions of constant volume (NVT ensemble) using a timestep of 4fs. For every simulation we used a temperature of 310K, maintained using the Langevin thermostat. Hydrogen bonds were restrained using the RATTLE algorithm. Non-bonded interactions were cut-off at a distance of 9A, with a smooth switching function applied at 7.5A. The interdomain rotation angle of b-arrestin 2 was analyzed using a script kindly provided by Naomi Latoracca. The angle was measured by comparing the displacement of the C-domain relative to the N-domain between the inactive and active barr1 crystal structures. Each simulation frame was aligned to the reference structures using the Ca atoms of the b-strands present within the N-domain, while the same atoms present in the C-domain were used to calculate the rotation angle. For each of the variants of the C-tail, all Ser and Thr residues present within the sequence were phosphorylated. To study correlation of the interdomain rotation angle and the distance between the studied probes and Arg8, simulations of the L344X system were utilized, which in this setup meant that a C-tail was not included at all. Simulation data are shared on the open online resource GPCRmd with the ID 1485.  Experiments were conducted as previously described. Briefly, HEK293 cells were transiently transfected via the calcium-phosphate method with either wild-type CXCR3 or the indicated CXCR3 mutant. 48 hours after transfection, the cells were serum starved in minimum essential medium with 1%.
+
+Penicillin/streptomycin, 0.05% bovine serum albumin, and 5 mM HEPES were applied for at least four hours, stimulated to a final concentration with 100 nM chemokine or vehicle control for 5, 30 or 60 minutes, subsequently washed once with ice-cold PBS, lysed in ice-cold radioimmunoprecipitation assay buffer (150 mM NaCl, 1% Nonidet P-40, 0.5% sodium deoxycholate, 0.1% sodium dodecyl sulfate (SDS), 25 mM Tris pH 7.4) containing the phosphatase inhibitor PhosSTOP (Roche, Basel, Switzerland) and protease inhibitor cOmplete EDTA free (Sigma-Aldrich, St. Louis, MO). Samples were then rotated for approximately 45 minutes at 4 oC and cleared of insoluble debris by centrifugation at 17000 g at 4 degC for 15 minutes, after which the supernatant was collected. Protein was resolved on SDS-10% polyacrylamide gels, transferred to nitrocellulose membranes, and immunoblotted with the indicated primary antibody overnight at 4 degC. phospho-ERK (Cell Signaling Technology) and total ERK (Millipore) were used to assess ERK activation. Peroxidase-conjugated polyclonal donkey anti-rabbit immunoglobulin (IgG) or polyclonal sheep anti-mouse IgG were used as secondary antibodies. Immune complexes on nitrocellulose membrane were imaged by SuperSignal enhanced chemiluminescent substrate (Thermo Fisher) using a ChemiDoc MP Imaging System (Bio-Rad). For quantification, phospho-ERK signal was normalized to total ERK signal using ImageLab (Bio-Rad) within the same immunoblot.  Confocal microscopy HEK293 cells plated in rat-tail-collagen-coated 35 mm glass bottomed dishes (MatTek Corporation, Ashland, MA) were transiently transfected using FuGENE 6 with either wild-type CXCR3-GFP or the indicated CXCR3-GFP mutant and b-arrestin-2-RFP. 48 hours after transfection, the cells were serum starved for one hour prior to treatment with the indicated chemokine at 100 nM for 45 minutes at 37oC. The samples were then washed once with HBSS and fixed in a 6% formaldehyde solution for 30 minutes in the dark at room temperature. Cells were then washed four times with PBS and subsequently imaged with a Zeiss CSU-X1 spinning disk confocal microscope using the corresponding lasers to excite GFP (480 nm) and RFP (561 nm). Confocal images were arranged and analyzed using ImageJ (NIH, Bethesda, MD).
+
+CXCR3 knock out (CXCR3-KO) Jurkat cells were generated using CRISPR-Cas9. CXCR3 guide RNA was developed using GAGTGACCACCAAGTGCTAAATGACG and GATGAAGTCTGGGAGGGCGAAA and inserted into a Cas9 containing plasmid backbone (PX459). Jurkat cells were transfected using Lipofectamine 2000 with the designed PX459 plasmid and CXCR3-KO Jurkats were selected using Puromycin and single clones were selected via limited dilution. CXCR3-KO was confirmed via flow cytometry. Stably expressing CXCR3 Jurkats were generated using lentiviral transduction. The wild-type or mutant CXCR3 were cloned into a pLenti plasmid backbone consisting of the receptor underneath a CMV promoter. HEK293 cells were transfected using calcium-phosphate with the pLenti receptor containing plasmid, envelope vector (pMD2.G), and packaging vector (psPAX2). 16 hours post-transfection, the HEK293 cell media was changed. 64 hours post transfection, the viral containing media was harvested, and virus was concentrated using the Lenti-X concentrator (Takara Bio, Japan) and viral titer was determined using qPCR per the manufacturer guidelines (ABM, Canada). CXCR3-KO Jurkats were transduced with virus via centrifugation at 1000 g for 90 minutes at a multiplicity of infection of 80-100 in the presence of polybrene at 8ug/mL. Cells expressing CXCR3 were sorted via FACS to obtain cells that express receptor to a similar degree. Chemotaxis assays were run in a 96 well format using the 5 um ChemoTx chemotaxis system (Neuro Probe, Gaithersburg, MD). 750000 Jurkats were serum starved for at least four hours and placed in the chemotaxis system and allowed to migrate towards vehicle control or chemokine. Chemotaxis was measured using a previously described MTT labeling assay where the number of migrated cells is quantified by the reduction of MTT. Following chemotaxis, cells were labelled with a 0.5 mg/mL solution of MTT for four hours at 37 oC, subsequently lysed in 2 mM hydrochloric acid in isopropanol, and absorbance was read at an optical density of 570 nm. Chemotactic index was determined by measuring the absorbance of cells treated with chemokine to those treated with vehicle and normalized to the cell type with maximum chemotactic response.  Chemokines Recombinant Human CXCL9, CXCL10, and CXCL11 (PeproTech) were diluted according to the manufacturer's specifications, and aliquots were stored at -80 degC until needed for use.
+
+QUANTIFICATION AND STATISTICAL ANALYSIS Statistical analyses  Data were analyzed in Excel (Microsoft, Redmond, WA) and graphed in Prism 9.0 (GraphPad, San Diego, CA). Dose-response curves were fitted to a log agonist versus stimulus with three parameters (span, baseline, and EC50) with the minimum baseline corrected to zero. For comparing ligands or receptors in concentration-response assays, a two-way ANOVA of ligand and concentration was conducted. Unless otherwise noted, statistical tests were two-sided and Tukey's post hoc testing was performed for multiple comparisons or Dunnet's testing was performed when comparisons were made to a reference condition. Statistical significance was shown on figures typically for the Emax of dose-response curves. In some cases, when applicable, statistical significance was shown on figures for EC50. Unless otherwise state, post hoc comparisons were made between CXCR3-WT and the denoted phosphorylation deficient receptor. Further details of statistical analysis and replicates are included in the figure captions. Experiments were not randomized, and investigators were not blinded to treatment conditions. Critical plate-based experiments were independently replicated by at least two different investigators when feasible.
+
+CC-BY-NC 4.0 International license available under a which was not certified by peer review is the author/funder who has granted bioRxiv a license to display the preprint in perpetuity it is made The copyright holder for this preprint this version posted March 14 2023
+
+Trypsin Promega Cat#V5117 Empore Octadecyl C18, 47 mm Supleco Cat#66883-U Waters tC18 SepPak Waters Cat#WAT054925  Deposited Data Mass Spectrometry Proteomics Data JPOST JPST001599  Molecular Dynamics Simulations GPCRmd 1485  Experimental Models: Cell Lines Human: 293 ATCC Cat#CRL-1573; RRID:CVCL_0045 Human: 293 ATCC Cat#CRL-3216; RRID:CVCL_0063 Human: 293 -arrestin 1/2 Knock Out Asuka Inoue  Human: 293 GRK 2, 3, 5, 6 Knock Out Asuka Inoue  Human: Jurkat, Clone E6-1 ATCC Cat#TIB-152; RRID:CVCL_0367  Recombinant DNA CXCR3 Rajagopal Lab N/A CXCR3-S355A/S356A This work N/A CXCR3-T360A/S361A/ This work N/A CXCR3-T360A/S361A/S364A/S366A Rajagopal Lab N/A CXCR3-L344X Rajagopal Lab N/A Gai1-RLuc8 Bryan Roth Lab N/A G9-GFP2 Bryan Roth Lab N/A G3 Bryan Roth Lab N/A CXCR3-RlucII This work N/A CXCR3-S355A/S356A-RlucII This work N/A CXCR3-T360A/S361A/-RlucII This work N/A CXCR3-T360A/S361A/S364A/S366A-RlucII This work N/A CXCR3-L344X-RlucII This work N/A barr2-mKO Rajagopal Lab N/A Myrpalm-mVenus Rajagopal Lab N/A 2x-Fyve-mvenus Rajagopal Lab N/A CXCR3-GFP Rajagopal Lab N/A CXCR3-S355A/S356A-GFP This work N/A CXCR3-T360A/S361A/-GFP This work N/A CXCR3-T360A/S361A/S364A/S366A-GFP This work N/A CXCR3-L344X-GFP This work N/A barr2-RFP Marc Caron Lab N/A barr2-FlAsH biosensors 1-6 Louis Luttrell Lab N/A
+
+CXCR3-SmBiT This work N/A CXCR3-S355A/S356A-SmBiT This work N/A CXCR3-T360A/S361A/-SmBiT This work N/A CXCR3-T360A/S361A/S364A/S366A-SmBiT This work N/A CXCR3-L344X-SmBiT This work N/A GRK2-LgBiT Asuka Inoue Lab N/A GRK3-LgBiT Asuka Inoue Lab N/A GRK5-LgBiT Asuka Inoue Lab N/A GRK6-LgBiT Asuka Inoue Lab N/A pLenti-CXCR3 This work N/A pLenti-CXCR3-S355A/S356A This work N/A pLenti-CXCR3-T360A/S361A This work N/A pLenti-CXCR3-T360A/S361A/S364A/S366A This work N/A pLenti-CXCR3-L344X This work N/A pMD2.G Addgene Cat#12259; RRID:Addgene_12259 psPAX2 Addgene Cat#12260; RRID:Addgene_12260 PX459 Addgene Cat#62988; RRID:Addgene_62988  GraphPad Prism GraphPad Software https://www.graphpad.com/scientific-software/prism/ ImageJ https://imagej.nih.gov/ij/ Adobe Illustrator Adobe https://www.adobe.com/ Excel Microsoft https://www.microsoft.com/en-us/microsoft-365/excel Database for Annotation, Visualization, and Integrated Discovery DAVID https://david.ncifcrf.gov/home.jsp Kinase Enrichment Analysis https://www.maayanlab.net/KEA2/ Modification Motifs https://meme-suite.org/meme/tools/momo GProX http://gprox.sourceforge.net/ MaxQuant https://www.maxquant.org/ FlowJo Becton, Dickinson & Company https://www.flowjo.com/ ImageLab Bio-Rad https://www.bio-rad.com/en-us/product/image-lab-software BioRender BioRender https://biorender.com/ GPCRdb https://gpcrdb.org/
+
+42
+SUPPLEMENTAL FIGURE TITLES AND LEGENDS 
+904
+905
+Supplemental Figure 1: Quantitation of CXCR3 C-terminal phosphopeptides and G protein activation, b-
+906
+arrestin-2 recruitment, and surface expression of various CXCR3 phosphodeficient mutants. Related to 
+907
+Figure 1. 
+908
+Abundance of singly phosphorylated (A) RDpSSWSETSEASYSGL, (B) RDSpSWSETSEASYSGL, and (C) 
+909
+RDSSWSEpTSEASYSGL peptide following stimulation with vehicle control or 100 nM of chemokine for 5 
+910
+minutes. Mean +- SEM, n=2 technical replicates of 6 pooled biological replicates. P<.05, by one-way ANOVA, 
+911
+Tukey's post hoc analysis. (D-E) Agonist dose-dependent TGF-a shedding assay of CXCR3-WT and various 
+912
+phosphorylation deficient mutants to assess Gai1 and Gai3 protein activation. Mean +- SEM, n=3 (F-G) b-arrestin-
+913
+2 recruitment of receptors treated with CXCL11. Mean +- SEM, n=3. (H) Surface expression of HEK293 cells 
+914
+transiently transfected with pcDNA 3.1 empty vector, CXCR3-WT, or denoted receptor as measured by flow 
+915
+cytometry. Mean +- SEM, n=3-5. *P<.05 by one-way ANOVA, Dunnett's post hoc testing denotes comparisons 
+916
+to CXCR3-WT. 
+917
+918
+Supplemental Figure 2: G protein dissociation in b-arrestin-1/2 knockout cells and phosphomimetic 
+919
+mutants, b-arrestin-2 recruitment grouped by receptor. Related to Figure 2. 
+920
+(A-C) G protein dissociation of receptors treated with chemokine in b-arrestin-1/2 knockout cells. (D) G protein 
+921
+dissociation of CXCR3-S355A/S356A in b-arrestin-1/2 knockout cells. (E-G) G protein dissociation of CXCR3-
+922
+WT, CXCR3-S355A/S356A, or phosphomimetic mutant CXCR3-S355D/S356D treated with chemokine. (H-L) b-
+923
+arrestin-2 recruitment of receptors treated with chemokine as grouped by receptor. For (A-G) TRUPATH and (H-
+924
+L) b-arrestin-2 recruitment assays, data shown are the mean +- SEM, n=3-4. * denotes statistically significant 
+925
+differences between EMax of specified receptor and CXCR3-WT unless otherwise noted. Agonist dose-dependent 
+926
+data presented are the average of BRET values 5 to 10 minutes following ligand stimulation. 
+927
+928
+Supplemental Figure 3: Single color confocal microscopy, and orthogonal BRET based receptor 
+929
+internalization assay. Related to Figure 2. 
+930
+1 
+ 2 
+ 3 
+ 4 
+ 5 
+ 6 
+ 7 
+ 8 
+ 9 
+10 
+11 
+12 
+13 
+14 
+15 
+16 
+17 
+18 
+19 
+20 
+21 
+22 
+23 
+24 
+25 
+26 
+27 
+28 
+29 
+30 
+31 
+32 
+33 
+34 
+35 
+36 
+37 
+38 
+39 
+40 
+41 
+42 
+43 
+44 
+45 
+46 
+47 
+48 
+49 
+50 
+51 
+52 
+53 
+54 
+55 
+56 
+57 
+58 
+59 
+60 
+61 
+62 
+63 
+64 
+65
+.
+CC-BY-NC 4.0 International license
+available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+The copyright holder for this preprint
+this version posted March 14, 2023. 
+; 
+https://doi.org/10.1101/2023.03.14.532634
+doi: 
+bioRxiv preprint
+
+Confocal microscopy images of HEK293 cells transfected with Receptor-GFP and b-arrestin-2-RFP following treatment with vehicle control or 100 nM of the listed chemokine for 45 minutes. Images are representative of three biological replicates. BRET assay data of receptor internalization using the acceptor Myrpalm-mVenus following stimulation with 100 nM of the listed chemokine in HEK293 cells. Data shown are the mean ± SEM, n=4. Data presented are the average of BRET values from 20–30 minutes following ligand stimulation.
+
+44
+(A-F) FlAsH data as grouped by FlAsH probes 1-6 shown as heat maps. Intensity of color corresponds with 
+957
+change in net BRET. (G) Source data for all FlAsH construct, ligand, receptor, combinations. Mean +- SEM, n=5. 
+958
+*P<.05 by two-way ANOVA for each FlAsH construct are shown in the heat maps to demonstrate statistical 
+959
+significance of a ligand effect, receptor effect, and or interaction. If a significant interaction term was identified, 
+960
+Tukey's post hoc testing was performed, and comparisons are shown in panel (G).  
+961
+962
+Supplemental Figure 7: Structural model of the construct used in the molecular dynamics simulations. 
+963
+Related to Figure 4. This model highlights the location of FlAsH probes 1-5 (red spheres) on b-arrestin 2 and 
+964
+the N-terminal RLuc (highlighted in green). We demonstrate the transition between an inactivate state with a low 
+965
+interdomain rotation angle, and an activate state, with a high interdomain rotation angle. 
+966
+967
+Supplemental Figure 8: Approach and source data for mass spectrometry to assess the global 
+968
+phosphoproteome. Related to Figure 5. 
+969
+(A) Schematic of experimental design of global phosphoproteomics experiments. (B) Venn diagram showing 
+970
+number of proteins and phosphoproteins identified. (C) Source data describing the proteome and 
+971
+phosphoproteome where Class I phosphorylation sites are defined as those with a localization probability of at 
+972
+least 0.75 (Olsen et al., 2006). (D) TMT labelling intensity across samples and pooled data demonstrating high 
+973
+degrees of replicability. (E) Heatmap and dendrogram of individual pooled technical replicates of HEK293 cells 
+974
+treated with vehicle control, CXCL9, CXCL10, or CXCL11 demonstrating technical replicates of specific 
+975
+treatments cluster together. (F) Visual representation of GProX clustering. 
+976
+977
+Supplemental Figure 9: Quantification of ERK1/2 phosphorylation at 5 minutes as grouped by receptor. 
+978
+Related to Figure 6. 
+979
+(A-E) Quantification of western blots of phosphorylated ERK1/2 in HEK293 cells expressing the indicated 
+980
+receptor following stimulation with vehicle control or 100 nM of chemokine at five minutes. Mean +- SEM, n=4. 
+981
+*P<.05 by two-way ANOVA. Tukey's post hoc testing denotes comparisons between ligands. Chemokine 
+982
+treatments were significantly different from vehicle at all receptors. 
+983
+1 
+ 2 
+ 3 
+ 4 
+ 5 
+ 6 
+ 7 
+ 8 
+ 9 
+10 
+11 
+12 
+13 
+14 
+15 
+16 
+17 
+18 
+19 
+20 
+21 
+22 
+23 
+24 
+25 
+26 
+27 
+28 
+29 
+30 
+31 
+32 
+33 
+34 
+35 
+36 
+37 
+38 
+39 
+40 
+41 
+42 
+43 
+44 
+45 
+46 
+47 
+48 
+49 
+50 
+51 
+52 
+53 
+54 
+55 
+56 
+57 
+58 
+59 
+60 
+61 
+62 
+63 
+64 
+65
+.
+CC-BY-NC 4.0 International license
+available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+The copyright holder for this preprint
+this version posted March 14, 2023. 
+; 
+https://doi.org/10.1101/2023.03.14.532634
+doi: 
+bioRxiv preprint
+
+(A-F) Normalized Jurkat chemotaxis data grouped by CXCR3-KO or receptor. Mean + SEM, n=4. (G-I) Univariate linear regression of G Protein activation, β-arrestin 2 recruitment, and MAPK activation versus chemotaxis. Shown are the best fit lines and 95% confidence intervals for each regression analysis.
+
+CC-BY-NC 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made The copyright holder for this preprint this version posted March 14, 2023. https://doi.org/10.1101/2023.03.14.532634
+
+prototypical GPCR differently orchestrate beta-arrestin interaction, trafficking, and signaling.
+
+CC-BY-NC 4.0 International license available under a is made
+
+CC-BY-NC 4.0 International license available under a (which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made available under https://doi.org/10.1101/2023.03.14.532634
+
+50
+Shukla, A.K., Manglik, A., Kruse, A.C., Xiao, K., Reis, R.I., Tseng, W.C., Staus, D.P., Hilger, D., Uysal, S., 
+202 
+Huang, L.Y., et al. (2013). Structure of active beta-arrestin-1 bound to a G-protein-coupled receptor 
+203 
+phosphopeptide. Nature 497, 137-141. 10.1038/nature12120. 
+204
+Shukla, A.K., Violin, J.D., Whalen, E.J., Gesty-Palmer, D., Shenoy, S.K., and Lefkowitz, R.J. (2008). Distinct 
+205 
+conformational changes in beta-arrestin report biased agonism at seven-transmembrane receptors. Proc Natl 
+206 
+Acad Sci U S A 105, 9988-9993. 10.1073/pnas.0804246105. 
+207
+Smith, J.S., Alagesan, P., Desai, N.K., Pack, T.F., Wu, J.H., Inoue, A., Freedman, N.J., and Rajagopal, S. 
+208 
+(2017). C-X-C Motif Chemokine Receptor 3 Splice Variants Differentially Activate Beta-Arrestins to Regulate 
+209 
+Downstream Signaling Pathways. Molecular pharmacology 92, 136-150. 10.1124/mol.117.108522. 
+210
+Smith, J.S., Nicholson, L.T., Suwanpradid, J., Glenn, R.A., Knape, N.M., Alagesan, P., Gundry, J.N., 
+211 
+Wehrman, T.S., Atwater, A.R., Gunn, M.D., et al. (2018a). Biased agonists of the chemokine receptor CXCR3 
+212 
+differentially control chemotaxis and inflammation. Science Signaling 11, eaaq1075. 
+213 
+10.1126/scisignal.aaq1075. 
+214
+Smith, J.S., Nicholson, L.T., Suwanpradid, J., Glenn, R.A., Knape, N.M., Alagesan, P., Gundry, J.N., 
+215 
+Wehrman, T.S., Atwater, A.R., Gunn, M.D., et al. (2018b). Biased agonists of the chemokine receptor CXCR3 
+216 
+differentially control chemotaxis and inflammation. Sci Signal 11. 10.1126/scisignal.aaq1075. 
+217
+Smith, J.S., Pack, T.F., Inoue, A., Lee, C., Zheng, K., Choi, I., Eiger, D.S., Warman, A., Xiong, X., Ma, Z., et al. 
+218 
+(2021). Noncanonical scaffolding of Galphai and beta-arrestin by G protein-coupled receptors. Science 371. 
+219 
+10.1126/science.aay1833. 
+220
+Smith, J.S., and Rajagopal, S. (2016). The beta-Arrestins: Multifunctional Regulators of G Protein-coupled 
+221 
+Receptors. J Biol Chem 291, 8969-8977. 10.1074/jbc.R115.713313. 
+222
+Smith, J.S., Rajagopal, S., and Atwater, A.R. (2018c). Chemokine Signaling in Allergic Contact Dermatitis: 
+223 
+Toward Targeted Therapies. Dermatitis 29, 179-186. 10.1097/DER.0000000000000391. 
+224
+Stevers, L.M., Sijbesma, E., Botta, M., MacKintosh, C., Obsil, T., Landrieu, I., Cau, Y., Wilson, A.J., 
+225 
+Karawajczyk, A., Eickhoff, J., et al. (2018). Modulators of 14-3-3 Protein-Protein Interactions. J Med Chem 61, 
+226 
+3755-3778. 10.1021/acs.jmedchem.7b00574. 
+227
+Strungs, E.G., Luttrell, L.M., and Lee, M.H. (2019). Probing Arrestin Function Using Intramolecular FlAsH-
+228 
+BRET Biosensors. Methods Mol Biol 1957, 309-322. 10.1007/978-1-4939-9158-7_19. 
+229
+Sun, Y., Cheng, Z., Ma, L., and Pei, G. (2002). Beta-arrestin2 is critically involved in CXCR4-mediated 
+230 
+chemotaxis, and this is mediated by its enhancement of p38 MAPK activation. J Biol Chem 277, 49212-49219. 
+231 
+10.1074/jbc.M207294200. 
+232
+Tobin, A.B. (2008). G-protein-coupled receptor phosphorylation: where, when and by whom. Br J Pharmacol 
+233 
+153 Suppl 1, S167-176. 10.1038/sj.bjp.0707662. 
+234
+Tsai, C.F., Smith, J.S., Krajewski, K., Zhao, R., Moghieb, A.M., Nicora, C.D., Xiong, X., Moore, R.J., Liu, T., 
+235 
+Smith, R.D., et al. (2019). Tandem Mass Tag Labeling Facilitates Reversed-Phase Liquid Chromatography-
+236 
+Mass Spectrometry Analysis of Hydrophilic Phosphopeptides. Anal Chem 91, 11606-11613. 
+237 
+10.1021/acs.analchem.9b01814. 
+238
+Tsai, C.F., Zhao, R., Williams, S.M., Moore, R.J., Schultz, K., Chrisler, W.B., Pasa-Tolic, L., Rodland, K.D., 
+239 
+Smith, R.D., Shi, T., et al. (2020). An Improved Boosting to Amplify Signal with Isobaric Labeling (iBASIL) 
+240 
+Strategy for Precise Quantitative Single-cell Proteomics. Mol Cell Proteomics 19, 828-838. 
+241 
+10.1074/mcp.RA119.001857. 
+242
+Tyanova, S., Temu, T., and Cox, J. (2016a). The MaxQuant computational platform for mass spectrometry-
+243 
+based shotgun proteomics. Nat Protoc 11, 2301-2319. 10.1038/nprot.2016.136. 
+244
+Tyanova, S., Temu, T., Sinitcyn, P., Carlson, A., Hein, M.Y., Geiger, T., Mann, M., and Cox, J. (2016b). The 
+245 
+Perseus computational platform for comprehensive analysis of (prote)omics data. Nat Methods 13, 731-740. 
+246 
+10.1038/nmeth.3901. 
+247
+Watanabe, N., and Osada, H. (2012). Phosphorylation-dependent protein-protein interaction modules as 
+248 
+potential molecular targets for cancer therapy. Curr Drug Targets 13, 1654-1658. 
+249 
+10.2174/138945012803530035. 
+250
+Watanabe, Y., Yoshizawa, A.C., Ishihama, Y., and Okuda, S. (2021). The jPOST Repository as a Public Data 
+251 
+Repository for Shotgun Proteomics. Methods Mol Biol 2259, 309-322. 10.1007/978-1-0716-1178-4_20. 
+252
+Xiao, K., Shenoy, S.K., Nobles, K., and Lefkowitz, R.J. (2004). Activation-dependent conformational changes 
+253 
+in {beta}-arrestin 2. J Biol Chem 279, 55744-55753. 10.1074/jbc.M409785200. 
+254
+1 
+ 2 
+ 3 
+ 4 
+ 5 
+ 6 
+ 7 
+ 8 
+ 9 
+10 
+11 
+12 
+13 
+14 
+15 
+16 
+17 
+18 
+19 
+20 
+21 
+22 
+23 
+24 
+25 
+26 
+27 
+28 
+29 
+30 
+31 
+32 
+33 
+34 
+35 
+36 
+37 
+38 
+39 
+40 
+41 
+42 
+43 
+44 
+45 
+46 
+47 
+48 
+49 
+50 
+51 
+52 
+53 
+54 
+55 
+56 
+57 
+58 
+59 
+60 
+61 
+62 
+63 
+64 
+65
+.
+CC-BY-NC 4.0 International license
+available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+The copyright holder for this preprint
+this version posted March 14, 2023. 
+; 
+https://doi.org/10.1101/2023.03.14.532634
+doi: 
+bioRxiv preprint
+
+51
+Yang, F., Yu, X., Liu, C., Qu, C.X., Gong, Z., Liu, H.D., Li, F.H., Wang, H.M., He, D.F., Yi, F., et al. (2015). 
+255 
+Phospho-selective mechanisms of arrestin conformations and functions revealed by unnatural amino acid 
+256 
+incorporation and (19)F-NMR. Nat Commun 6, 8202. 10.1038/ncomms9202. 
+257
+Yang, Z., Yang, F., Zhang, D., Liu, Z., Lin, A., Liu, C., Xiao, P., Yu, X., and Sun, J.P. (2017). Phosphorylation 
+258 
+of G Protein-Coupled Receptors: From the Barcode Hypothesis to the Flute Model. Mol Pharmacol 92, 201-
+259 
+210. 10.1124/mol.116.107839. 
+260
+Zheng, K., Smith, J.S., Eiger, D.S., Warman, A., Choi, I., Honeycutt, C.C., Boldizsar, N., Gundry, J.N., Pack, 
+261 
+T.F., Inoue, A., et al. (2022). Biased agonists of the chemokine receptor CXCR3 differentially signal through 
+262 
+Galphai:beta-arrestin complexes. Sci Signal 15, eabg5203. 10.1126/scisignal.abg5203. 
+263
+Zhou, X.E., He, Y., de Waal, P.W., Gao, X., Kang, Y., Van Eps, N., Yin, Y., Pal, K., Goswami, D., White, T.A., 
+264 
+et al. (2017). Identification of Phosphorylation Codes for Arrestin Recruitment by G Protein-Coupled Receptors. 
+265 
+Cell 170, 457-469 e413. 10.1016/j.cell.2017.07.002. 
+266
+Zlotnik, A., and Yoshie, O. (2012). The chemokine superfamily revisited. Immunity 36, 705-716. 
+267 
+10.1016/j.immuni.2012.05.008. 
+268
+269
+1 
+ 2 
+ 3 
+ 4 
+ 5 
+ 6 
+ 7 
+ 8 
+ 9 
+10 
+11 
+12 
+13 
+14 
+15 
+16 
+17 
+18 
+19 
+20 
+21 
+22 
+23 
+24 
+25 
+26 
+27 
+28 
+29 
+30 
+31 
+32 
+33 
+34 
+35 
+36 
+37 
+38 
+39 
+40 
+41 
+42 
+43 
+44 
+45 
+46 
+47 
+48 
+49 
+50 
+51 
+52 
+53 
+54 
+55 
+56 
+57 
+58 
+59 
+60 
+61 
+62 
+63 
+64 
+65
+.
+CC-BY-NC 4.0 International license
+available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+The copyright holder for this preprint
+this version posted March 14, 2023. 
+; 
+https://doi.org/10.1101/2023.03.14.532634
+doi: 
+bioRxiv preprint
+
+Wild Type (WT) S355A/S356A T360A/S361A T360A/S361A/S364A/S366A (4xA) L344X Vehicle CXCL9 CXCL10 CXCL11 Normalized TMT Intensity DSSWSETSEASYS*GL (S366)
+
+G Protein Dissociation (Normalized) CXCR3-WT / WT HEK293 CXCR3-L344X / WT HEK293 CXCR3-WT / arr 1/2 KO CXCR3-L344X / arr 1/2 KO  -arrestin 2 Recruitment (Normallized)  -arrestin 2 Recruitment (Normallized)  -arrestin 2 Recruitment (Normallized)  G Protein Dissociation (Normalized)  G Protein Dissociation (Normalized)  G Protein Dissociation (Normalized)  G Protein Dissociation b-arrestin 2 Recruitment CXCR3-WT CXCR3-S355A/S356A CXCR3-T360A/S361A CXCR3-4xA CXCR3-L344X CXCL9 CXCL10 CXCL11  G Protein Dissociation (Normalized) CXCR3-WT WT CXCR3 CXCR3-S355A/S356A CXCR3-T360A/S361A CXCR3-4xA CXCR3-L344X  G Protein Dissociation (Normalized) CXCR3-S355A/S356A  Receptor Internalization  CXCL9 CXCL10 CXCL11  Receptor Internalization (2x-Fyve: Early Endosome) Net BRET Ratio CXCR3-WT CXCR3-S355A/S356A CXCR3-T360A/S361A CXCR3-4xA CXCR3-L344X
+
+CXCR3-WT
+CXCR3-S355A/S356A
+CXCR3-T360A/S361A
+CXCR3-4xA
+CXCR3-L344X
+CXCR3-WT
+CXCR3-S355A/S356A
+CXCR3-T360A/S361A
+CXCR3-4xA
+CXCR3-L344X
+0
+500
+1000
+1500
+80
+100
+120
+140
+160
+180
+Seconds
+% Luminescence
+Of Vehicle
+GRK2 Recruitment
+CXCL9
+Chemokine
+0
+500
+1000
+1500
+80
+100
+120
+140
+160
+180
+Seconds
+% Luminescence  
+Of Vehicle
+GRK2 Recruitment
+CXCL10
+Chemokine
+0
+500
+1000
+1500
+80
+100
+120
+140
+160
+180
+Seconds
+% Luminescence  
+Of Vehicle
+GRK2 Recruitment
+CXCL11
+Chemokine
+10-11
+10-10
+10-9
+10-8
+10-7
+10-6
+0
+20
+40
+CXCL9, M
+GRK2  Recruitment
+(% over Vehicle)
+GRK2 Recruitment
+10-11
+10-10
+10-9
+10-8
+10-7
+10-6
+0
+20
+40
+CXCL10, M
+GRK2  Recruitment
+(% over Vehicle)
+GRK2 Recruitment
+10-11
+10-10
+10-9
+10-8
+10-7
+10-6
+0
+20
+40
+CXCL11, M
+GRK2  Recruitment
+(% over Vehicle)
+GRK2 Recruitment
+10-11
+10-10
+10-9
+10-8
+10-7
+10-6
+0
+20
+40
+CXCL9, M
+GRK3 Recruitment
+(% over Vehicle)
+GRK3 Recruitment
+10-11
+10-10
+10-9
+10-8
+10-7
+10-6
+0
+20
+40
+CXCL10, M
+GRK3 Recruitment
+(% over Vehicle)
+GRK3 Recruitment
+10-11
+10-10
+10-9
+10-8
+10-7
+10-6
+0
+20
+40
+CXCL11, M
+GRK3 Recruitment
+(% over Vehicle)
+GRK3 Recruitment
+CXCL9
+CXCL10
+CXCL11
+WT CXCR3
+CXCR3-
+S355A/S356A
+CXCR3-
+T360A/S361A
+CXCR3-4xA
+CXCR3-L344X
+FIGURE 3
+A
+#
+0
+500
+1000
+1500
+80
+100
+120
+140
+160
+180
+Seconds
+% Luminescence
+Of Vehicle
+GRK3 Recruitment
+CXCL9
+Chemokine
+0
+500
+1000
+1500
+80
+100
+120
+140
+160
+180
+GRK3 Recruitment
+CXCL10
+Seconds
+% Luminescence  
+Of Vehicle
+Chemokine
+0
+500
+1000
+1500
+80
+100
+120
+140
+160
+180
+GRK3 Recruitment
+CXCL11
+Seconds
+% Luminescence  
+Of Vehicle
+Chemokine
+B
+C
+D
+E
+F
+G
+H
+I
+J
+K
+L
+M
+N
+O
+P
+Figure 3
+.
+CC-BY-NC 4.0 International license
+available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+The copyright holder for this preprint
+this version posted March 14, 2023. 
+; 
+https://doi.org/10.1101/2023.03.14.532634
+doi: 
+bioRxiv preprint
+
+available under a is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made  this version posted March 14, 2023.
+
+CXCL9 CXCL10 CXCL11 Mitogen Activated Protein Kinase/ Cyclin Dependent Kinase (43%) Protein Kinase B (Akt) (19%) Casein Kinase 2 (9%) Unknown (10%) Consensus Sequence Potential Kinase (% of Total Phosphopeptides)
+
+CXCR3-WT
+CXCR3-S355A/S356A
+CXCR3-T360A/S361A
+CXCR3-4xA
+CXCR3-L344X
+0
+1
+2
+3
+4
+pERK/tERK
+Phosphorylated ERK1/2 (T202/Y204)
+60 Minutes
+CXCR3-WT
+CXCR3-S355A/S356A
+CXCR3-T360A/S361A
+CXCR3-4xA
+CXCR3-L344X
+0
+1
+2
+3
+4
+pERK/tERK
+Phosphorylated ERK1/2 (T202/Y204)
+30 Minutes
+Vehicle
+CXCL9
+CXCL10
+CXCL11
+0.9
+1.0
+1.1
+1.2
+Normalized Intensity
+JNK1/JNK3, T183/T221
+Phosphorylation
+Vehicle
+CXCL9
+CXCL10
+CXCL11
+0.8
+1.0
+1.2
+1.4
+1.6
+Normalized Intensity
+FYN/YES1/LCK/SRC, 
+Y420/Y426/Y394/Y419
+Phosphorylation
+CSNK2A3/CSNK2A1, T277
+Phosphorylation
+Vehicle
+CXCL9
+CXCL10
+CXCL11
+0.0
+0.5
+1.0
+1.5
+Normalized Intensity
+Vehicle
+CXCL9
+CXCL10
+CXCL11
+1.0
+1.1
+1.2
+Normalized Intensity
+BRAF, T401
+Phosphorylation
+Vehicle
+CXCL9
+CXCL10
+CXCL11
+1.0
+1.1
+1.2
+Normalized Intensity
+RAF1, S29
+Phosphorylation
+ERK1, Y204
+Phosphorylation
+Vehicle
+CXCL9
+CXCL10
+CXCL11
+1.0
+1.2
+1.4
+Normalized Intensity
+A
+Vehicle
+CXCL9
+CXCL10
+CXCL11
+Phosphorylated ERK1/2 (T202/Y204)
+5 Minutes
+CXCR3-WT
+CXCR3-S355A/S356A
+CXCR3-T360A/S361A
+CXCR3-4xA
+CXCR3-L344X
+0
+1
+2
+3
+4
+pERK/tERK
+FIGURE 6
+B
+D
+C
+I
+E
+G
+F
+H
+J
+Figure 6
+.
+CC-BY-NC 4.0 International license
+available under a
+(which was not certified by peer review) is the author/funder, who has granted bioRxiv a license to display the preprint in perpetuity. It is made
+The copyright holder for this preprint
+this version posted March 14, 2023. 
+; 
+https://doi.org/10.1101/2023.03.14.532634
+doi: 
+bioRxiv preprint
+
+CXCR3-WT CXCR3-S355A/S356A CXCR3-T360A/S361A CXCR3-4xA CXCR3-L344X CXCR3-KO APC Cell Count G Protein and b-arrestin Principal Component Analysis Complete Principal Component Analysis
