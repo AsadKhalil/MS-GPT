@@ -1,0 +1,14 @@
+{
+  "input_dir": "grobid_proccessed_pdf",
+  "output_dir": "data/qa_outputs/jsonl",
+  "model": "deepseek-r1:1.5b",
+  "base_url": "http://localhost:11434/v1",
+  "api_key": "ollama",
+  "jsonl_output": "questions_answers.jsonl",
+  "progress_file": "progress.json",
+  "log_file": "qa_generation.log",
+  "max_retries": 5,
+  "api_delay": 1.0
+}
+
+
