@@ -1,0 +1,742 @@
+[
+    {
+        "question": "What family does citrus belong to?",
+        "answer": "Citrus belongs to the rutaceae family."
+    },
+    {
+        "question": "What subfamily does citrus belong to?",
+        "answer": "Citrus belongs to the citrus subfamily of the rutaceae family."
+    },
+    {
+        "question": "What nutrients are citrus fruits rich in?",
+        "answer": "Citrus fruits are rich in nutrients such as vitamins, dietary fiber, flavonoids, minerals, and carotenoids."
+    },
+    {
+        "question": "Are citrus fruits high in protein and fat?",
+        "answer": "No, citrus fruits are low in protein and fat."
+    },
+    {
+        "question": "What health benefits do citrus fruits provide to the human body?",
+        "answer": "Citrus fruits provide good health benefits to the human body due to their rich content of nutrients like vitamins, dietary fiber, flavonoids, minerals, and carotenoids."
+    },
+    {
+        "question": "What was fenpyroximate defined as in the 2013 evaluation report of the FAO/WHO Joint Meeting on Pesticide Residues (JMPR)?",
+        "answer": "Fenpyroximate was defined as fenpyroximate (E-fenpyroximate) for the risk assessment."
+    },
+    {
+        "question": "Which organization conducted the evaluation report in 2013 regarding fenpyroximate?",
+        "answer": "The FAO/WHO Joint Meeting on Pesticide Residues (JMPR) conducted the evaluation report."
+    },
+    {
+        "question": "What specific term was used to refer to fenpyroximate for risk assessment purposes in the evaluation report?",
+        "answer": "E-fenpyroximate was used to refer to fenpyroximate for risk assessment in the report."
+    },
+    {
+        "question": "What were the objectives of the present study?",
+        "answer": "The objectives were to establish a simple and accurate method of QuEChERS combined with UHPLC-MS/MS to measure fenpyroximate and its Z-isomer in citrus."
+    },
+    {
+        "question": "What analytical techniques were combined in the study?",
+        "answer": "QuEChERS combined with UHPLC-MS/MS were used in the study."
+    },
+    {
+        "question": "What compounds were targeted for measurement in citrus?",
+        "answer": "Fenpyroximate and its Z-isomer were targeted for measurement in citrus."
+    },
+    {
+        "question": "In which type of fruit was the measurement of fenpyroximate and its Z-isomer conducted?",
+        "answer": "The measurement was conducted in citrus fruit."
+    },
+    {
+        "question": "What was fenpyroximate defined as in the 2013 evaluation report of the FAO/WHO Joint Meeting on Pesticide Residues?",
+        "answer": "Fenpyroximate was defined as fenpyroximate (E-fenpyroximate) for the risk assessment."
+    },
+    {
+        "question": "Which organization conducted the evaluation report in 2013 on pesticide residues?",
+        "answer": "The FAO/WHO Joint Meeting on Pesticide Residues (JMPR) conducted the evaluation report in 2013."
+    },
+    {
+        "question": "What were the objectives of the present study?",
+        "answer": "To establish a simple and accurate method of QuEChERS combined with UHPLC-MS/MS to measure fenpyroximate and its Z-isomer in citrus."
+    },
+    {
+        "question": "What method was intended to be established in the study?",
+        "answer": "A method of QuEChERS combined with UHPLC-MS/MS to measure fenpyroximate and its Z-isomer in citrus."
+    },
+    {
+        "question": "What compounds were targeted for measurement in citrus in the study?",
+        "answer": "Fenpyroximate and its Z-isomer."
+    },
+    {
+        "question": "What analytical techniques were planned to be used in the study?",
+        "answer": "QuEChERS combined with UHPLC-MS/MS."
+    },
+    {
+        "question": "In which type of fruit was the measurement intended to be conducted?",
+        "answer": "Citrus."
+    },
+    {
+        "question": "What method was used to inject a mixed standard solution of fenpyroximate and Z-fenpyroximate into the mass spectrometer?",
+        "answer": "A flow injection method was used."
+    },
+    {
+        "question": "At what concentration was the mixed standard solution of fenpyroximate and Z-fenpyroximate injected into the mass spectrometer?",
+        "answer": "The mixed standard solution was injected at 1 mg/L."
+    },
+    {
+        "question": "What mode was the mass spectrometer scanned in for this experiment?",
+        "answer": "The mass spectrum was scanned in the positive ionization mode (ESI+) in the MRM mode."
+    },
+    {
+        "question": "What was the value of the parent ion determined through primary mass spectrometry scanning?",
+        "answer": "The parent ion value was determined to be 422.2."
+    },
+    {
+        "question": "What were the values of the pieces determined using product ion scanning?",
+        "answer": "The values of the pieces were determined to be 366.1 and 135.0."
+    },
+    {
+        "question": "What collision energy values were optimized for the mass spectrometry to maximize the response of product ions?",
+        "answer": "Collision energy values of 23 V and 43 V were optimized."
+    },
+    {
+        "question": "What was the retention time of fenpyroximate under the mass spectrometry conditions?",
+        "answer": "The retention time of fenpyroximate was determined to be 2.71."
+    },
+    {
+        "question": "What flow rate was set to separate fenpyroximate and Z-fenpyroximate as much as possible?",
+        "answer": "A slow flow rate of 0.2 mL min -1 was set."
+    },
+    {
+        "question": "What were the main parameter indicators validated and evaluated for analyzing the experimental samples of pesticides in whole fruits and citrus flesh?",
+        "answer": "The main parameter indicators validated and evaluated were linearity, matrix effect, accuracy, precision, and sensitivity."
+    },
+    {
+        "question": "Why is it important to validate and evaluate the main parameter indicators of analysis methods for pesticides in whole fruits and citrus flesh?",
+        "answer": "It is important to ensure accurate analysis of experimental samples by confirming parameters like linearity, matrix effect, accuracy, precision, and sensitivity."
+    },
+    {
+        "question": "What does the validation and evaluation of linearity involve in the analysis of pesticides in whole fruits and citrus flesh?",
+        "answer": "The validation and evaluation of linearity involves checking the relationship between concentration and response to ensure consistent measurement results."
+    },
+    {
+        "question": "How does the matrix effect impact the analysis methods for pesticides in whole fruits and citrus flesh?",
+        "answer": "The matrix effect refers to how the fruit components influence the analysis results, so it needs to be evaluated to account for any interference."
+    },
+    {
+        "question": "What is the significance of assessing accuracy in analyzing pesticides in whole fruits and citrus flesh?",
+        "answer": "Assessing accuracy is crucial to determine how close the experimental results are to the true values, ensuring reliable analysis outcomes."
+    },
+    {
+        "question": "What role does precision play in evaluating the analysis methods for pesticides in whole fruits and citrus flesh?",
+        "answer": "Precision measures the consistency of results when repeated measurements are taken, indicating the reliability of the analysis methods."
+    },
+    {
+        "question": "How does sensitivity validation contribute to the overall analysis process of pesticides in whole fruits and citrus flesh?",
+        "answer": "Sensitivity validation helps determine the lowest detectable amount of pesticides, enhancing the method's ability to identify trace levels accurately."
+    },
+    {
+        "question": "What methods were used to verify Fenpyroximate and its Z-isomer in two matrixes?",
+        "answer": "Linearity, the correlation coefficient (R2), and the LOQ were used to verify Fenpyroximate and its Z-isomer in two matrixes."
+    },
+    {
+        "question": "How was the verification of Fenpyroximate and its Z-isomer conducted?",
+        "answer": "The verification of Fenpyroximate and its Z-isomer was conducted using linearity, the correlation coefficient (R2), and the LOQ."
+    },
+    {
+        "question": "What parameters were considered in the verification process of Fenpyroximate and its Z-isomer?",
+        "answer": "The parameters considered in the verification process of Fenpyroximate and its Z-isomer were linearity, the correlation coefficient (R2), and the LOQ."
+    },
+    {
+        "question": "What factors were examined for Fenpyroximate and its Z-isomer in two matrixes?",
+        "answer": "Factors such as linearity, the correlation coefficient (R2), and the LOQ were examined for Fenpyroximate and its Z-isomer in two matrixes."
+    },
+    {
+        "question": "What can be observed in the Table regarding Fenpyroximate and its Z-isomer?",
+        "answer": "In the Table, the verification results of Fenpyroximate and its Z-isomer using linearity, the correlation coefficient (R2), and the LOQ can be observed."
+    },
+    {
+        "question": "What were the main parameter indicators that were validated and evaluated for analyzing the experimental samples of two pesticides in whole fruits and citrus flesh?",
+        "answer": "The main parameter indicators included linearity, matrix effect, accuracy, precision, and sensitivity."
+    },
+    {
+        "question": "Why is it important to validate and evaluate the main parameter indicators of the analysis methods for the two pesticides in whole fruits and citrus flesh?",
+        "answer": "It is important to ensure accurate analysis of the experimental samples."
+    },
+    {
+        "question": "What is the significance of evaluating linearity in the analysis methods for pesticides in whole fruits and citrus flesh?",
+        "answer": "Evaluating linearity helps understand the relationship between concentration and response in a linear manner."
+    },
+    {
+        "question": "How does assessing matrix effect contribute to the accuracy of analyzing pesticides in whole fruits and citrus flesh?",
+        "answer": "Assessing matrix effect helps understand how the sample matrix influences the analytical method."
+    },
+    {
+        "question": "What role does precision evaluation play in ensuring reliable analysis of pesticides in whole fruits and citrus flesh?",
+        "answer": "Precision evaluation assesses the consistency and repeatability of results obtained from the analysis methods."
+    },
+    {
+        "question": "What parameters were used to verify Fenpyroximate and its Z-isomer in two matrixes?",
+        "answer": "Linearity, the correlation coefficient (R^2), and the LOQ were used."
+    },
+    {
+        "question": "How were Fenpyroximate and its Z-isomer verified in two matrixes?",
+        "answer": "They were verified using linearity, the correlation coefficient (R^2), and the LOQ."
+    },
+    {
+        "question": "What methods were employed to verify Fenpyroximate and its Z-isomer?",
+        "answer": "Linearity, the correlation coefficient (R^2), and the LOQ were employed for verification."
+    },
+    {
+        "question": "What can be observed in the table regarding Fenpyroximate and its Z-isomer in two matrixes?",
+        "answer": "The results of verification using linearity, the correlation coefficient (R^2), and the LOQ can be observed in the table."
+    },
+    {
+        "question": "What was the purpose of using a recovery test in evaluating the detection method?",
+        "answer": "The purpose was to evaluate the accuracy and precision of the detection method."
+    },
+    {
+        "question": "What parameters were calculated for each of the two tested compounds in the recovery test?",
+        "answer": "The average recovery and relative standard deviation (RSD) were calculated."
+    },
+    {
+        "question": "In which parts of the citrus fruit were the two tested compounds analyzed during the recovery test?",
+        "answer": "The compounds were analyzed in both whole fruit and citrus flesh."
+    },
+    {
+        "question": "What type of data was presented in the results table?",
+        "answer": "The results table showed the average recovery and relative standard deviation (RSD) for each compound in whole fruit and citrus flesh."
+    },
+    {
+        "question": "What is the recommendation regarding matrix effects (MEs) when using UHPLC-MS/MS for residue determination?",
+        "answer": "Matrix effects (MEs) should be avoided as much as possible when using UHPLC-MS/MS for residue determination."
+    },
+    {
+        "question": "What technique is being used for residue determination in the provided statement?",
+        "answer": "UHPLC-MS/MS is being used for residue determination in the provided statement."
+    },
+    {
+        "question": "What specific issue should be minimized when employing UHPLC-MS/MS for residue determination?",
+        "answer": "Matrix effects (MEs) should be minimized when using UHPLC-MS/MS for residue determination."
+    },
+    {
+        "question": "What was the dosage of fenpyroximate applied during the terminal residue experiment on citrus?",
+        "answer": "Fenpyroximate was applied at the registered high dosage of 56 mg kg -1."
+    },
+    {
+        "question": "How many fields were involved in the terminal residue experiment for fenpyroximate on citrus?",
+        "answer": "All twelve fields were involved in the terminal residue experiment for fenpyroximate on citrus."
+    },
+    {
+        "question": "At what intervals were the terminal residues of fenpyroximate collected after application on citrus?",
+        "answer": "The terminal residues were collected at 15 and 25 days after application."
+    },
+    {
+        "question": "What was the focus of calculating the total residues of fenpyroximate in the experiment?",
+        "answer": "The focus was on calculating the total residues of fenpyroximate in the samples collected at 15 and 25 days after application."
+    },
+    {
+        "question": "Where can the results of the terminal residue experiment for fenpyroximate on citrus be found?",
+        "answer": "The results are shown in tables."
+    },
+    {
+        "question": "What trend did the residual concentrations of fenpyroximate, Z-fenpyroximate, and total residues exhibit with increases in the harvest interval in both whole fruit and citrus flesh?",
+        "answer": "The residual concentrations exhibited a decreasing trend with increases in the harvest interval."
+    },
+    {
+        "question": "In what cases were the residue concentrations after long intervals slightly higher than the corresponding short-interval values?",
+        "answer": "In a small number of cases, the residue concentrations after long intervals were slightly higher than the corresponding short-interval values."
+    },
+    {
+        "question": "What factors may have contributed to the residue concentrations being slightly higher after long intervals compared to short intervals?",
+        "answer": "The higher residue concentrations after long intervals may have been the result of uneven sampling, quartering, or scaling during sample preparation."
+    },
+    {
+        "question": "Why were the residual concentrations of fenpyroximate in citrus flesh lower than those in entire fruits?",
+        "answer": "The residual concentrations of fenpyroximate in citrus flesh were lower because droplets of pesticides wholly adhered to the surface of the citrus peel after application."
+    },
+    {
+        "question": "What was the source of the total residues of fenpyroximate in both whole fruit and citrus flesh?",
+        "answer": "The total residues of fenpyroximate in whole fruit and citrus flesh were all derived from fenpyroximate."
+    },
+    {
+        "question": "What advantage does the chemical configuration of fenpyroximate in plants give it compared to Z-fenpyroximate?",
+        "answer": "The chemical configuration of fenpyroximate in plants gives it an advantage compared to Z-fenpyroximate."
+    },
+    {
+        "question": "What was the basis for the long-term dietary risk assessment mentioned in the statement?",
+        "answer": "The long-term dietary risk assessment was based on data from monitoring surveys on the nutritional and health status of Chinese residents."
+    },
+    {
+        "question": "How was the national estimated daily intake (NEDI) determined in the risk assessment?",
+        "answer": "The NEDI was determined by combining data from monitoring surveys with STMR or MRL to evaluate the dietary intake risk posed by edible parts of foods like citrus flesh."
+    },
+    {
+        "question": "Which crops are registered for fenpyroximate in China according to the Chinese pesticide information network?",
+        "answer": "The crops registered for fenpyroximate in China include maize, citrus, apple, and lycium."
+    },
+    {
+        "question": "What was the focus of the assessment related to fenpyroximate and citrus intake?",
+        "answer": "The assessment focused on the short-term dietary risk posed by fenpyroximate after the intake of citrus."
+    },
+    {
+        "question": "Which age groups were considered in the assessment of fenpyroximate dietary risk?",
+        "answer": "Two different groups were considered: children aged 1-6 years and the general population aged >6 years."
+    },
+    {
+        "question": "Who conducted the assessment regarding fenpyroximate and citrus intake?",
+        "answer": "The assessment was conducted according to data from the World Health Organization."
+    },
+    {
+        "question": "Who provided the fenpyroximate standard with a purity of 97.79%?",
+        "answer": "Dr. Ehrenstorfer from Augsburg, Germany provided the fenpyroximate standard with a purity of 97.79%."
+    },
+    {
+        "question": "Where was the Z-fenpyroximate standard obtained from and what is its concentration?",
+        "answer": "The Z-fenpyroximate standard (liquid) was provided by Dr. Ehrenstorfer from Augsburg, Germany, with a concentration of 100.0 µg mL -1."
+    },
+    {
+        "question": "Which company supplied the 28% suspension concentrate (SC) of fenpyroximate?",
+        "answer": "Shanxi Huarongkaiwei Biotech Co., Ltd. from Xi'an, China supplied the 28% suspension concentrate (SC) of fenpyroximate."
+    },
+    {
+        "question": "Where were formic acid and chromatographic-grade methanol purchased from?",
+        "answer": "Formic acid was purchased from Merck AG in Darmstadt, Germany, and chromatographic-grade methanol was purchased from Thermo Fisher Scientific Co., Ltd. in Shanghai, China."
+    },
+    {
+        "question": "From which suppliers were acetonitrile and HPLC-grade ammonium acetate purchased?",
+        "answer": "Acetonitrile was purchased from Tiandi Co., Ltd. in Dublin, OH, USA, and HPLC-grade ammonium acetate was purchased from the Tianjin Guangfu Fine Chemical Research Institute in Tianjin, China."
+    },
+    {
+        "question": "Where was the analytical-grade sodium chloride purchased from?",
+        "answer": "Analytical-grade sodium chloride was purchased from Sinopharm Chemical Reagent Co., Ltd. in Shanghai, China."
+    },
+    {
+        "question": "What components are present in the purification tubes of 2 mL capacity?",
+        "answer": "The purification tubes of 2 mL capacity contain 150 mg anhydrous MgSO4, 50 mg PSA, and 5 mg GCB."
+    },
+    {
+        "question": "How was the standard stock solution of fenpyroximate prepared?",
+        "answer": "The standard stock solution of fenpyroximate was prepared by weighing 10.0 mg of the fenpyroximate standard and dissolving it with acetonitrile in a 100 mL volumetric flask."
+    },
+    {
+        "question": "What solvent was used to dissolve the fenpyroximate standard for the stock solution preparation?",
+        "answer": "Acetonitrile was used to dissolve the fenpyroximate standard for the stock solution preparation."
+    },
+    {
+        "question": "What was the concentration of Z-fenpyroximate in its standard stock solution?",
+        "answer": "The standard stock solution of Z-fenpyroximate had a concentration of 100 µg mL^-1."
+    },
+    {
+        "question": "Where were the standard stock solutions of fenpyroximate and Z-fenpyroximate stored?",
+        "answer": "The standard stock solutions of fenpyroximate and Z-fenpyroximate were stored in a freezer at -18°C."
+    },
+    {
+        "question": "What temperature was maintained in the freezer where the solutions were stored?",
+        "answer": "The solutions were stored in a freezer at -18°C."
+    },
+    {
+        "question": "What was the volume of fenpyroximate and Z-fenpyroximate placed in the 10 mL volumetric flask?",
+        "answer": "0.1 mL of fenpyroximate and Z-fenpyroximate were placed in the 10 mL volumetric flask."
+    },
+    {
+        "question": "What was the concentration of the mixed standard solution prepared in the 10 mL volumetric flask?",
+        "answer": "The mixed standard solution had a concentration of 10 µg mL^-1."
+    },
+    {
+        "question": "At what temperatures were all solutions stored?",
+        "answer": "All solutions were stored at 4°C."
+    },
+    {
+        "question": "What was the dilution range used with whole fruit and citrus flesh for the mixed standard solution?",
+        "answer": "The dilution range used was 0.01, 0.02, 0.05, 0.1, 0.2, and 0.5 µg mL^-1."
+    },
+    {
+        "question": "What guideline requirements are being referred to in the statement?",
+        "answer": "The guideline requirements for the testing of pesticide residues in crops (NY/T 788-2018)."
+    },
+    {
+        "question": "What is the focus of the guideline requirements mentioned?",
+        "answer": "The testing of pesticide residues in crops."
+    },
+    {
+        "question": "What is the specific standard or code mentioned for the testing of pesticide residues in crops?",
+        "answer": "NY/T 788-2018."
+    },
+    {
+        "question": "What was the dosage of fenpyroximate SC applied to the citrus for measuring residue levels?",
+        "answer": "A dosage of 56 mg kg -1 fenpyroximate SC was applied."
+    },
+    {
+        "question": "When were the terminal residue samples of the whole fruit collected after application?",
+        "answer": "Terminal residue samples of the whole fruit were collected 15 d and 25 d after application."
+    },
+    {
+        "question": "How many independent samples were collected for measuring residue levels?",
+        "answer": "Two independent samples were collected."
+    },
+    {
+        "question": "How many fruits were included in each sample for residue collection?",
+        "answer": "At least 12 fruits were randomly chosen from different places on the tree for each sample."
+    },
+    {
+        "question": "What parts of the citrus were sampled for residue analysis?",
+        "answer": "Terminal residue samples of the whole fruit and citrus flesh were collected."
+    },
+    {
+        "question": "What size were the pieces samples cut into?",
+        "answer": "Samples were cut into pieces of less than 1 cm^2."
+    },
+    {
+        "question": "How were the samples divided into pieces of 150 g weight?",
+        "answer": "The samples were mixed and quartered to achieve pieces of 150 g weight."
+    },
+    {
+        "question": "At what temperature were all samples stored in preparation for testing?",
+        "answer": "All samples were stored at -20°C in preparation for testing."
+    },
+    {
+        "question": "What chromatographic conditions were used for the UHPLC-MS/MS analyses of fenpyroximate and its Z-isomer?",
+        "answer": "The UHPLC-MS/MS analyses of fenpyroximate and its Z-isomer were carried out using SCIEX Triple Quad 4500 with specific column and temperature settings."
+    },
+    {
+        "question": "What type of chromatographic column was used in the analysis?",
+        "answer": "The chromatographic column used was ACQUITY UPLC ® BEH 1.7 µm C18 100 A (100 × 2.1 mm, SN: 02973711615165)."
+    },
+    {
+        "question": "What were the temperatures of the column and sample plate during the analysis?",
+        "answer": "The temperature of the column was set at 30 °C, while the sample plate temperature was maintained at 20 °C."
+    },
+    {
+        "question": "What was the composition of the mobile phase used in the analysis?",
+        "answer": "The mobile phase consisted of 90% aqueous phase (4 mmol L -1 ammonium acetate aqueous solution with 0.1% formic acid) and 10% organic phase (pure methanol)."
+    },
+    {
+        "question": "What was the flow rate of the mobile phase during the analysis?",
+        "answer": "The mobile phase flowed at a rate of 0.2 mL min -1."
+    },
+    {
+        "question": "What was the injection volume for each sample in the analysis?",
+        "answer": "The injection volume for each sample was 2 µL."
+    },
+    {
+        "question": "What ionization mode was used for the mass spectrum scan?",
+        "answer": "Positive ionization mode (ESI+)"
+    },
+    {
+        "question": "What was the ionization voltage set to during the mass spectrum scan?",
+        "answer": "5500 V"
+    },
+    {
+        "question": "What was the ion source temperature during the mass spectrum scan?",
+        "answer": "550 • C"
+    },
+    {
+        "question": "Which gas was used as the collision gas in the mass spectrum scan?",
+        "answer": "Nitrogen"
+    },
+    {
+        "question": "What mode was the mass spectrometry operated in for fenpyroximate and its Z-isomer?",
+        "answer": "MRM mode"
+    },
+    {
+        "question": "What were the analytical methods verified for fenpyroximate and Z-fenpyroximate in whole fruit and citrus flesh?",
+        "answer": "The analytical methods were verified with respect to linearity, matrix effect (ME), accuracy, precision, and sensitivity."
+    },
+    {
+        "question": "What guidelines or standards were followed during the verification process?",
+        "answer": "The verification process was conducted in conformity with SANTE/11312/2021."
+    },
+    {
+        "question": "Which parameters were evaluated during the verification of analytical methods for fenpyroximate and Z-fenpyroximate?",
+        "answer": "The parameters evaluated included linearity, matrix effect (ME), accuracy, precision, and sensitivity."
+    },
+    {
+        "question": "What types of samples were used in the verification of analytical methods for fenpyroximate and Z-fenpyroximate?",
+        "answer": "Whole fruit and citrus flesh samples were used in the verification process."
+    },
+    {
+        "question": "Why is it important to verify the analytical methods for fenpyroximate and Z-fenpyroximate?",
+        "answer": "Verifying the analytical methods ensures their reliability and accuracy when analyzing whole fruit and citrus flesh samples."
+    },
+    {
+        "question": "What were the three levels of mixed standard solutions added to the blank matrixes of whole fruit and citrus flesh?",
+        "answer": "The three levels were 0.01, 0.1, and 0.2 mg kg -1."
+    },
+    {
+        "question": "How many repeated tests were carried out for each level of the mixed standard solutions?",
+        "answer": "Five repeated tests were carried out for each level."
+    },
+    {
+        "question": "What was the recovery rate range considered satisfactory for the method?",
+        "answer": "The recovery rate of 70-120% was considered satisfactory for the method."
+    },
+    {
+        "question": "What was the maximum concentration added to the whole fruit matrix to cover the maximum detected concentration among the testing samples?",
+        "answer": "A concentration of 0.5 mg kg -1 was added to the whole fruit matrix."
+    },
+    {
+        "question": "What was the criteria used to set the limit of quantification (LOQ) for evaluating the sensitivity of the method?",
+        "answer": "The lowest spiked level was set as the limit of quantification (LOQ)."
+    },
+    {
+        "question": "What was reported in the literature?",
+        "answer": "The information or findings specified in the literature."
+    },
+    {
+        "question": "Where can one find the information mentioned?",
+        "answer": "In the literature that reported it."
+    },
+    {
+        "question": "Is the information from a credible source?",
+        "answer": "Likely, as it is reported in the literature."
+    },
+    {
+        "question": "What do K m and K s represent in the context of standard curves?",
+        "answer": "K m represents the slope of the matrix-matched standard curve, and K s represents the slope of the solvent standard curve."
+    },
+    {
+        "question": "What does an ion suppression percentage of 0 indicate regarding matrix effect?",
+        "answer": "An ion suppression percentage of 0 indicates no matrix effect."
+    },
+    {
+        "question": "What does an ion suppression percentage of more than 0 indicate in terms of the sample matrix effect?",
+        "answer": "An ion suppression percentage of more than 0 indicates that the sample matrix has a matrix-enhancing effect on the determination of the target compound."
+    },
+    {
+        "question": "What do ion suppression percentages of less than 0 indicate about the sample matrix effect?",
+        "answer": "Ion suppression percentages of less than 0 indicate a matrix-inhibiting effect on the determination of the target compound."
+    },
+    {
+        "question": "What residue was defined for compliance with MRLs for plant commodities based on JMPR research results?",
+        "answer": "The residue defined for compliance with MRLs for plant commodities was fenpyroximate."
+    },
+    {
+        "question": "How was the residue defined for dietary risk assessment in relation to fenpyroximate?",
+        "answer": "For dietary risk assessment, the residue was defined as the sum of the parent fenpyroximate and its Z-isomer (M-1), expressed as fenpyroximate."
+    },
+    {
+        "question": "How was the residue calculated directly for dietary risk assessment?",
+        "answer": "The residue for dietary risk assessment was calculated directly using addition."
+    },
+    {
+        "question": "Who recommended the method for assessing long-term dietary intake risk?",
+        "answer": "The review committee of the National Pesticide Residue Standards recommended the method."
+    },
+    {
+        "question": "What was used to represent the long-term dietary intake risk?",
+        "answer": "The risk quotient (RQc) was used to represent the long-term dietary intake risk."
+    },
+    {
+        "question": "What were the calculation formulas for representing the long-term dietary intake risk?",
+        "answer": "The calculation formulas for representing the long-term dietary intake risk were provided."
+    },
+    {
+        "question": "What does NEDI (mg kg -1 bw) refer to?",
+        "answer": "NEDI (mg kg -1 bw) refers to the national estimated daily intake."
+    },
+    {
+        "question": "What does STMR i (mg kg -1 ) represent?",
+        "answer": "STMR i (mg kg -1 ) is the median residue of total fenpyroximate in citrus flesh collected from field trials."
+    },
+    {
+        "question": "What does F i (kg d -1 ) stand for?",
+        "answer": "F i (kg d -1 ) is the per capita daily consumption of citrus in China."
+    },
+    {
+        "question": "What is bw (kg) in the context of the statement?",
+        "answer": "bw (kg) is the average weight of Chinese adults."
+    },
+    {
+        "question": "What does ADI (mg kg -1 bw) represent?",
+        "answer": "ADI (mg kg -1 bw) is the allowable daily intake of fenpyroximate as determined by the Joint FAO/WHO Meeting of Pesticide Residues (JMPR)."
+    },
+    {
+        "question": "What method was used to assess the short-term dietary intake risk?",
+        "answer": "Assessment of short-term dietary intake risk was calculated in line with case 2a of the JMPR-recommended method."
+    },
+    {
+        "question": "Which formulas were utilized for calculating the short-term dietary intake risk?",
+        "answer": "The short-term dietary intake risk was calculated using the following formulas."
+    },
+    {
+        "question": "What does 'RQ a' represent in the provided equation?",
+        "answer": "'RQ a' represents a specific value or variable."
+    },
+    {
+        "question": "What does 'NESTI/ArfD' represent in the equation?",
+        "answer": "'NESTI/ArfD' represents a calculation or ratio."
+    },
+    {
+        "question": "How is the result of 'NESTI/ArfD' utilized in the equation?",
+        "answer": "The result of 'NESTI/ArfD' is multiplied by 100% in the equation."
+    },
+    {
+        "question": "What is the purpose of multiplying 'NESTI/ArfD' by 100% in the equation?",
+        "answer": "Multiplying 'NESTI/ArfD' by 100% likely serves a conversion or scaling purpose."
+    },
+    {
+        "question": "What is the significance of expressing the result as a percentage in this equation?",
+        "answer": "Expressing the result as a percentage may provide a standardized or easily interpretable value."
+    },
+    {
+        "question": "What method of analysis was established in the study to detect fenpyroximate and its Z-isomer in whole-fruit and flesh citrus?",
+        "answer": "A qualitative and quantitative method of analysis was established."
+    },
+    {
+        "question": "How was the established method characterized in terms of its effectiveness?",
+        "answer": "The method was found to be simple, time-saving, effective in purification, sensitive, and accurate."
+    },
+    {
+        "question": "What were the levels of accuracy and precision achieved by the method for detecting and analyzing pesticide residues?",
+        "answer": "The method exhibited levels of accuracy and precision meeting the requirements for detection and analysis of pesticide residues."
+    },
+    {
+        "question": "What were the terminal residues of fenpyroximate found in whole-fruit and flesh citrus collected from twelve fields?",
+        "answer": "The terminal residues were <0.010-0.18 mg kg -1 for whole-fruit citrus and <0.010-0.063 mg kg -1 for flesh citrus."
+    },
+    {
+        "question": "Were the terminal residues of fenpyroximate in whole-fruit and flesh citrus below the Chinese MRL values?",
+        "answer": "Yes, the terminal residues were lower than the Chinese MRL values."
+    },
+    {
+        "question": "What were the RQ c and RQ a values indicating in the study?",
+        "answer": "RQ c was 3.98%, and RQ a ranged from 10.6% to 27.5%, both indicating levels less than 100%."
+    },
+    {
+        "question": "What parameters were analyzed for fenpyroximate and Z-fenpyroximate?",
+        "answer": "Curves, correlation coefficients (R^2), MEs, and LOQs in matrixes were analyzed."
+    },
+    {
+        "question": "What does 'MEs' stand for in the analysis of fenpyroximate and Z-fenpyroximate?",
+        "answer": "'MEs' stands for Method of Extraction."
+    },
+    {
+        "question": "What is the significance of correlation coefficients (R^2) in the analysis mentioned?",
+        "answer": "Correlation coefficients (R^2) are important for assessing the strength of the relationship between variables."
+    },
+    {
+        "question": "Why are LOQs important when analyzing fenpyroximate and Z-fenpyroximate in matrixes?",
+        "answer": "LOQs (Limit of Quantification) are important as they define the lowest concentration of an analyte that can be reliably measured."
+    },
+    {
+        "question": "What method of analysis was established in the study to detect fenpyroximate and its Z-isomer in whole-fruit and flesh citrus?",
+        "answer": "A qualitative and quantitative method of analysis was established."
+    },
+    {
+        "question": "How was the established method characterized in terms of its effectiveness?",
+        "answer": "The method was found to be simple, time-saving, effective in purification, sensitive, and accurate."
+    },
+    {
+        "question": "What were the levels of accuracy and precision of the established method for detection and analysis of pesticide residues?",
+        "answer": "The method had levels of accuracy and precision that met the requirements for detection and analysis of pesticide residues."
+    },
+    {
+        "question": "What were the terminal residues of fenpyroximate in whole-fruit and flesh citrus collected from twelve fields?",
+        "answer": "<0.010-0.18 mg kg-1 for whole-fruit citrus, and <0.010-0.063 mg kg-1 for flesh citrus."
+    },
+    {
+        "question": "Were the terminal residues of fenpyroximate in whole-fruit and flesh citrus below the Chinese MRL values?",
+        "answer": "Yes, the terminal residues were lower than the Chinese MRL values."
+    },
+    {
+        "question": "What were the terminal residues of fenpyroximate (sum of fenpyroximate and Z-fenpyroximate) in whole-fruit and flesh citrus?",
+        "answer": "<0.020-0.19 mg kg-1 for whole-fruit citrus, and <0.020-0.053 mg kg-1 for flesh citrus."
+    },
+    {
+        "question": "What were the RQc and RQa values related to fenpyroximate residues in the study?",
+        "answer": "RQc was 3.98% and RQa ranged from 10.6% to 27.5%."
+    },
+    {
+        "question": "Did the levels of long-term residue pose a risk according to the RQ values obtained in the study?",
+        "answer": "The RQ values were less than 100%, indicating that the levels of long-term residue did not pose a risk."
+    },
+    {
+        "question": "What do the authors declare regarding conflict of interest?",
+        "answer": "The authors declare no conflict of interest."
+    },
+    {
+        "question": "Is there any conflict of interest disclosed by the authors?",
+        "answer": "No, the authors declare no conflict of interest."
+    },
+    {
+        "question": "How can one obtain samples for this research?",
+        "answer": "Samples for this research are available from the authors on request."
+    },
+    {
+        "question": "Who can provide the samples for this research?",
+        "answer": "The authors can provide the samples for this research."
+    },
+    {
+        "question": "What is the process to acquire samples for this research?",
+        "answer": "To acquire samples for this research, one needs to request them from the authors."
+    },
+    {
+        "question": "What do the authors declare regarding conflict of interest?",
+        "answer": "The authors declare no conflict of interest."
+    },
+    {
+        "question": "Is there any conflict of interest disclosed by the authors?",
+        "answer": "No, the authors do not disclose any conflict of interest."
+    },
+    {
+        "question": "How can one obtain samples for the research mentioned?",
+        "answer": "Samples for this research are available from the authors on request."
+    },
+    {
+        "question": "Who should be contacted to request samples for this research?",
+        "answer": "The authors should be contacted to request samples for this research."
+    },
+    {
+        "question": "What is the harvest interval recommended for fenpyroximate in citrus to ensure acceptable risk to Chinese consumers?",
+        "answer": "A 15-day harvest interval after application at 56 mg kg -1 is recommended."
+    },
+    {
+        "question": "What dietary-intake risk level was deemed acceptable for Chinese consumers related to fenpyroximate in citrus?",
+        "answer": "The term and short-term dietary-intake risk posed to Chinese consumers by fenpyroximate in citrus were considered acceptable."
+    },
+    {
+        "question": "What scientific basis did the study provide regarding the safe use of fenpyroximate in citrus?",
+        "answer": "The study provided a scientific basis for the safe use of fenpyroximate in citrus."
+    },
+    {
+        "question": "What purpose did the study serve regarding MRL values?",
+        "answer": "The study provided basic data for revising the MRL values related to fenpyroximate in citrus."
+    },
+    {
+        "question": "Where can the following supporting information be accessed?",
+        "answer": "The following supporting information can be downloaded."
+    },
+    {
+        "question": "What action can be taken with the supporting information?",
+        "answer": "The supporting information can be downloaded."
+    },
+    {
+        "question": "What was the harvest interval recommended for citrus after applying fenpyroximate at 56 mg kg -1?",
+        "answer": "A 15-day harvest interval was recommended after applying fenpyroximate at 56 mg kg -1."
+    },
+    {
+        "question": "How was the risk posed by fenpyroximate in citrus described for term and short-term dietary intake to Chinese consumers?",
+        "answer": "The risk posed by fenpyroximate in citrus for term and short-term dietary intake to Chinese consumers was deemed acceptable."
+    },
+    {
+        "question": "What scientific basis did the study provide regarding the safe use of fenpyroximate in citrus?",
+        "answer": "The study provided a scientific basis for the safe use of fenpyroximate in citrus."
+    },
+    {
+        "question": "What purpose did the study serve in terms of MRL values for fenpyroximate in citrus?",
+        "answer": "The study provided basic data for revising the MRL values of fenpyroximate in citrus."
+    },
+    {
+        "question": "Where can the supporting information be downloaded?",
+        "answer": "The supporting information can be downloaded at the provided location."
+    },
+    {
+        "question": "What type of information is available for download?",
+        "answer": "The supporting information is available for download."
+    },
+    {
+        "question": "Is the download of supporting information optional?",
+        "answer": "Yes, the download of supporting information is optional."
+    }
+]

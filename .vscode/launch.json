@@ -1,0 +1,17 @@
+{
+
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "args": [
+                "--model-name",
+                "deepseek-r1:1.5b"
+            ],
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
