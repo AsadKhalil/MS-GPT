@@ -26,14 +26,6 @@ mkdir -p /home/asad/sample_files && i=0 && find "/tear/dasulimov/home_folder/mas
 # Use config file (auto-detected)
 python vision_extractor.py
 
-# Specify config file
-python vision_extractor.py -c config/config.json
+nohup python -u src/vision_extractors/vision_extractor.py > logs/vision_extractor.out 2>&1 &
 
-# Process single file with resume
-python vision_extractor.py document.pdf
-
-# Batch process with resume
-python vision_extractor.py data/input --batch
-
-# Disable resume
-python vision_extractor.py document.pdf --no-resume
+CUDA_VISIBLE_DEVICES=2 nohup ollama serve > ollama-server.log 2>&1 &

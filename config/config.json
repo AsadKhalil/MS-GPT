@@ -1,7 +1,7 @@
 {
   "ollama": {
     "url": "http://localhost:11434",
-    "model": "qwen3-vl:2b",
+    "model": "llama3.2-vision:latest",
     "timeout": 500,
     "temperature": 0.1,
     "top_p": 0.9
