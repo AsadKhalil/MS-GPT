@@ -32,7 +32,8 @@ class PDFVisionExtractor:
         model: Optional[str] = None,
         output_dir: Optional[str] = None,
         log_level: Optional[str] = None,
-        progress_file: str = "extraction_progress.json"
+        log_file: Optional[str] = None,
+        progress_file: Optional[str] = None
     ):
         """
         Initialize the PDF Vision Extractor.
@@ -43,11 +44,15 @@ class PDFVisionExtractor:
             model: Vision model to use (overrides config)
             output_dir: Directory to save extracted text files (overrides config)
             log_level: Logging level (overrides config)
-            progress_file: Path to progress tracking file
+            log_file: Path to log file (overrides config)
+            progress_file: Path to progress tracking file (overrides config)
         """
         # Load configuration
         self.config = self._load_config(config_path)
         
+        processing_config = self.config.get('processing', {})
+        logging_config = self.config.get('logging', {})
+
         # Use provided args or fall back to config
         default_url = 'http://localhost:11434'
         self.ollama_url = (
@@ -61,12 +66,30 @@ class PDFVisionExtractor:
         default_output = 'extracted_text'
         self.output_dir = Path(
             output_dir or
-            self.config.get('processing', {}).get('output_dir', default_output)
+            processing_config.get('output_dir', default_output)
         )
-        self.output_dir.mkdir(exist_ok=True)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Progress tracking
+        progress_path = progress_file or processing_config.get(
+            'progress_file', 'extraction_progress.json'
+        )
+        self.progress_file = Path(progress_path)
+        self.progress_file.parent.mkdir(parents=True, exist_ok=True)
+        self.progress = self._load_progress()
+        
+        # Logging configuration
+        log_file_path = (
+            log_file or
+            logging_config.get('log_file') or
+            logging_config.get('file') or
+            'pdf_extraction.log'
+        )
+        self.log_file = Path(log_file_path)
+        self.log_file.parent.mkdir(parents=True, exist_ok=True)
         
         # Processing settings from config
-        self.image_dpi = self.config.get('processing', {}).get('image_dpi', 200)
+        self.image_dpi = processing_config.get('image_dpi', 200)
         self.timeout = self.config.get('ollama', {}).get('timeout', 120)
         self.temperature = self.config.get('ollama', {}).get('temperature', 0.1)
         self.top_p = self.config.get('ollama', {}).get('top_p', 0.9)
@@ -78,14 +101,16 @@ class PDFVisionExtractor:
             text_cleaning.get('remove_extra_whitespace', True)
         )
         self.min_text_length = text_cleaning.get('min_text_length', 10)
-        
-        # Progress tracking
-        self.progress_file = Path(progress_file)
-        self.progress = self._load_progress()
 
         # Setup logging
-        log_level = log_level or self.config.get('processing', {}).get('log_level', 'INFO')
-        self._setup_logging(log_level)
+        resolved_log_level = (
+            log_level or
+            logging_config.get('log_level') or
+            logging_config.get('level') or
+            processing_config.get('log_level') or
+            'INFO'
+        )
+        self._setup_logging(resolved_log_level)
 
         # Verify Ollama connection
         self._verify_ollama_connection()
@@ -137,6 +162,7 @@ class PDFVisionExtractor:
     def _save_progress(self) -> None:
         """Save progress tracking data."""
         try:
+            self.progress_file.parent.mkdir(parents=True, exist_ok=True)
             with open(self.progress_file, 'w', encoding='utf-8') as f:
                 json.dump(self.progress, f, indent=2, ensure_ascii=False)
         except Exception as e:
@@ -159,11 +185,18 @@ class PDFVisionExtractor:
     def _setup_logging(self, log_level: str) -> None:
         """Setup logging configuration."""
         log_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        level = getattr(logging, log_level.upper(), logging.INFO)
+        
+        # Reset existing handlers to avoid duplicate logs
+        root_logger = logging.getLogger()
+        for handler in root_logger.handlers[:]:
+            root_logger.removeHandler(handler)
+        
         logging.basicConfig(
-            level=getattr(logging, log_level.upper()),
+            level=level,
             format=log_format,
             handlers=[
-                logging.FileHandler("pdf_extraction.log"),
+                logging.FileHandler(self.log_file, encoding='utf-8'),
                 logging.StreamHandler(sys.stdout)
             ]
         )
@@ -648,8 +681,12 @@ def main():
         help="Disable resume functionality"
     )
     parser.add_argument(
-        "--progress-file", default="extraction_progress.json",
+        "--progress-file",
         help="Progress tracking file"
+    )
+    parser.add_argument(
+        "--log-file",
+        help="Path to log file"
     )
     parser.add_argument(
         "-v", "--verbose", action="store_true",
@@ -668,7 +705,8 @@ def main():
         model=args.model,
         output_dir=args.output,
         log_level=log_level,
-        progress_file=args.progress_file
+        progress_file=args.progress_file,
+        log_file=args.log_file
     )
     
     # Determine if batch processing

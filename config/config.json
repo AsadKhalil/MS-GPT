@@ -1,17 +1,21 @@
 {
   "ollama": {
     "url": "http://localhost:11434",
-    "model": "llava:13b",
-    "timeout": 120,
+    "model": "qwen3-vl:2b",
+    "timeout": 500,
     "temperature": 0.1,
     "top_p": 0.9
   },
   "processing": {
     "image_dpi": 200,
-    "output_dir": "extracted_text",
+    "output_dir": "extracted_text/vision",
     "input_dir": "data/input",
     "log_level": "INFO",
-    "batch_size": 1
+    "batch_size": 1,
+    "progress_file": "logs/extraction_progress.json"
+  },
+  "logging": {
+    "log_file": "logs/pdf_extraction.log"
   },
   "models": {
     "recommended": [

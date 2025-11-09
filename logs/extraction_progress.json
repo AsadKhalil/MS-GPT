@@ -1,0 +1,14 @@
+{
+  "496f40626e246c6b71b31f459e3a41a4": {
+    "file_path": "/home/tk-lpt-0806/Desktop/MS(GPT)/data/input/0003c723fc674c17153b13661453a849070e5786.pdf",
+    "output_path": "/home/tk-lpt-0806/Desktop/MS(GPT)/extracted_text/vision/0003c723fc674c17153b13661453a849070e5786_extracted.txt",
+    "processed_pages": [],
+    "extracted_texts": {}
+  },
+  "c3e013e0d9472ece7a078f670418aa30": {
+    "file_path": "/home/tk-lpt-0806/Desktop/MS(GPT)/data/input/0026be66ae61a027abaa76f6ae82700c67ec1807.pdf",
+    "output_path": "/home/tk-lpt-0806/Desktop/MS(GPT)/extracted_text/vision/0026be66ae61a027abaa76f6ae82700c67ec1807_extracted.txt",
+    "processed_pages": [],
+    "extracted_texts": {}
+  }
+}
