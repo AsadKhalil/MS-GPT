@@ -6,6 +6,11 @@ Pillow>=10.0.0           # Image processing
 requests>=2.31.0         # HTTP requests for Ollama API
 unidecode>=1.3.0         # Unicode text normalization
 
+# LangGraph and LangChain for agentic workflows
+langgraph>=0.2.0         # Graph-based agent orchestration
+langchain>=0.3.0         # LangChain core
+langchain-community>=0.3.0  # Community integrations
+
 # Optional dependencies for enhanced functionality
 pandas>=2.0.0            # Data manipulation (if needed for analysis)
 numpy>=1.24.0            # Numerical operations (used by PIL and PyMuPDF)
