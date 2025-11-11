@@ -26,6 +26,14 @@ mkdir -p /home/asad/sample_files && i=0 && find "/tear/dasulimov/home_folder/mas
 # Use config file (auto-detected)
 python vision_extractor.py
 
-nohup python -u src/vision_extractors/vision_extractor.py > logs/vision_extractor.out 2>&1 &
+nohup /home/asad/MS-GPT/.venv/bin/python3 -u src/vision_extractors/vision_extractor.py > logs/vision_extractor.out 2>&1 &
 
+
+nohup /home/asad/MS-GPT/.venv/bin/python3 -u src/vision_extractors/agentic_vision_extractor.py \
+  > logs/agentic_extraction.out 2>&1 &
+
+  
 CUDA_VISIBLE_DEVICES=2 nohup ollama serve > ollama-server.log 2>&1 &
+
+
+1207810

@@ -134,7 +134,7 @@ python src/vision_extractors/agentic_vision_extractor.py -c config/config.json
 ### Background Execution
 
 ```bash
-nohup python -u src/vision_extractors/agentic_vision_extractor.py \
+nohup /home/asad/MS-GPT/.venv/bin/python3 -u src/vision_extractors/agentic_vision_extractor.py \
   > logs/agentic_extraction.out 2>&1 &
 ```
 
