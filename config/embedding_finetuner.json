@@ -1,0 +1,42 @@
+{
+  "input_jsonl": "data/qa_outputs/jsonl/questions_answers.jsonl",
+  "output_dir": "models/fine_tuned_embeddings",
+  "log_file": "logs/embedding_finetuning.log",
+  "progress_file": "training_progress.json",
+  "metrics_file": "training_metrics.jsonl",
+  
+  "base_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "max_seq_length": 384,
+  
+  "train_batch_size": 16,
+  "eval_batch_size": 16,
+  "num_epochs": 3,
+  "warmup_steps": 500,
+  "evaluation_steps": 1000,
+  "save_steps": 1000,
+  "learning_rate": 2e-5,
+  "train_split": 0.9,
+  "loss_function": "MultipleNegativesRankingLoss",
+  
+  "_comments": {
+    "base_model_options": [
+      "sentence-transformers/all-MiniLM-L6-v2 (lightweight, fast)",
+      "sentence-transformers/all-mpnet-base-v2 (higher quality)",
+      "sentence-transformers/multi-qa-MiniLM-L6-cos-v1 (optimized for Q&A)",
+      "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 (multilingual)"
+    ],
+    "loss_function_options": [
+      "MultipleNegativesRankingLoss (recommended for Q&A pairs)",
+      "ContrastiveLoss (for similarity learning)",
+      "CosineSimilarityLoss (direct similarity)",
+      "OnlineContrastiveLoss (with online hard negative mining)"
+    ],
+    "training_tips": [
+      "Increase batch_size if you have more GPU memory",
+      "Increase num_epochs for better convergence (3-5 typical)",
+      "Adjust warmup_steps to 10% of total training steps",
+      "Use train_split to control validation set size"
+    ]
+  }
+}
+

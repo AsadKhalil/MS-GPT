@@ -602,7 +602,7 @@ Extract the main text content clearly and accurately.
             return False
         
         if output_filename is None:
-            output_filename = f"{pdf_path.stem}_extracted.txt"
+            output_filename = f"{pdf_path.stem}_extracted.md"
         
         output_path = self.output_dir / output_filename
         progress_key = self._get_file_hash(pdf_path)
@@ -713,7 +713,7 @@ Extract the main text content clearly and accurately.
                     
                     # Save partial output
                     self._save_partial_output(
-                        output_path, extracted_texts, total_pages
+                        output_path, extracted_texts, total_pages, quality_scores
                     )
                     
                 except Exception as e:
@@ -723,14 +723,15 @@ Extract the main text content clearly and accurately.
                     self._save_progress()
                     continue
             
-            # Combine all extracted text
+            # Combine all extracted text in markdown format
             if extracted_texts:
-                final_pages = []
-                for page_num in range(1, total_pages + 1):
-                    if str(page_num) in extracted_texts:
-                        final_pages.append(extracted_texts[str(page_num)])
-                
-                final_text = '\n\n'.join(final_pages)
+                final_text = self._format_as_markdown(
+                    pdf_path=pdf_path,
+                    extracted_texts=extracted_texts,
+                    quality_scores=quality_scores,
+                    total_pages=total_pages,
+                    include_metadata=True
+                )
                 
                 with open(output_path, 'w', encoding='utf-8') as f:
                     f.write(final_text)
@@ -768,20 +769,22 @@ Extract the main text content clearly and accurately.
     
     def _save_partial_output(
         self, output_path: Path, extracted_texts: Dict[str, str],
-        total_pages: int
+        total_pages: int, quality_scores: Dict[str, float] = None
     ) -> None:
-        """Save partial output."""
+        """Save partial output in markdown format."""
         try:
-            final_pages = []
-            for page_num in range(1, total_pages + 1):
-                if str(page_num) in extracted_texts:
-                    final_pages.append(extracted_texts[str(page_num)])
-                else:
-                    final_pages.append(
-                        f"[Page {page_num} - Not yet processed]"
-                    )
+            # Get PDF path from output path
+            pdf_path = Path(output_path.stem.replace('_extracted', ''))
             
-            partial_text = '\n\n'.join(final_pages)
+            # Use markdown formatting for partial output
+            partial_text = self._format_as_markdown(
+                pdf_path=output_path.parent.parent / pdf_path.name,
+                extracted_texts=extracted_texts,
+                quality_scores=quality_scores or {},
+                total_pages=total_pages,
+                include_metadata=True
+            )
+            
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(partial_text)
         except Exception as e:
@@ -797,6 +800,69 @@ Extract the main text content clearly and accurately.
             return hashlib.md5(identifier.encode()).hexdigest()
         except Exception:
             return hashlib.md5(str(file_path.absolute()).encode()).hexdigest()
+    
+    def _format_as_markdown(
+        self,
+        pdf_path: Path,
+        extracted_texts: Dict[str, str],
+        quality_scores: Dict[str, float],
+        total_pages: int,
+        include_metadata: bool = True
+    ) -> str:
+        """Format extracted text as markdown with proper structure."""
+        lines = []
+        
+        # Add document header
+        if include_metadata:
+            lines.append(f"# {pdf_path.stem}")
+            lines.append("")
+            lines.append("## Document Information")
+            lines.append("")
+            lines.append(f"- **Source File**: `{pdf_path.name}`")
+            lines.append(f"- **Total Pages**: {total_pages}")
+            lines.append(f"- **Extracted Pages**: {len(extracted_texts)}/{total_pages}")
+            lines.append(f"- **Extraction Date**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            
+            if quality_scores:
+                avg_quality = sum(quality_scores.values()) / len(quality_scores)
+                lines.append(f"- **Average Quality Score**: {avg_quality:.2f}")
+            
+            lines.append("")
+            lines.append("---")
+            lines.append("")
+        
+        # Add extracted content page by page
+        for page_num in range(1, total_pages + 1):
+            page_key = str(page_num)
+            
+            if page_key in extracted_texts:
+                # Page header
+                lines.append(f"## Page {page_num}")
+                lines.append("")
+                
+                # Optional quality indicator
+                if include_metadata and page_key in quality_scores:
+                    quality = quality_scores[page_key]
+                    quality_indicator = "✓" if quality >= 0.6 else "⚠"
+                    lines.append(f"*Quality: {quality_indicator} {quality:.2f}*")
+                    lines.append("")
+                
+                # Page content
+                text = extracted_texts[page_key]
+                lines.append(text)
+                lines.append("")
+                lines.append("---")
+                lines.append("")
+            else:
+                # Placeholder for unprocessed pages
+                lines.append(f"## Page {page_num}")
+                lines.append("")
+                lines.append("*[Not yet processed]*")
+                lines.append("")
+                lines.append("---")
+                lines.append("")
+        
+        return '\n'.join(lines)
     
     def batch_extract(
         self, input_dir: str, file_pattern: str = "*.pdf",
