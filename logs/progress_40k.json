@@ -1,0 +1,21 @@
+{
+  "completed": [],
+  "failed": [],
+  "stats": {
+    "total_files": 9,
+    "successful": 9,
+    "failed": 0,
+    "skipped": 0,
+    "total_pages": 168,
+    "total_time": 1.5607106685638428,
+    "methods": {
+      "direct": 9,
+      "ocr": 0,
+      "mixed": 0
+    },
+    "start_time": "2025-11-19T12:07:10.101373",
+    "end_time": "2025-11-19T12:07:10.366214",
+    "avg_time_per_file": 0.17341229650709364,
+    "avg_pages_per_file": 18.666666666666668
+  }
+}

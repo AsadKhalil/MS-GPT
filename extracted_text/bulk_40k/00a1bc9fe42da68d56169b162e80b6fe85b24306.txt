@@ -1,0 +1,1152 @@
+
+--- Page 1 ---
+
+Thermal stability of dialkylimidazolium
+tetrafluoroborate and hexafluorophosphate
+ionic liquids: ex situ bulk heating to
+complement in situ mass spectrometry
+Article
+Accepted Version
+Clarke, C. J., Puttick, S., Sanderson, T. J., Taylor, A. W.,
+Bourne, R., Lovelock, K. R. J. and Licence, P. (2018) Thermal
+stability of dialkylimidazolium tetrafluoroborate and
+hexafluorophosphate ionic liquids: ex situ bulk heating to
+complement in situ mass spectrometry. Physical Chemistry
+Chemical Physics, 20. pp. 16786-16800. ISSN 1463-9076 doi:
+https://doi.org/10.1039/C8CP01090K Available at
+https://centaur.reading.ac.uk/77586/
+It is advisable to refer to the publisher’s version if you intend to cite from the
+work. See Guidance on citing.
+To link to this article DOI: http://dx.doi.org/10.1039/C8CP01090K
+Publisher: Royal Society of Chemistry
+All outputs in CentAUR are protected by Intellectual Property Rights law,
+including copyright law. Copyright and IPR is retained by the creators or other
+copyright holders. Terms and conditions for use of this material are defined in
+the End User Agreement .
+
+--- Page 2 ---
+
+www.reading.ac.uk/centaur
+CentAUR
+Central Archive at the University of Reading
+Reading’s research outputs online
+
+--- Page 3 ---
+
+This is an Accepted Manuscript, which has been through the
+Royal Society of Chemistry peer review process and has been
+accepted for publication.
+Accepted Manuscripts are published online shortly after
+acceptance, before technical editing, formatting and proof reading.
+Using this free service, authors can make their results available
+to the community, in citable form, before we publish the edited
+article. We will replace this Accepted Manuscript with the edited
+and formatted Advance Article as soon as it is available.
+You can find more information about Accepted Manuscripts in the
+author guidelines.
+Please note that technical editing may introduce minor changes
+to the text and/or graphics, which may alter content. The journal’s
+standard Terms & Conditions and the ethical guidelines, outlined
+in our author and reviewer resource centre, still apply. In no
+event shall the Royal Society of Chemistry be held responsible
+for any errors or omissions in this Accepted Manuscript or any
+consequences arising from the use of any information it contains.
+Accepted Manuscript
+rsc.li/pccp
+PCCP
+Physical Chemistry Chemical Physics
+www.rsc.org/pccp
+ISSN 1463-9076
+PERSPECTIVE
+Darya Radziuk and Helmuth Möhwald
+Ultrasonically treated liquid interfaces for progress in cleaning and
+separation processes
+Volume 18 Number 1 7 January 2016 Pages 1–636
+PCCP
+View Article Online
+View Journal
+This article can be cited before page numbers have been issued, to do this please use: C. J. Clarke, S.
+Puttick, T. J. Sanderson, A. W. Taylor, R. Bourne, K. R. J. Lovelock and P. Licence, Phys. Chem. Chem.
+Phys., 2018, DOI: 10.1039/C8CP01090K.
+
+--- Page 4 ---
+
+Thermal Stability of Dialkylimidazolium Tetrafluoroborate and
+Hexafluorophosphate Ionic Liquids: Ex Situ Bulk Heating to Complement
+In Situ Mass Spectrometry
+Coby J. Clarke#*, Simon Puttick, Thomas J. Sanderson, Alasdair W. Taylor, Richard A. Bourne$*, Kevin
+R. J. Lovelock†* and Peter Licence
+Affiliations:
+School of Chemistry, The University of Nottingham, University Park, Nottingham, NG7 2RD, U.K.
+*Current address:
+Current Address: # Department of Chemical Engineering, Imperial College London, London, UK.
+Current Address: $ Department of Chemistry, University of Leeds, Leeds, UK.
+Current Address: † Department of Chemistry, University of Reading, Reading, UK.
+*Correspondence to:
+Coby.clarke@imperial.ac.uk
+k.r.j.lovelock@reading.ac.uk
+r.a.bourne@leeds.ac.uk
+Page 1 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 5 ---
+
+Abstract
+Thermal decomposition (TD) products of the ionic liquids (ILs) [CnC1Im][BF4] and [CnC1Im][PF6]
+([CnC1Im]+
+1-alkyl-3-methylimidazolium,
+[BF4]-
+tetrafluoroborate,
+[PF6]-
+hexafluorophosphate) were prepared, ex situ, by bulk heating experiments in a bespoke setup. The
+respective products, CnC1(C3N2H2)BF3 and CnC1(C3N2H2)PF5 (1-alkyl-3-methylimidazolium-2-
+trifluoroborate and 1-alkyl-3-methylimidazolium-2-pentafluorophosphate), were then vaporized and
+analyzed by direct insertion mass spectrometry (DIMS) in order to identify their characteristic MS
+signals. During IL DIMS experiments we were subsequently able, in situ, to identify and monitor
+signals due to both IL vaporization and IL thermal decomposition. These decomposition products
+have not been observed in situ during previous analytical vaporization studies of similar ILs. The ex
+situ preparation of TD products is therefore perfectly complimentary to in situ thermal stability
+measurements. Experimental parameters such as sample surface area to volume ratios and heating
+rates are consequently very important for ILs that show competitive vaporization and thermal
+decomposition. We have explained these experimental factors in terms of Langmuir evaporation and
+Knudsen effusion-like conditions, allowing us to draw together observations from previous studies to
+make sense of the literature on IL thermal stability. Hence, the design of experimental setups are
+crucial and previously overlooked experimental factors.
+1. Introduction
+For many applications of ionic liquids (ILs), low temperature molten salts composed entirely of
+mobile cations and anions, a pivotal property is thermal stability. Examples of elevated temperature
+IL processes include catalysis,1 electrochemical cells,2 electrodeposition,2 stationary phases for gas
+chromatography,3 lubricants,4 biomass dissolution,5 and gas absorption, to name a few.6 Poor
+thermal stability can lead to the loss of expensive ILs, and the presence of liquid phase thermal
+decomposition (TD) products can change the physicochemical properties of the IL solution.
+Therefore, understanding the thermally driven processes of ILs is key to many of these applications
+and any future application that operates at elevated temperatures. [CnC1Im][BF4] and [CnC1Im][PF6]
+([CnC1Im]+
+1-alkyl-3-methylimidazolium,
+[BF4]-
+tetrafluoroborate,
+[PF6]-
+hexafluorophosphate) are widely studied in academia, and therefore represent good model ILs for
+physical property studies. In addition, at the multigram scale the thermolytic conversion of
+dialkylimidazolium [BF4]- and [PF6]- salts under low to medium vacuum (i.e. 25 mbar to 10-3 mbar)
+has become a useful method for the preparation of substituted imidazol-2-ylidenes, i.e. Arduengo
+carbenes, for use as positron emission tomography probes.7-11
+Thermal mass loss of ILs can occur by two routes: (i) IL vaporization and (ii) vaporization of liquid
+phase TD products. Traditionally, these two routes have been treated as separate research fields.12
+For thermogravimetric analysis (TGA) studies of [CnC1Im][BF4] and [CnC1Im][PF6], it was assumed that
+only TD occurred, and vaporization of the IL was not considered.13-16 There are four general
+approaches for studying IL thermal stability:
+monitor changes in mass (e.g. by quartz crystal microbalance (QCM) or TGA)
+(ii)
+characterize the condensate of the vapor ex situ (e.g. using NMR spectroscopy, IR
+spectroscopy),
+(iii)
+characterize the residue left after heating the IL ex situ (e.g. using NMR
+spectroscopy, IR spectroscopy),
+Page 2 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 6 ---
+
+(iv)
+identify the vapor in situ (e.g. using mass spectrometry (MS)).
+Approach (i) above can provide temperatures at which mass loss occurs, but gives no information on
+TD products formed; therefore, competing processes cannot be readily identified. Approaches (ii)
+and (iii) can be used to identify the mass loss products but tend to give limited information on what
+occurs at different temperatures. Approach (iv) can potentially give information on both the
+temperatures at which mass loss occurs and to identify the mass loss products formed.
+Using a Knudsen cell at 410 K to 505 K and ≈10-5 mbar, Zaitsau et al. found that [C4C1Im][PF6]
+thermally decomposed, with Ea,TD = 68.0 ± 2.8 kJ mol-1 at T = 456.5 K; no TD products or TD
+mechanism was given.17 At T > 373 K, dialkylimidazolium salts with nucleophilic anions (e.g.
+[CnC1Im][A], where [A]– = halide or carboxylate) can thermally decompose by SN2 retro-alkylations to
+give 1-alkylimidazoles (CnIm) and alkylhalides or alkylacetates (CnH2n+1A).18-26 1-alkylimidazoles have
+also been found as TD products for both [CnC1Im][BF4] and [CnC1Im][PF6] ILs.19, 20, 27 For example, MS
+of the vapor produced when heating [C4C1Im][PF6] between 425 K to 528 K gave a signal at m/z 96,
+which was identified as [C2Im]+•.27 It was concluded that the TD product originated from neutral 1-
+ethylimidazole based upon three pieces of evidence: firstly, the m/z value of the peak matches that
+of the parent ion for 1-ethylimidazole; secondly, that the appearance energy for the peak at m/z 96
+matched the appearance energy for 1-ethylimidazole (and did not match the appearance energy for
+[C4C1Im][PF6] NIPs); thirdly, that no significant m/z 96 peak was observed after electron ionization of
+the vapor of [C4C1Im][NTf2] (where [NTf2]- = bis(trifluoromethanesulfonyl)imide). For [CnC1Im][BF4]
+ILs,
+dialkylimidazolium-2-trifluoroborates,
+i.e.
+(CH3)(CnH2n+1)(C3N2H2)BF3
+(abbreviated
+CnC1(C3N2H2)BF3 in this paper), were found as a TD product (HF is a by-product, see Scheme 1a).28, 29
+For [C1C1Im][PF6] analogous dialkylimidazolium-2-pentafluorophosphates TD products, i.e.
+(CH3)(CnH2n+1)(C3N2H2)PF5 (abbreviated to CnC1(C3N2H2)PF5 in this paper), have also been identified
+(with HF as a by-product, see Scheme 1b).29 For calculations of IL TD, prior knowledge of the liquid
+phase TD products was required for the methods used to date.26, 30, 31 Kroon et al. used ab initio
+quantum chemical calculations to investigate two different pathways for TD of [C4C1Im][BF4] and
+[C4C1Im][PF6].30 For pathway one the TD products were an unstable carbene (1-butyl-3-
+methylimidazol-2-ylidene), HF and BF3/PF5, and for pathway two the TD products were C4Im (1-
+butylimidazole), CH3F and BF3/PF5; for [C4C1Im][PF6] the activation energies of TD (Ea,TD ) were 313 kJ
+mol-1 and 213 kJ mol-1 for pathways one and two respectively.
+Until the mid-2000s, ILs were thought to be involatile; their high enthalpies of vaporization (∆vapH)
+were thought to prevent vaporization before TD occurred. In 2006 Earle et al. used a Kugelrohr
+setup at 473 K < T < 573 K and pressure <8 mbar to demonstrate that a range of ILs with different
+anion and cation combinations could be distilled (i.e. physical transfer by vaporization of IL).32
+[C4C1Im][PF6] was noted to distil at 573 K and 6 mbar, without significant TD of the condensate or
+the residue.32 A large number of studies have subsequently focused on investigating IL vaporization,
+most utilizing ILs containing the thermally robust [NTf2]- anion.33 Mass spectrometry (MS)22, 27, 34-55
+and simulations44, 56-59 have since identified the vapor phase of ILs to be composed primarily of
+neutral ion pairs (NIPs), including for both [CnC1Im][BF4] and [CnC1Im][PF6] (n = 2, 4, 8).34, 36, 39, 40, 42
+Using temperature programmed desorption (TPD) line-of-sight mass spectrometry (LOSMS) only IL
+NIP vaporization was observed; no evidence was found for the TD of [CnC1Im][BF4] to CnC1(C3N2H2)BF3
+or [CnC1Im][PF6] to CnC1(C3N2H2)PF5 between 450 K to 565 K.34, 36, 39, 40 Note that other studies where
+IL NIP vaporization was detected for [CnC1Im][BF4] to or [CnC1Im][PF6] did not report CnC1(C3N2H2)BF3
+Page 3 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 7 ---
+
+or CnC1(C3N2H2)PF5 formation.27, 42 Furthermore, IR spectroscopy of the condensate and residue from
+quartz-crystal microbalance (QCM) measurements of [CnC1Im][BF4] and [CnC1Im][PF6] (n = 2, 4, 6, 8,
+10) between 403 K to 461 K suggest that these ILs do not thermally decompose under these
+conditions.60, 61
+Recently, it has been appreciated that understanding the competition between the two possible
+routes for IL mass loss, IL vaporization and TD product vaporization, is key for understanding thermal
+mass loss of IL.22, 27, 62-65 However, the literature for dialkylimidazolium [BF4]- and [PF6]- ILs appears to
+be contradictory; it is unclear under what conditions vaporization or TD will occur. For example, the
+condensate collected after heating [CnC1Im][BF4] ILs under high vacuum (10-3 to 10-5 mbar) and T >
+523 K gave mixtures of IL distillate and the TD product CnC1(C3N2H2)BF3.28 By monitoring mass loss
+between 453 K to 551 K, Volpe et al. found competition between TD product vaporization and IL
+vaporization for [C4C1Im][PF6] by altering the orifice size of a Knudsen effusion cell.27 However, many
+other studies have reported either TD13-17, 19, 20 or IL vaporization34, 36, 39, 40, 42, 60, 61, 66.
+Scheme 1 The thermal decomposition (TD) of ionic liquids (ILs) under high vacuum (HV): (a)
+dialkylimidazolium tetrafluoroborate to form dialkylimidazolium-2-trifluoroborate and HF, (b)
+dialkylimidazolium hexafluorophosphate to form dialkylimidazolium-2-pentafluorophosphate and
+In this paper, we present data on the condensation products of bulk heating experiments and direct
+insertion mass spectrometry (DIMS) results for [C4C1Im][BF4] and [CnC1Im][PF6] (where n = 4, 8) that
+show how ex situ preparation enables a TD product to be definitively identified during in situ MS
+experiments. We therefore exploit a combination of approaches (i.e. ii-iv from the introduction list)
+by characterising (using ex situ characterization techniques) the condensates from bulk heating
+experiments and we identify, using in situ MS, the vapor produced by heating the same ILs. Our
+experiments demonstrate that previous studies aimed at understanding the TD of dialkylimidazolium
+[BF4]- and [PF6]- ILs may have been restricted by upper mass limits. The abbreviations, structures,
+names, and molar mass for ILs investigated in this work are given in Table 1.
+Page 4 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 8 ---
+
+Table 1 Summary of the ionic liquids investigated in this study. The molar masses are calculated
+using the most intense isotope for all elements. Note: [C2C1Im][NTf2] was used as a thermally robust
+comparison for bulk heating experiments (see the ESI).
+Abbreviation
+Structure
+Name
+Cation
+M / g
+mol-1
+Anion
+M / g
+mol-1
+[C2C1Im][NTf2]
+1-ethyl-3-methylimidazolium
+bis(trifluoromethanesulfonyl)imide
+[C4C1Im][BF4]
+1-butyl-3-methylimidazolium
+tetrafluoroborate
+[C4C1Im][PF6]
+1-butyl-3-methylimidazolium
+hexafluorophosphate
+[C8C1Im][PF6]
+1-octyl-3-methylimidazolium
+hexafluorophosphate
+Page 5 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 9 ---
+
+2. Experimental
+2.1 Ionic Liquid Synthesis
+Synthetic procedures of the ILs used in this work are reported in the Supplementary Information. All
+ILs were degassed for 24 h on a Schlenk line (p ≈ 5 × 10-2 mbar, T = 313 K) prior to transferring to the
+condensation apparatus. It must be noted that the presence of water can lead to hydrolysis of
+[CnC1Im][BF4] and [CnC1Im][PF6] ILs.67 However, 19F NMR showed no evidence of additional
+components, resulting from hydrolysis, prior to condensation or MS experiments.
+2.2 Vaporization + condensation apparatus and method
+Vaporization + condensation experiments were carried out using a custom designed glass
+condensation apparatus evacuated using a diffusion pump. The setup was developed to increase IL
+vaporization rates compared to the previous vaporization + condensation apparatus employed by
+our group.28, 38 Briefly, a blown glass still pot with integrated still head and receiver (see Figure 1)
+was filled with the IL of interest and connected to the high vacuum pumping system by way of a
+standard glass-to-metal seal. Pressure was monitored using a Penning gauge situated on the
+diffusion pump and a Pirani gauge situated between the condensation apparatus and diffusion
+pump. The base pressure in the apparatus prior to charging with IL was 7.5 × 10-6 mbar. The still pot
+was heated by an electrical heating tape that was wrapped around the apparatus, a Type K
+thermocouple provided temperature measurement. The still pot was insulated with glass wool to
+maintain a relatively uniform temperature (further details are available in the ESI). The surface area-
+to-volume ratio was calculated to be 0.0085 for 40 mL of IL in the condensation apparatus.
+Figure 1 The condensation apparatus (containing 20 ml ionic liquid) and corresponding process
+diagram showing the thermocouple (T), Pirani (P1) and Penning gauge (P2) positions.
+2.2.1
+Ex situ characterization of TD products
+Page 6 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 10 ---
+
+For IL heating/condensation experiments, 1H, 13C, 19F and 31P NMR spectra were recorded at room
+temperature on either a Bruker DPX300 (300 MHz), Bruker AV400 (400 MHz), or Bruker AV3500 (500
+MHz). All NMR spectroscopy samples were prepared in DMSO-d6 and spectra were referenced to
+the residual solvent signal of DMSO (1H NMR 2.50 ppm, 13C NMR 39.52 ppm). Electrospray
+ionization mass spectrometry (ESI-MS) was recorded on a Bruker Micro-TOF mass spectrometer
+possessing both positive and negative ionization sources. Solutions were made up in analytical
+reagent grade methanol. The thermally robust ionic liquid 1-ethyl-3-methylimidazolium
+bis(trifluoromethanesulfonyl)imide, [C2C1Im][NTf2], was used to test the condensation apparatus
+before investigating other ILs. Bulk vaporization was carried out at 579 K and 1.1 x 10-5 mbar to yield
+a colorless distillate (1.86 g hr-1). The 1H NMR of the condensate showed that pure IL had been
+collected and no decomposition had occurred (Figure S1).The NMR spectra of C4C1(C3N2H2)PF5 are
+displayed in the supplementary information (Figure S2-5) to show the coupling and multiplicity of
+the TD products.
+C4C1(C3N2H2)BF3 from [C4C1Im][BF4]
+[C4C1Im][BF4] (40 ml, 0.21 mol) was placed into the degassed and dried condensation apparatus via a
+glass syringe under a positive pressure of argon. The system was evacuated using a rotary pump (<
+5.0 × 10-2 mbar), before being opened to the main diffusion pump. After allowing the pressure to
+equilibrate, the sample was heated to 359 K, causing the pressure to rise to 4.0 x 10-4 mbar. Further
+heating overnight allowed the base pressure to establish (7.2 x 10-6 mbar) at this temperature which
+ensured the removal of any residual volatile impurities. The temperature was raised and a dark
+orange condensate was observed to condense on the walls of the apparatus at 578 K. Bulk
+vaporization + condensation occurred at 613 K and 2 x 10-3 mbar to 4 x 10-3 mbar to yield a pale
+orange liquid condensate (9.85 g, 0.37 g h-1). For DIMS experiments and to confirm the identity of
+the condensate, a small portion of the liquid was washed with excess water to remove residual IL.
+1H NMR (DMSO-d6, 300 MHz): δ 7.53 (d, J = 1.8 Hz, 1H), 7.46 (d, J = 1.8 Hz, 1H), 4.16 (t, J = 7.6 Hz,
+2H), 3.79 (s, 3H), 1.57-1.82 (m, 2H), 4.09 (d, J = 15.0 Hz, 2H), 0.88 (t, J = 7.5 Hz, 3H). 13C NMR (DMSO-
+d6, 75 MHz): δ = 123.0, 121.5, 48.0, 35.7, 32.6, 19.0, 13.4. ESI-MS (MeOH): (+ve) 229.1095 (M+Na)+.
+Data consistent with previous reports.28
+Page 7 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 11 ---
+
+C4C1(C3N2H2)PF5 from [C4C1Im][PF6]
+The same loading and degassing procedure used for [C4C1Im][BF4] was also used for [C4C1Im][PF6].
+The bulk vaporization + condensation took place at 641 K and 1.4 x 10-4 mbar to yield a pale orange
+condensate that solidified upon collecting in a round bottom flask (15.2 g, 0.66 g h-1). For DIMS
+experiments and to confirm the identity of the condensate, a small portion of the solidified material
+was recrystallized from methanol/water to give fine white needles that were dried at ≈ 10-2 mbar
+and 323 K. 1H NMR (400 MHz, DMSO-d6) δ 7.65 (dd, J = 3.3, 2.0 Hz, 1H), 7.58 (dd, J = 3.0, 2.0 Hz, 1H),
+4.27 – 4.23 (m, 2H), 3.86 (s, 3H), 1.80 – 1.61 (m, 2H), 1.41 – 1.18 (m, 2H), 0.90 (t, J = 7.4 Hz, 3H). 13C
+NMR (126 MHz, DMSO-d6) δ 152.91 (dquin, J = 330.6, 62.7 Hz, 1C), 123.84 (br d, J = 9.1 Hz, 1C),
+121.52 (br d, J = 10.0 Hz, 1C), 49.22 (t, J = 3.2 Hz, 1C), 37.70, 32.42, 19.24, 13.46. 19F NMR (DMSO-d6,
+377 MHz): Shift = -52.25 (dd, J = 782.0, 51.0 Hz, 4F), -70.60 ppm (dquin, J = 755.0, 51.0 Hz, 1F). 31P
+NMR (DMSO-d6, 162 MHz): δ = -150.65 ppm (dquin, J = 781.9, 755.1 Hz, 1P). ESI-MS (MeOH): (+ve)
+287.0705 (M+Na)+. Anal. Calcd for C8H14F5N2P: C, 36.37; H, 5.34; N, 10.60. Found: C, 36.51; H, 5.32;
+N, 10.26. HRMS (ESI/QTOF) m/z: [M + Na]+ Calcd for C8H14F5N2NaP+ 287.0707; Found 287.0705.
+C8C1(C3N2H2)PF5 from [C8C1Im][PF6]
+The same loading and degassing procedure used for [C4C1Im][BF4] was also used for [C4C1Im][PF6].
+The bulk vaporization + condensation took place at 625 K and 3.7 x 10-4 mbar to yield a dark orange
+liquid condensate (11.7 g, 0.51 g h-1). To confirm the identity of the condensate, a small portion of
+the liquid was purified by column chromatography (silica gel; DCM) to give a white solid that was
+dried at ≈ 10-2 mbar and 323 K. 1H NMR (400 MHz, DMSO-d6) δ 7.65 (dd, J = 3.2, 2.0 Hz, 1H), 7.58 (dd,
+J = 3.1, 1.9 Hz, 1H), 4.26 – 4.21 (m, 2H), 3.86 (s, 3H), 1.76 – 1.68 (m, 2H), 1.31 – 1.21 (m, 10H), 0.85 (t,
+J = 7.0 Hz, 3H). 13C NMR (126 MHz, DMSO-d6) δ 152.90 (dquin, J = 331.5, 63.1 Hz, 1C), 123.80 (d, J =
+10.0 Hz, 1C), 121.49 (d, J = 9.1 Hz, 1C), 49.43, 37.68, 31.20, 30.40, 28.54, 28.51, 25.92, 22.09, 13.92.
+19F NMR (376 MHz, DMSO-d6) δ -52.31 (dd, J = 781.9, 51.1 Hz, 4F), -70.66 (dquin, J = 754.9, 51.1 Hz,
+1F). 31P NMR (DMSO-d6, 162 MHz): δ = -150.63 ppm (dquin, J = 781.9, 755.1 Hz, 1P). HRMS
+(ESI/QTOF) m/z: [M + Na]+ Calcd for C12H22F5N2NaP+ 343.1333; Found 343.1316.
+2.3 Direct insertion mass spectrometry (DIMS)
+Direct insertion mass spectrometry (DIMS) was performed on a Thermo Finnigan PolarisQ ion trap
+mass spectrometer (with ≈ 2.5 x 10-6 mbar base pressure). ILs were dried on a Schlenk line for 24 h
+(p ≈ 5 × 10-2 mbar, T = 313 K) before 1 to 2 drops were deposited onto a glass capillary in open air.
+The capillary was mounted on the direct insertion probe, which was introduced to the spectrometer
+straight away to limit absorption of water from the air. After equilibrating at 313 K, all ILs were
+heated by 10 K min-1 to 623 K, or until sufficient amounts of desorption were observed. Samples
+were ionized by electron impact ionization (70 eV), and the ion detector was switched from positive
+to negative detection mode every minute during acquisition. The surface area-to-volume ration for
+the glass sample holder was calculated to be 0.036, a value far larger than the bulk heating
+apparatus.
+3. Results
+Page 8 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 12 ---
+
+3.1 Heating bulk [C4C1Im][BF4] followed by ex situ characterization of the condensate
+Bulk [C4C1Im][BF4] was heated in the vaporization + condensation setup at different temperatures
+between 543 K and 690 K and the condensates were characterized by NMR spectroscopy. Two
+different products were obtained, [C4C1Im][BF4] and C4C1(C3N2H2)BF3 (Scheme 2, parts 1b and 2a-b).
+The 1H NMR spectra show C4-H and C5-H protons for C4C1(C3N2H2)BF3 (7.46 and 7.52 ppm) which are
+shifted upfield of the [C4C1Im][BF4] C4-H and C5-H protons (7.75 and 7.69 ppm) by ~0.23 ppm (Figure
+2). All other protons in both [C4C1Im][BF4] and C4C1(C3N2H2)BF3 give similar chemical shifts, apart
+from the C2-H signal which is not present in C4C1(C3N2H2)BF3 and therefore not observed in the 1H
+NMR (see Figure S7). Integration of the C4-H and C5-H signals gave the relative amounts of
+[C4C1Im][BF4] and C4C1(C3N2H2)BF3 in the condensates. Figure 3 shows the composition of
+condensates collected from seven separate bulk scale attempts at the distillation of [C4C1Im][BF4] at
+different T between 543 K and 690 K. At T < 583 K, IL distillation and production of C4C1(C3N2H2)BF3
+occur as competing processes, e.g. at 543 K the ratio of [C4C1Im][BF4]:C4C1(C3N2H2)BF3 was 37:63.
+However, at T > 583 K the amount of distilled [C4C1Im][BF4] decreases, giving C4C1(C3N2H2)BF3 as the
+major product, e.g. at 690 K the ratio was 7:93. An optimized yield of 95% was achieved at 623 K in
+the vaporization + condensation setup.
+Figure 2 The C4-H and C5-H protons of [C4C1Im][BF4] and C4C1(C3N2H2)BF3 (highlighted in green) in the
+1H NMR spectroscopy of the condensates from [C4C1Im][BF4] vaporization + condensation
+experiments at 543 K and 690 K.
+Page 9 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 13 ---
+
+Figure 3 The composition of the condensate for bulk scale vaporization + condensation experiments
+for [C4C1Im][BF4] at different T between 543 K and 690 K, as determined by 1H NMR spectroscopy.
+3.2 Heating thin films of C4C1(C3N2H2)BF3: in situ mass spectrometry of the vapor phase
+To understand the MS of [C4C1Im][BF4], it is necessary to first investigate C4C1(C3N2H2)BF3 using MS.
+There are two parts to studying the MS of C4C1(C3N2H2)BF3, firstly identifying the vapor phase
+composition and secondly determining at what temperatures vaporization occurs. Summaries of the
+key fragment cations and anions are given in Table 2 and Table 3 respectively. At 323 K in positive
+mode for C4C1(C3N2H2)BF3, Figure 4a, the peak at m/z 187 is C4C1(C3N2H2)BF3 minus one fluorine,
+[C4C1(C3N2H2)11BF2]+ (Scheme 2, step 2c(ii)). A peak at m/z 186, approximately four times lower
+intensity than the m/z 187 peak, is [C4C1(C3N2H2)10BF2]+, an isotopic cation. No peak due to the
+C4C1(C3N2H2)BF3 molecular ion, [C4C1(C3N2H2)BF3]+•, was observed at m/z 206 (Scheme 2, step 2c(i)).
+The peaks at m/z 137, m/z 95 and m/z 82 are all cationic fragments of the [C4C1Im]+ parent.39 At
+higher temperatures, e.g. 391 K, a peak at m/z 393 was observed in the positive mode mass
+spectrum
+C4C1(C3N2H2)BF3,
+indicating
+formation
+dimers
+(i.e.
+[C4H9CH3(C3N2H2)BF2(C4C1(C3N2H2)BF3)]+) in the vapor phase (Figure S8). For the negative mode mass
+spectra, three peaks were observed between 323 K and 391 K; an example mass spectrum is given in
+Figure 4b at 368 K. The m/z 205 peak is C4C1(C3N2H2)BF3 minus one hydrogen. It is unclear whether
+loss of this hydrogen occurred from an alkyl group or from the ring; the fragment anion is labelled as
+[C4C1(C3N2H)11BF3]-, corresponding to loss of one hydrogen from the ring. The m/z 149 peak is due to
+[C1(C3N2H2)11BF3]- and the m/z 81 peak is due to [C1(C3N2H2)]-. Therefore, all evidence points to
+vaporization of intact C4C1(C3N2H2)BF3.
+The intensities of the peaks recorded in negative mode MS were significantly lower than those
+recorded in positive mode MS for the vapor of C4C1(C3N2H2)BF3. This significant difference is
+somewhat masked by the negative mode mass spectrum (Figure 4b) being recorded at 45 K higher
+temperature than the positive mode mass spectrum (Figure 4a); at 323 K the signal-to-noise ratio
+was very poor. A relatively intense m/z 96 peak was observed for positive mode DIMS of
+C4C1(C3N2H2)BF3 (Figure 4a). Therefore, this m/z 96 peak was a fragmentation product of
+C4C1(C3N2H2)BF3.
+Page 10 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 14 ---
+
+Figure 4 Mass spectrum intensity versus m/z for: (a) C4C1(C3N2H2)BF3 in positive mode at 323 K, (b)
+C4C1(C3N2H2)BF3 in negative mode at 368 K, (c) [C4C1Im][BF4] in positive mode at 500 K, (d)
+[C4C1Im][BF4] in negative mode at 500 K, (e) [C4C1Im][BF4] in positive mode at 640 K, (f) [C4C1Im][BF4]
+in negative mode at 640 K.
+The peak at m/z 187 was used to monitor C4C1(C3N2H2)BF3 vaporization with respect to T (Figure 5a).
+Vaporization of C4C1(C3N2H2)BF3 occurs significantly at 323 K, and is complete by ~400 K. For this
+mass spectrometer, the lowest starting T for experiments is ~323 K; desorption clearly occurs at
+lower T but this could not be recorded. Such observations are in agreement with the X-ray
+photoelectron spectroscopy (XPS) studies presented previously by our group;28 in these experiments,
+the pressure in the XPS chamber increased significantly when C4C1(C3N2H2)BF3 was introduced,
+indicating that significant C4C1(C3N2H2)BF3 vaporization was occurring at ~300 K.28 Therefore,
+C4C1(C3N2H2)BF3 has significantly higher vapor pressure than [C4C1Im][BF4].
+Page 11 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 15 ---
+
+Figure 5 Positive mode mass spectrum intensity versus T for the vapor in the DIMS experimental set-
+up of: (a) C4C1(C3N2H2)BF3 monitoring m/z 187, [C4C1(C3N2H2)11BF2]+, (b) [C4C1Im][BF4] monitoring m/z
+139, [C4C1Im]+, and m/z 187, [C4C1(C3N2H2)11BF2]+.
+3.3 Heating thin films of [C4C1Im][BF4]: in situ mass spectrometry of the vapor phase
+Using DIMS, mass spectra were obtained for [C4C1Im][BF4] (Figure 4c-f). Summaries of the key
+fragment cations and anions are also given in Table 2 and Table 3. At 500 K (Figure 4c), no molecular
+cation at m/z 226, [C4C1ImBF4]+•, is observed, as expected based upon previous MS studies of ILs39
+(step 1c(i) in Scheme 2). Peaks at m/z 139, [C4C1Im]+, and m/z 83, [HC1Im]+, confirm vaporization of
+[C4C1Im][BF4] NIPs (steps 1c(iii) and 1c(iv) in Scheme 2 respectively). Clearly, no peaks due to
+formation of C4C1(C3N2H2)BF3, e.g., m/z 187, were observed at 500 K. The peak at m/z 158 has been
+identified previously as the radical cation [C4C1ImF]+•, and is a fragmentation product of ionization of
+[C4C1Im][BF4] NIPs (step 1c(ii) in Scheme 2).39 In negative mode at 500 K m/z 86 and m/z 87 are
+observed, corresponding to [10BF4]- and [11BF4]- respectively (Figure 4d). As far as we are aware, this
+is the first reported observation of the [BF4]- anion in negative mode MS after vaporization of an IL.33
+Overall, these observations confirm that at 500 K under these experimental conditions the
+vaporization of [C4C1Im][BF4] NIPs is the dominant process.
+At 640 K (Figure 4e), in positive mode m/z 139, [C4C1Im]+, is still present, confirming vaporization of
+[C4C1Im][BF4] NIPs. However, an additional peak at m/z 187 is present, corresponding to
+[C4C1(C3N2H2)11BF2]+ (step 2c(ii) in Scheme 2). Therefore, liquid phase TD is occurring at this
+temperature, forming C4C1(C3N2H2)BF3, which is then vaporized. A molecular cation peak at m/z 206,
+[C4C1(C3N2H2)BF3]+•, was not observed (step 2c(i) in Scheme 2), as expected from the positive mode
+MS of C4C1(C3N2H2)BF3. In addition, [HF]+• at m/z 20 is below the lower m/z limit for the mass
+spectrometer. The peaks at m/z 139 and 187 indicate that both vaporization and liquid phase TD
+Page 12 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 16 ---
+
+were occurring for [C4C1Im][BF4] at 640 K. Negative mode peaks originating from C4C1(C3N2H2)BF3
+were not observed in [C4C1Im][BF4] MS at 500 K (Figure 4d) or 640 K (Figure 4f), only peaks
+associated with the anion are observed at m/z 86 and m/z 87 (i.e. [10BF4]- and [11BF4]-). This finding is
+as expected, given that the intensities of the peaks recorded in negative mode MS were significantly
+lower than those recorded in positive mode MS for the vapor of C4C1(C3N2H2)BF3, as described
+previously here.
+There is no clear evidence of BF3, a postulated volatile TD product, for which the m/z 49 peak from
+[11BF2]+ would be the most intense peak. Furthermore, there is no evidence of proton transfer from
+the cation to the anion, in particular for the C2-H proton; no peaks were observed at m/z 138 for a
+carbene, [C4C1(C3N2H2)]+•, or at m/z 88 for [HBF4]+•. It must be noted however that there are no
+literature EI mass spectra to compare to for these compounds. Therefore, there is no evidence of
+volatile TD products other than C4C1(C3N2H2)BF3; all peaks in the mass spectrum of the vaporized
+products of [C4C1Im][BF4] can be identified as arising from [C4C1Im][BF4] NIPs or C4C1(C3N2H2)BF3. The
+desorption traces for m/z 139 ([C4C1Im]+ from [C4C1Im][BF4] NIPs) and m/z 187 ([C4C1(C3N2H2)11BF2]+
+from C4C1(C3N2H2)BF3) with respect to T are given in Figure 5b. Vaporization of [C4C1Im][BF4] NIPs
+occurred at lower T, before the C4C1(C3N2H2)BF3 signal was observed.
+A relatively intense m/z 96 peak was observed for positive mode DIMS of [C4C1Im][BF4] at T = 500 K
+(Figure 4c). As no significant amount of m/z 187 (i.e. the parent peak for positive mode DIMS of
+C4C1(C3N2H2)BF3) was recorded at this temperature, it can be concluded that the m/z 96 peak was
+formed by fragmentation after electron ionization for positive mode DIMS of [C4C1Im][BF4]. This
+observation is in agreement with LOSMS experiments for [CnC1Im][BF4] (n = 4, 8), where an m/z 96
+peak was observed and no m/z 187 peak was observed.39
+Page 13 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 17 ---
+
+Scheme 2 (a) Liquid phase thermal decomposition (TD), (b) vaporization, (c) electron ionization (EI)
+and fragmentation taking place in the vapor phase inside the mass spectrometer for [C4C1Im][BF4].
+Route 1 is for neutral ion pair (NIP) vaporization, and route 2 is for liquid phase TD to form
+C4C1(C3N2H2)BF3 followed by vaporization of C4C1(C3N2H2)BF3.
+3.4 Heating bulk [CnC1Im][PF6] followed by ex situ characterization of the condensate
+Vaporization + condensation experiments were repeated with 1-alkyl-3-methylimidazolium
+hexafluorophosphate ILs, [CnC1Im][PF6] (where n = 4 or 8), to investigate the formation of TD
+products. [C4C1Im][PF6] was heated at 641 K in the vaporization + condensation apparatus and the
+condensates and residue were analyzed by 1H NMR spectroscopy. The condensate contained 89%
+C4C1(C3N2H2)PF5, 8% [C4C1Im][PF6], and 3% unknown products. The residue was found to contained
+96% [C4C1Im][PF6], 2% C4C1(C3N2H2)PF5, and 2% unknown products. As with [C4C1Im][BF4], the TD
+product, C4C1(C3N2H2)PF5, was obtained as the major product at relatively high temperature. The
+presence of C4C1(C3N2H2)PF5 in the residue indicates TD of the IL occurs in the liquid phase, before
+vaporization. In the event of a vapor phase TD, condensation of the TD product into the residue is
+Page 14 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 18 ---
+
+unlikely at these temperatures given the significantly higher ∆vapH of the TD product relative to the
+IL, as demonstrated in Figure 5. The small amount of [C4C1Im][PF6] in the condensate also indicates
+that IL vaporization occurs as a competing process during the vaporization + condensation
+experiments.
+[C8C1Im][PF6] was also heated in the vaporization + condensation apparatus at 625 K and the
+condensate was found to contain 65% C8C1(C3N2H2)PF5, 31% [C8C1Im][PF6] and 3% unknown product.
+The residue was also found to contain 93% [C8C1Im][PF6], 2% C8C1(C3N2H2)PF5, and 5% unknown
+products. Although C8C1(C3N2H2)PF5 was the major product, the [C8C1Im][PF6] condensate contained
+less TD product and more IL than the [C4C1Im][PF6] condensate. As the condensation temperature
+was slightly lower for [C8C1Im][PF6] (albeit by 16 K), IL vaporization should be favored over TD;
+however, longer alkyl chain ILs have higher ∆vapH values,33 suggesting less IL should be collected in
+the condensate. Interestingly, the [C8C1Im][PF6] residue contained only 2% C8C1(C3N2H2)PF5, the same
+proportion as the higher temperature [C4C1Im][PF6] condensate. This composition suggests that the
+vaporization of the TD product is a fast process under these experimental conditions. However, the
+large volume of IL has a low surface area to bulk ratio which hinders vaporization of the TD products,
+resulting in a small portion remaining in the liquid phase. As both C8C1(C3N2H2)PF5 and [C8C1Im][PF6]
+are condensed, there is competition between IL vaporization and liquid phase TD (followed by
+vaporization of the TD product). Tian et al. observed the formation of C1C1(C3N2H2)PF5 for
+[C1C1Im][PF6], but no IL vaporization was reported.29 Therefore, these results appear contradictory.
+3.5 Heating thin films of CnC1(C3N2H2)PF5: in situ mass spectrometry of the vapor phase
+To understand the MS of CnC1(C3N2H2)PF5 a small portion of C4C1(C3N2H2)PF5 was purified and
+introduced to the mass spectrometer (Figure 6). A list of key cation and anion fragments are also
+given in Table 2 and Table 3. The peaks at m/z 137, m/z 95 and m/z 82 (Figure 6a) are fragments of
+C4C1(C3N2H2)PF5 which were also observed for C4C1(C3N2H2)BF3 (Figure 4a). The peak at m/z 245 is
+[C4C1(C3N2H2)PF4]+, a fragmentation product of C4C1(C3N2H2)PF5 minus one fluorine (Scheme S1, step
+2c(ii); analogous to Scheme 2, step 2c(ii)). Again, no peak for the C4C1(C3N2H2)PF5 molecular ion,
+[C4C1(C3N2H2)PF5]+, was observed at m/z 264. The peak at m/z 245 was chosen to monitor
+C4C1(C3N2H2)PF5 vaporization with respect to temperature (Figure 6b). Significant vaporization of
+C4C1(C3N2H2)PF5 also occurs at low temperature (e.g. ~323 K); however, at T >360 K the
+[C4C1(C3N2H2)PF4]+ signal rapidly increases and desorption is completed by 423 K. Therefore, the
+vapor pressure of C4C1(C3N2H2)PF5 is higher than the vapor pressure of the IL as desorption occurs at
+the lowest temperature in this setup (≈2.5 x 10-6 mbar base pressure). Unlike for C4C1(C3N2H2)BF3, a
+dimer signal at m/z 509 was not observed for C4C1(C3N2H2)PF5, even at elevated temperatures
+(Figure S9).
+A relatively intense m/z 96 peak was observed for positive mode DIMS of C4C1(C3N2H2)PF5 (Figure
+6a). Therefore, this m/z 96 peak was a fragmentation product of C4C1(C3N2H2)PF5.
+Page 15 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 19 ---
+
+Figure 6 (a) Positive mode mass spectrum intensity versus m/z for C4C1(C3N2H2)PF5 at 313 K. (b)
+Positive mode mass spectrum intensity versus T for [C4C1(C3N2H2)PF4]+ m/z 245. The block profile is
+due to positive-negative mode switching during measurements.
+3.6 Heating thin films of [CnC1Im][PF6]: in situ mass spectrometry of the vapor phase
+Mass spectra of [C4C1Im][PF6] (Figure 7a-d) were also measured to investigate the in situ formation
+of C4C1(C3N2H2)PF5. As expected, no molecular cation at m/z 284, [C4C1ImPF6]+•, is observed at high
+or low temperatures. The peaks at m/z 139, [C4C1Im]+, and m/z 83, [HC1Im]+, again confirm
+vaporization of [C4C1Im][PF6] NIPs and at 493 K C4C1(C3N2H2)PF5, e.g., m/z 245, is not observed. The
+negative mode MS at both 493 K and 623 K (Figure 7b, d) only show a signal corresponding to the
+[PF6]- anion at m/z 145; this fragmentation pattern matches a literature report42. Again, these
+observations confirm that at T = 493 K under these spectrometer conditions the vaporization of
+[C4C1Im][PF6] NIPs is the dominant process. At higher T, e.g. 623 K, in positive mode (Figure 7c)
+signals corresponding to the NIPs are still present. A small peak at m/z 245, [C4C1(C3N2H2)PF4]+,
+appears, however the signal is extremely low; an expansion of the baseline has been presented. This
+signal indicates liquid phase TD is occurring to form C4C1(C3N2H2)PF5. However, under the
+spectrometer conditions used here, vaporization of [C4C1Im]PF6] is the dominant process; the large
+surface area to bulk ratio allows [C4C1Im][PF6] to evaporate before significant TD can occur in the
+liquid phase.
+Page 16 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 20 ---
+
+Figure 7 Mass spectrum intensity versus m/z for [C4C1Im][PF6]: (a) positive mode at 493 K, (b)
+negative mode at 503 K, (c) positive mode at 623 K, (d) negative mode at 623 K.
+[C8C1Im][PF6] was also investigated by DIMS (Figure 8a-d) to investigate alkyl chain length effects
+within this setup. At 533 K (Figure 8a), no molecular cation at m/z 340, [C8C1ImPF6]+•, is observed, as
+expected. Peaks at m/z 195, [C8C1Im]+, and m/z 83, [HC1Im]+, again confirm vaporization of
+[C8C1Im][PF6] NIPs. The small m/z 257 peak in the positive mode at 533 K could not be identified; it
+is not present in the positive mode spectrum at 543 K. In negative mode the [PF6]- anion, m/z 145,
+was the only signal observed at both 543 K and 623 K (Figure 8b and d). At 543 K (Figure 8c), the
+positive mode MS of [C4C1Im][PF6] is similar to the positive mode spectrum at 533 K. However, a
+peak at m/z 301 is present which corresponds to [C8C1(C3N2H2)PF4]+
+, a fragmentation product of
+C8C1(C3N2H2)PF5. Therefore, liquid phase TD is occurring to form C8C1(C3N2H2)PF5, followed by
+C8C1(C3N2H2)PF5 vaporization at 633 K inside the spectrometer. No molecular cation at m/z 320,
+[C8C1(C3N2H2)PF5]+•, is observed, as with C4C1(C3N2H2)BF3 and C4C1(C3N2H2)PF5. Relative to
+[C4C1(C3N2H2)PF4]+ at m/z 245, the peak at m/z 301 appears to have a higher intensity relative to the
+parent cation of the ILs. There are a number of possible explanations for this observation.
+A relatively intense m/z 96 peak was observed for positive mode DIMS of [C8C1Im][PF6] at T = 533 K
+(Figure 7a). As no significant amount of m/z 301 (i.e. the parent peak for positive mode DIMS of
+C8C1(C3N2H2)PF5) was recorded at this temperature, it can be concluded that the m/z 96 peak was
+formed by fragmentation after electron ionization for positive mode DIMS of [C8C1Im][PF6].
+Page 17 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 21 ---
+
+Figure 8 Mass spectrum intensity versus m/z for [C8C1Im][PF6]: (a) positive mode at 533 K, (b)
+negative mode at 543 K, (c) positive mode at 623 K, (d) negative mode at 623 K.
+Table 2 Cations observed in positive mode MS of [C4C1Im][BF4], [CnC1Im][PF6], C4C1(C3N2H2)BF3, and
+C4C1(C3N2H2)PF5.
+Formula
+Notation
+Source
+[(C3H3N2)CH3]+•
+[C1Im]+•
+All samples
+[H(C3H3N2)CH3]+
+[HC1Im]+
+All samples
+[C2H4(C3H3N2)]+
+[(C2H4)Im]+
+All samples
+[C2H5(C3H3N2)]+•
+[C2Im]+•
+All samples
+[C4H7(C3H3N2)CH3]+
+[(C4H7)C1Im]+
+All samples
+[C4H9(C3H3N2)CH3]+
+[C4C1Im]+
+[C4C1Im][BF4]
+[C4C1Im][PF6]
+[C4H9(C3H3N2)CH3F]+•
+[C4C1ImF]+•
+[C4C1Im][BF4]
+[C4C1Im][PF6]
+[C4H9CH3(C3N2H2)BF2]+
+[C4C1(C3N2H2)BF2]+
+C4C1(C3N2H2)BF3
+[C4C1Im][BF4]
+[C8H17(C3H3N2)CH3]+
+[C8C1Im]+
+[C8C1Im][PF6]
+[C8H17(C3H3N2)CH3F]+•
+[C8C1ImF]+•
+[C8C1Im][PF6]
+[C4H9CH3(C3N2H2)PF4]+
+[C4C1(C3N2H2)PF4]+
+C4C1(C3N2H2)PF5
+[C4C1Im][PF6]
+[C8H17CH3(C3N2H2)PF4]+
+[C8C1(C3N2H2)PF4]+
+[C8C1Im][PF6]
+[C4H9CH3(C3N2H2)BF2(C4C1(C3N2H2)BF3)]+
+[C4C1(C3N2H2)BF2(C4C1(C3N2H2)BF3)]+
+C4C1(C3N2H2)BF3
+Page 18 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 22 ---
+
+Table 3 Anions observed in negative mode MS of [C4C1Im][BF4], [CnC1Im][PF6], C4C1(C3N2H2)BF3, and
+C4C1(C3N2H2)PF5.
+Formula
+Notation
+Source
+[CH3(C3N2H2)]-
+[C1(C3N2H2)]-
+C4C1(C3N2H2)BF3
+[10BF4]-
+[BF4]-
+[C4C1Im][BF4]
+[11BF4]-
+[BF4]-
+[C4C1Im][BF4]
+[PF6]-
+[PF6]-
+[C4C1Im][PF6]
+[C8C1Im][PF6]
+[CH3(C3N2H2)11BF3]-
+[C1(C3N2H2)11BF3]-
+C4C1(C3N2H2)BF3
+[C4H9CH3(C3N2H)11BF3]-
+[C4C1(C3N2H)11BF3]-
+C4C1(C3N2H2)BF3
+4. Discussion
+Measuring DIM spectra of C4C1(C3N2H2)BF3 and CnC1(C3N2H2)PF5 allowed identification of MS peaks
+which originate solely from these TD products. Peaks were clearly identified as being from these TD
+products in the positive mode DIM spectra of C4C1(C3N2H2)BF3 (m/z 187) and C4C1(C3N2H2)PF5 (m/z
+245). No peaks at lower m/z than that of the [C4C1Im]+ cation, m/z 139, were positively identified as
+only coming from ionization of either C4C1(C3N2H2)BF3 or CnC1(C3N2H2)PF5. Therefore, only the peaks
+at m/z 187 and m/z 245 were used to identify vaporization of TD products for MS of the ILs studied
+here. HF was not detected in either experimental set-up used here. When heating [C4C1Im][BF4] and
+[CnC1Im][PF6] in the bulk vaporization + condensation apparatus the HF will have either: been
+trapped by the diffusion pump (as HF is very volatile it will not have readily condensed) or reacted
+with the glass walls/steel tubing. The DIMS system was not capable of detecting HF (due to the low
+m/z value of [HF]+•).
+There are two possible reasons why CnC1(C3N2H2)BF3 or CnC1(C3N2H2)PF5 were not observed in
+previous experiments on the vapor of [CnC1Im][BF4] and [CnC1Im][PF6]. Firstly, the particular TD
+product was not present in significant quantities in the vapor phase. This was the case for
+[CnC1Im][BF4]; no peaks due to CnC1(C3N2H2)BF3 were observed when LOSMS was used.39 Secondly,
+identification of the peaks due to ionization of the TD products is difficult. For both C4C1(C3N2H2)BF3
+and C4C1(C3N2H2)PF5, the parent ions observed after electron ionization are not easy to interpret
+without prior knowledge of the expected TD products. The loss by fragmentation of a fluorine
+radical, F•, after electron ionization to give an unexpected parent ion is not an obvious ion to form
+from IL vapor. It is possible that a peak of relatively low intensity may have been ignored during
+data analysis. Hence, ex situ TD product preparation is perfectly complimentary to in situ MS
+detection. For two previously published studies on the identification of the species vaporized after
+heating [C4C1Im][PF6] using electron ionization MS, neither study presented the appropriate regions
+of their mass spectra to determine if the TD products were present or not.27, 42
+No significant quantities of TD products were found in the residue in the bulk apparatus, other than
+remaining CnC1(C3N2H2)BF3 or CnC1(C3N2H2)PF5. Furthermore, no visible quantity of sample was left in
+the glass vial after each DIMS experiment. These observations confirm that no significant quantity of
+non-volatile TD product was formed during either the bulk heating experiments or the DIMS
+experiments. All experiments were performed in systems with base pressures of ≈10-6 mbar.
+Page 19 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 23 ---
+
+Therefore, the amount of water present during the experiments was minimal,68 meaning that TD via
+hydrolysis can be ruled out as the major TD mechanism.
+Volpe et al. used their MS evidence to conclude that 1-ethylimidazole was a TD product of
+[C4C1Im][PF6].27 No 1-ethylimidazole (or similar TD products) were detected either in the
+condensates or the residues; previous experiments suggest that both [CnC1Im][BF4] and [CnC1Im][PF6]
+thermally decompose to give neutral 1-alkylimidazoles19, 20, 27. There are two possible reasons for
+this observation, neither of which can be ruled out: firstly, that 1-ethylimidazole and other TD
+products were not formed under the reaction conditions used here; secondly, such TD products
+were formed, but were sufficiently volatile that they did not condense in the bulk apparatus used
+here. For all DIMS experiments presented here, a peak at m/z 96 was observed (Table 2, line 5).
+Therefore, the match of the peak at m/z 96 to that of the parent ion of 1-ethylimidazole is
+insufficient evidence for assignment. The appearance energy evidence from Volpe et al. strongly
+suggests that their peak at m/z 96 was formed from a TD product, not from IL NIPs.27 However, their
+peak at m/z 96 could be formed by fragmentation after electron ionization of the zwitterion TD
+product. The mass spectra presented by Volpe et al. do not show the region where the zwitterion
+peak at m/z 245 would have occurred, if present.27 Overall, an answer cannot be provided at this
+stage; it is possible that [CnC1Im][PF6] ILs thermally decompose via two different mechanisms, one
+that gives 1-ethylimidazole and one that gives a zwitterion. However, it is also possible that the m/z
+96 peak observed by Volpe et al. was produced by fragmentation of [CnC1Im][PF6] NIPs after electron
+ionization.
+For TD product formation followed by vaporization, the overall process can be separated into two
+steps: liquid phase TD (controlled by Ea,TD), and vaporization of the liquid phase TD products,
+controlled by ∆vapH298 (TD products). Both C4C1(C3N2H2)BF3 and C4C1(C3N2H2)PF5 TD products showed
+significant vaporization at 323 K in the DIMS setup. However, in both the bulk heating experiments
+and the DIMS experiments on the ILs, significant TD product formation is not detected at low
+temperatures. This is highlighted by Figure 5, which shows the temperature profiles of pure
+C4C1(C3N2H2)BF3 (isolated and characterized by ex situ vaporization + condensation experiments) and
+TD of [C4C1Im][BF4] (i.e. in situ formation). As liquid phase TD occurred at more than 200 K above
+C4C1(C3N2H2)BF3 vaporization, it can be concluded that ∆vapH298(TD product) << Ea,TD. Therefore, the
+rate-determining step for TD product formation followed by vaporization was Ea,TD. Consequently,
+TD product vaporization is almost instantaneous after TD product formation; hence, the zwitterionic
+TD products have significantly weaker intermolecular interactions than the ILs. Vaporization of the
+NIPs occurs at much lower temperatures than liquid phase TD. Therefore, it can also be concluded
+that for [C4C1Im][BF4] and [CnC1Im][PF6] (where n = 4 and 8) ∆vapH298(IL NIP) << Ea,TD. ∆vapH298 for
+[C4C1Im][BF4] and [C4C1Im][PF6] are both ~150 kJ mol-1,27, 33, 34, 40, 60 indicating that Ea,TD for these two
+ILs are likely to be towards 200 kJ mol-1.
+The thermal stability literature for dialkylimidazolium [BF4]- and [PF6]- ILs appears to be
+contradictory. It is unclear under what conditions IL vaporization or TD will occur. There are reports
+of TD,13-17, 19, 20 IL vaporization,34, 36, 39, 40, 42, 60, 61, 66 and competition between the two in this work and
+others.27, 28 Many of these studies assume either decomposition or vaporization, without considering
+both processes occurring in competition. Techniques employing MS are advantageous in this regard,
+especially over other approaches that are unable to definitively identify the composition of the
+Page 20 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 24 ---
+
+vapor, e.g. most TGA studies assume TD without vaporization. Importantly, a key question to answer
+is: if IL vaporization is energetically more favorable than liquid phase TD, why is the major product of
+heating [CnC1Im][BF4] or [CnC1Im][PF6] under certain experimental conditions the zwitterionic TD
+product and not intact IL? Based on literature data and our results, we propose that there are two
+key factors controlling the competition between IL vaporization and TD product formation +
+vaporization: single versus multiple vaporization events and sample geometry. To understand both
+of these factors, it is vital to consider the vaporization approach used, which depends on
+experimental conditions.
+There are two extremes of approach for IL vaporization studies: Langmuir vaporization (Figure 9) and
+effusive vaporization (Figure 9). Firstly, Langmuir vaporization involves free vaporization from a
+liquid surface to the detector/condensation region; the detector/condensation region is in line-of-
+sight with the whole IL sample surface. This approach has been successfully used for ILs, e.g.
+LOSMS22, 34-40, 69 and quartz crystal microbalance, QCM60, 66, 70-85. Effusive conditions involve near-
+equilibrium vaporization, usually achieved in a Knudsen effusion cell with a small orifice hole, which
+enables gas-phase saturation by slowing the escape of vaporized species.27, 51-55, 70, 86-94 It is
+important to note that the liquid phase TD products are sufficiently volatile (i.e. relatively small
+∆vapH) that the multiple vaporization events are not a limiting process (Ea,TD is the rate limiting step),
+whereas for IL NIPs, condensation followed by re-vaporization must overcome the significantly larger
+∆vapH of ILs.
+The sample geometry, i.e. the sample surface area:volume ratio, matters because vaporization is a
+surface process and TD is a bulk process. Another way of considering this ratio is the number of IL
+ion pairs at the surface relative to the number of IL ion pairs in the bulk liquid. A lower surface
+area:volume ratio favors TD, whereas a higher surface area:volume ratio favors IL NIP vaporization.
+Certain apparatus involve a single vaporization event (i.e. Langmuir apparatus), whereas other
+apparatus involve, on average, multiple vaporization events to achieve the same signal level as single
+vaporization event apparatus (i.e. effusion apparatus). Therefore, to achieve the same signal (or
+sample amount) at the detector (or condensation region), more energy (i.e. higher temperature) is
+required for effusion apparatus compared to Langmuir apparatus. The need for a higher
+temperature in the effusion apparatus means that the probability of TD occurring increases, relative
+to the probability of IL NIP vaporization. Another way to think of this reasoning is that effusion
+apparatus has a smaller effective sample surface area that is in line of sight with the
+detector/condensation region to Langmuir apparatus.
+The DIMS apparatus gave a single/low number of vaporization events (Figure 9b). The mass
+spectrometer ionization region was in line-of-sight with the IL sample, but the IL that vaporized may
+hit the glass wall before reaching the mass spectrometer ionization region. Such IL NIPs would need
+to re-vaporize (at least once more) to reach the mass spectrometer ionization region. As the
+collection vessel in the vaporization + condensation apparatus is not in line-of-sight, multiple
+vaporization events were required for certain, given the design of the apparatus with a curve
+between the sample and the sample collection region (Figure 9c). Therefore, the vaporization +
+condensation apparatus was likely to give more TD (relative to IL NIP vaporization), relative to the
+DIMS apparatus.
+Page 21 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 25 ---
+
+To maximize the probability of observing IL NIP vaporization, at least for [CnC1Im][BF4] and
+[CnC1Im][PF6], the sample surface area:volume ratio must be maximized (i.e. use very thin films),
+along with an apparatus geometry which allows only single vaporization events (i.e. line-of-sight).
+Conversely, to maximize the probability of observing IL liquid phase TD the sample surface
+area:volume ratio must be minimized (i.e. use thicker films), along with an apparatus geometry
+which favors multiple vaporization events (i.e. a Knudsen cell, or at least one bend between sample
+and detector).
+Figure 9 Schematics showing the vaporization steps for the three different experimental set-ups: (a)
+LOSMS, (b) DIMS, (c) vaporization + condensation apparatus, (d) Knudsen effusion cell. The green
+arrows represent one step vaporization from sample to detection region, i.e. Langmuir/free
+vaporization. The blue arrows represent multiple vaporization steps from sample to detection
+region, i.e. more closely representing an effusive experimental set–up. The red arrow represents
+vaporization of IL from the wall of the vaporization + condensation apparatus back onto the sample
+surface, hindering further IL vaporization.
+5. Conclusions
+The bulk vaporization + condensation experiments of [C4C1Im][BF4] and [CnC1Im][PF6] gave mixtures
+of IL and the respective TD products C4C1(C3N2H2)BF3 and CnC1(C3N2H2)PF5 (where n = 4 or 8). DIMS of
+the purified TD products then enabled the identification of their characteristic MS signals.
+Importantly, the TD products do not have distinct signals from their respective ILs, except in the
+positive mode at m/z higher than the corresponding IL cations, [CnC1Im]+. These signals were
+subsequently observed in situ when analyzing the respective ILs by DIMS, along with signals
+originating from NIPS, indicating competing vaporization and decomposition. Previous studies have
+not reported the signals originating from the TD product reported in this work, possibly due to
+restricted m/z values. Furthermore, identifying the TD products without prior knowledge of the
+vaporized species would be difficult, hence our ex situ preparation is perfectly complimentary to in
+Page 22 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 26 ---
+
+situ detection. The results presented here show that sample surface area to volume ratios and
+heating rates are critical experimental parameters for ILs that show competition between
+vaporization and thermal decomposition. These experimental factors have been explained in terms
+of Langmuir evaporation and Knudsen effusion-like conditions, allowing us to draw together
+observations from previous studies to make sense of the literature on IL thermal stability. Describing
+the experimental setup, particularly in terms of sample holders and sample volume, is therefore
+important for future IL TD or vaporization studies.
+6. Acknowledgments
+K.R.J.L acknowledges the Royal Society for the award of a University Research Fellowship. C.J.C, S.P.,
+A.W.T and P.L. thank EPSRC for support EP/D073014/1, EP/I018093/1 and EP/K005138/1. The
+authors thank Prof Sir Martyn Poliakoff FRS for access to the Thermo Finnigan PolarisQ MS and Mr
+Clive Dixon for design and fabrication of the high vacuum vaporization + condensation glassware.
+7. References
+V. I. Parvulescu and C. Hardacre, Chem. Rev., 2007, 107, 2615-2665.
+M. Armand, F. Endres, D. R. MacFarlane, H. Ohno and B. Scrosati, Nat. Mater., 2009, 8, 621-
+629.
+C. F. Poole and S. K. Poole, J. Sep. Sci., 2011, 34, 888-900.
+F. Zhou, Y. M. Liang and W. M. Liu, Chem. Soc. Rev., 2009, 38, 2590-2599.
+A. Brandt, J. Gräsvik, J. P. Hallett and T. Welton, Green Chem., 2013, 15, 550-583.
+Y. F. Hu, Z. C. Liu, C. M. Xu and X. M. Zhang, Chem. Soc. Rev., 2011, 40, 3802-3823.
+C. Tian, W. L. Nie, Q. Chen, G. F. Sun, J. P. Hu and M. V. Borzov, Russ. Chem. Bull., 2014, 63,
+2668-2674.
+K. Chansaenpak, M. Z. Wang, Z. H. Wu, R. Zaman, Z. B. Li and F. P. Gabbai, Chem. Commun.,
+2015, 51, 12439-12442.
+B. Vabre, K. Chansaenpak, M. Z. Wang, H. Wang, Z. B. Li and F. P. Gabbai, Chem. Commun.,
+2017, 53, 8657-8659.
+K. Chansaenpak, M. Z. Wang, H. Wang, B. C. Giglio, F. P. Gabba, Z. H. Wu and Z. B. Li, Rsc
+Advances, 2017, 7, 17748-17751.
+T. Bottcher and G. V. Roschenthaler, J. Fluor. Chem., 2015, 171, 4-11.
+C. Maton, N. De Vos and C. V. Stevens, Chem. Soc. Rev., 2013, 42, 5963-5977.
+H. L. Ngo, K. LeCompte, L. Hargens and A. B. McEwen, Thermochim. Acta, 2000, 357, 97-102.
+C. P. Fredlake, J. M. Crosthwaite, D. G. Hert, S. Aki and J. F. Brennecke, J. Chem. Eng. Data,
+2004, 49, 954-964.
+W. H. Awad, J. W. Gilman, M. Nyden, R. H. Harris, T. E. Sutto, J. Callahan, P. C. Trulove, H. C.
+DeLong and D. M. Fox, Thermochim. Acta, 2004, 409, 3-11.
+J. G. Huddleston, A. E. Visser, W. M. Reichert, H. D. Willauer, G. A. Broker and R. D. Rogers,
+Green Chem., 2001, 3, 156-164.
+D. H. Zaitsau, Y. U. Paulechka and G. J. Kabo, J. Phys. Chem. A, 2006, 110, 11602-11604.
+B. K. M. Chan, N. H. Chang and M. R. Grimmett, Aust. J. Chem., 1977, 30, 2005-2013.
+H. Ohtani, S. Ishimura and M. Kumai, Anal. Sci., 2008, 24, 1335-1340.
+N. Meine, F. Benedito and R. Rinaldi, Green Chem., 2010, 12, 1711-1714.
+Y. Hao, J. Peng, S. W. Hu, J. G. Li and M. L. Zhai, Thermochim. Acta, 2010, 501, 78-83.
+K. R. J. Lovelock, J. P. Armstrong, P. Licence and R. G. Jones, Phys. Chem. Chem. Phys., 2014,
+16, 1339-1353.
+Page 23 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 27 ---
+
+S. D. Chambreau, J. A. Boatz, G. L. Vaghjiani, C. Koh, O. Kostko, A. Golan and S. R. Leone, J.
+Phys. Chem. A, 2012, 116, 5867-5876.
+S. D. Chambreau, A. C. Schenk, A. J. Sheppard, G. R. Yandek, G. L. Vaghjiani, J. Maciejewski, C.
+J. Koh, A. Golan and S. R. Leone, J. Phys. Chem. A, 2014, 118, 11119-11132.
+J. B. Liu, S. D. Chambreau and G. L. Vaghjiani, J. Phys. Chem. A, 2014, 118, 11133-11144.
+M. T. Clough, K. Geyer, P. A. Hunt, J. Mertes and T. Welton, Phys. Chem. Chem. Phys., 2013,
+15, 20480-20495.
+V. Volpe, B. Brunetti, G. Gigli, A. Lapi, S. V. Ciprioti and A. Ciccioli, J. Phys. Chem. B, 2017,
+121, 10382-10393.
+A. W. Taylor, K. R. J. Lovelock, R. G. Jones and P. Licence, Dalton Trans., 2011, 40, 1463-1470.
+C. Tian, W. L. Nie, M. V. Borzov and P. F. Su, Organometallics, 2012, 31, 1751-1760.
+M. C. Kroon, W. Buijs, C. J. Peters and G. J. Witkamp, Thermochim. Acta, 2007, 465, 40-47.
+P. Ballone and R. Cortes-Huerto, Faraday Discuss., 2012, 154, 373-389.
+M. J. Earle, J. M. S. S. Esperança, M. A. Gilea, J. N. Canongia Lopes, L. P. N. Rebelo, J. W.
+Magee, K. R. Seddon and J. A. Widegren, Nature, 2006, 439, 831-834.
+K. R. J. Lovelock, R. Soc. Open Sci., 2017, 4, 171223.
+J. P. Armstrong, C. Hurst, R. G. Jones, P. Licence, K. R. J. Lovelock, C. J. Satterley and I. J.
+Villar-Garcia, Phys. Chem. Chem. Phys., 2007, 9, 982-990.
+V. N. Emel'yanenko, S. P. Verevkin, A. Heintz, J. A. Corfield, A. Deyko, K. R. J. Lovelock, P.
+Licence and R. G. Jones, J. Phys. Chem. B, 2008, 112, 11734-11742.
+A. Deyko, K. R. J. Lovelock, J. A. Corfield, A. W. Taylor, P. N. Gooden, I. J. Villar-Garcia, P.
+Licence, R. G. Jones, V. G. Krasovskiy, E. A. Chernikova and L. M. Kustov, Phys. Chem. Chem.
+Phys., 2009, 11, 8544-8555.
+K. R. J. Lovelock, A. Deyko, P. Licence and R. G. Jones, Phys. Chem. Chem. Phys., 2010, 12,
+8893-8901.
+A. W. Taylor, K. R. J. Lovelock, A. Deyko, P. Licence and R. G. Jones, Phys. Chem. Chem. Phys.,
+2010, 12, 1772-1783.
+A. Deyko, K. R. J. Lovelock, P. Licence and R. G. Jones, Phys. Chem. Chem. Phys., 2011, 13,
+16841-16850.
+A. Deyko, S. G. Hessey, P. Licence, E. A. Chernikova, V. G. Krasovskiy, L. M. Kustov and R. G.
+Jones, Phys. Chem. Chem. Phys., 2012, 14, 3181-3193.
+S. G. Hessey and R. G. Jones, Chem. Sci., 2013, 4, 2519-2529.
+J. P. Leal, J. M. S. S. Esperança, M. E. M. da Piedade, J. N. Canongia Lopes, L. P. N. Rebelo and
+K. R. Seddon, J. Phys. Chem. A, 2007, 111, 6176-6182.
+J. H. Gross, J. Am. Soc. Mass Spectrom., 2008, 19, 1347-1352.
+D. Strasser, F. Goulay, M. S. Kelkar, E. J. Maginn and S. R. Leone, J. Phys. Chem. A, 2007, 111,
+3191-3195.
+S. D. Chambreau, G. L. Vaghjiani, A. To, C. Koh, D. Strasser, O. Kostko and S. R. Leone, J. Phys.
+Chem. B, 2010, 114, 1361-1367.
+D. Strasser, F. Goulay, L. Belau, O. Kostko, C. Koh, S. D. Chambreau, G. L. Vaghjiani, M.
+Ahmed and S. R. Leone, J. Phys. Chem. A, 2010, 114, 879-883.
+S. D. Chambreau, G. L. Vaghjiani, C. J. Koh, A. Golan and S. R. Leone, J. Phys. Chem. Lett.,
+2012, 3, 2910-2914.
+C. J. Koh and S. R. Leone, Mol. Phys., 2012, 110, 1705-1712.
+E. I. Obi, C. M. Leavitt, P. L. Raston, C. P. Moradi, S. D. Flynn, G. L. Vaghjiani, J. A. Boatz, S. D.
+Chambreau and G. E. Douberly, J. Phys. Chem. A, 2013, 117, 9047-9056.
+R. Cooper, A. M. Zolot, J. A. Boatz, D. P. Sporleder and J. A. Stearns, J. Phys. Chem. A, 2013,
+117, 12419-12428.
+N. S. Chilingarov, A. A. Medvedev, G. S. Deyko, L. M. Kustov, E. A. Chernikova, L. M. Glukhov,
+V. Y. Markov, I. Y. N. Ioffe, V. M. Senyavin, M. V. Polyakova and L. N. Sidorov, Rapid Commun.
+Mass Spectrom., 2015, 29, 1227-1232.
+Page 24 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 28 ---
+
+A. M. Dunaev, V. B. Motalov, L. S. Kudin and M. F. Butman, J. Mol. Liq., 2016, 219, 599-601.
+A. M. Dunaev, V. B. Motalov, L. S. Kudin and M. F. Butman, J. Mol. Liq., 2016, 223, 407-411.
+A. Tolstogouzov, U. Bardi, O. Nishikawa and M. Taniguchi, Surf. Interface Anal., 2008, 40,
+1614-1618.
+B. Brunetti, A. Ciccioli, G. Gigli, A. Lapi, N. Misceo, L. Tanzi and S. V. Ciprioti, Phys. Chem.
+Chem. Phys., 2014, 16, 15653-15661.
+M. S. Kelkar and E. J. Maginn, J. Phys. Chem. B, 2007, 111, 9424-9427.
+N. Rai and E. J. Maginn, Faraday Discuss., 2012, 154, 53-69.
+P. Ballone, C. Pinilla, J. Kohanoff and M. G. Del Pópolo, J. Phys. Chem. B, 2007, 111, 4938-
+4950.
+V. V. Chaban and O. V. Prezhdo, J. Phys. Chem. Lett., 2012, 3, 1657-1662.
+D. H. Zaitsau, A. V. Yermalayeu, V. N. Emel'yanenko, S. Butler, T. Schubert and S. P. Verevkin,
+J. Phys. Chem. B, 2016, 120, 7949-7957.
+D. H. Zaitsau, A. V. Yermalayeu, T. J. S. Schubert and S. P. Verevkin, J. Mol. Liq., 2017, 242,
+951-957.
+A. Seeberger, A. K. Andresen and A. Jess, Phys. Chem. Chem. Phys., 2009, 11, 9375-9381.
+F. Heym, B. J. M. Etzold, C. Kern and A. Jess, Phys. Chem. Chem. Phys., 2010, 12, 12089-
+12100.
+F. Heym, B. J. M. Etzold, C. Kern and A. Jess, Green Chem., 2011, 13, 1453-1466.
+F. Heym, W. Korth, J. Thiessen, C. Kern and A. Jess, Chem. Ing. Tech., 2015, 87, 791-802.
+D. H. Zaitsau, K. Fumino, V. N. Emel'yanenko, A. V. Yermalayeu, R. Ludwig and S. P. Verevkin,
+ChemPhysChem, 2012, 13, 1868-1876.
+M. G. Freire, C. M. S. S. Neves, I. M. Marrucho, J. A. P. Coutinho and A. M. Fernandes, J. Phys.
+Chem. A, 2010, 114, 3744-3749.
+K. R. J. Lovelock, E. F. Smith, A. Deyko, I. J. Villar-Garcia, P. Licence and R. G. Jones, Chem.
+Commun., 2007, 4866-4868.
+K. R. J. Lovelock, A. Deyko, J. A. Corfield, P. N. Gooden, P. Licence and R. G. Jones,
+ChemPhysChem, 2009, 10, 337-340.
+S. P. Verevkin, D. H. Zaitsau, V. N. Emelyanenko and A. Heintz, J. Phys. Chem. B, 2011, 115,
+12889-12895.
+D. H. Zaitsau, S. P. Verevkin, V. N. Emel'yanenko and A. Heintz, ChemPhysChem, 2011, 12,
+3609-3613.
+K. Fumino, T. Peppel, M. Geppert-Rybczynska, D. H. Zaitsau, J. K. Lehmann, S. P. Verevkin, M.
+Köckerling and R. Ludwig, Phys. Chem. Chem. Phys., 2011, 13, 14064-14075.
+V. N. Emel'yanenko, D. H. Zaitsau, S. P. Verevkin, A. Heintz, K. Voss and A. Schulz, J. Phys.
+Chem. B, 2011, 115, 11712-11717.
+D. H. Zaitsau, A. V. Yermalayeu, V. N. Emel'yanenko, S. P. Verevkin, U. Welz-Biermann and T.
+Schubert, Sci. China-Chem., 2012, 55, 1525-1531.
+S. P. Verevkin, D. H. Zaitsau, V. N. Emel'yanenko, R. V. Ralys, A. V. Yermalayeu and C. Schick,
+J. Chem. Thermodyn., 2012, 54, 433-437.
+S. P. Verevkin, D. H. Zaitsau, V. N. Emel'yanenko, A. V. Yermalayeu, C. Schick, H. J. Liu, E. J.
+Maginn, S. Bulut, I. Krossing and R. Kalb, J. Phys. Chem. B, 2013, 117, 6473-6486.
+D. H. Zaitsau, A. V. Yermalayeu, V. N. Emel'yanenko, C. Schick, S. P. Verevkin, A. A. Samarov,
+S. Schlenk and P. Wasserscheid, Z. Phys. Chemie-Int. J. Res. Phys. Chem. Chem. Phys., 2013,
+227, 205-215.
+D. H. Zaitsau, A. V. Yermalayeu, S. P. Verevkin, J. E. Bara and A. D. Stanton, Ind. Eng. Chem.
+Res., 2013, 52, 16615-16621.
+D. H. Zaitsau, A. V. Yermalayeu, V. N. Emel'yanenko, A. Heintz, S. P. Verevkin, C. Schick, S.
+Berdzinski and V. Strehmel, J. Mol. Liq., 2014, 192, 171-176.
+D. H. Zaitsau, A. V. Yermalayeu, S. P. Verevkin, J. E. Bara and D. A. Wallace, Thermochim.
+Acta, 2015, 622, 38-43.
+Page 25 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 29 ---
+
+D. H. Zaitsau, M. A. Varfolomeev, S. P. Verevkin, A. D. Stanton, M. S. Hindman and J. E. Bara,
+J. Chem. Thermodyn., 2016, 93, 151-156.
+D. H. Zaitsau, M. Kaliner, S. Lerch, T. Strassner, V. N. Emel'yanenko and S. P. Verevkin, Z.
+Anorg. Allg. Chem., 2017, 643, 114-119.
+D. H. Zaitsau, A. V. Yermalayeu, V. N. Emel'yanenko, A. Schulz and S. P. Verevkin, Z. Anorg.
+Allg. Chem., 2017, 643, 87-92.
+A. V. Yermalayeu, D. H. Zaitsau, M. Loor, J. Schaumann, V. N. Emel'yanenko, S. Schulz and S.
+P. Verevkin, Z. Anorg. Allg. Chem., 2017, 643, 81-86.
+A. V. Yermalayeu, D. H. Zaitsau, V. N. Emel'yanenko and S. P. Verevkin, J. Solut. Chem., 2015,
+44, 754-768.
+Y. U. Paulechka, D. H. Zaitsau, G. J. Kabo and A. A. Strechan, Thermochim. Acta, 2005, 439,
+158-160.
+D. H. Zaitsau, G. J. Kabo, A. A. Strechan, Y. U. Paulechka, A. Tschersich, S. P. Verevkin and A.
+Heintz, J. Phys. Chem. A, 2006, 110, 7303-7306.
+E. Paulechka, A. V. Blokhin, A. S. M. C. Rodrigues, M. A. A. Rocha and L. M. N. B. F. Santos, J.
+Chem. Thermodyn., 2016, 97, 331-340.
+M. A. A. Rocha, C. F. R. A. C. Lima, L. R. Gomes, B. Schröder, J. A. P. Coutinho, I. M. Marrucho,
+J. M. S. S. Esperança, L. P. N. Rebelo, K. Shimizu, J. N. Canongia Lopes and L. M. N. B. F.
+Santos, J. Phys. Chem. B, 2011, 115, 10919-10926.
+M. A. A. Rocha, J. A. P. Coutinho and L. M. N. B. F. Santos, J. Phys. Chem. B, 2012, 116,
+10922-10927.
+M. A. A. Rocha and L. M. N. B. F. Santos, Chem. Phys. Lett., 2013, 585, 59-62.
+M. A. A. Rocha, J. A. P. Coutinho and L. M. N. B. F. Santos, J. Chem. Phys., 2014, 141, 8.
+M. A. A. Rocha, F. M. S. Ribeiro, B. Schröder, J. A. P. Coutinho and L. M. N. B. F. Santos, J.
+Chem. Thermodyn., 2014, 68, 317-321.
+A. S. M. C. Rodrigues, C. F. R. A. C. Lima, J. A. P. Coutinho and L. M. N. B. F. Santos, Phys.
+Chem. Chem. Phys., 2017, 19, 5326-5332.
+Page 26 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K
+
+--- Page 30 ---
+
+Graphical Abstract
+Competition between vaporization and thermal decomposition of ionic liquids can be influenced by
+sample mounting during in situ measurements.
+Page 27 of 27
+Physical Chemistry Chemical Physics
+Physical Chemistry Chemical Physics Accepted Manuscript
+Published on 01 June 2018. Downloaded by University of Reading on 07/06/2018 16:27:10.
+View Article Online
+DOI: 10.1039/C8CP01090K

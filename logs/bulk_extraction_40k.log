@@ -1,0 +1,42 @@
+2025-11-19 12:07:10,091 - INFO - [MainProcess] - System resources:
+2025-11-19 12:07:10,092 - INFO - [MainProcess] -   - CPU usage: 9.0%
+2025-11-19 12:07:10,092 - INFO - [MainProcess] -   - Memory available: 17.8 GB
+2025-11-19 12:07:10,092 - INFO - [MainProcess] -   - Memory usage: 54.2%
+2025-11-19 12:07:10,092 - INFO - [MainProcess] - Set process nice level to 10
+2025-11-19 12:07:10,099 - INFO - [MainProcess] - Set IO nice to class 2, level 4
+2025-11-19 12:07:10,100 - INFO - [MainProcess] - ======================================================================
+2025-11-19 12:07:10,100 - INFO - [MainProcess] - BULK PDF PROCESSING - 9 FILES
+2025-11-19 12:07:10,100 - INFO - [MainProcess] - ======================================================================
+2025-11-19 12:07:10,100 - INFO - [MainProcess] - Input directory: data/input
+2025-11-19 12:07:10,100 - INFO - [MainProcess] - Output directory: extracted_text/bulk_40k
+2025-11-19 12:07:10,100 - INFO - [MainProcess] - Workers: 16
+2025-11-19 12:07:10,100 - INFO - [MainProcess] - OCR fallback: True
+2025-11-19 12:07:10,100 - INFO - [MainProcess] - ======================================================================
+2025-11-19 12:07:10,100 - INFO - [MainProcess] - Starting batch extraction...
+2025-11-19 12:07:10,100 - INFO - [MainProcess] - Press Ctrl+C to interrupt (progress will be saved)
+2025-11-19 12:07:10,101 - INFO - [MainProcess] - Found 9 PDF files to process
+2025-11-19 12:07:10,101 - INFO - [MainProcess] - Processing with 16 workers
+2025-11-19 12:07:10,238 - INFO - [ForkProcess-9] - ✓ 00752649521efc3cfa42401751e4174371b2c06d.pdf: 26/26 pages (direct, 0.1s)
+2025-11-19 12:07:10,242 - INFO - [ForkProcess-6] - ✓ 00992195fa5820be3fc5f8dc536608b6a41fd2d6.pdf: 13/13 pages (direct, 0.1s)
+2025-11-19 12:07:10,256 - INFO - [ForkProcess-1] - ✓ 0026be66ae61a027abaa76f6ae82700c67ec1807.pdf: 13/13 pages (direct, 0.1s)
+2025-11-19 12:07:10,304 - INFO - [ForkProcess-8] - ✓ 00467b44d5aca46650422e2173260ffef45cad8b.pdf: 18/18 pages (direct, 0.2s)
+2025-11-19 12:07:10,313 - INFO - [ForkProcess-5] - ✓ 000a8ed616860064620ec70255ec3d1d46fe6382.pdf: 13/13 pages (direct, 0.2s)
+2025-11-19 12:07:10,336 - INFO - [ForkProcess-7] - ✓ 00a1bc9fe42da68d56169b162e80b6fe85b24306.pdf: 30/30 pages (direct, 0.2s)
+2025-11-19 12:07:10,338 - INFO - [ForkProcess-2] - ✓ 0108ac40163d3723488a960a4e39279f86ba2e2f.pdf: 13/13 pages (direct, 0.2s)
+2025-11-19 12:07:10,347 - INFO - [ForkProcess-3] - ✓ 0033d41e726ea6613508477b926cbcd76d2c499e.pdf: 11/11 pages (direct, 0.2s)
+2025-11-19 12:07:10,354 - INFO - [ForkProcess-4] - ✓ 0097f497377a6d657363e71de720a89ce61244b6.pdf: 31/32 pages (direct, 0.2s)
+2025-11-19 12:07:10,366 - INFO - [MainProcess] - ======================================================================
+2025-11-19 12:07:10,366 - INFO - [MainProcess] - PROCESSING COMPLETE
+2025-11-19 12:07:10,366 - INFO - [MainProcess] - ======================================================================
+2025-11-19 12:07:10,366 - INFO - [MainProcess] - Total files: 9
+2025-11-19 12:07:10,366 - INFO - [MainProcess] - Successful: 9
+2025-11-19 12:07:10,366 - INFO - [MainProcess] - Failed: 0
+2025-11-19 12:07:10,366 - INFO - [MainProcess] - Skipped: 0
+2025-11-19 12:07:10,366 - INFO - [MainProcess] - 
+Performance:
+2025-11-19 12:07:10,366 - INFO - [MainProcess] -   - Total time: 0:00:01.276333
+2025-11-19 12:07:10,366 - INFO - [MainProcess] -   - Pages extracted: 168
+2025-11-19 12:07:10,367 - INFO - [MainProcess] -   - Avg pages/file: 18.7
+2025-11-19 12:07:10,367 - INFO - [MainProcess] -   - Avg time/file: 0.17s
+2025-11-19 12:07:10,367 - INFO - [MainProcess] -   - Processing speed: 25385 files/hour
+2025-11-19 12:07:10,367 - INFO - [MainProcess] - ======================================================================

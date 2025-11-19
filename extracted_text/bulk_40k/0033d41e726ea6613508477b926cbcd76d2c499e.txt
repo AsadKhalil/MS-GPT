@@ -1,0 +1,1222 @@
+
+--- Page 1 ---
+
+1521-009X/46/2/178–188$25.00
+https://doi.org/10.1124/dmd.117.077586
+DRUG METABOLISM AND DISPOSITION
+Drug Metab Dispos 46:178–188, February 2018
+Copyright ª 2018 by The American Society for Pharmacology and Experimental Therapeutics
+Discovery and Validation of Pyridoxic Acid and Homovanillic Acid as
+Novel Endogenous Plasma Biomarkers of Organic Anion Transporter
+(OAT) 1 and OAT3 in Cynomolgus Monkeys s
+Hong Shen, David M. Nelson, Regina V. Oliveira, Yueping Zhang, Colleen A. Mcnaney,
+Xiaomei Gu, Weiqi Chen, Ching Su, Michael D. Reily, Petia A. Shipkova, Jinping Gan, Yurong Lai,
+Punit Marathe, and W. Griffith Humphreys
+Departments of Metabolism and Pharmacokinetics (H.S., Y.Z., X.G., W.C., J.G., Y.L., P.M., W.G.H.), Discovery Toxicology (D.M.N.),
+Bioanalytical and Discovery Analytical Sciences (R.V.O., C.A.M., M.D.R., P.A.S.), and Discovery Pharmaceutics (C.S.),
+Pharmaceutical Candidate Optimization, Bristol-Myers Squibb Research and Development, Princeton, New Jersey
+Received July 14, 2017; accepted November 17, 2017
+ABSTRACT
+Perturbation of organic anion transporter (OAT) 1- and OAT3-
+mediated transport can alter the exposure, efficacy, and safety of
+drugs. Although there have been reports of the endogenous
+biomarkers for OAT1/3, none of these have all of the characteristics
+required for a clinical useful biomarker. Cynomolgus monkeys were
+treated with intravenous probenecid (PROB) at a dose of 40 mg/kg in
+this study. As expected, PROB increased the area under the plasma
+concentration-time curve (AUC) of coadministered furosemide, a
+known substrate of OAT1 and OAT3, by 4.1-fold, consistent with the
+values reported in humans (3.1- to 3.7-fold). Of the 233 plasma
+metabolites analyzed using a liquid chromatography–tandem mass
+spectrometry (LC-MS/MS)–based metabolomics method, 29 metab-
+olites, including pyridoxic acid (PDA) and homovanillic acid (HVA),
+were significantly increased after either 1 or 3 hours in plasma from
+the monkeys pretreated with PROB compared with the treated
+animals. The plasma of animals was then subjected to targeted
+LC-MS/MS analysis, which confirmed that the PDA and HVA AUCs
+increased by approximately 2- to 3-fold by PROB pretreatments.
+PROB also increased the plasma concentrations of hexadecane-
+dioic acid (HDA) and tetradecanedioic acid (TDA), although the
+increases were not statistically significant. Moreover, transporter
+profiling assessed using stable cell lines constitutively expressing
+transporters demonstrated that PDA and HVA are substrates for
+human OAT1, OAT3, OAT2 (HVA), and OAT4 (PDA), but not OCT2,
+MATE1, MATE2K, OATP1B1, OATP1B3, and sodium taurocholate
+cotransporting polypeptide. Collectively, these findings suggest that
+PDA and HVA might serve as blood-based endogenous probes of
+cynomolgus monkey OAT1 and OAT3, and investigation of PDA and
+HVA as circulating endogenous biomarkers of human OAT1 and
+OAT3 function is warranted.
+Introduction
+The organic anion transporters (OATs) OAT1 (SLC22A6) and OAT3
+(SLC22A8) function as influx transporters that are mainly expressed on
+the basolateral membrane of renal proximal tubular cells (RPTCs) and
+mediate cellular uptake of substrates from blood into the cells
+(Motohashi et al., 2002). OAT1 and OAT3 can serve as the loci of
+drug-drug interactions (DDIs), and such DDIs can lead to undesired
+changes in systemic and local exposures of victim drugs and toxins
+(Morrissey et al., 2013; Nigam et al., 2015). For example, furosemide
+(FSM) is taken up from the blood in RPTCs via OAT1 and OAT3
+(Hasannejad et al., 2004), and probenecid (PROB), an inhibitor of OAT1
+and OAT3, causes significant alterations in the pharmacokinetic
+parameters of FSM in humans through the increased area under
+the plasma drug concentration-time curve (AUC), decreased total
+plasma clearance (CLTOT) and renal clearance (CLR), and de-
+creased fraction excreted in the urine (fR) (Chennavasin et al.,
+1979; Smith et al., 1980; Vree et al., 1995). Moreover, a few uremic
+toxins recently have been demonstrated to be inhibitors of OAT1
+and OAT3, and have the potential to inhibit renal secretion
+clearance of drug substrates of OAT1 and OAT3 in patients with
+chronic kidney disease (Hsueh et al., 2016). On the other hand,
+concomitant use of PROB is recommended by the U.S. Food and
+Drug Administration for reducing the pronounced nephrotoxicity of
+cidofovir by inhibiting OAT1 and OAT3 to reduce the exposure of
+cidofovir in RPTCs to an extent that results in an acceptable benefit-
+risk balance (http://www.accessdata.fda.gov/drugsatfda_docs/label/
+1999/020638s003lbl.pdf).
+This study is supported by the Bristol-Myers Squibb Company.
+https://doi.org/10.1124/dmd.117.077586.
+s This article has supplemental material available at dmd.aspetjournals.org.
+ABBREVIATIONS: ACN, acetonitrile; AUC, area under the plasma concentration-time curve; BSA, bovine serum albumin; CLNR, nonrenal plasma
+clearance; CLR, renal clearance; CLTOT, total plasma clearance; DDI, drug-drug interaction; Enal-d5, enalapril maleate-d5; FSM, furosemide; HBSS,
+Hanks’ balanced salt solution; HDA, hexadecanedioic acid; HEK, human embryonic kidney; HILIC, hydrophilic interaction liquid chromatography;
+HVA, homovanillic acid; LC, liquid chromatography;
+LC-MS/MS, liquid chromatography–tandem mass spectrometry; MS, mass spectrometry;
+NTCP, sodium taurocholate cotransporting polypeptide; OAT, organic anion transporter; PBS, phosphate-buffered saline; PDA, pyridoxic acid;
+PROB, probenecid; QC, quality control; RP, reverse phase; RPTC, renal proximal tubular cell; TDA, tetradecanedioic acid; Vdss, volume of
+distribution at steady-state.
+http://dmd.aspetjournals.org/content/suppl/2017/11/21/dmd.117.077586.DC1
+Supplemental material to this article can be found at:
+at ASPET Journals on December 31, 2023
+dmd.aspetjournals.org
+Downloaded from
+
+--- Page 2 ---
+
+Animal models have often been used to assess preclinical drug-OAT
+interactions. For example, the clinical famotidine-PROB interaction was
+reproduced in cynomolgus monkeys recently since PROB caused an
+approximate 90% reduction in the tubular secretion clearance of famotidine
+in monkeys (4.58 61.25 vs. 0.38 60.36 ml/min per kilogram) (Tahara et al.,
+2006). Similarly, PROB significantly decreased the renal tubular secretion
+clearance of famotidine from 2.80 60.36 to 0.37 60.07 ml/min per kilogram
+in humans. Furthermore, the protective effect of PROB treatment on the
+nephrotoxicity ofcidofovir in humans wasable to be recapitulated in monkeys
+(Lacy et al., 1998). These results suggest that monkey is the more suitable
+animal model to predict the clinical DDIs involving OAT1 and OAT3.
+Recently, endogenous biomarkers have been envisioned as simple,
+fast, and cost-effective tools to monitor transporter activity in preclinical
+and clinical settings to facilitate development of a drug candidate (Ito
+et al., 2012; Müller et al., 2015; Lai et al., 2016; Yee et al., 2016;
+Bergagnini-Kolev et al., 2017). Therefore, the identification of a
+sensitive endogenous biomarker for OAT1 and OAT3 would be of
+great value. In this regard, Imamura et al. (2014) reported that 6b-
+hydroxycortisol could be an endogenous probe for OAT3 inhibition
+evaluation since PROB significantly changed the AUC and CLR of 6b-
+hydroxycortisol in healthy subjects. However, 6b-hydroxycortisol is
+formed from cortisol by hepatic CYP3A4, and many drugs known to
+affect this drug-metabolizing enzyme can also change exposure of 6b-
+hydroxycortisol (Peng et al., 2011). Very recently, Tsuruya et al. (2016)
+reported that taurine and glycochenodeoxycholate sulfate were endog-
+enous biomarkers of OAT1 and OAT3, respectively. However, the
+plasma levels of taurine and glycochenodeoxycholate sulfate were not
+changed significantly by PROB treatment compared with control even
+though the renal secretion and CLR were significantly decreased
+(Tsuruya et al., 2016). Reduced activities of blood-facing OAT1 and
+OAT3 by PROB are supposed to increase plasma concentration of a
+sensitive and selective endogenous probe, mimicking systemic alter-
+ations of probe drugs such as FSM. To our knowledge, all published
+endogenous biomarkers of OAT1 and OAT3 could not recapitulate
+plasma drug concentration-time profiles in the presence of OAT
+inhibitors. Several features including specificity, sensitivity, predictabil-
+ity, reproducibility, acute response, and accessibility have been
+considered in the identification and validation of ideal endogenous
+biomarkers for drug transporters (Chu et al., 2017; Mariappan et al.,
+2017; Rodrigues et al., 2017). Given the aforementioned reasons, there is
+a need for novel plasma biomarkers of renal OATs.
+In the present studies we provide direct experimental evidence that
+several organic anionic compounds, including pyridoxic acid (PDA),
+homovanilic acid (HVA), hexadecanedioic acid (HDA), and tetradeca-
+nedioic acid (TDA) are potential endogenous biomarkers of OAT1 and
+OAT3 in cynomolgus monkeys. Specifically, an untargeted metabolo-
+mics analysis was applied to plasma samples to screen endogenous
+compounds that were associated with OAT1 and OAT3 inhibition in
+monkeys. Follow-up quantitative liquid chromatography–tandem mass
+spectrometry (LC-MS/MS) analysis further characterized the time-
+plasma concentration profiles of selected endogenous compounds (i.e.,
+PDA, HVA, had, and TDA) after PROB administration in cynomolgus
+monkeys. Moreover, transporter profiling assessed using human
+embryonic kidney (HEK) 293 cells stably transfected with major human
+renal and hepatic drug transporters demonstrated that PDA and HVA are
+OAT1 and OAT3 substrates and thus potential novel plasma endoge-
+nous biomarkers of OAT1 and OAT3 inhibition.
+Materials and Methods
+Materials. [3H]Penciclovir (1.3 Ci/mmol) and [14C]metformin (98 mCi/mmol)
+were purchased from Moravek Biochemicals, Inc. (Brea, CA), and [3H]para-
+aminohippuric acid (4.5 Ci/mmol), [3H]estrone-3-sulfate (44.0 Ci/mmol), [3H]-
+estradiol-17b-D-glucuronide (34.3 Ci/mmol), and [3H]cholecystokinin octapep-
+tide (97.5 mCi/mmol) were purchased from PerkinElmer Life and Analytical
+Sciences (Waltham, MA). Nonradiolabeled FSM, PROB, and taurocholic acid,
+and the corresponding stable isotope-labeled internal standards were purchased
+from Toronto Research Chemicals Inc. (North York, Ontario, Canada). 4-PDA
+($98%) was purchased from Sigma-Aldrich (St. Louis, MO), and HVA ($98%)
+was purchased from Acros Organics (Geel, Belgium). Hexadecanedioic acid-d28,
+tetradecanedioic acid-d24, and enalapril maleate-d5 (Enal-d5) were obtained from
+CDN Isotopes (Pointe-Claire, Quebec, Canada). Other nonradiolabeled com-
+pounds were purchased from either Sigma-Aldrich or Toronto Research
+Chemicals Inc. and were of analytical grade. Cell culture media and reagents
+were purchased from Invitrogen (Carlsbad, CA) or Mediatech, Inc., A Corning
+Subsidiary (Manassas, VA).
+Cynomolgus Monkeys Pharmacokinetic FSM-PROB Interaction Study
+Protocol. To identify and verify the endogenous biomarkers of OAT1 and OAT3,
+we conducted a series of experiments: cynomolgus monkey FSM-PROB
+interaction, metabolomics, targeted LC tandem MS (LC-MS/MS), and transporter
+profiling experiments. The experimental workflow is shown in Fig. 1.
+A single-dose, three-period crossover intravenous pharmacokinetic DDI study
+was carried out at the Bristol-Myers Squibb Company, and three male
+cynomolgus monkeys with body weights ranging from 5.3 to 6.0 kg during the
+study periods were included in this study. The experiment was performed in
+accordance with the National Institutes of Health guidelines (https://grants.nih.
+gov/grants/olaw/guide-for-the-care-and-use-of-laboratory-animals.pdf) and ap-
+proved by the Bristol-Myers Squibb Animal Care and Use Committee. The
+animals were housed in a temperature- and humidity-controlled room with a
+12-hour light/dark cycle.
+In the first period, 40 mg/kg PROB dissolved in a sodium hydroxide solution
+(0.1 N) and titrated to neutral pH with hydrochloric acid was intravenously
+infused via a femoral vein catheter over 5 minutes (5 ml/kg). Venous blood
+samples (2 ml) were collected before and 0.08, 0.17, 0.25, 0.5, 0.75, 1, 2, 3, 5, 7,
+and 24 hours after administration in K2-EDTA-containing tubes. In the second
+period, after a washout period of 7 days, 2 mg/kg FSM dissolved in saline was
+intravenously infused via a femoral vein over 5 minutes (5 ml/kg), and blood
+samples were collected before and 0.08, 0.17, 0.25, 0.5, 0.75, 1, 2, 3, 5, 7, and
+24 hours after administration. In the third period, 8 days after administrations of
+the previous dose of FSM, a FSM saline solution (2 mg/kg) was given by femoral
+vein infusion over 5 minutes to each monkey 30 minutes after PROB
+administration (40 mg/kg, i.v. infusion for 5 minutes). Blood was sampled before
+and 0.08, 0.17, 0.25, 0.5, 0.75, 1, 2, 3, 5, 7, and 24 hours after start of the FSM
+infusion. Blood samples were spun for 5 minutes at 13,000 rpm within 1 hour to
+obtain plasma. Urine samples were collected using metabolic cages for the
+following intervals in all three periods: 0–3, 3–7, and 7–24 hours after
+administration, and the volume of urine was recorded. The plasma and urine
+samples were stored at 280C until LC-MS/MS and metabolomics analyses were
+conducted.
+LC-MS/MS Analysis of Furosemide and Probenecid. The LC-MS/MS
+analysis was performed on a SCIEX Triple Quad API-4000 system (AB SCIEX,
+Framingham, MA) coupled with a Shimadzu Nexera LD-30AD ultra-
+performance LC system (Shimadzu, Columbia, MD). The chromatographic
+separation was performed on an Agilent Zorbax RRHD SB-C8 column (2.0 
+100 mm, 1.7 mm) from Agilent Technologies (Santa Clara, CA) using mobile
+phases of 0.1% formic acid in water and 0.1% formic acid in acetonitrile (ACN).
+The flow rate was 0.7 ml/min and total run time was 3.7 minutes. The LC column
+was maintained at 60C. The analytes were monitored using selected reaction
+monitoring in negative ionization mode with the optimized nebulizing and
+desolvation gases. The source temperature was set at 400C, and the declustering
+potential and collision energy were optimized. FSM, furosemide-d5, and PROB
+were detected at the selected reaction monitoring transitions of m/z 329.1 →
+285.0, 334.1 →291.0, and 283.9 →239.9, respectively.
+Before the analysis, urine samples were diluted 100-fold into blank plasma and
+treated as previously described for plasma. The plasma and diluted urine samples
+were then extracted using protein precipitation. Specifically, the 100 ml plasma
+and diluted urine samples were mixed with 100 ml of ACN containing 400 nM
+of furosemide-d5 (internal standard), followed by vortex mixing on a mixer
+for 5 minutes at room temperature. The mixed solutions were then filtered
+using a MultiScreen hydrophilic flitration plate (Billerica, Millipore, MA) by
+Identification of Functional Plasma Markers of OAT1 and OAT3
+at ASPET Journals on December 31, 2023
+dmd.aspetjournals.org
+Downloaded from
+
+--- Page 3 ---
+
+centrifugation at 4000g for 10 minutes, and the filtered solution was then injected
+(5 ml) onto LC-MS/MS. The assay was qualified over the analytical range of
+1–5000 nM using a linear 1/x2 weighed regression.
+Plasma Metabolomic Profiling. Frozen plasma samples were thawed and
+50 ml aliquots were subjected to protein precipitation by the addition of 600 ml of
+methanol containing 0.1% formic acid and stable-labeled internal standards. The
+samples were mixed with a vortex mixer and subjected to centrifugation for
+10 minutes at 2700g (4000 rpm). An aliquot (50 ml) of the resulting supernatants
+was transferred to a 96-well plate for further hydrophilic interaction LC (HILIC)
+LC-MS analysis and an additional 100 ml was transferred to a separate 96-well
+plate for reverse phase (RP) LC-MS analysis. Both plates were dried to
+completeness under a nitrogen stream at room temperature. For RP LC-MS
+analysis, the dried samples were reconstituted by the addition of 20 ml of
+methanol, followed by vigorous shaking and the addition of 180 ml of water. The
+samples were mixed with a vortex mixer and subjected to centrifugation for
+10 minutes at 4000 rpm. The resulting supernatants were transferred to a 96-well
+plate, from which 10 ml was directly injected for analysis. For HILIC LC-MS
+analysis, the dried samples were reconstituted by the addition of 20 ml of water,
+followed by vigorous shaking and the addition of 180 ml of 50:50 MeOH:ACN.
+The samples were mixed with a vortex mixer and subjected to centrifugation for
+10 minutes at 4000 rpm. The resulting supernatants were transferred to a 96-well
+plate, from which 10 ml was directly injected for analysis.
+HILIC and RP LC-MS analyses were performed on a Nexera 2 LC-30AD
+(Shimadzu, Somerset, NJ) ultra-high-performance LC system connected to an
+Exactive Plus (Thermo Fisher Scientific, Waltham, MA) mass spectrometer. The
+ultra-high-performance LC column for HILIC analyses was an Acquity BEH-
+NH2, 2.1  150 mm, 1.7 m (Waters Corporation, Milford, MA) with mobile
+phases A (95:5 water:ACN, 10 mM NH4OAc, 0.05% NH4OH) and B (ACN,
+0.05% NH4OH) at a flow rate of 300 ml/min with starting conditions of 95% B–
+37% B at 3.5 minutes, hold for 4 minutes, and down to starting conditions at
+7 minutes, for a total run time of 11 minutes. The ultra-high-performance LC
+column for RP analyses was an Acquity BEH C18, 2.1  150 mm, 1.7 m (Waters
+Corporation) with mobile phases A (water, 0.1% formic acid) and B (98:2ACN:
+water, 0.1% formic acid) at a flow rate of 600 ml/min with starting conditions of
+100% A, to 80% A at 3 minutes, 40% A at 4 minutes, and 100% B by 7 minutes,
+and after a 2-minute hold, down to starting conditions at 9 minutes, for a total run
+time of 11 minutes. Both HILIC and RP LC-MS data were collected in positive
+and negative polarities (separate injections) at 35,000 resolution and expected
+mass accuracy of 5 ppm.
+LC-MS data analysis was performed using software developed in-house,
+Expedient Data Mining, as described previously (Hnatyshyn et al., 2013). Direct
+data input from raw files was performed using the Thermo Fisher Scientific
+MSFileReader software. The resulting list of components was matched with
+accurate mass and retention time values using an in-house database of endogenous
+metabolites stored within Expedient Data Mining. The annotated table of
+component integrals was exported to Microsoft Excel for further statistical
+analysis using in-house Visual Basic scripts for Microsoft Excel. For these
+analyses, mean intensities for each treatment group were compared with the
+relevant concurrent control. For each component, fold change was calculated by
+dividing the treatment group value by the control group value and the P values
+were calculated as a pairwise comparison for two-tailed distribution, using the
+Student’s t test (Excel statistics package; Microsoft; Redmond, Washington).
+Characterization of PDA and HVA Uptake in Stable Cell Lines
+Constitutively Expressing Major Renal Drug Transporters. Uptake studies
+were performed as described previously (Shen et al., 2016b). Uptake of PDA and
+HVA was first measured at a single concentration for 5-minute incubation with
+OAT1-, OAT2-, OAT3-, OAT4-, OCT2-, MATE1-, MATE2K-, OATP1B1-,
+OATP1B3-, and sodium taurocholate cotransporting polypeptide (NTCP)-HEK
+cells, and then time- and concentration-dependent uptake was measured. The
+initial concentration used for PDA was 1 mM because the physiologic baseline
+level ranged from 0.67 to 2.5 mM in cynomolgus monkeys (Fig. 3A). The
+concentration studied for HVA was 5 mM because of limited bioanalytical
+sensitivity of this compound in Mock-HEK cells. In addition, the transport
+Michaelis-Menten constant value (Km) of 274 6 100 mM (that corresponds to the
+Fig. 1. Schematic overview of experimental workflow for identification and validation of endogenous biomarkers of OAT1 and OAT3. Plasma samples were collected from
+monkey FSM-PROB interaction study, and metabolites were quantified by LC-MS/MS. Raw data were extracted, and analyzed by various tools to identify associations
+between drug treatments and concentrations, determine significant correlations, and integrate results with transporter knowledge. Three selected potential endogenous
+biomarkers were further validated by LC-MS/MS with deuterated internal standards to confirm metabolomics observations. Transporter uptake studies were performed to
+determine whether the selected probes were selective substrates for human OAT1 and OAT3.
+Shen et al.
+at ASPET Journals on December 31, 2023
+dmd.aspetjournals.org
+Downloaded from
+
+--- Page 4 ---
+
+substrate concentration at which the uptake rate is half that of the Vmax value) has
+been reported in rat Oat2-mediated transport for HVA (Mori et al., 2003), which is
+significantly greater than the selected testing concentrations (274 6 100 vs.
+5 mM). No corresponding data were available for PDA. Kinetic transport
+experiments were conducted under linear-uptake conditions or for shortest
+incubation duration with acceptable analytical sensitivity (Supplemental Fig. 1).
+Cells were grown to confluence in 24-well poly-D-lysine-coated plates 2–3 days
+after seeding at a cell density of 500,000 cells per well (BD Biosciences, San Jose,
+CA). All experiments were conducted at 37C using a working solution containing
+Hanks’ balanced salt solution (HBSS) supplemented with 10 mM HEPES (pH 7.4 for
+OAT1-, OAT2-, OAT3-, OAT4-, OCT2-, OATP1B1, OATP1B3-, and NTCP-HEK
+cells, and pH 8.4 for MATE1- and MATE2K-HEK cells, respectively), with a probe
+substrate, PDA, or HVA. The probe substrates used were [3H]para-aminohippuric
+acid (OAT1), [3H]penciclovir (OAT2), [3H]estrone-3-sulfate (OAT3 and OAT4),
+[14C]metformin (OCT2, MATE1, and MATE2K), [3H]estradiol-17b-D-glucuronide
+(OATP1B1), [3H] cholecystokinin octapeptide [OATP1B3, and taurocholic acid
+(NTCP)]. Compounds were dissolved in dimethyl sulfoxide and diluted in HBSS
+(maximum 0.2% dimethyl sulfoxide). Plating medium was removed, and cell
+monolayers were rinsed twice with prewarmed HBSS. Incubations were started by
+the addition of 200 ml of substrate prewarmed at 37C. After incubation for desired
+time at 37C, the cell monolayers were rinsed three times with 500 ml of ice-cold
+HBSS. The cells were then lysed with 300 ml buffer (0.1% Triton X-100 or
+methanol), and compound concentrations in the cell lysates were measured by either
+liquid scintillation counting (Tri-Carb 2910 TR Liquid Scintillation Analyzer;
+PerkinElmer Life and Analytical Sciences) or LC-MS/MS as described subsequently.
+LC-MS/MS Analysis of PDA and HVA. Stock PDA solution (390 mg/ml,
+2.13 mM) was prepared by dissolving PDA in 0.5% NH4OH solution. Stock HVA
+(1.8 mg/ml, 9.5 mM) solution was prepared in water. Stock solutions were stored in
+darkness at 230C and brought to room temperature before use. The highest
+calibration standard (5000 ng/ml) was prepared by diluting appropriate aliquots of
+PDA and HVA stock solutions to a final volume of 2 ml with 1% bovine serum
+albumin (BSA) in phosphate-buffered saline (PBS) (pH 7.4). Additional standard
+solutions were obtained by serial dilution from the 5000 ng/ml standard with 1% BSA
+in PBS (pH 7.4) to final concentrations of 2500, 1000, 500, 250, 100, 50, 25, 10, and
+5 ng/ml. Quality control (QC) samples were also prepared with 1% BSA in PBS (pH
+7.4) at three concentration levels: 7.5, 75, and 750 ng/ml. The internal standard stock
+solution of Enal-d5 was prepared at 1 mg/ml in methanol. The internal standard
+working solution containing 1000 ng/ml of Enal-d5 was prepared by dilution of
+internal standard stock solution with methanol and stored at 4C.
+Calibration curves for PDA and HVA were fitted by the 1/x weighted least-
+squares quadratic. The calibration curves for PDA and HVA ranged from 5 to
+5000 ng/ml. All coefficients of determination (R2) of the calibration lines
+were $0.98. The mean accuracy (percentage of true value) of individual
+calibrators was $15%. The lower limit of quantitation, defined as the lowest
+concentration that could be determined with precision and accuracy of 6 20%,
+was 5 ng/ml for PDA and HVA.
+Sample stability was also determined for QC samples (n = 5) that were extracted
+and stored in the instrument autosampler under refrigerated conditions (5C).
+Samples were stable for 24 hours. Average recovery for QC samples (n = 5) prepared
+with 1% BSA in PBS (pH 7.4) was 101% and 102% for PDA and HVA, respectively.
+Urine and plasma samples were diluted by factors of 1:1, 1:2, 1:10 or 1:100 with
+1% BSA in PBS (pH 7.4) to ensure the levels were within the range of the calibration
+curve. Aliquots (50 ml) of diluted animal samples (urine and plasma), calibrator
+standards, or QCs were transferred to a 2 ml 96-well plate and mixed for 1 minute at
+2000 rpm. The samples were extracted by adding 200 ml of Enal-d5 in methanol
+(1000 ng/ml) and vortex mixed for 5 minutes at 2000 rpm, and then centrifuged at
+4C for 10 minutes at 4000g. The supernatant (170 ml) was transferred to a 500 ml
+96-well plate and dried under heated nitrogen (45C). Samples were then
+reconstituted with 50 ml of water:methanol (98:2) containing 0.1% formic acid,
+vortex mixed for 1 minute at 2000 rpm, followed by 10 minutes of centrifugation at
+4000g at 4C before MS analysis. To avoid PDA and HVA degradation, all samples
+were protected from direct light exposure during sample preparation and analysis.
+LC-MS/MS analyses were carried out on a Waters Acquity UPLC system,
+consisting of a Acquity binary solvent manager and Acquity sample manager with
+sample organizer (Waters) coupled to a SCIEX 6500 tandem quadrupole mass
+spectrometer (Applied Biosystems/MDS SCIEX, Toronto, Canada) equipped
+with an electrospray ionization source. The analytes (10 ml) were separated on an
+Acquity UPLC BEH130 C18 (2.1  100 mm; 1.7 mm particle size) column and
+eluted by a gradient program as follows: held 2% B for 0.5 minutes, 2% B–20% B
+for 2.5 minutes, 20% B–98% B for 1 minute, 98% B–2% B for 0.01 minute, and
+retained 1 minute for equilibration. The column was heated at 45C, and the flow
+rate was 500 ml/min. The mobile phase consisted of an aqueous phase (A: 0.1%
+formic acid in water) and an organic phase (B: 0.1% formic acid in ACN).
+The electrospray ionization source was operated in negative ion mode and its main
+working parameters were set as follows: ion spray voltage, 24.5 kV; ion source
+temperature, 550C; declustering potential, 240 V for PDA and HVA and 2150 V
+for Enal-d5; collision energy, 235 V; entrance potential, 210 V; and collision cell
+exit potential, 210 V. Multiple reactions monitoring measurements of PDA and
+HVA analytes were performed using individually optimized cone voltage and
+collision energy. The multiple reactions monitoring precursor/product ion transitions
+were as follows: m/z 182 . 138.0 for PDA, 181.0 . 122.0 for HVA, and 380.3 .
+114.2 for the internal standard, Enal-d5. The dwell time established for each transition
+was 50 milliseconds. All peak integration and data processing methods were
+performed using SCIEX Analyst 1.6.2 (Applied Biosystems/MDS SCIEX).
+Pharmacokinetic, Transport, and Statistical Analyses. The AUC from zero
+to 24 hours (AUC0–24 h) was calculated using the mixed trapezoidal rule. The
+AUC from zero to infinity includes AUC0–24 h and one extrapolated to infinity
+from the last measured concentration. The volume of distribution at steady-state
+(VdSS) was determined by the noncompartmental method:
+Vdss ¼ Dose × ðAUMCÞ
+ðAUCÞ2
+where AUMC is the area under the curve of the first moment of the concentration-
+time curve. The CLTOT was calculated from the following equation:
+CLTOT ¼ Dose
+The pharmacokinetics parameters including AUC0–24 h, AUC, VdSS, and
+CLTOT for FSM, PROB, PDA, and HVA, following single intravenous
+administration of PROB and FSM with or without coadministration of PROB
+were analyzed with a mixed trapezoidal model using the Kinetica program
+(Thermo Electron, Philadelphia, PA). The CLR was estimated from the following
+equation:
+CLR ¼ Xe0–24 h
+AUC0–24 h
+where Xe0–24 h is the cumulative amount of unchanged FSM excreted in urine
+over 24 hours. The renal extraction ratio (ERR) of FSM was calculated by the
+following equation:
+ERR ¼
+fu × GFR
+where fu is the fraction of unbound FSM in human plasma reported (i.e., 0.041)
+(Rane et al., 1978), and GFR is the glomerular filtration rate in cynomolgus
+monkeys (i.e., 10.4 ml/min) (Davies and Morris, 1993). The fraction of FSM
+excreted unchanged in the urine (fR) was calculated by dividing Xe0–24 h by the
+dose. The nonrenal plasma clearance (CLNR) was estimated as the difference
+between the total plasma and renal clearances. The fraction excreted by nonrenal
+routes (fNR) was calculated by dividing the nonrenal clearance by the total plasma
+clearance. Paired Student’s t test was performed to compare pharmacokinetic
+parameters between groups using GraphPad Prism version 7 (GraphPad Software
+Inc., San Diego, CA). A P value of less than 0.05 was considered to be statistically
+significant (*P , 0.05, **P , 0.01, and ***P , 0.001). To compare
+pharmacokinetic parameters between groups, the data are also reported as the
+geometric mean ratio with a two-sided 90% confidence interval.
+Transport data represent the results from a single study run in triplicate and a
+minimum of two experiments on different days. The results are reported as mean 6
+S.D. (n = 3). To estimate the transport kinetics parameters of PDA and HVA into
+transporter-expressing HEK 293cells,the transporter-mediated uptake was calculated
+by subtracting the uptake in MOCK-HEK cells from that in transporter-expressing
+HEK 293 cells. The following equation was used to estimate the parameters:
+V ¼ Vmax  ½S
+Km þ ½S
+Identification of Functional Plasma Markers of OAT1 and OAT3
+at ASPET Journals on December 31, 2023
+dmd.aspetjournals.org
+Downloaded from
+
+--- Page 5 ---
+
+where V is the rate of uptake measured at the given concentration; Vmax is the
+maximal rate of uptake; Km represents the Michaelis-Menten constant at
+which the transport rate is half its maximal value; and [S] is the substrate
+concentration.
+Statistical differences between cell lines or treatments were determined by an
+unpaired two-tailed Student t test (GraphPad Prism version 7; GraphPad Software
+Inc.). A P value of less than 0.05 was considered to be statistically significant
+(*P , 0.05, **P , 0.01, and ***P , 0.001).
+Results
+Effects of PROB on Pharmacokinetics of FSM in Cynomolgus
+Monkeys. The mean FSM plasma concentration-time profiles after
+intravenous administration of 2 mg/kg of FSM in the absence and
+presence of PROB (40 mg/kg, i.v.) are illustrated in Fig. 2A. The plasma
+concentrations of FSM were higher in the presence than in the absence of
+PROB at all time points and in all animals. This statement was supported
+Fig. 2. (A) Plasma concentration-time curves of FSM administered intravenously alone (2 mg/kg; open circles) or with PROB (40 mg/kg, i.v.; closed circles). (B) Plasma
+concentration time curves of PROB administered intravenously alone (40 mg/kg; open triangles) or with FSM (2 mg/kg, i.v.; closed triangles). (C) Effects of PROB on
+urinary exertion rate of FSM administered intravenously alone (2 mg/kg; open bar) or with PROB (40 mg/kg, i.v.; closed bar). Data are shown as mean 6 S.D. (n = 3).
+**P , 0.01, significantly different from urinary excretion rate in the absence of PROB.
+TABLE 1
+Pharmacokinetic parameters of FSM and PROB in cynomolgus monkeys (n = 3) following intravenous administration of
+PROB alone (40 mg/kg), FSM alone (2 mg/kg), and PROB with FSM
+Pharmacokinetic parameters were determined as described in Materials and Methods. Data are shown as mean 6 S.D. (n = 3). PROB
+was intravenously dosed 30 minutes prior to FSM administration in the coadministration treatment group.
+Analyte/Parameter
+PROB Alone
+FSM Alone
+FSM with PROB
+Ratio (90% CI)
+AUC0–24 h (mM×h)
+11.5 6 0.7
+47.7 6 5.9**
+4.1 (3.6–4.8)
+CLTOT (ml/min per kilogram)
+8.8 6 0.6
+2.1 6 0.3***
+0.24 (0.21–0.28)
+VdSS (l/kg)
+0.33 6 0.11
+0.21 6 0.03
+0.66 (0.31–1.4)
+T1/2 (h)
+5.9 6 1.4
+4.7 6 0.8
+0.82 (0.40–1.7)
+CLR (ml/min per kilogram)
+3.7 6 0.6
+0.44 6 0.12**
+0.12 (0.11–0.13)
+CLNR (ml/min per kilogram)
+5.0 6 0.6
+1.7 6 0.2**
+0.34 (0.27–0.42)
+49.5 6 8.8
+5.9 6 1.4**
+0.12 (0.11–0.13)
+PROB
+AUC0–24 h (mM×h)
+3436 6 655
+3386 6 860
+0.98 (0.58–1.6)
+C24 h (mM)
+7.3 6 5.7
+8.9 6 6.5
+1.1 (0.37–3.2)
+CLTOT (ml/min per kilogram)
+0.69 6 0.12
+0.71 6 0.18
+1.0 (0.60–1.7)
+VdSS (l/kg)
+0.20 6 0.01
+0.21 6 0.02
+1.0 (0.85–1.3)
+T1/2 (h)
+3.7 6 0.8
+3.7 6 0.9
+1.0 (0.87–1.1)
+CI, confidence interval; ERR, renal extraction ratio; NA, not applicable; T1/2, terminal elimination half-life.
+**P , 0.01 and ***P , 0.001, when the parameter was compared with that administered with FSM or PROB alone.
+Shen et al.
+at ASPET Journals on December 31, 2023
+dmd.aspetjournals.org
+Downloaded from
+
+--- Page 6 ---
+
+by the significant increase in AUC0–24 h (11.5 6 0.7 and 47.7 6 5.0 mM×h
+after intravenous administration of 2 mg/kg FSM alone and with 40 mg/kg
+PROB, respectively; P , 0.01) (Table 1). The geometric mean and 90%
+confidence interval of the FSM AUC0–24 h ratio was 4.1 (3.6–4.8).
+Consistently, the CLTOT of FSM was reduced significantly by PROB
+pretreatment (8.8 6 0.6 vs. 2.1 6 0.3 ml/min per kilogram; P , 0.001).
+However, the administration of PROB did not cause a significant difference
+in VdSS and terminal elimination half-life of FSM although the mean values
+were decreased by PROB pretreatment (0.33 6 0.11 vs. 0.21 6 0.03 l/kg
+and 5.9 6 1.4 vs. 4.7 6 0.8 hour, respectively; P . 0.05) (Table 1).
+The mean urinary excretion rates of FSM in cynomolgus monkeys are
+shown in Fig. 2C. A 2.1- to 2.4-fold reduction of FSM urinary excretion in
+the presence of PROB was observed (P , 0.01). The CLR and extraction
+ratio of FSM were reduced significantly with PROB pretreatment (3.7 6
+0.6 vs. 0.44 6 0.12 ml/min per kilogram and 49.5 6 8.8 vs. 5.9 6 1.4,
+respectively; P , 0.01). Furthermore, the CLNR of FSM in the presence of
+PROB was also reduced markedly (5.0 6 0.6 vs. 1.7 6 0.2 ml/min per
+kilogram, respectively; P , 0.01). Therefore, the reduced CLTOT by PROB
+pretreatment was not solely due to either decreased CLR or CLNR.
+Figure 2B illustrates the PROB concentration in plasma after
+intravenous PROB alone and concurrently with FSM. The PROB
+plasma concentrations 24 hours after PROB administration (C24 h) were
+not significantly different (7.3 6 5.7 and 8.9 6 6.5 mM, P . 0.05)
+(Table 1). Comparing other PROB pharmacokinetic parameters in the
+absence or presence of FSM indicates that the mean PROB AUC0–24 h,
+C24 h, CLTOT, and terminal elimination half-life values were almost
+identical (Table 1).
+Identification of Potential Plasma Endogenous Biomarkers of
+OAT1 and OAT3 by Metabolomics. To identify potential endogenous
+plasma probes of OAT1 and OAT3, LC-MS-based metabolomics was
+used to determine the alterations in plasma concentrations of endoge-
+nous compounds between treatments in cynomolgus monkeys. A total of
+233 metabolites of known structural identity by matching accurate mass
+and retention time values with an in-house database of endogenous
+metabolites were measured, and the concentration values were used to
+determine statistical significance using the paired Student’s t test
+(Supplemental Table 1). Of those metabolites monitored, 29 endogenous
+molecules were identified to be present at concentrations at least 3-fold
+higher at 1 and/or 3 hours in PROB pretreatment groups (adminis-
+tered alone or with FSM) (Table 2), suggesting that the changes of
+endogenous metabolites in the plasma were associated with inhibition of
+monkey OAT1 and OAT3, with associated reduction of OAT-mediated
+renal clearance. However, only some metabolites were able to return to
+baseline at 24 hours, which were included as a criterion for transporter
+biomarker candidacy.
+Based on the structure similarities, the identified metabolites can be
+categorized into three subset groups. The first subset of metabolites are
+long-chain dicarboxylic acids and derivatives (Table 2), which include
+TDA [HOOC(CH2)12COOH] and HDA [HOOC(CH2)14COOH]. The
+second subset consists of small acids that are produced by gut microflora.
+TABLE 2
+Comparison of plasma concentrations of the 29 selected endogenous metabolites in cynomolgus monkeys (n = 3) following intravenous
+administration of PROB alone (40 mg/kg), FSM alone (2 mg/kg), and PROB with FSM
+Plasma concentrations of approximately 230 endogenous metabolites were determined by liquid chromatography-mass spectrometry (Supplemental Table 1). Each
+determination was made in samples collected at 1, 3, and 24 hours postdose from three cynomolgus monkeys, and values for compounds with $3.0-fold different
+plasma concentration at any of three time points in the monkeys treated with PROB and FSM are presented. The P values were determined by paired Student’s t test
+(Supplemental Table 1).
+Metabolite Type and Name
+Ratio of PROB Alone to FSM Alone
+Ratio of PROB with FSM to FSM Alone
+C1 h
+C3 h
+C24 h
+C1 h
+C3 h
+C24 h
+Dicarboxylic acids and derivatives
+C18-di-OH dihydroxyoctadecanoic acid
+11.7
+C18-2 dicarboxylic acid
+C20-4 dicarboxylic acid
+C18-1 dicarboxylic acid
+C16-1 dicarboxylic acid
+13.7
+C12 dicarboxylic acid
+C10-1 dicarboxylic acid
+C12-1 dicarboxylic acid
+C12-OH hydroxydidecanoic acid
+C14-1 dicarboxylic acid
+Unsaturated tetradecanoyl carnitine (C14-1)
+Unsaturated lauryl carnitine (C12-1)
+Lauryl carnitine (C12)
+Small acids produced by gut microflora
+Indole-3 acetic acid
+11.2
+Cresol sulfate
+Phenyl sulfate
+Phenyllactic acid
+Indoxyl sulfate
+Phenylacetylglycine
+Amino acids and derivatives
+Hydroxy-isovaleric acid
+12.6
+Tyrosine
+Aspartic acid
+Others
+Glucuronic acid
+10.5
+11.2
+Pantothenic acid
+Xanthurenic acid
+Kynurenic acid
+Identification of Functional Plasma Markers of OAT1 and OAT3
+at ASPET Journals on December 31, 2023
+dmd.aspetjournals.org
+Downloaded from
+
+--- Page 7 ---
+
+The metabolites include indole-3 acetic acid, cresol sulfate, phenyl sulfate,
+phenyllactic acid, indoxyl sulfate, and phenylacetylglycine. The third are
+amino acids and derivatives, which include hydroxy isovaleric acid,
+tyrosine, and aspartic acid. The metabolites whose plasma concentrations
+were significantly increased by PROB pretreatments include PDA, HVA,
+glucuronic acid, pantothenic acid, xanthurenic acid, and kynurenic acid
+(Table 2). The administration of PROB caused increases in plasma PDA
+and HVA concentrations at 1 and 3 hours (approximately 3- to 6-fold), and
+the concentrations returned to baseline at 24 hours (Table 2). PDA and
+HVA represent novel types of endogenous biomarkers not known
+previously to interact with monkey and human OAT1 and OAT3.
+Therefore, we conducted follow-up experiments to determine the time
+course of change in plasma PDA and HVA concentrations and transporter-
+expressing cell uptake to comprehend the sensitivity and specificity of the
+probes as described subsequently.
+Time-Dependent Effects on Plasma PDA, HVA, HDA, and TDA
+Levels of PROB Pretreatment. Administration of 40 mg/kg PROB
+intravenously caused increases in plasma PDA and HVA concentra-
+tions in monkeys. The plasma PDA concentration increased by
+approximately 3-fold over the first 24 hours (113.5 6 23.3 and
+120.0 6 17.9 vs. 40.5 6 2.2 mM×h, P , 0.05), and gradually declined
+to the basal level (1.5 6 0.3 mM) at 24 hours after PROB pretreatment
+(Fig. 3A; Table 3). The PDA concentrations were greater at any time
+points after PROB pretreatment compared with those after FSM
+administration. Similarly, the increase in plasma HVA concentration
+was persistent. The plasma HVA concentration peaked at 3–4 hours,
+returning to the baseline (85 6 32 nM) within 24 hours after PROB
+pretreatment with approximately 2-fold increase in AUC (6.5 6 1.0
+and 8.7 6 1.9 vs. 4.1 6 0.7 mM×h, P , 0.05) (Fig. 3B; Table 3). As
+shown in Table 3, PROB pretreatment significantly decreased CLR of
+PDA compared with FSM treatment (P , 0.05). The pretreatment also
+decreased the CLR value of HVA, although the reduction was not
+statistically significant.
+We also detected the effects of PROB on plasma concentrations of
+TDA and HDA since they are reported as substrates of OAT1 and OAT3.
+PROB pretreatment increased plasma concentrations of TDA and other
+long-chain dicarboxylic acids in monkeys (Table 2). Figure 3, C and D
+show that PROB pretreatments increase plasma concentrations, although
+the increases were not statistically significant (Table 3).
+Measurement of PDA and HVA Uptake in Stable Cell Lines
+Constitutively Expressing Renal Transporter. To determine whether
+PDA and HVA are substrates for major renal drug transporters, the
+cellular uptake of the molecules was measured at a single concentration
+(1 and 5 mM for PDA and HVA, respectively) in human OAT1-, OAT2-,
+OAT3-, OAT4-, OCT2-, MATE1-, MATE2K-, OATP1B1, OATP1B3-,
+and NTCP-HEK cells after 5-minute incubation. The cellular uptake of
+PDA and HVA into the HEK cells stably transfected with the
+cynomolgus monkey renal OATs was not evaluated because in vitro
+models are not available in the United States (Tahara et al., 2005). The
+uptake of PDA in OAT1- and OAT3-HEK cells was approximately 55-
+and 52-fold higher than that in the control cells (1757 6 703 vs. 30.6 6
+6.7 and 1548 6 40.0 vs. 29.8 6 5.9 pmol/mg after 5 minutes,
+respectively) (Fig. 4A). In addition, the PDA uptake in OAT1- and
+OAT3-HEK cells is significantly inhibited by PROB, a potent OAT1
+and OAT3 inhibitor (Fig. 4A). Furthermore, PDA is a substrate for
+human OAT4 because the uptake of PDA in OAT4-HEK cells is
+significantly greater than that in Mock-HEK cells (1.8-fold; P , 0.01)
+and the uptake is reduced by 1 mM PROB (Fig. 5A). On the other hand,
+there was no significant OAT2-, OCT2-, MATE1-, and MATE2K-
+mediated uptake of PDA compared with the control (P . 0.05) (Figs. 4A
+and 5A). Similarly, the uptake of HVA in OAT1- and OAT3-expressing
+cells was approximately 45- and 6-fold higher than those in the control
+cells (8.33 6 0.40 vs. 0.18 6 0.02 and 1.09 6 0.09 vs. 0.18 6 0.02
+pmol/mg after 5 minutes, respectively; P , 0.001) (Fig. 4B).
+Additionally, there was also significant OAT2-mediated uptake of
+HVA compared with the control (5-fold; P , 0.001). However, there
+was no significant OCT2-, MATE1-, and MATE2K-mediated uptake of
+HVA compared with the control (P . 0.05). Moreover, both PDA and
+HVA are not substrates for human hepatic transporters OATP1B1,
+OATP1B3, and NTCP because there are no significant differences in the
+uptake between the transporter-overexpressing cells and mock cells
+(P . 0.05) (Supplemental Fig. 2).
+Fig. 3. Effect of PROB on plasma concentra-
+tion-time curves of PDA (A), HVA (B), TDA
+(C), and HDA (D) in three cynomolgus
+monkeys after intravenous administration of
+PROB alone (40 mg/kg; open squares), FSM
+alone (2 mg/kg, close triangles), and PROB
+with FSM (open circles).
+Shen et al.
+at ASPET Journals on December 31, 2023
+dmd.aspetjournals.org
+Downloaded from
+
+--- Page 8 ---
+
+The affinities of OAT1- and OAT3-meditated transport for PDA and
+HVA were further determined over a range of PDA and HVA concentrations
+(0.2–500 mM) in OAT1- and OAT3-HEK cells after 2.5-minute incubation.
+The incubation time was set by the linear-uptake condition and the lower
+limit of bioanalytical methods (Supplemental Fig. 1). As shown in Fig. 6, the
+apparent Km values were 33.0 6 5.3 and 52.1 6 15.3 mM for OAT1- and
+OAT3-mediated uptake of PDA, respectively, while the apparent Km values
+of OAT1-, OAT-2, and OAT3-mediated uptake of HVA were 108 6 6.2,
+124 6 10.8, and 438 6 63 mM, respectively.
+Discussion
+OAT transporters are mainly expressed in RPTCs and mediate active
+renal secretion of their substrates. Inhibition of OAT transporter function
+could lead to decreased renal elimination and increased plasma exposure
+of xenobiotics and endogenous metabolites that are transported by these
+transporters. The general approach of using cynomolgus monkey as a
+model for study of human transporter function has become routine and
+takes advantage of the similarity and function of drug transporters
+between humans and monkeys (Tahara et al., 2006; Shen et al., 2013,
+2016b). It is recognized that such approaches can identify endogenous
+biomarker candidates that are selective for a specific transporter (Chu
+et al., 2015; Shen et al., 2016a; Thakare et al., 2017). To demonstrate that
+cynomolgus monkey permits quantitative prediction of human OAT-
+mediated DDIs, we measured the effects of the clinically relevant OAT
+inhibitor PROB on the pharmacokinetics of the OAT1 and OAT3 probe
+substrate FSM in monkeys, and compared these results with the changes
+observed in human subjects. As shown in Fig. 2, the intravenous
+TABLE 3
+Pharmacokinetic parameters of PDA, HVA, TDA, and HDA in three cynomolgus monkeys following intravenous administration of PROB alone
+(40 mg/kg), FSM alone (2 mg/kg), and PROB with FSM
+Pharmacokinetic parameters were determined as described in Materials and Methods. Data are shown as mean 6 S.D. (n = 3). PROB was intravenously dosed
+30 minutes prior to FSM administration in the coadministration treatment group.
+Analyte/Parameter
+PROB Alone
+FSM Alone
+FSM with PROB
+Value
+Ratio (90% CI)a
+Value
+Value
+Ratio (90% CI)a
+AUC0–24 h (mM×h)
+113.5 6 23.3*
+2.8 (2.0–3.9)
+40.5 6 2.2
+120.0 6 17.9**
+2.9 (2.1–4.1)
+Cmax (mM)
+7.3 6 1.2*
+3.1 (2.2–4.3)
+2.4 6 0.2
+7.9 6 1.1**
+3.3 (2.3–4.8)
+CLR (ml/min per kilogram)
+0.4 6 0.2*
+0.10 (0.01–1.6)
+4.9 6 3.3
+2.7 (2.2 and 3.1)b,**
+0.39 (0.33 and 0.46)b
+AUC0–24 h (mM×h)
+6.5 6 1.0*
+1.6 (1.1–2.3)
+4.1 6 0.7
+8.7 6 1.9*
+2.1 (1.9–2.4)
+Cmax (mM)
+0.68 6 0.03**
+2.8 (2.0–3.8)
+0.25 6 0.04
+0.78 6 0.22*
+3.1 (2.1–4.6)
+CLR (ml/min per kilogram)
+1.3 6 0.5
+0.8 (0.4–1.6)
+1.6 6 0.2
+0.9 (0.9 and 0.8)b,*
+0.50 (0.49 and 0.51)b
+AUC0–7 h (nM×h)
+449 6 233*
+2.8 (1.6–5.0)
+168 6 121
+526 6 250
+3.3 (1.1–10.3)
+Cmax (nM)
+97 6 43*
+2.3 (1.8–3.0)
+42 6 21
+195 6 110
+4.3 (1.1–17.7)
+AUC0–7 h (nM×h)
+592 6 224*
+1.9 (0.9–3.7)
+355 6 263
+870 6 321
+2.7 (0.9–8.0)
+Cmax (nM)
+148 6 109
+2.0 (1.1–3.9)
+69 6 45
+223 6 107*
+3.3 (1.7–6.6)
+CI, confidence interval.
+aRatio of pharmacokinetics parameter of PROB treatment to FSM treatment.
+bCage malfunction prevented urine collection from one monkey in the coadministration treatment group (n = 2).
+*P , 0.05 and **P , 0.01, when the parameter was compared with that administered with FSM alone.
+Fig. 4. Profiling of the transport of PDA and
+HVA by major drug transporters expressed at
+the basolateral membrane of RPTC. Uptake in
+the HEK cells stably transfected with the
+control vector (Mock-HEK), OAT1, OAT2,
+OAT3, or OCT2 was measured after 5-minute
+incubation at 37C with PDA (1 mM) (A), HVA
+(5 mM) (B), and radiolabeled probe substrates
+[1 mM [3H]para-aminohippuric acid (OAT1),
+1 mM [3H]penciclovir (OAT2), 1 mM [3H]-
+estrone-3-sulfate (OAT3), and 2 mM [14C]-
+metformin
+(OAT2)]
+(C).
+Incubations
+were
+conducted in the absence and presence of
+1 mM PROB (OAT1 and OAT3), 100 mM
+indomethacin (OAT2), or 100 mM pyrimethan-
+mine (OCT2) to evaluate the effects of these
+inhibitors on PDA and HVA uptake. Each value
+represents the mean 6 S.D. (n = 3). *P , 0.05;
+0.01;
+***P
+0.001
+statistically
+significantly different from uptake in Mock-
+HEK cells, and $P , 0.05; $$P , 0.01; $$$P ,
+0.001 statistically significantly different from
+uptake in the absence of an inhibitor.
+Identification of Functional Plasma Markers of OAT1 and OAT3
+at ASPET Journals on December 31, 2023
+dmd.aspetjournals.org
+Downloaded from
+
+--- Page 9 ---
+
+administration of PROB generated a plasma total C24 h of 7.3 6 5.7 mM
+(Fig. 2; Table 1). Based on the IC50 values for both monkey OAT1 and
+OAT3 (,10 mM) (Tahara et al., 2005), sustained inhibition of OAT1
+and OAT3 transport function is anticipated. In agreement with the
+in vitro inhibition, a pronounced increase in AUC of FSM, a known
+substrate of OAT1 and OAT3, resulting from PROB pretreatment was
+evident (Fig. 2; Table 1). At the relevant dose (i.e., 40 mg/kg, i.v.),
+PROB decreased the FSM CLR value by 8.3-fold in cynomolgus
+monkeys. The decreases in the CLR values of coadministered FSM
+observed in the clinic were 3.6- to 5.1-fold for PROB (Chennavasin
+et al., 1979; Smith et al., 1980). Furthermore, PROB decreased FSM
+CLNR in monkeys and humans by 2.9- and 1.5-fold, respectively,
+suggesting inhibition of FSM metabolism in both species. In the current
+study, we demonstrated that intravenous pretreatment of cynomolgus
+monkeys with PROB (40 mg/kg) increased in the AUC of FSM by 4.1-
+fold, which is consistent with the values (3.1- to 3.7-fold) reported in
+humans and indicates that DDIs associated with OAT transporter
+inhibitions could be reproduced in cynomoglous monkey. These results
+support previous findings in cynomolgus monkeys where it was found
+that OAT1 and OAT3 exhibit very similar transport kinetics compared
+with corresponding human orthologs, and cynomolgus monkeys are
+recommended as more appropriate alternative systems for predicting
+DDIs involving renal drug transporters in humans (Tahara et al., 2005,
+2006).
+In the present study, we applied a combination of fit-for-purpose
+untargeted metabolomics and quantitative multiple reactions monitoring
+LC-MS/MS methods (Fig. 1) to determine if OAT inhibition is
+associated with changes in plasma concentrations of endogenous
+metabolites that are reflective of OAT function. Of the 233 plasma
+metabolites examined using the metabolomics method, 29 metabolites
+including PDA and HVA were significantly increased at 1 or 3 hours in
+plasma from monkeys by PROB. Of those, a number of metabolites
+identified had not previously been reported as substrates for OAT1 and
+OAT3 (Table 2). LC-MS/MS methods were further optimized for
+determination of plasma PDA and HVA concentration-time profiles. We
+found PDA and HVA to be consistently elevated in plasma from
+cynomolgus monkeys pretreated with PROB alone and with FSM
+(AUC0–24 h of 2.8- to 2.9-fold and 1.6- to 2.1-fold, respectively), similar
+to the increase in plasma FSM concentration (4.1-fold) (Figs. 2 and 3;
+Tables 1 and 3). Furthermore, we demonstrated that PDA and HVA are
+substrates for human OAT1, OAT3, OAT2 (HVA), and OAT4 (PDA)
+but not OCT2, MATE1, MATE2K, OATP1B1, OATP1B3, and NTCP
+(Figs. 4 and 5; Supplemental Fig. 2). However, we did not study the
+transport of PDA and HVA by cynomolgus monkey OAT1 and OAT3
+because in vitro cell models are not available in the United States. The
+species-dependent differences in OAT1- and OAT3-mediated transport
+of PDA and HVA cannot be excluded, although monkey OAT1 and
+OAT3 exhibit similar transport kinetics (i.e., Km and Vmax values) to
+human orthologs (Tahara et al., 2005). Collectively, the results from the
+present study demonstrate that circulating PDA and HVA can be
+potentially used as endogenous biomarkers of OAT1 and OAT3
+inhibition.
+A few years ago, an investigation was conducted examining the
+changes of plasma and urine metabolites with murine Oat1 (Slc22a6)
+deficiency. Using untargeted metabolomics analysis, the researchers
+identified several physiologically important metabolites, including
+PDA, that were increased in the plasma from Oat1 knockout mice
+compared with wild-type animals, suggesting they are substrates for
+mouse Oat1 (Wikoff et al., 2011). In agreement, PROB increased the
+plasma HVA levels in rhesus monkey (Bacopoulos et al., 1978). PDA
+has been shown to undergo active renal secretion in humans, and
+elevated plasma PDA was observed in patients with renal insuffi-
+ciency (Coburn et al., 2002). It is worth noting that the present study
+shows a considerable variation in the urinary excretion and CLR of
+PDA and HVA (Fig. 3, B and D; Table 3). In addition, the volumes of
+urine samples collected in PROB groups during normal diuresis and
+Fig. 5. Profiling of the transport of PDA and
+HVA by major drug transporters expressed at
+the apical membrane of RPTC. Uptake in the
+HEK cells stably transfected with the control
+vector
+(Mock-HEK),
+OAT4,
+MATE1,
+MATE2K was measured after 5-minute in-
+cubation at 37C with PDA (1 mM) (A), HVA
+(5 mM) (B), and [3H]estrone-3-sulfate (1 mM)
+and [14C]metformin (2 mM) (C). Incubations
+were conducted in the absence and presence of
+1 mM PROB (OAT4) or 100 mM pyrimethan-
+mine (MATE1 and MATE2K) to evaluate the
+effects of these inhibitors on PDA and HVA
+uptake. Each value represents the mean 6 S.D.
+(n = 3). ***P , 0.001 statistically significantly
+different from uptake in Mock-HEK cells, and $
+$$P , 0.001 statistically significantly different
+from uptake in the absence of an inhibitor.
+Shen et al.
+at ASPET Journals on December 31, 2023
+dmd.aspetjournals.org
+Downloaded from
+
+--- Page 10 ---
+
+forced diuresis (i.e., administration of PROB alone and with FSM)
+are significantly different. Despite large variation, PROB pretreat-
+ments, either alone or with FSM, significantly reduced the CLR
+values of PDA in monkeys (ratios of 0.10 and 0.33–0.46, re-
+spectively), similar to the decrease in FSM CLR [0.12 (0.11–0.13)]
+(Tables 1 and 3).
+Although the plasma levels of HVA are significantly increased by
+PROB pretreatments compared with FSM treatment, the CLR value was
+only slightly reduced by PROB pretreatments (ratios of 0.8 and 0.49–
+0.50, respectively) and the changes were not statistically significant. It is
+unclear why PROB pretreatments decreased the CLR of HVA to a lesser
+extent compared with PDA. However, the following observations may
+shed some light. Based on the in vitro uptake experiments, the renal
+basolateral transporters OAT1, OAT2, and OAT3 are involved in the
+uptake of HVA while PDA is only transported by OAT1 and OAT3
+(Figs. 4 and 6). OAT2 is less sensitive to the inhibition by PROB
+compared with OAT1 and OAT3 (IC50 of 393–766 mM vs. ,10 mM)
+(Enomoto et al., 2002; Jia et al., 2015). In contrast to our findings,
+previous studies examining expression of human OATs in the choroid
+plexus and their interactions with neurotransmitter metabolites have
+reported that HVA is not a substrate for human OATs (OAT1 and
+OAT3) in mouse cells (second segment of the proximal tubule cells, S2
+cells) stably expressing OAT1 or OAT3 (Alebouyeh et al., 2003); the
+difference in transport profiling is probably due to the use of different
+host cells (HEK 293 cells vs. S2 cells), and endogenous expression of
+mouse Oat1, Oat2, and Oat3 in S2 host cells would mask HVA uptake.
+Although we showed high-affinity uptake of PDA and HVA by
+basolateral transporters OAT1, OAT3, and/or OAT2 into stably trans-
+fected HEK cells (Figs. 4 and 6), the mechanism(s) of the export of PDA
+and HVA out of the proximal tubule cells into the urine is not fully
+understood. These molecules may be extruded out of the cell by the
+efflux transporters MRP2 and MRP4 since most MRP2 and MRP4
+substrates are organic anions, which are localized in the apical
+membrane of RPTCs. In addition, the renal apical transporter OAT4
+may play a role in the transport of PDA from RPTCs into the urine since
+OAT4 can operate in efflux mode in addition to influx fashion (Hagos
+et al., 2007).
+PROB is a selective inhibitor of OAT1 and OAT3 since its IC50 values
+toward other transporters are greater than 25 mM (Supplemental Table 2),
+although for other monkey transporters there is still paucity of complete
+data for PROB inhibition. Therefore, even though the results presented
+herein showcase PDA and HVA as novel cynomolgus monkey plasma
+OAT biomarkers, it cannot be assumed that the results translate directly
+to human subjects. In addition, we cannot exclude that the formation of
+the biomarkers studied may be affected by PROB. Moreover, PDA is the
+dead-end catabolite of the B6 vitamins including pyridoxine, pyridox-
+amine, and pyridoxal (Merrill and Henderson, 1990). Although the
+plasma PDA baseline level exhibits acceptable interindividual variabil-
+ity in monkeys and humans (1.6 6 0.4 mM and 43 6 17 nM) (Coburn
+et al., 2002), the use of vitamin B6 supplements causes elevation of PDA
+levels far above the normal physiologic level (Zempleni, 1995; Coburn
+et al., 2002). Therefore, the use of vitamin B6 supplements should be
+excluded in a clinical study with the goal of assessing a change in PDA
+plasma level.
+Emerging metabolomics and genome-wide association data revealed
+that HDA and TDA, two fatty acid dicarboxylates, were potential
+endogenous biomarkers of human OATP1B1 (Yee et al., 2016).
+Although HDA and TDA are substrates of OATP1B1, OAT1 and
+OAT3 were also involved in the disposition of HDA and TDA (Yee
+et al., 2016). Consistently, we have observed that administration of
+rifampin, a selective inhibitor of hepatic OATPs over renal OATs,
+increased the AUCs of HDA and TDA by approximately 2-fold in
+human subjects (Shen et al., 2017). Although these results indicated that
+HDA and TDA are endogenous biomarkers of OATP1B1, the in vitro
+transport profiling suggested the involvement of OAT1 and OAT3 in the
+disposition of HDA and TDA (Yee et al., 2016). Metabolomics analysis
+in this study demonstrated the significant elevations in plasma levels of
+at least 20 dicarboxylic acids and fatty acids in the monkeys pretreated
+with PROB (Supplemental Table 1; Table 2). A similar trend was more
+evident for TDA with significant increases of AUC in the LC-MS/MS
+data set (Fig. 3C; Table 3). A comparable degree of increase has been
+observed with HDA (Fig. 3D; Table 3). As a result, HDA and TDA may
+serve as dual hepatic OATP and renal OAT biomarkers although further
+studies are needed for the relevance of clinical interactions. The
+concentration-time profiles for TDA and HDA appear different in the
+PROB-alone and with FSM groups although the concentrations in both
+groups are greater than those in that of FSM alone (Fig. 3, C and D). This
+is likely due to the additional inhibitory effect of FSM toward OAT1-
+and OAT3-mediated transport of TDA and HDA (Hasannejad et al.,
+2004; Nieskens et al., 2016).
+In conclusion, the use of monkey as a transporter-mediated DDI model
+along with metabolomics has been demonstrated to be a useful approach for
+transporter biomarker identification. Our investigations showed that PDA
+and HVA are novel blood biomarkers of monkey renal OAT since the
+changes in plasma exposures of PDA and HVA are similar to that of a probe
+substrate in monkeys. Although interspecies differences in the transport and
+disposition of PDA and HVA need be considered, the information obtained
+Fig. 6. Concentration-dependent uptake of PDA (A) and HVA (B) by human OAT1
+and OAT3. Cells were incubated with PDA or HVA (0.23–500 mM) for 2 minutes
+(linear range). The net OAT1- (open triangle) or OAT3-mediated uptake (open
+circle) was calculated by subtracting that in mock cells from that in OAT1- or
+OAT3-HEK cells. The curves represent the best fit of the Michaelis-Menten
+equation. Each value represents the mean 6 S.D. (n = 3).
+Identification of Functional Plasma Markers of OAT1 and OAT3
+at ASPET Journals on December 31, 2023
+dmd.aspetjournals.org
+Downloaded from
+
+--- Page 11 ---
+
+in this monkey study on the extent of these endogenous compounds after
+pretreatment with PROB along with the results from stably transporter-
+overexpressing cell lines suggest that PDA and HVA are candidate
+biomarkers of OAT1 and OAT3 for use in clinical settings.
+Acknowledgments
+We thank Joseph Cantone and Dr. Dieter Drexler for supporting the bioanalysis
+of PDA and HVA in the OAT4, OATP1B1, OATP1B3, and NTCP uptake
+experiments.
+Authorship Contributions
+Participated in research design: Shen, Nelson, Oliveira, Lai, Humphreys.
+Conducted experiments: Shen, Oliveira, Zhang, Mcnaney, Gu, Chen, Su.
+Contributed new reagents or analytic tools: Shen, Nelson, Oliveira.
+Performed data analysis: Shen, Nelson, Oliveira, Zhang, Shipkova, Reily,
+Gan, Marathe, Humphreys.
+Wrote or contributed to the writing of the manuscript: Shen, Nelson, Oliveira,
+Lai, Marathe, Humphreys.
+References
+Alebouyeh M, Takeda M, Onozato ML, Tojo A, Noshiro R, Hasannejad H, Inatomi J, Narikawa S,
+Huang XL, Khamdang S, et al. (2003) Expression of human organic anion transporters in the
+choroid plexus and their interactions with neurotransmitter metabolites. Journal of Pharmaco-
+logical Sciences 93:430–436.
+Bacopoulos NG, Heninger GR, and Roth RH (1978) Effects of haloperidol and probenecid on
+plasma and CSF dopamine metabolites in the rhesus monkey (Macacca mulatta). Life Sci 23:
+1805–1812.
+Bergagnini-Kolev MC, Hebert MF, Easterling TR, and Lin YS (2017) Pregnancy increases the
+renal secretion of N(1)-methylnicotinamide, an endogenous probe for renal cation transporters, in
+patients prescribed metformin. Drug Metab Dispos 45:325–329.
+Chennavasin P, Seiwell R, Brater DC, and Liang WM (1979) Pharmacodynamic analysis of the
+furosemide-probenecid interaction in man. Kidney Int 16:187–195.
+Chu X, Chan GH, and Evers R (2017) Identification of endogenous biomarkers to predict the
+propensity of drug candidates to cause hepatic or renal transporter-mediated drug-drug interac-
+tions. J Pharm Sci 106:2357–2367.
+Chu X, Shih SJ, Shaw R, Hentze H, Chan GH, Owens K, Wang S, Cai X, Newton D, Castro-Perez
+J, et al. (2015) Evaluation of cynomolgus monkeys for the identification of endogenous bio-
+markers for hepatic transporter inhibition and as a translatable model to predict pharmacokinetic
+interactions with statins in humans. Drug Metab Dispos 43:851–863.
+Coburn SP, Reynolds RD, Mahuren JD, Schaltenbrand WE, Wang Y, Ericson KL, Whyte MP,
+Zubovic YM, Ziegler PJ, Costill DL, et al. (2002) Elevated plasma 4-pyridoxic acid in renal
+insufficiency. Am J Clin Nutr 75:57–64.
+Davies B and Morris T (1993) Physiological parameters in laboratory animals and humans. Pharm
+Res 10:1093–1095.
+Enomoto A, Takeda M, Shimoda M, Narikawa S, Kobayashi Y, Kobayashi Y, Yamamoto T,
+Sekine T, Cha SH, Niwa T, et al. (2002) Interaction of human organic anion transporters 2 and
+4 with organic anion transport inhibitors. J Pharmacol Exp Ther 301:797–802.
+Hagos Y, Stein D, Ugele B, Burckhardt G, and Bahn A (2007) Human renal organic anion
+transporter 4 operates as an asymmetric urate transporter. J Am Soc Nephrol 18:430–439.
+Hasannejad H, Takeda M, Taki K, Shin HJ, Babu E, Jutabha P, Khamdang S, Aleboyeh M,
+Onozato ML, Tojo A, et al. (2004) Interactions of human organic anion transporters with
+diuretics. J Pharmacol Exp Ther 308:1021–1029.
+Hnatyshyn S, Shipkova P, and Sanders M (2013) Expedient data mining for nontargeted high-
+resolution LC-MS profiles of biological samples. Bioanalysis 5:1195–1210.
+Hsueh CH, Yoshida K, Zhao P, Meyer TW, Zhang L, Huang SM, and Giacomini KM (2016)
+Identification and quantitative assessment of uremic solutes as inhibitors of renal organic anion
+transporters, OAT1 and OAT3. Mol Pharm 13:3130–3140.
+Imamura Y, Tsuruya Y, Damme K, Heer D, Kumagai Y, Maeda K, Murayama N, Okudaira N,
+Kurihara A, Izumi T, et al. (2014) 6b-Hydroxycortisol is an endogenous probe for evaluation of
+drug-drug
+interactions
+involving
+multispecific
+renal
+organic
+anion
+transporter,
+OAT3/SLC22A8, in healthy subjects. Drug Metab Dispos 42:685–694.
+Ito S, Kusuhara H, Kumagai Y, Moriyama Y, Inoue K, Kondo T, Nakayama H, Horita S, Tanabe
+K, Yuasa H, et al. (2012) N-methylnicotinamide is an endogenous probe for evaluation of drug-
+drug interactions involving multidrug and toxin extrusions (MATE1 and MATE2-K). Clin
+Pharmacol Ther 92:635–641.
+Jia W, Du F, Liu X, Jiang R, Xu F, Yang J, Li L, Wang F, Olaleye OE, Dong J, et al. (2015) Renal
+tubular secretion of tanshinol: molecular mechanisms, impact on its systemic exposure, and
+propensity for dose-related nephrotoxicity and for renal herb-drug interactions. Drug Metab
+Dispos 43:669–678.
+Lacy SA, Hitchcock MJ, Lee WA, Tellier P, and Cundy KC (1998) Effect of oral probenecid
+coadministration on the chronic toxicity and pharmacokinetics of intravenous cidofovir in
+cynomolgus monkeys. Toxicol Sci 44:97–106.
+Lai Y, Mandlekar S, Shen H, Holenarsipur VK, Langish R, Rajanna P, Murugesan S, Gaud N,
+Selvam S, Date O, et al. (2016) Coproporphyrins in plasma and urine can be appropriate clinical
+biomarkers to recapitulate drug-drug interactions mediated by organic anion transporting poly-
+peptide inhibition. J Pharmacol Exp Ther 358:397–404.
+Mariappan TT, Shen H, and Marathe P (2017) Endogenous biomarkers to assess drug-drug in-
+teractions by drug transporters and enzymes. Curr Drug Metab 18:757–768.
+Merrill AH, Jr and Henderson JM (1990) Vitamin B6 metabolism by human liver. Ann N Y Acad
+Sci 585:110–117.
+Mori S, Takanaga H, Ohtsuki S, Deguchi T, Kang YS, Hosoya K, and Terasaki T (2003) Rat organic
+anion transporter 3 (rOAT3) is responsible for brain-to-blood efflux of homovanillic acid at the
+abluminal membrane of brain capillary endothelial cells. J Cereb Blood Flow Metab 23:432–440.
+Morrissey KM, Stocker SL, Wittwer MB, Xu L, and Giacomini KM (2013) Renal transporters in
+drug development. Annu Rev Pharmacol Toxicol 53:503–529.
+Motohashi H, Sakurai Y, Saito H, Masuda S, Urakami Y, Goto M, Fukatsu A, Ogawa O, and Inui
+K (2002) Gene expression levels and immunolocalization of organic ion transporters in the
+human kidney. J Am Soc Nephrol 13:866–874.
+Müller F, Pontones CA, Renner B, Mieth M, Hoier E, Auge D, Maas R, Zolk O, and Fromm
+MF (2015) N(1)-methylnicotinamide as an endogenous probe for drug interactions by renal
+cation transporters: studies on the metformin-trimethoprim interaction. Eur J Clin Phar-
+macol 71:85–94.
+Nieskens TT, Peters JG, Schreurs MJ, Smits N, Woestenenk R, Jansen K, van der Made TK,
+Röring M, Hilgendorf C, Wilmer MJ, et al. (2016) A human renal proximal tubule cell line with
+stable organic anion transporter 1 and 3 expression predictive for antiviral-induced toxicity.
+AAPS J 18:465–475.
+Nigam SK, Wu W, Bush KT, Hoenig MP, Blantz RC, and Bhatnagar V (2015) Handling of drugs,
+metabolites, and uremic toxins by kidney proximal tubule drug transporters. Clin J Am Soc
+Nephrol 10:2039–2049.
+Peng CC, Templeton I, Thummel KE, Davis C, Kunze KL, and Isoherranen N (2011) Evaluation of
+6b-hydroxycortisol, 6b-hydroxycortisone, and a combination of the two as endogenous probes
+for inhibition of CYP3A4 in vivo. Clin Pharmacol Ther 89:888–895.
+Rane A, Villeneuve JP, Stone WJ, Nies AS, Wilkinson GR, and Branch RA (1978) Plasma binding
+and disposition of furosemide in the nephrotic syndrome and in uremia. Clin Pharmacol Ther 24:
+199–207.
+Rodrigues AD, Taskar KS, Kusuhara H, and Sugiyama Y (2017) Endogenous probes for drug
+transporters: balancing vision with reality. Clin Pharmacol Ther [published ahead of print].
+Shen H, Chen W, Drexler DM, Mandlekar S, Holenarsipur VK, Shields EE, Langish R, Sidik
+K, Gan J, Humphreys WG, et al. (2017) Comparative evaluation of plasma bile acids,
+dehydroepiandrosterone
+sulfate,
+hexadecanedioate,
+tetradecanedioate
+with
+cop-
+roporphyrins I and III as markers of OATP inhibition in healthy subjects. Drug Metab
+Dispos 45:908–919.
+Shen H, Dai J, Liu T, Cheng Y, Chen W, Freeden C, Zhang Y, Humphreys WG, Marathe P,
+and Lai Y (2016a) Coproporphyrins I and III as functional markers of OATP1B activity: in vitro
+and in vivo evaluation in preclinical species. J Pharmacol Exp Ther 357:382–393.
+Shen H, Liu T, Jiang H, Titsch C, Taylor K, Kandoussi H, Qiu X, Chen C, Sukrutharaj S, Kuit K, et al.
+(2016b) Cynomolgus monkey as a clinically relevant model to study transport involving renal organic
+cation transporters: in vitro and in vivo evaluation. Drug Metab Dispos 44:238–249.
+Shen H, Yang Z, Zhao W, Zhang Y, and Rodrigues AD (2013) Assessment of vandetanib as an
+inhibitor of various human renal transporters: inhibition of multidrug and toxin extrusion as a
+possible mechanism leading to decreased cisplatin and creatinine clearance. Drug Metab Dispos
+41:2095–2103.
+Smith DE, Gee WL, Brater DC, Lin ET, and Benet LZ (1980) Preliminary evaluation of
+furosemide-probenecid interaction in humans. J Pharm Sci 69:571–575.
+Tahara H, Kusuhara H, Chida M, Fuse E, and Sugiyama Y (2006) Is the monkey an appro-
+priate animal model to examine drug-drug interactions involving renal clearance? Effect of
+probenecid on the renal elimination of H2 receptor antagonists. J Pharmacol Exp Ther 316:
+1187–1194.
+Tahara H, Shono M, Kusuhara H, Kinoshita H, Fuse E, Takadate A, Otagiri M, and Sugiyama Y
+(2005) Molecular cloning and functional analyses of OAT1 and OAT3 from cynomolgus
+monkey kidney. Pharm Res 22:647–660.
+Thakare R, Gao H, Kosa RE, Bi YA, Varma MVS, Cerny MA, Sharma R, Kuhn M, Huang B, Liu
+Y, et al. (2017) Leveraging of rifampicin-dosed cynomolgus monkeys to identify bile acid 3-O-
+sulfate conjugates as potential novel biomarkers for organic anion-transporting polypeptides.
+Drug Metab Dispos 45:721–733.
+Tsuruya Y, Kato K, Sano Y, Imamura Y, Maeda K, Kumagai Y, Sugiyama Y, and Kusuhara H (2016)
+Investigation of endogenous compounds applicable to drug-drug interaction studies involving the
+renal organic anion transporters, OAT1 and OAT3, in humans. Drug Metab Dispos 44:1925–1933.
+Vree TB, van den Biggelaar-Martea M, and Verwey-van Wissen CP (1995) Probenecid inhibits the
+renal clearance of frusemide and its acyl glucuronide. Br J Clin Pharmacol 39:692–695.
+Wikoff WR, Nagle MA, Kouznetsova VL, Tsigelny IF, and Nigam SK (2011) Untargeted
+metabolomics identifies enterobiome metabolites and putative uremic toxins as substrates of
+organic anion transporter 1 (Oat1). J Proteome Res 10:2842–2851.
+Yee SW, Giacomini MM, Hsueh CH, Weitz D, Liang X, Goswami S, Kinchen JM, Coelho A, Zur
+AA, Mertsch K, et al. (2016) Metabolomic and genome-wide association studies reveal potential
+endogenous biomarkers for OATP1B1. Clin Pharmacol Ther 100:524–536.
+Zempleni J (1995) Pharmacokinetics of vitamin B6 supplements in humans. J Am Coll Nutr 14:
+579–586.
+Address correspondence to: Dr. Hong Shen, Department of Metabolism and
+Pharmacokinetics, Pharmaceutical Candidate Optimization, Bristol-Myers Squibb
+Company, Route 206 & Province Line Road, Princeton, NJ 08543-4000. E-mail:
+hong.shen1@bms.com
+Shen et al.
+at ASPET Journals on December 31, 2023
+dmd.aspetjournals.org
+Downloaded from
