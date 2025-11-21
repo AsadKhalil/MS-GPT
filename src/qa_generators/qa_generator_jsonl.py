@@ -356,14 +356,26 @@ def main():
     parser.add_argument("--workers", type=int, help="Number of parallel workers")
     args = parser.parse_args()
 
-    # Load config
-    cfg = load_json(Path(args.config), {})
+    # Resolve config path relative to workspace root
+    config_path = Path(args.config)
+    if not config_path.is_absolute():
+        # Try to find workspace root (look for config directory)
+        workspace_root = Path(__file__).parent.parent.parent
+        config_path = workspace_root / args.config
+        if not config_path.exists():
+            # Fallback to current directory
+            config_path = Path(args.config)
     
-    input_dir = Path(args.input_dir or cfg.get("input_dir", "grobid_proccessed_pdf"))
+    # Load config
+    cfg = load_json(config_path, {})
+    if not cfg:
+        logging.warning(f"Config file {config_path} not found or empty. Using defaults.")
+    
+    input_dir = Path(args.input_dir or cfg.get("input_dir", "extracted_text/bulk_40k"))
     output_dir = Path(args.output_dir or cfg.get("output_dir", "data/qa_outputs/jsonl"))
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    model_name = args.model or cfg.get("model", "qwen2.5:32b-q5_k_m")
+    model_name = args.model or cfg.get("model", "qwen2.5:32b")
     base_url = args.base_url or cfg.get("base_url", "http://localhost:11434/v1")
     api_key = args.api_key or cfg.get("api_key", "ollama")
     
