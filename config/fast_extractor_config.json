@@ -14,7 +14,7 @@
     "input_dir": "data/input",
     "pattern": "*.pdf",
     "force_reprocess": false,
-    "parallel": true,
+    "parallel": false,
     "checkpoint_interval": 100,
     "retry_failed": true,
     "max_retries": 2

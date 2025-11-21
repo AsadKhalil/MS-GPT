@@ -1,4 +1,5 @@
-/tear/dasulimov/home_folder/mass_spec_papers_multi
+/tear/dasulimov/home_folder/mass_spec_papers_multi  ===> 8,k something
+/tear/dasulimov/dasulimov/home_folder/mass_spec_papers_multi  // 36214
 
 output 
 /home/tk-lpt-0806/Desktop/pdf_to_process/input
@@ -33,6 +34,7 @@ nohup /home/asad/MS-GPT/.venv/bin/python3 -u src/vision_extractors/agentic_visio
   > logs/agentic_extraction.out 2>&1 &
 
   
+nohup /home/asad/MS-GPT/.venv/bin/python3 process_40k_pdfs.py > /logs/process_40k_pdfs.out 2>&1 &
 CUDA_VISIBLE_DEVICES=2 nohup ollama serve > ollama-server.log 2>&1 &
 
 

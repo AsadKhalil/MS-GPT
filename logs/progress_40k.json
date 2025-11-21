@@ -1,5 +1,15 @@
 {
-  "completed": [],
+  "completed": [
+    "71f7572677020f9e7d9eb5bb4ff6c67b",
+    "c6e921839a962d2e3615ac2921f05ffb",
+    "eef963b2a60bb20cce1212e5096aed54",
+    "1713450aa5b38a4f86ffb1debfe321fd",
+    "72a62810e6b8ec2ef3f39e005689a1d0",
+    "24176d946bd1d170218aca9e124930c5",
+    "646658df39258c2d1a9214964aeb0e3c",
+    "19746193a2acec244df07b2db022dc8c",
+    "420d19b0f65dc2c06b9b9578a048468b"
+  ],
   "failed": [],
   "stats": {
     "total_files": 9,
@@ -7,15 +17,15 @@
     "failed": 0,
     "skipped": 0,
     "total_pages": 168,
-    "total_time": 1.5607106685638428,
+    "total_time": 0.48148465156555176,
     "methods": {
       "direct": 9,
       "ocr": 0,
       "mixed": 0
     },
-    "start_time": "2025-11-19T12:07:10.101373",
-    "end_time": "2025-11-19T12:07:10.366214",
-    "avg_time_per_file": 0.17341229650709364,
+    "start_time": "2025-11-19T12:40:30.500272",
+    "end_time": "2025-11-19T12:40:30.984037",
+    "avg_time_per_file": 0.05349829461839464,
     "avg_pages_per_file": 18.666666666666668
   }
 }
