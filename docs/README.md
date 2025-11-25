@@ -33,8 +33,9 @@ nohup /home/asad/MS-GPT/.venv/bin/python3 -u src/vision_extractors/vision_extrac
 nohup /home/asad/MS-GPT/.venv/bin/python3 -u src/vision_extractors/agentic_vision_extractor.py \
   > logs/agentic_extraction.out 2>&1 &
 
+nohup /home/asad/MS-GPT/.venv/bin/python3 src/qa_generators/qa_generator_jsonl.py --config config/qa_generator.json > logs/qa_generator_$(date +%Y%m%d_%H%M%S).out 2>&1 &
   
-nohup /home/asad/MS-GPT/.venv/bin/python3 process_40k_pdfs.py > /logs/process_40k_pdfs.out 2>&1 &
+nohup /home/asad/MS-GPT/.venv/bin/python3 process_40k_pdfs.py > logs/process_36214k_pdfs.out 2>&1 &
 CUDA_VISIBLE_DEVICES=2 nohup ollama serve > ollama-server.log 2>&1 &
 
 

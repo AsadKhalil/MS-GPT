@@ -2,16 +2,13 @@
   "input_dir": "extracted_text/bulk_40k",
   "output_dir": "data/qa_outputs/jsonl",
   "per_file_output_dir": "qa_by_file",
-  "model": "qwen2.5:32b-q5_k_m",
-  "base_url": "http://localhost:11434/v1",
-  "api_key": "ollama",
+  "model": "qwen/Qwen2.5-32B-Instruct-AWQ",
+  "base_url": "http://localhost:8001/v1",
+  "api_key": "vllm",
   "progress_file": "progress.json",
   "log_file": "qa_generation.log",
   "failed_records_file": "failed_paragraphs.jsonl",
   "max_retries": 5,
-  "api_delay": 0.5,
-  "batch_count": 1,
-  "batch_index": 0,
-  "max_files_per_batch": null,
-  "workers": 2
+  "api_delay": 0.1,
+  "workers": 4
 }
