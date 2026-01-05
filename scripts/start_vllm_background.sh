@@ -14,20 +14,44 @@ cd "$(dirname "$0")/.."
 PROJECT_DIR="$(pwd)"
 
 # Parse arguments
-GPU="${1:-0}"
+GPU="${1:-2}"  # Default to GPU 2 (3090 Ti) - supports AWQ
 MODEL_SIZE="${2:-7b}"
 PORT="${3:-8000}"
 
+# GPU Compute Capabilities:
+#   GPU 0 (1080 Ti): 6.1 - NO AWQ support (use FP16 models only)
+#   GPU 1 (2080 Ti): 7.5 - AWQ supported
+#   GPU 2 (3090 Ti): 8.6 - AWQ supported (RECOMMENDED)
+
 # Map model size to full name
+# AWQ models need GPU 1 or 2. FP16 models work on any GPU.
 case "$MODEL_SIZE" in
+    3b|3B)
+        # Small FP16 model - works on any GPU including 1080 Ti
+        MODEL="Qwen/Qwen2.5-3B-Instruct"
+        ;;
     7b|7B)
-        MODEL="Qwen/Qwen2.5-7B-Instruct-AWQ"
+        if [ "$GPU" = "0" ]; then
+            # GPU 0 doesn't support AWQ, use FP16
+            MODEL="Qwen/Qwen2.5-7B-Instruct"
+            echo "⚠️  GPU 0 doesn't support AWQ, using FP16 model"
+        else
+            MODEL="Qwen/Qwen2.5-7B-Instruct-AWQ"
+        fi
         ;;
     14b|14B)
         MODEL="Qwen/Qwen2.5-14B-Instruct-AWQ"
+        if [ "$GPU" = "0" ]; then
+            echo "❌ GPU 0 doesn't support AWQ. Use GPU 1 or 2."
+            exit 1
+        fi
         ;;
     32b|32B)
         MODEL="Qwen/Qwen2.5-32B-Instruct-AWQ"
+        if [ "$GPU" = "0" ]; then
+            echo "❌ GPU 0 doesn't support AWQ. Use GPU 1 or 2."
+            exit 1
+        fi
         ;;
     *)
         MODEL="$MODEL_SIZE"  # Allow full model name

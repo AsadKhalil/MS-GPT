@@ -30,16 +30,20 @@ HOST="0.0.0.0"
 PORT="${VLLM_PORT:-8000}"
 MAX_MODEL_LEN=4096
 
-# Model options (choose based on available VRAM):
-# - Qwen/Qwen2.5-7B-Instruct-AWQ   (~5GB)  - Fast, fits anywhere
-# - Qwen/Qwen2.5-14B-Instruct-AWQ  (~9GB)  - Better quality
-# - Qwen/Qwen2.5-32B-Instruct-AWQ  (~18GB) - Best quality, needs 3090 Ti
+# GPU Compute Capabilities (AWQ requires 7.5+):
+#   GPU 0 (1080 Ti): 6.1 - NO AWQ support
+#   GPU 1 (2080 Ti): 7.5 - AWQ supported  
+#   GPU 2 (3090 Ti): 8.6 - AWQ supported (BEST)
 
-# Default: Use 7B model for shared GPU compatibility
+# Model options:
+# - Qwen/Qwen2.5-3B-Instruct       (~6GB FP16)  - Works on ANY GPU
+# - Qwen/Qwen2.5-7B-Instruct-AWQ   (~5GB AWQ)   - Needs GPU 1 or 2
+# - Qwen/Qwen2.5-14B-Instruct-AWQ  (~9GB AWQ)   - Needs GPU 1 or 2
+# - Qwen/Qwen2.5-32B-Instruct-AWQ  (~18GB AWQ)  - Needs GPU 2 (3090 Ti)
+
+# Default: Use GPU 2 (3090 Ti) with 7B AWQ model
 MODEL="${VLLM_MODEL:-Qwen/Qwen2.5-7B-Instruct-AWQ}"
-
-# GPU Selection (default to GPU 0 since GPU 2 is already partially used)
-GPU="${VLLM_GPU:-0}"
+GPU="${VLLM_GPU:-2}"
 
 # Create logs directory
 mkdir -p logs
