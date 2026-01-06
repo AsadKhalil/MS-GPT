@@ -66,14 +66,17 @@ echo "Project: $PROJECT_DIR"
 echo "Log: logs/vllm_gpu${GPU}.log"
 echo "=============================================="
 
-# Run vLLM on selected GPU
-CUDA_VISIBLE_DEVICES=$GPU python3 -m vllm.entrypoints.openai.api_server \
+# Run vLLM on selected GPU with proper isolation
+# CUDA_DEVICE_ORDER=PCI_BUS_ID ensures GPU indices match nvidia-smi
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+export CUDA_VISIBLE_DEVICES=$GPU
+
+python3 -m vllm.entrypoints.openai.api_server \
     --model "$MODEL" \
     --host "$HOST" \
     --port "$PORT" \
     --max-model-len "$MAX_MODEL_LEN" \
     --dtype auto \
-    --trust-remote-code \
     --gpu-memory-utilization 0.85 \
     --max-num-seqs 16 \
     --disable-log-requests \

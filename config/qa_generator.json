@@ -2,7 +2,7 @@
   "input_dir": "extracted_text/bulk_40k",
   "output_dir": "data/qa_outputs",
   "pdf_source_dir": "data/input",
-  "model": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "model": "Qwen/Qwen2.5-14B-Instruct-AWQ",
   "base_url": "http://localhost:8000/v1",
   "api_key": "not-needed",
   "max_retries": 5,
