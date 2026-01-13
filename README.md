@@ -181,4 +181,15 @@ For issues and questions, please refer to the documentation in the `docs/` direc
 
 
 
-see
+
+
+Commands:
+   Monitor:  tail -f logs/vllm_gpu2.log
+   Stop:     kill $(cat logs/vllm_gpu2.pid)
+   Kill all: pkill -f 'vllm.entrypoints'
+   Restart:  ./scripts/start_vllm_background.sh 2 14b 8000 --force
+
+
+/home/asad/qa_generation_small
+/home/asad/extracted_text
+/tear/dasulimov/home_folder/mass_spec_papers_multi
