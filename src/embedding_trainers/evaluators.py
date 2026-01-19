@@ -95,14 +95,16 @@ def create_ir_evaluator(
     logger.info(f"IR Evaluator: {len(queries)} queries, {len(corpus)} corpus documents")
     
     # Create evaluator with proper metrics
+    # Parameters: mrr_at_k, ndcg_at_k, accuracy_at_k, precision_recall_at_k, map_at_k
     evaluator = InformationRetrievalEvaluator(
         queries=queries,
         corpus=corpus,
         relevant_docs=relevant_docs,
         name=name,
         mrr_at_k=[1, 5, 10],
-        recall_at_k=[1, 5, 10, 50],
         ndcg_at_k=[10],
+        accuracy_at_k=[1, 5, 10],
+        precision_recall_at_k=[1, 5, 10],
         map_at_k=[10],
         show_progress_bar=True,
         batch_size=32,

@@ -61,7 +61,7 @@ shift || true
 # Parse additional arguments
 CONFIG="$DEFAULT_CONFIG"
 SUBSET=""
-GPU_ID=""
+GPU_ID="2"  # Default to GPU 2
 EXTRA_ARGS=""
 
 while [[ $# -gt 0 ]]; do
