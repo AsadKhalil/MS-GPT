@@ -26,7 +26,7 @@ import random
 import hashlib
 import logging
 import argparse
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, Optional, List
 from dataclasses import dataclass, asdict
@@ -177,7 +177,7 @@ class StreamingEmbeddingFinetuner:
         self.best_metric = 0.0
         self.best_metric_step = 0
         self.metrics_history: List[Dict[str, Any]] = []
-        self.started_at = datetime.utcnow().isoformat() + "Z"
+        self.started_at = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
         
         # Shutdown handling
         self.shutdown_requested = False
@@ -322,7 +322,7 @@ class StreamingEmbeddingFinetuner:
             best_metric=self.best_metric,
             best_metric_step=self.best_metric_step,
             started_at=self.started_at,
-            last_saved_at=datetime.utcnow().isoformat() + "Z",
+            last_saved_at=datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
             config_hash=self.config_hash,
             metrics_history=self.metrics_history,
         )
@@ -527,14 +527,21 @@ class StreamingEmbeddingFinetuner:
         if not resume:
             logger.info("Evaluating base model before training...")
             base_score = self.evaluate(evaluator)
+            # Handle both dict and float return types from evaluator
+            if isinstance(base_score, dict):
+                score_value = base_score.get('mrr@10', base_score.get('map@10', 0.0))
+                score_display = base_score
+            else:
+                score_value = base_score
+                score_display = base_score
             self.metrics_history.append({
                 'epoch': 0,
                 'step': 0,
                 'type': 'base_model',
-                'score': base_score,
-                'timestamp': datetime.utcnow().isoformat() + "Z",
+                'score': score_display,
+                'timestamp': datetime.now().isoformat() + "Z",
             })
-            logger.info(f"Base model score: {base_score:.4f}")
+            logger.info(f"Base model score: {score_value:.4f}" if isinstance(score_value, (int, float)) else f"Base model score: {score_display}")
         
         # Training using sentence-transformers fit() with proper parameters
         # Create dataloader
@@ -600,7 +607,7 @@ class StreamingEmbeddingFinetuner:
             # Save training summary
             summary = {
                 'completed': True,
-                'completed_at': datetime.utcnow().isoformat() + "Z",
+                'completed_at': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
                 'started_at': self.started_at,
                 'base_model': self.config.base_model,
                 'num_epochs': self.config.num_epochs,
@@ -632,7 +639,7 @@ class StreamingEmbeddingFinetuner:
             
             # Save shutdown state
             shutdown_info = {
-                'shutdown_at': datetime.utcnow().isoformat() + "Z",
+                'shutdown_at': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
                 'global_step': self.global_step,
                 'epoch': self.current_epoch,
                 'records_processed': self.records_processed,

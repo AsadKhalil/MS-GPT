@@ -181,7 +181,7 @@ For issues and questions, please refer to the documentation in the `docs/` direc
 
 
 
-
+<Model monitor>
 
 Commands:
    Monitor:  tail -f logs/vllm_gpu2.log
@@ -193,3 +193,10 @@ Commands:
 /home/asad/qa_generation_small
 /home/asad/extracted_text
 /tear/dasulimov/home_folder/mass_spec_papers_multi
+
+
+Script Monitor
+Commands:
+  Monitor:  tail -f logs/qa_generator_20260106_234215.out
+  Progress: ./run_qa_generator.sh status
+  Stop:     ./run_qa_generator.sh stop
