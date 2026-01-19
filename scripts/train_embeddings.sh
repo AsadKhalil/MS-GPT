@@ -130,7 +130,14 @@ start_training() {
     LOG_FILE="${LOG_DIR}/training_${TIMESTAMP}.log"
     
     # Build command
-    CMD="python -u -m src.embedding_trainers.streaming_finetuner --config $CONFIG"
+    # Use Python from virtual environment
+    PYTHON="${PROJECT_DIR}/.venv/bin/python"
+    if [ ! -f "$PYTHON" ]; then
+        echo -e "${YELLOW}Warning: .venv not found, using system python${NC}"
+        PYTHON="python"
+    fi
+    
+    CMD="$PYTHON -u -m src.embedding_trainers.streaming_finetuner --config $CONFIG"
     
     if [ -n "$SUBSET" ]; then
         CMD="$CMD --subset_size $SUBSET"
@@ -214,7 +221,14 @@ resume_training() {
     LOG_FILE="${LOG_DIR}/training_resume_${TIMESTAMP}.log"
     
     # Build command with --resume flag
-    CMD="python -u -m src.embedding_trainers.streaming_finetuner --config $CONFIG --resume"
+    # Use Python from virtual environment
+    PYTHON="${PROJECT_DIR}/.venv/bin/python"
+    if [ ! -f "$PYTHON" ]; then
+        echo -e "${YELLOW}Warning: .venv not found, using system python${NC}"
+        PYTHON="python"
+    fi
+    
+    CMD="$PYTHON -u -m src.embedding_trainers.streaming_finetuner --config $CONFIG --resume"
     CMD="$CMD $EXTRA_ARGS"
     
     echo -e "${GREEN}Resuming training from checkpoint...${NC}"
