@@ -1,42 +1,57 @@
 {
-  "input_jsonl": "data/qa_outputs/jsonl/questions_answers.jsonl",
-  "output_dir": "models/fine_tuned_embeddings",
-  "log_file": "logs/embedding_finetuning.log",
-  "progress_file": "training_progress.json",
-  "metrics_file": "training_metrics.jsonl",
+  "_comment": "Streaming Embedding Fine-Tuner Configuration",
+  
+  "input_jsonl": "/home/asad/output_consolidated/consolidated_qa.jsonl",
+  "output_dir": "/home/asad/models/fine_tuned_embeddings",
+  "checkpoint_dir": "/home/asad/models/fine_tuned_embeddings/checkpoints",
+  "log_file": "/home/asad/output_consolidated/models/logs/streaming_finetuning.log",
   
   "base_model": "sentence-transformers/all-MiniLM-L6-v2",
-  "max_seq_length": 384,
+  "max_seq_length": 256,
   
-  "train_batch_size": 16,
-  "eval_batch_size": 16,
-  "num_epochs": 3,
-  "warmup_steps": 500,
-  "evaluation_steps": 1000,
-  "save_steps": 1000,
+  "streaming": true,
+  "num_epochs": 1,
+  "train_batch_size": 64,
+  "eval_batch_size": 32,
   "learning_rate": 2e-5,
-  "train_split": 0.9,
+  "warmup_ratio": 0.05,
+  "gradient_accumulation_steps": 4,
+  
+  "train_ratio": 0.85,
+  "val_ratio": 0.10,
+  "test_ratio": 0.05,
+  
+  "min_question_length": 10,
+  "max_question_length": 256,
+  "min_answer_length": 20,
+  "max_answer_length": 512,
+  "clean_answers": true,
+  
+  "eval_sample_size": 5000,
+  "checkpoint_save_limit": 3,
+  
   "loss_function": "MultipleNegativesRankingLoss",
   
-  "_comments": {
-    "base_model_options": [
-      "sentence-transformers/all-MiniLM-L6-v2 (lightweight, fast)",
-      "sentence-transformers/all-mpnet-base-v2 (higher quality)",
-      "sentence-transformers/multi-qa-MiniLM-L6-cos-v1 (optimized for Q&A)",
-      "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 (multilingual)"
-    ],
-    "loss_function_options": [
-      "MultipleNegativesRankingLoss (recommended for Q&A pairs)",
-      "ContrastiveLoss (for similarity learning)",
-      "CosineSimilarityLoss (direct similarity)",
-      "OnlineContrastiveLoss (with online hard negative mining)"
-    ],
-    "training_tips": [
-      "Increase batch_size if you have more GPU memory",
-      "Increase num_epochs for better convergence (3-5 typical)",
-      "Adjust warmup_steps to 10% of total training steps",
-      "Use train_split to control validation set size"
-    ]
+  "subset_size": null,
+  
+  "_model_options": {
+    "lightweight": "sentence-transformers/all-MiniLM-L6-v2",
+    "high_quality": "sentence-transformers/all-mpnet-base-v2",
+    "qa_optimized": "sentence-transformers/multi-qa-MiniLM-L6-cos-v1",
+    "multilingual": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+  },
+  
+  "_training_tips": [
+    "For 1M+ pairs: use num_epochs=1, larger batch size",
+    "Start with subset_size=200000 to validate pipeline",
+    "Increase gradient_accumulation_steps if GPU memory limited",
+    "Use warmup_ratio=0.05 to 0.10 for stable training"
+  ],
+  
+  "_data_split_info": {
+    "train": "85% of data (hash % 100 < 85)",
+    "val": "10% of data (85 <= hash % 100 < 95)", 
+    "test": "5% of data (hash % 100 >= 95)",
+    "note": "Splits are deterministic based on record ID hash"
   }
 }
-
