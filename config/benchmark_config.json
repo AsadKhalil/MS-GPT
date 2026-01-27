@@ -1,0 +1,58 @@
+{
+  "_comment": "MSQA-Bench Configuration",
+  
+  "dataset": {
+    "input_qa_file": "data/consolidated_qa.jsonl",
+    "text_dir": "data/extracted_text/bulk_40k",
+    "output_dir": "benchmark",
+    
+    "splits": {
+      "train_ratio": 0.85,
+      "val_ratio": 0.10,
+      "test_ratio": 0.05,
+      "seed": 42
+    },
+    
+    "quality_filters": {
+      "min_question_length": 15,
+      "max_question_length": 500,
+      "min_answer_length": 20,
+      "max_answer_length": 2000,
+      "min_quality_score": 0.4,
+      "deduplicate": true
+    }
+  },
+  
+  "metadata": {
+    "use_api": false,
+    "cache_dir": "benchmark/metadata_cache"
+  },
+  
+  "retrieval": {
+    "models": [
+      {"name": "BM25", "type": "bm25"},
+      {"name": "all-MiniLM-L6-v2", "type": "embedding", "path": "sentence-transformers/all-MiniLM-L6-v2"},
+      {"name": "MSQA-MiniLM", "type": "embedding", "path": "models/fine_tuned_embeddings/final_model"}
+    ],
+    "top_k": 20,
+    "eval_sample_size": 5000
+  },
+  
+  "rag": {
+    "generator_model": "Qwen/Qwen2.5-14B-Instruct-AWQ",
+    "generator_base_url": "http://localhost:8000/v1",
+    "top_k": 5,
+    "modes": ["standard", "cite", "abstain"]
+  },
+  
+  "annotation": {
+    "target_size": 500,
+    "output_format": "csv",
+    "guidelines_file": "benchmark/gold/annotation_guidelines.md"
+  },
+  
+  "paper": {
+    "tables_dir": "paper/figures/tables",
+    "figures_dir": "paper/figures/plots"
+  }
+}
