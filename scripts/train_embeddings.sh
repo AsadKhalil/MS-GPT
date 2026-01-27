@@ -98,7 +98,16 @@ is_running() {
 
 # Function to get latest log file
 get_latest_log() {
-    ls -t "$LOG_DIR"/training_*.log 2>/dev/null | head -1
+    # Check for active training log first
+    if [ -f "${LOG_DIR}/training.logfile" ]; then
+        ACTIVE_LOG=$(cat "${LOG_DIR}/training.logfile")
+        if [ -f "$ACTIVE_LOG" ]; then
+            echo "$ACTIVE_LOG"
+            return
+        fi
+    fi
+    # Fallback to latest log
+    ls -t "$LOG_DIR"/training*.log 2>/dev/null | head -1
 }
 
 # Function to show GPU info
@@ -400,13 +409,31 @@ show_logs() {
 
 # Train all models
 train_all_models() {
+    if is_running; then
+        echo -e "${YELLOW}Training is already running (PID: $(cat $PID_FILE))${NC}"
+        echo "Use './scripts/train_embeddings.sh status' to check progress"
+        echo "Use './scripts/train_embeddings.sh stop' to stop current training"
+        exit 1
+    fi
+    
+    # Check if config exists
+    if [ ! -f "$CONFIG" ]; then
+        echo -e "${RED}Config file not found: $CONFIG${NC}"
+        exit 1
+    fi
+    
+    # Generate log filename
+    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+    LOG_FILE="${LOG_DIR}/training_all_models_${TIMESTAMP}.log"
+    
+    # Build command
     PYTHON="${PROJECT_DIR}/.venv/bin/python"
     if [ ! -f "$PYTHON" ]; then
         echo -e "${YELLOW}Warning: .venv not found, using system python${NC}"
         PYTHON="python"
     fi
     
-    CMD="$PYTHON -u scripts/train_all_models.py --config $CONFIG"
+    CMD="$PYTHON -u scripts/train_all_models.py --config $CONFIG --yes"
     
     if [ -n "$SUBSET" ]; then
         CMD="$CMD --subset $SUBSET"
@@ -418,8 +445,9 @@ train_all_models() {
     
     CMD="$CMD $EXTRA_ARGS"
     
-    echo -e "${GREEN}Training all models from config...${NC}"
+    echo -e "${GREEN}Starting multi-model training...${NC}"
     echo "  Config: $CONFIG"
+    echo "  Log file: $LOG_FILE"
     if [ -n "$SUBSET" ]; then
         echo "  Subset: $SUBSET examples"
     fi
@@ -428,15 +456,52 @@ train_all_models() {
     fi
     echo ""
     
+    show_gpu_info
+    echo ""
+    
+    # Start training in background
     cd "$PROJECT_DIR"
     
     # Set GPU if specified
     if [ -n "$GPU_ID" ]; then
         export CUDA_VISIBLE_DEVICES="$GPU_ID"
+        echo "Using GPU $GPU_ID (CUDA_VISIBLE_DEVICES=$GPU_ID)"
     fi
     
-    # Run training (foreground for multi-model training)
-    $CMD
+    nohup env CUDA_VISIBLE_DEVICES="${GPU_ID:-}" $CMD > "$LOG_FILE" 2>&1 &
+    PID=$!
+    echo $PID > "$PID_FILE"
+    
+    # Save GPU info for status command
+    echo "$GPU_ID" > "${LOG_DIR}/training.gpu"
+    
+    # Save log file path for status command
+    echo "$LOG_FILE" > "${LOG_DIR}/training.logfile"
+    
+    echo -e "${GREEN}Multi-model training started!${NC}"
+    echo "  PID: $PID"
+    echo "  Log: $LOG_FILE"
+    if [ -n "$GPU_ID" ]; then
+        echo "  GPU: $GPU_ID"
+    fi
+    echo ""
+    echo "Commands:"
+    echo "  ./scripts/train_embeddings.sh status  - Check progress"
+    echo "  ./scripts/train_embeddings.sh logs    - View live logs"
+    echo "  ./scripts/train_embeddings.sh stop    - Stop training"
+    
+    # Show initial log output
+    echo ""
+    echo -e "${BLUE}Initial output (Ctrl+C to detach):${NC}"
+    sleep 2
+    tail -f "$LOG_FILE" &
+    TAIL_PID=$!
+    
+    # Wait a bit then kill tail
+    sleep 5
+    kill $TAIL_PID 2>/dev/null || true
+    echo ""
+    echo -e "${GREEN}Training is running in background.${NC}"
 }
 
 # Show help

@@ -115,6 +115,10 @@ def train_model(
     final_model_path = Path(output_dir) / "final_model"
     if final_model_path.exists():
         logger.warning(f"Model already exists at {final_model_path}")
+        # Skip prompt if running non-interactively
+        if not sys.stdin.isatty():
+            logger.info(f"Skipping {model_name} (already exists)")
+            return True
         response = input(f"Skip {model_name}? (y/n): ").strip().lower()
         if response == 'y':
             logger.info(f"Skipping {model_name}")
@@ -215,6 +219,12 @@ def main():
         action="store_true",
         help="Skip models that already have final_model directory"
     )
+    parser.add_argument(
+        "--yes",
+        "-y",
+        action="store_true",
+        help="Skip confirmation prompts (for background execution)"
+    )
     
     args = parser.parse_args()
     
@@ -264,12 +274,16 @@ def main():
         logger.info(f"GPU: {args.gpu}")
     logger.info("=" * 80)
     
-    # Confirm
-    if not args.skip_existing:
-        response = input("\nProceed with training? (y/n): ").strip().lower()
-        if response != 'y':
-            logger.info("Cancelled")
-            sys.exit(0)
+    # Confirm (skip if --yes flag or running non-interactively)
+    if not args.skip_existing and not args.yes:
+        # Check if running in background (no TTY)
+        if sys.stdin.isatty():
+            response = input("\nProceed with training? (y/n): ").strip().lower()
+            if response != 'y':
+                logger.info("Cancelled")
+                sys.exit(0)
+        else:
+            logger.info("Running non-interactively, proceeding automatically...")
     
     # Train each model
     results = {}
