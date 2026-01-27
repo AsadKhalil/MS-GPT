@@ -1,0 +1,43 @@
+{
+  "completed": true,
+  "completed_at": "2026-01-19T16:29:21.074848Z",
+  "started_at": "2026-01-19T15:59:43.524705Z",
+  "base_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "num_epochs": 1,
+  "train_examples": 1011803,
+  "test_results": {
+    "recall@1": 0.816,
+    "recall@5": 0.9026,
+    "recall@10": 0.926,
+    "mrr@10": 0.8541255429827439,
+    "ndcg@10": 0.8694677503226304,
+    "map@10": 0.8541255429827439,
+    "num_queries": 5000,
+    "num_corpus": 5000
+  },
+  "metrics_history": [
+    {
+      "epoch": 0,
+      "step": 0,
+      "type": "base_model",
+      "score": {
+        "qa_retrieval_cosine_accuracy@1": 0.673,
+        "qa_retrieval_cosine_accuracy@5": 0.7656,
+        "qa_retrieval_cosine_accuracy@10": 0.7926,
+        "qa_retrieval_cosine_precision@1": 0.673,
+        "qa_retrieval_cosine_precision@5": 0.15312,
+        "qa_retrieval_cosine_precision@10": 0.07926,
+        "qa_retrieval_cosine_recall@1": 0.673,
+        "qa_retrieval_cosine_recall@5": 0.7656,
+        "qa_retrieval_cosine_recall@10": 0.7926,
+        "qa_retrieval_cosine_ndcg@10": 0.7329816810155957,
+        "qa_retrieval_cosine_mrr@1": 0.673,
+        "qa_retrieval_cosine_mrr@5": 0.7103933333333337,
+        "qa_retrieval_cosine_mrr@10": 0.7139307142857143,
+        "qa_retrieval_cosine_map@10": 0.7139307142857143
+      },
+      "timestamp": "2026-01-19T19:00:49.374026Z"
+    }
+  ],
+  "final_model_path": "/home/asad/models/fine_tuned_embeddings/final_model"
+}

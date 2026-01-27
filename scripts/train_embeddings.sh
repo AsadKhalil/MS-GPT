@@ -398,6 +398,47 @@ show_logs() {
     tail -f "$LATEST_LOG"
 }
 
+# Train all models
+train_all_models() {
+    PYTHON="${PROJECT_DIR}/.venv/bin/python"
+    if [ ! -f "$PYTHON" ]; then
+        echo -e "${YELLOW}Warning: .venv not found, using system python${NC}"
+        PYTHON="python"
+    fi
+    
+    CMD="$PYTHON -u scripts/train_all_models.py --config $CONFIG"
+    
+    if [ -n "$SUBSET" ]; then
+        CMD="$CMD --subset $SUBSET"
+    fi
+    
+    if [ -n "$GPU_ID" ]; then
+        CMD="$CMD --gpu $GPU_ID"
+    fi
+    
+    CMD="$CMD $EXTRA_ARGS"
+    
+    echo -e "${GREEN}Training all models from config...${NC}"
+    echo "  Config: $CONFIG"
+    if [ -n "$SUBSET" ]; then
+        echo "  Subset: $SUBSET examples"
+    fi
+    if [ -n "$GPU_ID" ]; then
+        echo "  GPU: $GPU_ID"
+    fi
+    echo ""
+    
+    cd "$PROJECT_DIR"
+    
+    # Set GPU if specified
+    if [ -n "$GPU_ID" ]; then
+        export CUDA_VISIBLE_DEVICES="$GPU_ID"
+    fi
+    
+    # Run training (foreground for multi-model training)
+    $CMD
+}
+
 # Show help
 show_help() {
     echo "Embedding Fine-Tuning Training Script"
@@ -411,6 +452,7 @@ show_help() {
     echo "  status  Show training status and progress"
     echo "  logs    Show live training logs"
     echo "  resume  Resume training from checkpoint"
+    echo "  all     Train all models from config (sequential)"
     echo "  help    Show this help message"
     echo ""
     echo "Options:"
@@ -419,8 +461,17 @@ show_help() {
     echo "  --gpu ID         Use specific GPU (0, 1, 2, etc.)"
     echo ""
     echo "Examples:"
-    echo "  # Start training"
+    echo "  # Start training single model"
     echo "  ./scripts/train_embeddings.sh start"
+    echo ""
+    echo "  # Train all models from config"
+    echo "  ./scripts/train_embeddings.sh all"
+    echo ""
+    echo "  # Train all models with subset for testing"
+    echo "  ./scripts/train_embeddings.sh all --subset 10000"
+    echo ""
+    echo "  # Train all models on specific GPU"
+    echo "  ./scripts/train_embeddings.sh all --gpu 2"
     echo ""
     echo "  # Start with subset for quick test"
     echo "  ./scripts/train_embeddings.sh start --subset 10000"
@@ -451,6 +502,9 @@ case $COMMAND in
         ;;
     resume)
         resume_training
+        ;;
+    all)
+        train_all_models
         ;;
     help|--help|-h)
         show_help

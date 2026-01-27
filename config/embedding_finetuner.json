@@ -6,8 +6,8 @@
   "checkpoint_dir": "/home/asad/models/fine_tuned_embeddings/checkpoints",
   "log_file": "/home/asad/output_consolidated/models/logs/streaming_finetuning.log",
   
-  "base_model": "sentence-transformers/all-MiniLM-L6-v2",
-  "max_seq_length": 256,
+  "base_model": "nomic-ai/nomic-embed-text-v1.5",
+  "max_seq_length": 8192,
   
   "streaming": true,
   "num_epochs": 1,
@@ -38,8 +38,63 @@
     "lightweight": "sentence-transformers/all-MiniLM-L6-v2",
     "high_quality": "sentence-transformers/all-mpnet-base-v2",
     "qa_optimized": "sentence-transformers/multi-qa-MiniLM-L6-cos-v1",
-    "multilingual": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    "multilingual": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "nomic_v1": "nomic-ai/nomic-embed-text-v1",
+    "nomic_v1.5": "nomic-ai/nomic-embed-text-v1.5"
   },
+  
+  "models_to_train": [
+    {
+      "name": "e5_large_v2",
+      "model_path": "intfloat/e5-large-v2",
+      "max_seq_length": 512,
+      "requires_instruction_prefix": true,
+      "query_prefix": "query:",
+      "document_prefix": "passage:",
+      "trust_remote_code": false,
+      "enabled": true
+    },
+    {
+      "name": "bge_large_en_v1.5",
+      "model_path": "BAAI/bge-large-en-v1.5",
+      "max_seq_length": 512,
+      "requires_instruction_prefix": false,
+      "query_prefix": null,
+      "document_prefix": null,
+      "trust_remote_code": false,
+      "enabled": true
+    },
+    {
+      "name": "nomic_embed_v1.5",
+      "model_path": "nomic-ai/nomic-embed-text-v1.5",
+      "max_seq_length": 8192,
+      "requires_instruction_prefix": true,
+      "query_prefix": "search_query:",
+      "document_prefix": "search_document:",
+      "trust_remote_code": true,
+      "enabled": true
+    },
+    {
+      "name": "e5_base_v2",
+      "model_path": "intfloat/e5-base-v2",
+      "max_seq_length": 512,
+      "requires_instruction_prefix": true,
+      "query_prefix": "query:",
+      "document_prefix": "passage:",
+      "trust_remote_code": false,
+      "enabled": true
+    },
+    {
+      "name": "bge_base_en_v1.5",
+      "model_path": "BAAI/bge-base-en-v1.5",
+      "max_seq_length": 512,
+      "requires_instruction_prefix": false,
+      "query_prefix": null,
+      "document_prefix": null,
+      "trust_remote_code": false,
+      "enabled": true
+    }
+  ],
   
   "_training_tips": [
     "For 1M+ pairs: use num_epochs=1, larger batch size",
