@@ -91,7 +91,8 @@ def train_model(
     base_config: Dict,
     project_dir: Path,
     subset_size: Optional[int] = None,
-    gpu_id: Optional[int] = None
+    gpu_id: Optional[int] = None,
+    force_cpu: bool = False
 ) -> bool:
     """
     Train a single model using streaming_finetuner.
@@ -145,9 +146,12 @@ def train_model(
     if subset_size:
         cmd.extend(["--subset_size", str(subset_size)])
     
-    # Set GPU if specified
+    # Set GPU/CPU
     env = {}
-    if gpu_id is not None:
+    if force_cpu:
+        env['CUDA_VISIBLE_DEVICES'] = ''
+        logger.info("Forcing CPU usage")
+    elif gpu_id is not None:
         env['CUDA_VISIBLE_DEVICES'] = str(gpu_id)
         logger.info(f"Using GPU: {gpu_id}")
     
@@ -157,10 +161,15 @@ def train_model(
         logger.info(f"Output directory: {output_dir}")
         logger.info(f"Command: {' '.join(cmd)}")
         
+        # Merge environment variables properly
+        merged_env = os.environ.copy()
+        if env:
+            merged_env.update(env)
+        
         result = subprocess.run(
             cmd,
             cwd=str(project_dir),
-            env={**os.environ, **env} if env else None,
+            env=merged_env,
             check=True
         )
         
@@ -213,6 +222,11 @@ def main():
         type=int,
         default=None,
         help="GPU ID to use"
+    )
+    parser.add_argument(
+        "--cpu",
+        action="store_true",
+        help="Force CPU usage (useful if GPU has compatibility issues)"
     )
     parser.add_argument(
         "--skip-existing",
@@ -270,7 +284,9 @@ def main():
         logger.info(f"  {i}. {model['name']} ({model['model_path']})")
     if args.subset:
         logger.info(f"Subset size: {args.subset}")
-    if args.gpu is not None:
+    if args.cpu:
+        logger.info("Mode: CPU (forced)")
+    elif args.gpu is not None:
         logger.info(f"GPU: {args.gpu}")
     logger.info("=" * 80)
     
@@ -310,7 +326,8 @@ def main():
                 config,
                 project_dir,
                 subset_size=args.subset,
-                gpu_id=args.gpu
+                gpu_id=args.gpu,
+                force_cpu=args.cpu
             )
             results[model_name] = {
                 'status': 'success' if success else 'failed',

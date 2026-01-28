@@ -204,8 +204,24 @@ class StreamingEmbeddingFinetuner:
         """Determine device for training."""
         if torch.cuda.is_available():
             device = "cuda"
-            logger.info(f"Using CUDA: {torch.cuda.get_device_name(0)}")
-            logger.info(f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.1f} GB")
+            # Get the actual device index (0 when CUDA_VISIBLE_DEVICES is set)
+            device_idx = 0
+            gpu_name = torch.cuda.get_device_name(device_idx)
+            gpu_props = torch.cuda.get_device_properties(device_idx)
+            
+            # Check compute capability
+            compute_cap = gpu_props.major * 10 + gpu_props.minor
+            logger.info(f"Using CUDA device {device_idx}: {gpu_name}")
+            logger.info(f"GPU Memory: {gpu_props.total_memory / 1e9:.1f} GB")
+            logger.info(f"Compute Capability: {gpu_props.major}.{gpu_props.minor} (sm_{gpu_props.major}{gpu_props.minor})")
+            
+            # Warn if compute capability might be too low
+            if compute_cap < 70:
+                logger.warning(
+                    f"GPU compute capability {gpu_props.major}.{gpu_props.minor} may not be supported by this PyTorch build. "
+                    f"PyTorch typically requires compute capability 7.0+. "
+                    f"If you get CUDA errors, install PyTorch compiled for your GPU architecture."
+                )
         else:
             device = "cpu"
             logger.warning("No GPU detected, using CPU (training will be slow)")

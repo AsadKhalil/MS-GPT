@@ -409,6 +409,9 @@ show_logs() {
 
 # Train all models
 train_all_models() {
+    # Force all-model training to use GPU 2 (RTX 3090 Ti)
+    GPU_ID="2"
+
     if is_running; then
         echo -e "${YELLOW}Training is already running (PID: $(cat $PID_FILE))${NC}"
         echo "Use './scripts/train_embeddings.sh status' to check progress"
@@ -443,6 +446,11 @@ train_all_models() {
         CMD="$CMD --gpu $GPU_ID"
     fi
     
+    # Check for --cpu flag in extra args
+    if [[ "$EXTRA_ARGS" == *"--cpu"* ]]; then
+        CMD="$CMD --cpu"
+    fi
+    
     CMD="$CMD $EXTRA_ARGS"
     
     echo -e "${GREEN}Starting multi-model training...${NC}"
@@ -451,7 +459,9 @@ train_all_models() {
     if [ -n "$SUBSET" ]; then
         echo "  Subset: $SUBSET examples"
     fi
-    if [ -n "$GPU_ID" ]; then
+    if [[ "$EXTRA_ARGS" == *"--cpu"* ]]; then
+        echo "  Mode: CPU (forced)"
+    elif [ -n "$GPU_ID" ]; then
         echo "  GPU: $GPU_ID"
     fi
     echo ""
@@ -462,18 +472,33 @@ train_all_models() {
     # Start training in background
     cd "$PROJECT_DIR"
     
-    # Set GPU if specified
-    if [ -n "$GPU_ID" ]; then
+    # Set GPU/CPU environment
+    if [[ "$EXTRA_ARGS" == *"--cpu"* ]]; then
+        export CUDA_VISIBLE_DEVICES=""
+        echo "Forcing CPU usage (CUDA_VISIBLE_DEVICES='')"
+        ENV_VARS="CUDA_VISIBLE_DEVICES="
+    elif [ -n "$GPU_ID" ]; then
         export CUDA_VISIBLE_DEVICES="$GPU_ID"
         echo "Using GPU $GPU_ID (CUDA_VISIBLE_DEVICES=$GPU_ID)"
+        ENV_VARS="CUDA_VISIBLE_DEVICES=$GPU_ID"
+    else
+        ENV_VARS=""
     fi
     
-    nohup env CUDA_VISIBLE_DEVICES="${GPU_ID:-}" $CMD > "$LOG_FILE" 2>&1 &
+    if [ -n "$ENV_VARS" ]; then
+        nohup env $ENV_VARS $CMD > "$LOG_FILE" 2>&1 &
+    else
+        nohup $CMD > "$LOG_FILE" 2>&1 &
+    fi
     PID=$!
     echo $PID > "$PID_FILE"
     
     # Save GPU info for status command
-    echo "$GPU_ID" > "${LOG_DIR}/training.gpu"
+    if [[ "$EXTRA_ARGS" == *"--cpu"* ]]; then
+        echo "cpu" > "${LOG_DIR}/training.gpu"
+    else
+        echo "$GPU_ID" > "${LOG_DIR}/training.gpu"
+    fi
     
     # Save log file path for status command
     echo "$LOG_FILE" > "${LOG_DIR}/training.logfile"
