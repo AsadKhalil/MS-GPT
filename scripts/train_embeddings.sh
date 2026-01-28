@@ -37,6 +37,11 @@
 
 set -e
 
+# Ensure CUDA device ordering matches nvidia-smi indices (by PCI bus id).
+# Without this, CUDA device ordinals may not match `nvidia-smi` index numbers,
+# so CUDA_VISIBLE_DEVICES=2 might not be the RTX 3090 Ti.
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
+
 # Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"

@@ -148,6 +148,8 @@ def train_model(
     
     # Set GPU/CPU
     env = {}
+    # Make CUDA ordinals match `nvidia-smi` indices (PCI bus order)
+    env["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     if force_cpu:
         env['CUDA_VISIBLE_DEVICES'] = ''
         logger.info("Forcing CPU usage")
