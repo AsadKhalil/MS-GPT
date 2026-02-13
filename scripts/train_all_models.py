@@ -61,6 +61,12 @@ def create_model_config(base_config: Dict, model_config: Dict, output_dir: str) 
     model_specific_config['max_seq_length'] = model_config['max_seq_length']
     model_specific_config['output_dir'] = output_dir
     model_specific_config['checkpoint_dir'] = str(Path(output_dir) / "checkpoints")
+
+    # Optional: per-model training overrides (batch size, eval batch, grad accumulation)
+    # If these keys are present on the model entry, they will override the global config
+    for key in ["train_batch_size", "eval_batch_size", "gradient_accumulation_steps"]:
+        if key in model_config:
+            model_specific_config[key] = model_config[key]
     
     # Update log file to be model-specific
     log_file = Path(base_config.get('log_file', 'logs/streaming_finetuning.log'))

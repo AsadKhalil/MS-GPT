@@ -194,9 +194,6 @@ Commands:
 /home/asad/extracted_text
 /tear/dasulimov/home_folder/mass_spec_papers_multi
 
-
-Script Monitor
-Commands:
-  Monitor:  tail -f logs/qa_generator_20260106_234215.out
-  Progress: ./run_qa_generator.sh status
-  Stop:     ./run_qa_generator.sh stop
+ Config: /home/asad/MS-GPT/config/embedding_finetuner.json
+  Log file: /home/asad/MS-GPT/logs/training_all_models_20260128_152623.log
+  GPU: 2
