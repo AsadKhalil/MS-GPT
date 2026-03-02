@@ -61,6 +61,8 @@ class TrainingConfig:
     # Model
     base_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     max_seq_length: int = 256
+    # HuggingFace / SentenceTransformer options
+    trust_remote_code: bool = False
     
     # Training
     num_epochs: int = 1
@@ -226,6 +228,17 @@ class StreamingEmbeddingFinetuner:
             device = "cpu"
             logger.warning("No GPU detected, using CPU (training will be slow)")
         return device
+
+    def _create_sentence_transformer(self, model_name_or_path: str) -> SentenceTransformer:
+        """
+        Create a SentenceTransformer instance, respecting config options.
+        
+        trust_remote_code is required for some HF repos (e.g., nomic-ai models).
+        """
+        model_kwargs = {}
+        if getattr(self.config, "trust_remote_code", False):
+            model_kwargs["trust_remote_code"] = True
+        return SentenceTransformer(model_name_or_path, device=self.device, **model_kwargs)
     
     def setup_logging(self) -> None:
         """Configure logging."""
@@ -416,7 +429,7 @@ class StreamingEmbeddingFinetuner:
         
         # Load model
         model_path = checkpoint_path / "model"
-        self.model = SentenceTransformer(str(model_path), device=self.device)
+        self.model = self._create_sentence_transformer(str(model_path))
         self.model.max_seq_length = self.config.max_seq_length
         
         # Restore state
@@ -509,7 +522,7 @@ class StreamingEmbeddingFinetuner:
         # Load model if not loaded from checkpoint
         if self.model is None:
             logger.info(f"Loading base model: {self.config.base_model}")
-            self.model = SentenceTransformer(self.config.base_model, device=self.device)
+            self.model = self._create_sentence_transformer(self.config.base_model)
             self.model.max_seq_length = self.config.max_seq_length
         
         # Count training examples (streaming - may take a moment)

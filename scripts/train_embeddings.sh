@@ -42,6 +42,9 @@ set -e
 # so CUDA_VISIBLE_DEVICES=2 might not be the RTX 3090 Ti.
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
 
+# Help PyTorch reduce CUDA memory fragmentation (recommended in OOM message)
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
 # Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
