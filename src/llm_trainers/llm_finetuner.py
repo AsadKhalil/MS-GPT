@@ -435,7 +435,6 @@ class LLMFineTuner:
             train_dataset=train_dataset,
             eval_dataset=val_dataset,
             processing_class=self.tokenizer,
-            max_seq_length=self.config.max_seq_length,
         )
 
         # 8 - Train
