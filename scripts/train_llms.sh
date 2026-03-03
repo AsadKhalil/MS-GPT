@@ -149,7 +149,7 @@ start_training() {
     fi
 
     # shellcheck disable=SC2086
-    nohup bash -c "$CMD" > \"$LOG_FILE\" 2>&1 &
+    nohup bash -c "$CMD" > "$LOG_FILE" 2>&1 &
     PID=$!
     echo "$PID" > "$PID_FILE"
     echo "$LOG_FILE" > "$ACTIVE_LOG_FILE"

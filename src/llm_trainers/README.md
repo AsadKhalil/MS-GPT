@@ -1,5 +1,4 @@
-LLM Trainers (`src/llm_trainers/`)
-===================================
+# LLM Trainers (`src/llm_trainers/`)
 
 This module provides a QLoRA-based fine-tuning pipeline for open‑source LLMs on the scientific Q&A data in `data/consolidated_qa.jsonl`. It mirrors the structure of `src/embedding_trainers/`.
 
@@ -28,9 +27,9 @@ This will, for each model in `models_to_train`:
 
 1. Create a model‑specific config (overriding base model name, batch size, etc.).
 2. Fine‑tune the model with QLoRA adapters saved in:
-   - `models/fine_tuned_llms/<model_name>/final_adapter/`
+  - `models/fine_tuned_llms/<model_name>/final_adapter/`
 3. Run evaluation on the test split and store metrics in:
-   - `models/fine_tuned_llms/<model_name>/eval_results_test.json`
+  - `models/fine_tuned_llms/<model_name>/eval_results_test.json`
 
 After at least two models are trained, a cross‑model comparison report is written to:
 
@@ -77,3 +76,8 @@ For each fine‑tuned LLM, you will find:
 - `eval_results_test.json`: aggregate metrics (ROUGE, BERTScore, F1, EM, faithfulness, perplexity).
 - `predictions_test.jsonl`: per‑sample question, reference, and generated answer for inspection.
 
+
+
+
+
+/home/asad/MS-GPT/logs/llm_training_20260303_135435.log
