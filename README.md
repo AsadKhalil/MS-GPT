@@ -197,3 +197,12 @@ Commands:
  Config: /home/asad/MS-GPT/config/embedding_finetuner.json
   Log file: /home/asad/MS-GPT/logs/training_all_models_20260128_152623.log
   GPU: 2
+
+
+LATEST train embedding logs  24-02-2026
+Using GPU 2 (CUDA_VISIBLE_DEVICES=2)
+Multi-model training started!
+  PID: 3059428
+  Log: /home/asad/MS-GPT/logs/training_all_models_20260224_170410.log
+  GPU: 2
+

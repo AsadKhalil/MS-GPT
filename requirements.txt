@@ -15,6 +15,23 @@ langchain-community>=0.3.0  # Community integrations
 pandas>=2.0.0            # Data manipulation (if needed for analysis)
 numpy>=1.24.0            # Numerical operations (used by PIL and PyMuPDF)
 
+# Embedding model fine-tuning
+sentence-transformers>=2.7.0  # Embedding model training
+
+# LLM fine-tuning (QLoRA)
+transformers>=4.40.0     # HuggingFace model loading
+peft>=0.10.0             # LoRA/QLoRA adapters
+trl>=0.8.0               # SFTTrainer for instruction tuning
+bitsandbytes>=0.43.0     # 4-bit quantization
+accelerate>=0.30.0       # Training acceleration
+datasets>=2.19.0         # HuggingFace datasets
+torch>=2.2.0             # PyTorch
+
+# Evaluation metrics
+rouge-score>=0.1.2       # ROUGE metric
+bert-score>=0.3.13       # BERTScore metric
+evaluate>=0.4.0          # HuggingFace evaluate
+
 # Development dependencies (optional)
 pytest>=7.0.0            # Testing framework
 black>=23.0.0            # Code formatting
