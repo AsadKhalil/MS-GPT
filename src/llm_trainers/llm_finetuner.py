@@ -113,6 +113,10 @@ class LLMTrainingConfig:
     logging_steps: int = 10
     eval_strategy: str = "steps"
 
+    # Early stopping
+    early_stopping_patience: Optional[int] = None
+    early_stopping_threshold: float = 0.001
+
     # Generation settings for evaluation
     eval_max_new_tokens: int = 256
     eval_temperature: float = 0.1
@@ -429,6 +433,20 @@ class LLMFineTuner:
         )
 
         # 7 - SFT Trainer
+        callbacks = []
+        if self.config.early_stopping_patience:
+            from transformers import EarlyStoppingCallback
+            callbacks.append(
+                EarlyStoppingCallback(
+                    early_stopping_patience=self.config.early_stopping_patience,
+                    early_stopping_threshold=self.config.early_stopping_threshold,
+                )
+            )
+            logger.info(
+                f"  Early stopping: patience={self.config.early_stopping_patience}, "
+                f"threshold={self.config.early_stopping_threshold}"
+            )
+
         self.trainer = SFTTrainer(
             model=self.model,
             args=training_args,
@@ -436,6 +454,7 @@ class LLMFineTuner:
             eval_dataset=val_dataset,
             processing_class=self.tokenizer,
             max_seq_length=self.config.max_seq_length,
+            callbacks=callbacks if callbacks else None,
         )
 
         # 8 - Train

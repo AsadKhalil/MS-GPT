@@ -76,8 +76,3 @@ For each fine‑tuned LLM, you will find:
 - `eval_results_test.json`: aggregate metrics (ROUGE, BERTScore, F1, EM, faithfulness, perplexity).
 - `predictions_test.jsonl`: per‑sample question, reference, and generated answer for inspection.
 
-
-
-
-
-/home/asad/MS-GPT/logs/llm_training_20260303_135435.log
