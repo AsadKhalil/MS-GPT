@@ -69,7 +69,7 @@
       "per_device_train_batch_size": 4,
       "gradient_accumulation_steps": 4,
       "trust_remote_code": true,
-      "enabled": true,
+      "enabled": false,
       "_note": "Tiny but strong; fast iteration, baseline reference"
     },
     {
