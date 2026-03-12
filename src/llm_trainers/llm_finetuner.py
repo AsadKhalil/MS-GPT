@@ -18,6 +18,7 @@ Usage:
 """
 
 import json
+import os
 import signal
 import logging
 import argparse
@@ -361,8 +362,18 @@ class LLMFineTuner:
 
         Returns the path to the final saved adapter.
         """
-        from transformers import TrainingArguments
-        from trl import SFTTrainer
+        from trl import SFTConfig, SFTTrainer
+
+        # Hugging Face login for gated models (e.g. Llama)
+        hf_token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+        if hf_token:
+            from huggingface_hub import login
+            login(token=hf_token)
+            logger.info("Hugging Face authentication: token from HF_TOKEN/HUGGING_FACE_HUB_TOKEN")
+        else:
+            logger.info(
+                "No HF_TOKEN set. For gated models (e.g. Llama), set: export HF_TOKEN=hf_..."
+            )
 
         logger.info("=" * 70)
         logger.info("STARTING LLM FINE-TUNING (QLoRA)")
@@ -402,8 +413,8 @@ class LLMFineTuner:
         if resume_from_checkpoint is True or resume_from_checkpoint == "auto":
             resume_from_checkpoint = self._find_latest_checkpoint()
 
-        # 6 - Training arguments
-        training_args = TrainingArguments(
+        # 6 - SFTConfig (training args + max_length for sequence truncation)
+        sft_config = SFTConfig(
             output_dir=self.config.output_dir,
             num_train_epochs=self.config.num_epochs,
             per_device_train_batch_size=self.config.per_device_train_batch_size,
@@ -430,6 +441,7 @@ class LLMFineTuner:
             gradient_checkpointing_kwargs={"use_reentrant": False},
             report_to="none",
             remove_unused_columns=False,
+            max_length=self.config.max_seq_length,
         )
 
         # 7 - SFT Trainer
@@ -449,11 +461,10 @@ class LLMFineTuner:
 
         self.trainer = SFTTrainer(
             model=self.model,
-            args=training_args,
+            args=sft_config,
             train_dataset=train_dataset,
             eval_dataset=val_dataset,
             processing_class=self.tokenizer,
-            max_seq_length=self.config.max_seq_length,
             callbacks=callbacks if callbacks else None,
         )
 
