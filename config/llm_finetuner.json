@@ -111,6 +111,16 @@
       "trust_remote_code": true,
       "enabled": true,
       "_note": "Competitive 7B with long context support"
+    },
+    {
+      "name": "deepseek_r1_distill_7b",
+      "model_path": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "max_seq_length": 2048,
+      "per_device_train_batch_size": 2,
+      "gradient_accumulation_steps": 16,
+      "trust_remote_code": true,
+      "enabled": true,
+      "_note": "DeepSeek R1 distilled into Qwen2.5-7B; strong reasoning, 24GB-friendly with QLoRA"
     }
   ],
 
