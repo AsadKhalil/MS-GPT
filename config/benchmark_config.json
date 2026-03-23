@@ -38,13 +38,6 @@
     "eval_sample_size": 5000
   },
   
-  "rag": {
-    "generator_model": "Qwen/Qwen2.5-14B-Instruct-AWQ",
-    "generator_base_url": "http://localhost:8000/v1",
-    "top_k": 5,
-    "modes": ["standard", "cite", "abstain"]
-  },
-  
   "annotation": {
     "target_size": 500,
     "output_format": "csv",

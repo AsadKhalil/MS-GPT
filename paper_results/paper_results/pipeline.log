@@ -1,0 +1,21 @@
+2026-03-18 05:56:23 [INFO] paper_pipeline: Paper pipeline started at 2026-03-18T00:56:23.999441
+2026-03-18 05:56:23 [INFO] paper_pipeline: Output directory: /home/tk-lpt-0806/Desktop/MS(GPT)/paper_results
+2026-03-18 05:56:23 [INFO] paper_pipeline: Running: /home/tk-lpt-0806/Applications/cursor.appimage -m paper.dataset.quality_filters --input /home/tk-lpt-0806/Desktop/MS(GPT)/data/consolidated_qa.jsonl --output /home/tk-lpt-0806/Desktop/MS(GPT)/paper_results/dataset/quality_filtered.jsonl --min-quality 0.4
+2026-03-18 05:56:24 [ERROR] paper_pipeline: Quality filters failed (exit 127)
+2026-03-18 05:56:24 [ERROR] paper_pipeline: stderr: fuse: device not found, try 'modprobe fuse' first
+open dir error: No such file or directory
+
+2026-03-18 05:56:24 [INFO] paper_pipeline: Paper pipeline finished at 2026-03-18T00:56:24.007700
+2026-03-18 05:56:24 [INFO] paper_pipeline: Results saved to /home/tk-lpt-0806/Desktop/MS(GPT)/paper_results
+2026-03-18 05:56:31 [INFO] paper_pipeline: Paper pipeline started at 2026-03-18T00:56:31.224399
+2026-03-18 05:56:31 [INFO] paper_pipeline: Output directory: /home/tk-lpt-0806/Desktop/MS(GPT)/paper_results
+2026-03-18 05:56:31 [INFO] paper_pipeline: Running: /home/tk-lpt-0806/Desktop/MS(GPT)/.venv/bin/python -m paper.dataset.quality_filters --input /home/tk-lpt-0806/Desktop/MS(GPT)/data/consolidated_qa.jsonl --output /home/tk-lpt-0806/Desktop/MS(GPT)/paper_results/dataset/quality_filtered.jsonl --min-quality 0.4
+2026-03-18 05:56:31 [INFO] paper_pipeline: Quality filters completed
+2026-03-18 05:56:31 [INFO] paper_pipeline: Running: /home/tk-lpt-0806/Desktop/MS(GPT)/.venv/bin/python -m paper.dataset.question_classifier --input /home/tk-lpt-0806/Desktop/MS(GPT)/paper_results/dataset/quality_filtered.jsonl --output /home/tk-lpt-0806/Desktop/MS(GPT)/paper_results/dataset/classified.jsonl
+2026-03-18 05:56:31 [INFO] paper_pipeline: Question classifier completed
+2026-03-18 05:56:31 [INFO] paper_pipeline: Running: /home/tk-lpt-0806/Desktop/MS(GPT)/.venv/bin/python -m paper.dataset.schema_enricher --input /home/tk-lpt-0806/Desktop/MS(GPT)/paper_results/dataset/classified.jsonl --output /home/tk-lpt-0806/Desktop/MS(GPT)/paper_results/dataset/enriched.jsonl --text-dir /home/tk-lpt-0806/Desktop/MS(GPT)/data/extracted_text/bulk_40k
+2026-03-18 05:56:32 [INFO] paper_pipeline: Schema enricher completed
+2026-03-18 05:56:32 [INFO] paper_pipeline: Running: /home/tk-lpt-0806/Desktop/MS(GPT)/.venv/bin/python -m paper.dataset.split_generator --input /home/tk-lpt-0806/Desktop/MS(GPT)/paper_results/dataset/enriched.jsonl --output-dir /home/tk-lpt-0806/Desktop/MS(GPT)/paper_results/dataset/splits --train-ratio 0.85 --val-ratio 0.1 --test-ratio 0.05
+2026-03-18 05:56:32 [INFO] paper_pipeline: Split generator completed
+2026-03-18 05:56:32 [INFO] paper_pipeline: Paper pipeline finished at 2026-03-18T00:56:32.404163
+2026-03-18 05:56:32 [INFO] paper_pipeline: Results saved to /home/tk-lpt-0806/Desktop/MS(GPT)/paper_results

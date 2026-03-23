@@ -12,9 +12,10 @@ import re
 import json
 import logging
 import hashlib
+from concurrent.futures import ProcessPoolExecutor
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Set, Tuple
-from dataclasses import dataclass, field
 from collections import defaultdict
 
 logger = logging.getLogger(__name__)
@@ -125,26 +126,27 @@ class QualityFilter:
     5. Trivial question removal
     """
     
-    def __init__(self, config: Optional[FilterConfig] = None):
+    def __init__(self, config: Optional[FilterConfig] = None, build_lsh: bool = True):
         """
         Initialize quality filter.
-        
+
         Args:
             config: Filter configuration
+            build_lsh: If False, skip MinHash LSH (for worker processes that only compute metrics).
         """
         self.config = config or FilterConfig()
-        
+
         # Compile trivial patterns
         self.trivial_patterns = [
-            re.compile(p, re.IGNORECASE) 
+            re.compile(p, re.IGNORECASE)
             for p in self.config.trivial_patterns
         ]
-        
+
         # MinHash LSH for deduplication
         self.lsh: Optional[Any] = None
         self.minhash_cache: Dict[str, Any] = {}
-        
-        if HAS_DATASKETCH:
+
+        if build_lsh and HAS_DATASKETCH:
             self.lsh = MinHashLSH(
                 threshold=self.config.minhash_threshold,
                 num_perm=self.config.minhash_num_perm,
@@ -436,27 +438,71 @@ class QualityFilter:
         return minhash
 
 
+def _quality_metrics_from_dict(d: Dict[str, Any]) -> QualityMetrics:
+    """Reconstruct QualityMetrics from to_dict() output (for parallel workers)."""
+    m = QualityMetrics()
+    for k, v in d.items():
+        if hasattr(m, k):
+            setattr(m, k, v)
+    return m
+
+
+def _quality_subchunk_worker(args: Tuple[List[str], Dict[str, Any]]) -> List[Tuple[Dict[str, Any], Dict[str, Any]]]:
+    """Compute metrics for a list of JSONL lines (no LSH; used in worker process)."""
+    lines, config_dict = args
+    cfg = FilterConfig(**config_dict)
+    qf = QualityFilter(cfg, build_lsh=False)
+    results: List[Tuple[Dict[str, Any], Dict[str, Any]]] = []
+    for line in lines:
+        if not line.strip():
+            continue
+        record = json.loads(line)
+        metrics = qf.compute_metrics(record)
+        results.append((record, metrics.to_dict()))
+    return results
+
+
+def _split_for_parallel(lines: List[str], num_parts: int) -> List[List[str]]:
+    if not lines or num_parts <= 1:
+        return [lines]
+    n = len(lines)
+    base, extra = divmod(n, num_parts)
+    out: List[List[str]] = []
+    start = 0
+    for i in range(num_parts):
+        sz = base + (1 if i < extra else 0)
+        out.append(lines[start : start + sz])
+        start += sz
+    return [x for x in out if x]
+
+
 def run_quality_pipeline(
     input_file: Path,
     output_file: Path,
     config: Optional[FilterConfig] = None,
     deduplicate: bool = True,
+    workers: int = 1,
+    chunk_size: int = 8000,
 ) -> Dict[str, Any]:
     """
     Run the full quality control pipeline on a QA file.
-    
+
     Args:
         input_file: Input JSONL file
         output_file: Output JSONL file (filtered records)
         config: Filter configuration
         deduplicate: Whether to perform deduplication
-        
+        workers: If > 1, parallelize metric computation within each chunk (CPU).
+                 Global MinHash dedup stays sequential for correctness.
+        chunk_size: Lines read per chunk when workers > 1 (limits peak RAM).
+
     Returns:
         Statistics dictionary
     """
+    config = config or FilterConfig()
     qf = QualityFilter(config)
-    
-    stats = {
+
+    stats: Dict[str, Any] = {
         'total': 0,
         'kept': 0,
         'filtered': 0,
@@ -464,28 +510,20 @@ def run_quality_pipeline(
         'duplicates_removed': 0,
         'quality_score_distribution': defaultdict(int),
     }
-    
-    # First pass: build dedup index and compute metrics
+
     records_with_metrics: List[Tuple[Dict, QualityMetrics]] = []
-    
-    logger.info(f"Processing {input_file}...")
-    
-    with input_file.open('r', encoding='utf-8') as f:
-        for line in f:
-            if not line.strip():
-                continue
-            
+
+    logger.info("Processing %s (workers=%s, chunk_size=%s)...", input_file, workers, chunk_size)
+
+    cfg_dict = asdict(config)
+
+    def process_ordered_pairs(pairs: List[Tuple[Dict[str, Any], QualityMetrics]]) -> None:
+        nonlocal stats
+        for record, metrics in pairs:
             stats['total'] += 1
-            record = json.loads(line)
-            
-            # Compute quality metrics
-            metrics = qf.compute_metrics(record)
-            
-            # Check for duplicates
             if deduplicate:
                 question_text = record.get('question', '')
                 record_id = record.get('id', str(stats['total']))
-                
                 is_dup, dup_of = qf.check_duplicate(record_id, question_text)
                 if is_dup:
                     metrics.is_near_duplicate = True
@@ -494,15 +532,59 @@ def run_quality_pipeline(
                     metrics.filter_reasons.append('near_duplicate')
                     stats['duplicates_removed'] += 1
                 else:
-                    # Add to index for future checks
                     qf.add_to_dedup_index(record_id, question_text)
-            
             records_with_metrics.append((record, metrics))
-            
-            # Track quality score distribution
             score_bucket = int(metrics.quality_score * 10) / 10
             stats['quality_score_distribution'][f"{score_bucket:.1f}"] += 1
-    
+
+    if workers <= 1:
+        with input_file.open('r', encoding='utf-8') as f:
+            for line in f:
+                if not line.strip():
+                    continue
+                stats['total'] += 1
+                record = json.loads(line)
+                metrics = qf.compute_metrics(record)
+                if deduplicate:
+                    question_text = record.get('question', '')
+                    record_id = record.get('id', str(stats['total']))
+                    is_dup, dup_of = qf.check_duplicate(record_id, question_text)
+                    if is_dup:
+                        metrics.is_near_duplicate = True
+                        metrics.duplicate_of = dup_of
+                        metrics.should_keep = False
+                        metrics.filter_reasons.append('near_duplicate')
+                        stats['duplicates_removed'] += 1
+                    else:
+                        qf.add_to_dedup_index(record_id, question_text)
+                records_with_metrics.append((record, metrics))
+                score_bucket = int(metrics.quality_score * 10) / 10
+                stats['quality_score_distribution'][f"{score_bucket:.1f}"] += 1
+    else:
+        buf: List[str] = []
+        with input_file.open('r', encoding='utf-8') as f:
+            for line in f:
+                if not line.strip():
+                    continue
+                buf.append(line)
+                if len(buf) >= chunk_size:
+                    subs = _split_for_parallel(buf, workers)
+                    buf = []
+                    merged: List[Tuple[Dict[str, Any], QualityMetrics]] = []
+                    with ProcessPoolExecutor(max_workers=workers) as ex:
+                        for sub in ex.map(_quality_subchunk_worker, [(s, cfg_dict) for s in subs]):
+                            for rec, md in sub:
+                                merged.append((rec, _quality_metrics_from_dict(md)))
+                    process_ordered_pairs(merged)
+            if buf:
+                subs = _split_for_parallel(buf, workers)
+                merged = []
+                with ProcessPoolExecutor(max_workers=workers) as ex:
+                    for sub in ex.map(_quality_subchunk_worker, [(s, cfg_dict) for s in subs]):
+                        for rec, md in sub:
+                            merged.append((rec, _quality_metrics_from_dict(md)))
+                process_ordered_pairs(merged)
+
     # Write filtered records
     output_file.parent.mkdir(parents=True, exist_ok=True)
     
@@ -537,18 +619,33 @@ if __name__ == "__main__":
     parser.add_argument("--output", "-o", required=True, help="Output JSONL file")
     parser.add_argument("--no-dedup", action="store_true", help="Skip deduplication")
     parser.add_argument("--min-quality", type=float, default=0.4, help="Min quality score")
-    
+    parser.add_argument(
+        "--workers",
+        "-w",
+        type=int,
+        default=1,
+        help="Parallel worker processes for metric computation (1=sequential).",
+    )
+    parser.add_argument(
+        "--chunk-size",
+        type=int,
+        default=8000,
+        help="JSONL lines per chunk when workers > 1.",
+    )
+
     args = parser.parse_args()
-    
+
     logging.basicConfig(level=logging.INFO)
-    
+
     config = FilterConfig(min_quality_score=args.min_quality)
-    
+
     stats = run_quality_pipeline(
         Path(args.input),
         Path(args.output),
         config=config,
         deduplicate=not args.no_dedup,
+        workers=max(1, args.workers),
+        chunk_size=max(100, args.chunk_size),
     )
     
     print("\nQuality Filter Statistics:")

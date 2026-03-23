@@ -202,9 +202,9 @@ class EmbeddingRetriever(BaseRetriever):
     """Dense embedding retrieval using sentence-transformers."""
     
     def __init__(
-        self, 
+        self,
         model_name_or_path: str = "sentence-transformers/all-MiniLM-L6-v2",
-        device: str = "cuda",
+        device: str = "cpu",
         batch_size: int = 32,
     ):
         """
@@ -460,12 +460,26 @@ class RetrievalEvaluator:
         return precision_sum / min(len(relevant), k)
 
 
+def _embedding_device(explicit: Optional[str] = None) -> str:
+    """Prefer CUDA when available for sentence-transformers."""
+    if explicit and explicit.lower() not in ("auto", ""):
+        return explicit
+    try:
+        import torch
+
+        return "cuda" if torch.cuda.is_available() else "cpu"
+    except ImportError:
+        return "cpu"
+
+
 def evaluate_retrieval(
     qa_file: Path,
     model_name_or_path: str,
     retriever_type: str = "embedding",
     top_k: int = 20,
     sample_size: Optional[int] = None,
+    device: Optional[str] = "auto",
+    embed_batch_size: int = 64,
 ) -> EvaluationMetrics:
     """
     Convenience function to evaluate retrieval on a QA file.
@@ -516,7 +530,11 @@ def evaluate_retrieval(
     if retriever_type == "bm25":
         retriever = BM25Retriever()
     else:
-        retriever = EmbeddingRetriever(model_name_or_path)
+        retriever = EmbeddingRetriever(
+            model_name_or_path,
+            device=_embedding_device(device),
+            batch_size=embed_batch_size,
+        )
     
     # Evaluate
     evaluator = RetrievalEvaluator(retriever)
@@ -531,6 +549,8 @@ def compare_retrievers(
     top_k: int = 20,
     sample_size: Optional[int] = None,
     output_file: Optional[Path] = None,
+    device: Optional[str] = "auto",
+    embed_batch_size: int = 64,
 ) -> Dict[str, EvaluationMetrics]:
     """
     Compare multiple retrievers on the same data.
@@ -561,6 +581,8 @@ def compare_retrievers(
             retriever_type=retriever_type,
             top_k=top_k,
             sample_size=sample_size,
+            device=device,
+            embed_batch_size=embed_batch_size,
         )
         
         results[name] = metrics
@@ -602,9 +624,21 @@ if __name__ == "__main__":
     parser.add_argument("--model", "-m", default="bm25", 
                        help="Model name/path or 'bm25'")
     parser.add_argument("--sample", "-s", type=int, help="Sample size")
-    parser.add_argument("--compare", action="store_true", 
-                       help="Compare multiple baselines")
-    
+    parser.add_argument("--compare", action="store_true",
+                        help="Compare multiple baselines")
+    parser.add_argument(
+        "--device",
+        "-d",
+        default="auto",
+        help="Embedding device: auto (cuda if available), cuda, cuda:0, or cpu",
+    )
+    parser.add_argument(
+        "--embed-batch-size",
+        type=int,
+        default=64,
+        help="Batch size for corpus/query encoding (GPU)",
+    )
+
     args = parser.parse_args()
     
     logging.basicConfig(level=logging.INFO)
@@ -621,6 +655,8 @@ if __name__ == "__main__":
             models,
             sample_size=args.sample,
             output_file=Path(args.output) if args.output else None,
+            device=args.device,
+            embed_batch_size=args.embed_batch_size,
         )
     else:
         # Single model evaluation
@@ -631,6 +667,8 @@ if __name__ == "__main__":
             args.model,
             retriever_type=retriever_type,
             sample_size=args.sample,
+            device=args.device,
+            embed_batch_size=args.embed_batch_size,
         )
         
         print(f"\nResults: {metrics}")

@@ -13,14 +13,18 @@ Extends the QA schema with benchmark-grade fields including:
 import json
 import hashlib
 import logging
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
-from typing import Dict, List, Optional, Any, Iterator
+from typing import Dict, List, Optional, Any, Iterator, cast
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 
 from .metadata_extractor import MetadataExtractor, DocumentMetadata
 
 logger = logging.getLogger(__name__)
+
+# Set in worker processes (see _schema_enrich_pool_init after SchemaEnricher is defined)
+_PARALLEL_ENRICHER: Any = None
 
 
 @dataclass
@@ -255,8 +259,8 @@ class SchemaEnricher:
             context_id=context_id,
             evidence_spans=evidence_spans,
             answer_style=answer_style,
-            question_type="unknown",  # Will be set by question classifier
-            quality_score=0.0,        # Will be set by quality filter
+            question_type=record.get('question_type', 'unknown'),
+            quality_score=record.get('quality_score', 0.0),
             split="train",            # Will be set by split generator
             
             # Generation metadata
@@ -399,6 +403,43 @@ class SchemaEnricher:
             return "abstractive"
 
 
+# --- Parallel enrichment (worker pool; SchemaEnricher must be defined above) ---
+
+
+def _schema_enrich_pool_init(text_dir_str: str) -> None:
+    global _PARALLEL_ENRICHER  # noqa: PLW0603
+    td = Path(text_dir_str) if text_dir_str else None
+    _PARALLEL_ENRICHER = SchemaEnricher(metadata_cache={}, text_dir=td, use_api=False)
+
+
+def _schema_enrich_lines_block(lines: List[str]) -> List[str]:
+    enricher = cast(SchemaEnricher, _PARALLEL_ENRICHER)
+    out: List[str] = []
+    for line in lines:
+        if not line.strip():
+            continue
+        record = json.loads(line)
+        enriched = enricher.enrich_record(record)
+        out.append(json.dumps(enriched.to_dict(), ensure_ascii=False) + "\n")
+    return out
+
+
+def _split_lines_for_workers(lines: List[str], num_parts: int) -> List[List[str]]:
+    if not lines or num_parts <= 1:
+        return [lines]
+    n = len(lines)
+    base, extra = divmod(n, num_parts)
+    chunks: List[List[str]] = []
+    start = 0
+    for i in range(num_parts):
+        sz = base + (1 if i < extra else 0)
+        part = lines[start : start + sz]
+        if part:
+            chunks.append(part)
+        start += sz
+    return chunks
+
+
 def enrich_qa_record(
     record: Dict[str, Any],
     metadata_cache: Optional[Dict[str, DocumentMetadata]] = None,
@@ -429,94 +470,165 @@ def enrich_qa_file(
     text_dir: Optional[Path] = None,
     metadata_file: Optional[Path] = None,
     public_output: Optional[Path] = None,
+    workers: int = 1,
+    chunk_size: int = 4000,
 ) -> Dict[str, int]:
     """
     Enrich all QA records in a JSONL file.
-    
+
     Args:
         input_file: Input JSONL file with QA records
         output_file: Output JSONL file for enriched records
         text_dir: Directory with extracted text files
         metadata_file: Optional pre-extracted metadata JSONL
         public_output: Optional output file for public release format
-        
+        workers: If > 1, parallel worker processes (CPU). Disabled if metadata_file
+                 or public_output is set (single-process only).
+        chunk_size: Lines per chunk when workers > 1.
+
     Returns:
         Statistics dictionary
     """
     # Load metadata cache if provided
     metadata_cache: Dict[str, DocumentMetadata] = {}
     if metadata_file and metadata_file.exists():
-        logger.info(f"Loading metadata from {metadata_file}")
-        with metadata_file.open('r') as f:
+        logger.info("Loading metadata from %s", metadata_file)
+        with metadata_file.open("r", encoding="utf-8") as f:
             for line in f:
                 if line.strip():
                     data = json.loads(line)
-                    metadata_cache[data['doc_id']] = DocumentMetadata.from_dict(data)
-    
+                    metadata_cache[data["doc_id"]] = DocumentMetadata.from_dict(data)
+
+    if (metadata_file and metadata_file.exists()) or public_output:
+        if workers > 1:
+            logger.warning(
+                "Parallel enrichment disabled when using --metadata or --public; using workers=1."
+            )
+        workers = 1
+
     enricher = SchemaEnricher(
         metadata_cache=metadata_cache,
         text_dir=text_dir,
     )
-    
-    stats = {
-        'total': 0,
-        'enriched': 0,
-        'with_doi': 0,
-        'extractive': 0,
-        'abstractive': 0,
-        'with_evidence': 0,
+
+    stats: Dict[str, int] = {
+        "total": 0,
+        "enriched": 0,
+        "with_doi": 0,
+        "extractive": 0,
+        "abstractive": 0,
+        "with_evidence": 0,
     }
-    
+
+    def _update_stats_from_enriched(enriched: EnrichedQARecord) -> None:
+        stats["enriched"] += 1
+        if enriched.doi:
+            stats["with_doi"] += 1
+        if enriched.answer_style == "extractive":
+            stats["extractive"] += 1
+        elif enriched.answer_style == "abstractive":
+            stats["abstractive"] += 1
+        if enriched.evidence_spans:
+            stats["with_evidence"] += 1
+
     output_file.parent.mkdir(parents=True, exist_ok=True)
-    
+
     public_f = None
     if public_output:
         public_output.parent.mkdir(parents=True, exist_ok=True)
-        public_f = public_output.open('w', encoding='utf-8')
-    
+        public_f = public_output.open("w", encoding="utf-8")
+
     try:
-        with input_file.open('r', encoding='utf-8') as f_in, \
-             output_file.open('w', encoding='utf-8') as f_out:
-            
-            for line in f_in:
-                if not line.strip():
-                    continue
-                
-                stats['total'] += 1
-                
-                try:
-                    record = json.loads(line)
-                    enriched = enricher.enrich_record(record)
-                    
-                    # Write enriched record
-                    f_out.write(json.dumps(enriched.to_dict(), ensure_ascii=False) + '\n')
-                    
-                    # Write public format if requested
-                    if public_f:
-                        public_f.write(
-                            json.dumps(enriched.to_public_dict(), ensure_ascii=False) + '\n'
+        text_dir_str = str(text_dir.resolve()) if text_dir else ""
+    except OSError:
+        text_dir_str = str(text_dir) if text_dir else ""
+
+    try:
+        with input_file.open("r", encoding="utf-8") as f_in, output_file.open(
+            "w", encoding="utf-8"
+        ) as f_out:
+            if workers <= 1:
+                for line in f_in:
+                    if not line.strip():
+                        continue
+                    stats["total"] += 1
+                    try:
+                        record = json.loads(line)
+                        enriched = enricher.enrich_record(record)
+                        f_out.write(
+                            json.dumps(enriched.to_dict(), ensure_ascii=False) + "\n"
                         )
-                    
-                    # Update stats
-                    stats['enriched'] += 1
-                    if enriched.doi:
-                        stats['with_doi'] += 1
-                    if enriched.answer_style == 'extractive':
-                        stats['extractive'] += 1
-                    elif enriched.answer_style == 'abstractive':
-                        stats['abstractive'] += 1
-                    if enriched.evidence_spans:
-                        stats['with_evidence'] += 1
-                        
-                except Exception as e:
-                    logger.error(f"Error enriching record: {e}")
-                    continue
-                    
+                        if public_f:
+                            public_f.write(
+                                json.dumps(
+                                    enriched.to_public_dict(), ensure_ascii=False
+                                )
+                                + "\n"
+                            )
+                        _update_stats_from_enriched(enriched)
+                    except Exception as e:
+                        logger.error("Error enriching record: %s", e)
+            else:
+                buf: List[str] = []
+                with ProcessPoolExecutor(
+                    max_workers=workers,
+                    initializer=_schema_enrich_pool_init,
+                    initargs=(text_dir_str,),
+                ) as executor:
+                    for line in f_in:
+                        if not line.strip():
+                            continue
+                        buf.append(line)
+                        if len(buf) >= chunk_size:
+                            subs = _split_lines_for_workers(buf, workers)
+                            buf = []
+                            merged: List[str] = []
+                            for part in executor.map(_schema_enrich_lines_block, subs):
+                                merged.extend(part)
+                            for out_line in merged:
+                                stats["total"] += 1
+                                try:
+                                    data = json.loads(out_line)
+                                    enriched = EnrichedQARecord.from_dict(data)
+                                    f_out.write(out_line)
+                                    if public_f:
+                                        public_f.write(
+                                            json.dumps(
+                                                enriched.to_public_dict(),
+                                                ensure_ascii=False,
+                                            )
+                                            + "\n"
+                                        )
+                                    _update_stats_from_enriched(enriched)
+                                except Exception as e:
+                                    logger.error("Error post-processing record: %s", e)
+                    if buf:
+                        subs = _split_lines_for_workers(buf, workers)
+                        merged = []
+                        for part in executor.map(_schema_enrich_lines_block, subs):
+                            merged.extend(part)
+                        for out_line in merged:
+                            stats["total"] += 1
+                            try:
+                                data = json.loads(out_line)
+                                enriched = EnrichedQARecord.from_dict(data)
+                                f_out.write(out_line)
+                                if public_f:
+                                    public_f.write(
+                                        json.dumps(
+                                            enriched.to_public_dict(), ensure_ascii=False
+                                        )
+                                        + "\n"
+                                    )
+                                _update_stats_from_enriched(enriched)
+                            except Exception as e:
+                                logger.error("Error post-processing record: %s", e)
+
     finally:
         if public_f:
             public_f.close()
-    
-    logger.info(f"Enrichment complete: {stats}")
+
+    logger.info("Enrichment complete: %s", stats)
     return stats
 
 
@@ -529,17 +641,32 @@ if __name__ == "__main__":
     parser.add_argument("--text-dir", "-t", help="Directory with text files")
     parser.add_argument("--metadata", "-m", help="Pre-extracted metadata JSONL")
     parser.add_argument("--public", "-p", help="Output file for public release format")
-    
+    parser.add_argument(
+        "--workers",
+        "-w",
+        type=int,
+        default=1,
+        help="Parallel worker processes (CPU). Ignored with --metadata or --public.",
+    )
+    parser.add_argument(
+        "--chunk-size",
+        type=int,
+        default=4000,
+        help="Lines per chunk when workers > 1.",
+    )
+
     args = parser.parse_args()
-    
+
     logging.basicConfig(level=logging.INFO)
-    
+
     stats = enrich_qa_file(
         Path(args.input),
         Path(args.output),
         text_dir=Path(args.text_dir) if args.text_dir else None,
         metadata_file=Path(args.metadata) if args.metadata else None,
         public_output=Path(args.public) if args.public else None,
+        workers=max(1, args.workers),
+        chunk_size=max(100, args.chunk_size),
     )
     
     print(f"\nEnrichment Statistics:")

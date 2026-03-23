@@ -14,12 +14,54 @@ Classifies questions into types:
 import re
 import json
 import logging
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
-from typing import Dict, List, Optional, Any, Tuple
+from typing import Dict, List, Optional, Any, Tuple, cast
 from dataclasses import dataclass
 from collections import Counter
 
 logger = logging.getLogger(__name__)
+
+_CLASSIFIER: Optional["QuestionClassifier"] = None
+
+
+def _classifier_pool_init() -> None:
+    global _CLASSIFIER  # noqa: PLW0603
+    _CLASSIFIER = QuestionClassifier()
+
+
+def _classify_lines_block(lines: List[str]) -> List[str]:
+    clf = cast(QuestionClassifier, _CLASSIFIER)
+    out: List[str] = []
+    for line in lines:
+        if not line.strip():
+            continue
+        record = json.loads(line)
+        question = record.get("question", "")
+        answer = record.get("answer")
+        result = clf.classify(question, answer)
+        record["question_type"] = result.question_type
+        record["question_type_confidence"] = result.confidence
+        if result.secondary_type:
+            record["question_type_secondary"] = result.secondary_type
+        out.append(json.dumps(record, ensure_ascii=False) + "\n")
+    return out
+
+
+def _qc_split_lines(lines: List[str], num_parts: int) -> List[List[str]]:
+    if not lines or num_parts <= 1:
+        return [lines]
+    n = len(lines)
+    base, extra = divmod(n, num_parts)
+    chunks: List[List[str]] = []
+    start = 0
+    for i in range(num_parts):
+        sz = base + (1 if i < extra else 0)
+        part = lines[start : start + sz]
+        if part:
+            chunks.append(part)
+        start += sz
+    return chunks
 
 
 @dataclass
@@ -320,44 +362,73 @@ def classify_question(
 def classify_qa_file(
     input_file: Path,
     output_file: Path,
+    workers: int = 1,
+    chunk_size: int = 8000,
 ) -> Dict[str, int]:
     """
     Classify all questions in a JSONL file.
-    
+
     Args:
         input_file: Input JSONL file
         output_file: Output JSONL file with classifications
-        
+        workers: If > 1, use parallel worker processes (CPU).
+        chunk_size: Lines per chunk when workers > 1.
+
     Returns:
         Distribution of question types
     """
     classifier = QuestionClassifier()
     type_counts: Counter = Counter()
-    
+
     output_file.parent.mkdir(parents=True, exist_ok=True)
-    
-    with input_file.open('r', encoding='utf-8') as f_in, \
-         output_file.open('w', encoding='utf-8') as f_out:
-        
-        for line in f_in:
-            if not line.strip():
-                continue
-            
-            record = json.loads(line)
-            question = record.get('question', '')
-            answer = record.get('answer')
-            
-            result = classifier.classify(question, answer)
-            
-            record['question_type'] = result.question_type
-            record['question_type_confidence'] = result.confidence
-            if result.secondary_type:
-                record['question_type_secondary'] = result.secondary_type
-            
-            f_out.write(json.dumps(record, ensure_ascii=False) + '\n')
-            type_counts[result.question_type] += 1
-    
-    logger.info(f"Question type distribution: {dict(type_counts)}")
+
+    with input_file.open("r", encoding="utf-8") as f_in, output_file.open(
+        "w", encoding="utf-8"
+    ) as f_out:
+        if workers <= 1:
+            for line in f_in:
+                if not line.strip():
+                    continue
+                record = json.loads(line)
+                question = record.get("question", "")
+                answer = record.get("answer")
+                result = classifier.classify(question, answer)
+                record["question_type"] = result.question_type
+                record["question_type_confidence"] = result.confidence
+                if result.secondary_type:
+                    record["question_type_secondary"] = result.secondary_type
+                f_out.write(json.dumps(record, ensure_ascii=False) + "\n")
+                type_counts[result.question_type] += 1
+        else:
+            buf: List[str] = []
+            with ProcessPoolExecutor(
+                max_workers=workers, initializer=_classifier_pool_init
+            ) as executor:
+                for line in f_in:
+                    if not line.strip():
+                        continue
+                    buf.append(line)
+                    if len(buf) >= chunk_size:
+                        subs = _qc_split_lines(buf, workers)
+                        buf = []
+                        merged: List[str] = []
+                        for part in executor.map(_classify_lines_block, subs):
+                            merged.extend(part)
+                        for out_line in merged:
+                            f_out.write(out_line)
+                            rec = json.loads(out_line)
+                            type_counts[rec.get("question_type", "unknown")] += 1
+                if buf:
+                    subs = _qc_split_lines(buf, workers)
+                    merged = []
+                    for part in executor.map(_classify_lines_block, subs):
+                        merged.extend(part)
+                    for out_line in merged:
+                        f_out.write(out_line)
+                        rec = json.loads(out_line)
+                        type_counts[rec.get("question_type", "unknown")] += 1
+
+    logger.info("Question type distribution: %s", dict(type_counts))
     return dict(type_counts)
 
 
@@ -386,12 +457,30 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Classify question types")
     parser.add_argument("--input", "-i", required=True, help="Input JSONL file")
     parser.add_argument("--output", "-o", required=True, help="Output JSONL file")
-    
+    parser.add_argument(
+        "--workers",
+        "-w",
+        type=int,
+        default=1,
+        help="Parallel worker processes (CPU).",
+    )
+    parser.add_argument(
+        "--chunk-size",
+        type=int,
+        default=8000,
+        help="Lines per chunk when workers > 1.",
+    )
+
     args = parser.parse_args()
-    
+
     logging.basicConfig(level=logging.INFO)
-    
-    type_counts = classify_qa_file(Path(args.input), Path(args.output))
+
+    type_counts = classify_qa_file(
+        Path(args.input),
+        Path(args.output),
+        workers=max(1, args.workers),
+        chunk_size=max(100, args.chunk_size),
+    )
     
     total = sum(type_counts.values())
     print("\nQuestion Type Distribution:")

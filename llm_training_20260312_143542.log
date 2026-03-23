@@ -1,0 +1,300 @@
+2026-03-12 14:35:42,896 - INFO - ================================================================================
+2026-03-12 14:35:42,896 - INFO - MULTI-MODEL LLM FINE-TUNING (QLoRA)
+2026-03-12 14:35:42,896 - INFO - ================================================================================
+2026-03-12 14:35:42,896 - INFO - Config: /home/asad/MS-GPT/config/llm_finetuner.json
+2026-03-12 14:35:42,896 - INFO - Models to train: 4
+2026-03-12 14:35:42,896 - INFO -   1. phi3.5_mini (microsoft/Phi-3.5-mini-instruct)
+2026-03-12 14:35:42,896 - INFO -   2. mistral_7b_v0.3 (mistralai/Mistral-7B-Instruct-v0.3)
+2026-03-12 14:35:42,896 - INFO -   3. llama3.1_8b (meta-llama/Llama-3.1-8B-Instruct)
+2026-03-12 14:35:42,896 - INFO -   4. qwen2.5_7b (Qwen/Qwen2.5-7B-Instruct)
+2026-03-12 14:35:42,896 - INFO - ================================================================================
+2026-03-12 14:35:42,896 - INFO - Running non-interactively, proceeding automatically...
+2026-03-12 14:35:42,896 - INFO - 
+[1/4] Processing phi3.5_mini
+2026-03-12 14:35:42,896 - INFO - ================================================================================
+2026-03-12 14:35:42,896 - INFO - Training LLM: phi3.5_mini
+2026-03-12 14:35:42,896 - INFO - Model path: microsoft/Phi-3.5-mini-instruct
+2026-03-12 14:35:42,896 - INFO - ================================================================================
+2026-03-12 14:35:42,897 - INFO - Starting training for phi3.5_mini...
+2026-03-12 14:35:42,897 - INFO - Output directory: /home/asad/models/fine_tuned_llms/phi3.5_mini
+2026-03-12 14:35:42,897 - INFO - Command: /home/asad/MS-GPT/.venv/bin/python -u -m src.llm_trainers.llm_finetuner --config /home/asad/MS-GPT/logs/llm_config_phi3.5_mini.json
+2026-03-12 14:35:54,462 - INFO - __main__ - LLMFineTuner initialized
+2026-03-12 14:35:54,462 - INFO - __main__ -   Base model: microsoft/Phi-3.5-mini-instruct
+2026-03-12 14:35:54,462 - INFO - __main__ -   Output dir: /home/asad/models/fine_tuned_llms/phi3.5_mini
+2026-03-12 14:35:55,421 - INFO - __main__ - ======================================================================
+2026-03-12 14:35:55,422 - INFO - __main__ - STARTING LLM FINE-TUNING (QLoRA)
+2026-03-12 14:35:55,422 - INFO - __main__ - ======================================================================
+2026-03-12 14:35:55,422 - INFO - __main__ - Loading model: microsoft/Phi-3.5-mini-instruct
+2026-03-12 14:35:55,433 - INFO - __main__ -   Quantization: 4-bit nf4, double_quant=True
+A new version of the following files was downloaded from https://huggingface.co/microsoft/Phi-3.5-mini-instruct:
+- configuration_phi3.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+`torch_dtype` is deprecated! Use `dtype` instead!
+A new version of the following files was downloaded from https://huggingface.co/microsoft/Phi-3.5-mini-instruct:
+- modeling_phi3.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+2026-03-12 14:35:56,620 - WARNING - transformers_modules.microsoft.Phi_hyphen_3_dot_5_hyphen_mini_hyphen_instruct.2fe192450127e6a83f7441aef6e3ca586c338b77.modeling_phi3 - `flash-attention` package not found, consider installing for better performance: No module named 'flash_attn'.
+2026-03-12 14:35:56,620 - WARNING - transformers_modules.microsoft.Phi_hyphen_3_dot_5_hyphen_mini_hyphen_instruct.2fe192450127e6a83f7441aef6e3ca586c338b77.modeling_phi3 - Current `flash-attention` does not support `window_size`. Either upgrade or use `attn_implementation='eager'`.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [01:02<01:02, 62.95s/it]Fetching 2 files: 100%|██████████| 2/2 [01:02<00:00, 31.47s/it]
+2026-03-12 14:37:09,332 - INFO - accelerate.utils.modeling - We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:06<00:06,  6.43s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.20s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.53s/it]
+2026-03-12 14:37:22,478 - INFO - __main__ -   Model loaded: 2.01B parameters
+2026-03-12 14:37:22,478 - INFO - __main__ - Applying LoRA adapters...
+2026-03-12 14:37:22,599 - INFO - __main__ -   Auto-detected target modules: ['down_proj', 'gate_up_proj', 'o_proj', 'qkv_proj']
+2026-03-12 14:37:23,848 - INFO - __main__ -   LoRA applied: 100.66M trainable / 2109.8M total (4.77%)
+2026-03-12 14:37:23,848 - INFO - __main__ -   Target modules: ['down_proj', 'gate_up_proj', 'o_proj', 'qkv_proj']
+2026-03-12 14:37:23,849 - INFO - __main__ -   Rank: 64, Alpha: 128
+2026-03-12 14:37:23,849 - INFO - __main__ - Preparing training dataset...
+2026-03-12 14:38:35,881 - INFO - src.llm_trainers.data_utils - Loaded 1011803 records from train split (filtered=2280)
+2026-03-12 14:38:35,950 - INFO - src.llm_trainers.data_utils -   With context: 708793, Without context: 303010
+2026-03-12 14:39:30,832 - INFO - src.llm_trainers.data_utils - Created HF dataset for 'train': 1011803 examples, max_seq_length=2048
+2026-03-12 14:39:32,345 - INFO - __main__ - Preparing validation dataset...
+2026-03-12 14:40:02,520 - INFO - src.llm_trainers.data_utils - Loaded 118925 records from val split (filtered=283)
+2026-03-12 14:40:02,528 - INFO - src.llm_trainers.data_utils -   With context: 83455, Without context: 35470
+2026-03-12 14:40:07,800 - INFO - src.llm_trainers.data_utils - Created HF dataset for 'val': 118925 examples, max_seq_length=2048
+2026-03-12 14:40:07,923 - INFO - __main__ - Training steps:
+2026-03-12 14:40:07,923 - INFO - __main__ -   Examples: 1011803
+2026-03-12 14:40:07,923 - INFO - __main__ -   Effective batch: 32
+2026-03-12 14:40:07,923 - INFO - __main__ -   Steps/epoch: 31618
+2026-03-12 14:40:07,923 - INFO - __main__ -   Total steps: 31618
+2026-03-12 14:40:07,923 - INFO - __main__ -   Eval every: 5000 steps
+2026-03-12 14:40:07,923 - INFO - __main__ -   Save every: 5000 steps
+2026-03-12 14:40:07,954 - INFO - __main__ -   Early stopping: patience=3, threshold=0.001
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 618, in <module>
+    main()
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 614, in main
+    finetuner.train(resume_from_checkpoint="auto" if args.resume else None)
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 450, in train
+    self.trainer = SFTTrainer(
+                   ^^^^^^^^^^^
+TypeError: SFTTrainer.__init__() got an unexpected keyword argument 'max_seq_length'
+[W312 14:40:09.611010652 AllocatorConfig.cpp:28] Warning: PYTORCH_CUDA_ALLOC_CONF is deprecated, use PYTORCH_ALLOC_CONF instead (function operator())
+2026-03-12 14:40:10,614 - ERROR - Training failed for phi3.5_mini: Command '['/home/asad/MS-GPT/.venv/bin/python', '-u', '-m', 'src.llm_trainers.llm_finetuner', '--config', '/home/asad/MS-GPT/logs/llm_config_phi3.5_mini.json']' returned non-zero exit status 1.
+2026-03-12 14:40:10,614 - INFO - 
+[2/4] Processing mistral_7b_v0.3
+2026-03-12 14:40:10,614 - INFO - ================================================================================
+2026-03-12 14:40:10,614 - INFO - Training LLM: mistral_7b_v0.3
+2026-03-12 14:40:10,614 - INFO - Model path: mistralai/Mistral-7B-Instruct-v0.3
+2026-03-12 14:40:10,614 - INFO - ================================================================================
+2026-03-12 14:40:10,615 - INFO - Starting training for mistral_7b_v0.3...
+2026-03-12 14:40:10,615 - INFO - Output directory: /home/asad/models/fine_tuned_llms/mistral_7b_v0.3
+2026-03-12 14:40:10,615 - INFO - Command: /home/asad/MS-GPT/.venv/bin/python -u -m src.llm_trainers.llm_finetuner --config /home/asad/MS-GPT/logs/llm_config_mistral_7b_v0.3.json
+2026-03-12 14:40:19,468 - INFO - __main__ - LLMFineTuner initialized
+2026-03-12 14:40:19,469 - INFO - __main__ -   Base model: mistralai/Mistral-7B-Instruct-v0.3
+2026-03-12 14:40:19,469 - INFO - __main__ -   Output dir: /home/asad/models/fine_tuned_llms/mistral_7b_v0.3
+2026-03-12 14:40:20,421 - INFO - __main__ - ======================================================================
+2026-03-12 14:40:20,421 - INFO - __main__ - STARTING LLM FINE-TUNING (QLoRA)
+2026-03-12 14:40:20,421 - INFO - __main__ - ======================================================================
+2026-03-12 14:40:20,421 - INFO - __main__ - Loading model: mistralai/Mistral-7B-Instruct-v0.3
+2026-03-12 14:40:20,433 - INFO - __main__ -   Quantization: 4-bit nf4, double_quant=True
+`torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]Fetching 3 files:  33%|███▎      | 1/3 [02:10<04:20, 130.08s/it]Fetching 3 files: 100%|██████████| 3/3 [02:11<00:00, 34.30s/it] Fetching 3 files: 100%|██████████| 3/3 [02:11<00:00, 43.88s/it]
+2026-03-12 14:42:38,722 - INFO - accelerate.utils.modeling - We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:05<00:10,  5.00s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:10<00:05,  5.16s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:14<00:00,  4.88s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:14<00:00,  4.94s/it]
+2026-03-12 14:42:57,964 - INFO - __main__ -   Model loaded: 3.76B parameters
+2026-03-12 14:42:57,964 - INFO - __main__ - Applying LoRA adapters...
+2026-03-12 14:42:57,987 - INFO - __main__ -   Using known target modules for mistral: ['q_proj', 'v_proj']
+2026-03-12 14:42:58,401 - INFO - __main__ -   LoRA applied: 27.26M trainable / 3785.6M total (0.72%)
+2026-03-12 14:42:58,401 - INFO - __main__ -   Target modules: ['q_proj', 'v_proj']
+2026-03-12 14:42:58,402 - INFO - __main__ -   Rank: 64, Alpha: 128
+2026-03-12 14:42:58,402 - INFO - __main__ - Preparing training dataset...
+2026-03-12 14:43:57,970 - INFO - src.llm_trainers.data_utils - Loaded 1011803 records from train split (filtered=2280)
+2026-03-12 14:43:58,037 - INFO - src.llm_trainers.data_utils -   With context: 708793, Without context: 303010
+2026-03-12 14:46:12,047 - INFO - src.llm_trainers.data_utils - Created HF dataset for 'train': 1011803 examples, max_seq_length=2048
+2026-03-12 14:46:13,162 - INFO - __main__ - Preparing validation dataset...
+2026-03-12 14:46:42,846 - INFO - src.llm_trainers.data_utils - Loaded 118925 records from val split (filtered=283)
+2026-03-12 14:46:42,854 - INFO - src.llm_trainers.data_utils -   With context: 83455, Without context: 35470
+2026-03-12 14:46:57,616 - INFO - src.llm_trainers.data_utils - Created HF dataset for 'val': 118925 examples, max_seq_length=2048
+2026-03-12 14:46:57,742 - INFO - __main__ - Training steps:
+2026-03-12 14:46:57,742 - INFO - __main__ -   Examples: 1011803
+2026-03-12 14:46:57,742 - INFO - __main__ -   Effective batch: 32
+2026-03-12 14:46:57,742 - INFO - __main__ -   Steps/epoch: 31618
+2026-03-12 14:46:57,742 - INFO - __main__ -   Total steps: 31618
+2026-03-12 14:46:57,742 - INFO - __main__ -   Eval every: 5000 steps
+2026-03-12 14:46:57,742 - INFO - __main__ -   Save every: 5000 steps
+2026-03-12 14:46:57,801 - INFO - __main__ -   Early stopping: patience=3, threshold=0.001
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 618, in <module>
+    main()
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 614, in main
+    finetuner.train(resume_from_checkpoint="auto" if args.resume else None)
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 450, in train
+    self.trainer = SFTTrainer(
+                   ^^^^^^^^^^^
+TypeError: SFTTrainer.__init__() got an unexpected keyword argument 'max_seq_length'
+[W312 14:46:58.346453450 AllocatorConfig.cpp:28] Warning: PYTORCH_CUDA_ALLOC_CONF is deprecated, use PYTORCH_ALLOC_CONF instead (function operator())
+2026-03-12 14:46:59,536 - ERROR - Training failed for mistral_7b_v0.3: Command '['/home/asad/MS-GPT/.venv/bin/python', '-u', '-m', 'src.llm_trainers.llm_finetuner', '--config', '/home/asad/MS-GPT/logs/llm_config_mistral_7b_v0.3.json']' returned non-zero exit status 1.
+2026-03-12 14:46:59,537 - INFO - 
+[3/4] Processing llama3.1_8b
+2026-03-12 14:46:59,537 - INFO - ================================================================================
+2026-03-12 14:46:59,537 - INFO - Training LLM: llama3.1_8b
+2026-03-12 14:46:59,537 - INFO - Model path: meta-llama/Llama-3.1-8B-Instruct
+2026-03-12 14:46:59,537 - INFO - ================================================================================
+2026-03-12 14:46:59,538 - INFO - Starting training for llama3.1_8b...
+2026-03-12 14:46:59,538 - INFO - Output directory: /home/asad/models/fine_tuned_llms/llama3.1_8b
+2026-03-12 14:46:59,538 - INFO - Command: /home/asad/MS-GPT/.venv/bin/python -u -m src.llm_trainers.llm_finetuner --config /home/asad/MS-GPT/logs/llm_config_llama3.1_8b.json
+2026-03-12 14:47:05,924 - INFO - __main__ - LLMFineTuner initialized
+2026-03-12 14:47:05,924 - INFO - __main__ -   Base model: meta-llama/Llama-3.1-8B-Instruct
+2026-03-12 14:47:05,924 - INFO - __main__ -   Output dir: /home/asad/models/fine_tuned_llms/llama3.1_8b
+2026-03-12 14:47:06,735 - INFO - __main__ - ======================================================================
+2026-03-12 14:47:06,735 - INFO - __main__ - STARTING LLM FINE-TUNING (QLoRA)
+2026-03-12 14:47:06,735 - INFO - __main__ - ======================================================================
+2026-03-12 14:47:06,735 - INFO - __main__ - Loading model: meta-llama/Llama-3.1-8B-Instruct
+2026-03-12 14:47:06,760 - INFO - __main__ -   Quantization: 4-bit nf4, double_quant=True
+Traceback (most recent call last):
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 402, in hf_raise_for_status
+    response.raise_for_status()
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct/resolve/main/config.json
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 479, in cached_files
+    hf_hub_download(
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1007, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1114, in _hf_hub_download_to_cache_dir
+    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1655, in _raise_on_head_call_error
+    raise head_call_error
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1543, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1460, in get_hf_file_metadata
+    r = _request_wrapper(
+        ^^^^^^^^^^^^^^^^^
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 283, in _request_wrapper
+    response = _request_wrapper(
+               ^^^^^^^^^^^^^^^^^
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 307, in _request_wrapper
+    hf_raise_for_status(response)
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 419, in hf_raise_for_status
+    raise _format(GatedRepoError, message, response) from e
+huggingface_hub.errors.GatedRepoError: 401 Client Error. (Request ID: Root=1-69b2a7bb-138607bf4abd3cb077b76f1a;36748e24-2c4a-4aee-9ae2-24f169684933)
+
+Cannot access gated repo for url https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct/resolve/main/config.json.
+Access to model meta-llama/Llama-3.1-8B-Instruct is restricted. You must have access to it and be authenticated to access it. Please log in.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 618, in <module>
+    main()
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 614, in main
+    finetuner.train(resume_from_checkpoint="auto" if args.resume else None)
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 372, in train
+    self.load_model_and_tokenizer()
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 249, in load_model_and_tokenizer
+    self.model = AutoModelForCausalLM.from_pretrained(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 549, in from_pretrained
+    config, kwargs = AutoConfig.from_pretrained(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/transformers/models/auto/configuration_auto.py", line 1332, in from_pretrained
+    config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/transformers/configuration_utils.py", line 662, in get_config_dict
+    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/transformers/configuration_utils.py", line 721, in _get_config_dict
+    resolved_config_file = cached_file(
+                           ^^^^^^^^^^^^
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 322, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/asad/MS-GPT/.venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 543, in cached_files
+    raise OSError(
+OSError: You are trying to access a gated repo.
+Make sure to have access to it at https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct.
+401 Client Error. (Request ID: Root=1-69b2a7bb-138607bf4abd3cb077b76f1a;36748e24-2c4a-4aee-9ae2-24f169684933)
+
+Cannot access gated repo for url https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct/resolve/main/config.json.
+Access to model meta-llama/Llama-3.1-8B-Instruct is restricted. You must have access to it and be authenticated to access it. Please log in.
+[W312 14:47:08.707856393 AllocatorConfig.cpp:28] Warning: PYTORCH_CUDA_ALLOC_CONF is deprecated, use PYTORCH_ALLOC_CONF instead (function operator())
+2026-03-12 14:47:08,353 - ERROR - Training failed for llama3.1_8b: Command '['/home/asad/MS-GPT/.venv/bin/python', '-u', '-m', 'src.llm_trainers.llm_finetuner', '--config', '/home/asad/MS-GPT/logs/llm_config_llama3.1_8b.json']' returned non-zero exit status 1.
+2026-03-12 14:47:08,353 - INFO - 
+[4/4] Processing qwen2.5_7b
+2026-03-12 14:47:08,353 - INFO - ================================================================================
+2026-03-12 14:47:08,353 - INFO - Training LLM: qwen2.5_7b
+2026-03-12 14:47:08,353 - INFO - Model path: Qwen/Qwen2.5-7B-Instruct
+2026-03-12 14:47:08,353 - INFO - ================================================================================
+2026-03-12 14:47:08,354 - INFO - Starting training for qwen2.5_7b...
+2026-03-12 14:47:08,354 - INFO - Output directory: /home/asad/models/fine_tuned_llms/qwen2.5_7b
+2026-03-12 14:47:08,354 - INFO - Command: /home/asad/MS-GPT/.venv/bin/python -u -m src.llm_trainers.llm_finetuner --config /home/asad/MS-GPT/logs/llm_config_qwen2.5_7b.json
+2026-03-12 14:47:14,598 - INFO - __main__ - LLMFineTuner initialized
+2026-03-12 14:47:14,598 - INFO - __main__ -   Base model: Qwen/Qwen2.5-7B-Instruct
+2026-03-12 14:47:14,599 - INFO - __main__ -   Output dir: /home/asad/models/fine_tuned_llms/qwen2.5_7b
+2026-03-12 14:47:15,415 - INFO - __main__ - ======================================================================
+2026-03-12 14:47:15,415 - INFO - __main__ - STARTING LLM FINE-TUNING (QLoRA)
+2026-03-12 14:47:15,415 - INFO - __main__ - ======================================================================
+2026-03-12 14:47:15,415 - INFO - __main__ - Loading model: Qwen/Qwen2.5-7B-Instruct
+2026-03-12 14:47:15,427 - INFO - __main__ -   Quantization: 4-bit nf4, double_quant=True
+`torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [02:08<06:25, 128.46s/it]Fetching 4 files: 100%|██████████| 4/4 [02:08<00:00, 32.11s/it] 
+2026-03-12 14:49:28,698 - INFO - accelerate.utils.modeling - We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:03<00:09,  3.28s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:07<00:07,  3.75s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:11<00:03,  3.89s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:14<00:00,  3.45s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:14<00:00,  3.55s/it]
+2026-03-12 14:49:47,477 - INFO - __main__ -   Model loaded: 4.35B parameters
+2026-03-12 14:49:47,477 - INFO - __main__ - Applying LoRA adapters...
+2026-03-12 14:49:47,511 - INFO - __main__ -   Using known target modules for qwen2: ['q_proj', 'v_proj']
+2026-03-12 14:49:47,848 - INFO - __main__ -   LoRA applied: 20.19M trainable / 4373.2M total (0.46%)
+2026-03-12 14:49:47,848 - INFO - __main__ -   Target modules: ['q_proj', 'v_proj']
+2026-03-12 14:49:47,848 - INFO - __main__ -   Rank: 64, Alpha: 128
+2026-03-12 14:49:47,848 - INFO - __main__ - Preparing training dataset...
+2026-03-12 14:50:47,418 - INFO - src.llm_trainers.data_utils - Loaded 1011803 records from train split (filtered=2280)
+2026-03-12 14:50:47,486 - INFO - src.llm_trainers.data_utils -   With context: 708793, Without context: 303010
+2026-03-12 14:52:09,348 - INFO - src.llm_trainers.data_utils - Created HF dataset for 'train': 1011803 examples, max_seq_length=2048
+2026-03-12 14:52:10,488 - INFO - __main__ - Preparing validation dataset...
+2026-03-12 14:52:40,686 - INFO - src.llm_trainers.data_utils - Loaded 118925 records from val split (filtered=283)
+2026-03-12 14:52:40,695 - INFO - src.llm_trainers.data_utils -   With context: 83455, Without context: 35470
+2026-03-12 14:52:49,184 - INFO - src.llm_trainers.data_utils - Created HF dataset for 'val': 118925 examples, max_seq_length=2048
+2026-03-12 14:52:49,308 - INFO - __main__ - Training steps:
+2026-03-12 14:52:49,308 - INFO - __main__ -   Examples: 1011803
+2026-03-12 14:52:49,308 - INFO - __main__ -   Effective batch: 32
+2026-03-12 14:52:49,308 - INFO - __main__ -   Steps/epoch: 31618
+2026-03-12 14:52:49,308 - INFO - __main__ -   Total steps: 31618
+2026-03-12 14:52:49,308 - INFO - __main__ -   Eval every: 5000 steps
+2026-03-12 14:52:49,309 - INFO - __main__ -   Save every: 5000 steps
+2026-03-12 14:52:49,339 - INFO - __main__ -   Early stopping: patience=3, threshold=0.001
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 618, in <module>
+    main()
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 614, in main
+    finetuner.train(resume_from_checkpoint="auto" if args.resume else None)
+  File "/home/asad/MS-GPT/src/llm_trainers/llm_finetuner.py", line 450, in train
+    self.trainer = SFTTrainer(
+                   ^^^^^^^^^^^
+TypeError: SFTTrainer.__init__() got an unexpected keyword argument 'max_seq_length'
+[W312 14:52:50.947176437 AllocatorConfig.cpp:28] Warning: PYTORCH_CUDA_ALLOC_CONF is deprecated, use PYTORCH_ALLOC_CONF instead (function operator())
+2026-03-12 14:52:51,331 - ERROR - Training failed for qwen2.5_7b: Command '['/home/asad/MS-GPT/.venv/bin/python', '-u', '-m', 'src.llm_trainers.llm_finetuner', '--config', '/home/asad/MS-GPT/logs/llm_config_qwen2.5_7b.json']' returned non-zero exit status 1.
+2026-03-12 14:52:51,331 - INFO - 
+================================================================================
+2026-03-12 14:52:51,331 - INFO - TRAINING SUMMARY
+2026-03-12 14:52:51,331 - INFO - ================================================================================
+2026-03-12 14:52:51,332 - INFO - Total time: 0:17:08.435149
+2026-03-12 14:52:51,332 - INFO - Successful: 0
+2026-03-12 14:52:51,332 - WARNING - Failed: 4
+2026-03-12 14:52:51,332 - WARNING -   phi3.5_mini
+2026-03-12 14:52:51,332 - WARNING -   mistral_7b_v0.3
+2026-03-12 14:52:51,332 - WARNING -   llama3.1_8b
+2026-03-12 14:52:51,332 - WARNING -   qwen2.5_7b
+2026-03-12 14:52:51,332 - INFO - ================================================================================
+2026-03-12 14:52:51,336 - INFO - 
+Summary saved to: /home/asad/MS-GPT/logs/multi_llm_training_summary.json
