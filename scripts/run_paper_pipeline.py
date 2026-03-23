@@ -29,7 +29,7 @@ import json
 import logging
 import subprocess
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -346,7 +346,7 @@ def main() -> int:
     setup_logging(log_file)
     log = logging.getLogger("paper_pipeline")
 
-    log.info("Paper pipeline started at %s", datetime.utcnow().isoformat())
+    log.info("Paper pipeline started at %s", datetime.now(timezone.utc).isoformat())
     log.info("Output directory: %s", base_out)
 
     steps = args.steps
@@ -366,7 +366,7 @@ def main() -> int:
         elif s == "figures":
             success = run_figures_step(config, base_out, log) and success
 
-    log.info("Paper pipeline finished at %s", datetime.utcnow().isoformat())
+    log.info("Paper pipeline finished at %s", datetime.now(timezone.utc).isoformat())
     log.info("Results saved to %s", base_out)
 
     return 0 if success else 1

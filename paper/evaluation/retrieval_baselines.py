@@ -528,6 +528,10 @@ def evaluate_retrieval(
     
     # Create retriever
     if retriever_type == "bm25":
+        if not HAS_BM25:
+            raise ImportError(
+                "BM25 requires rank-bm25. Install with: pip install rank-bm25"
+            )
         retriever = BM25Retriever()
     else:
         retriever = EmbeddingRetriever(
@@ -566,8 +570,30 @@ def compare_retrievers(
         Dict mapping model name to metrics
     """
     results = {}
-    
+
+    models_to_run: List[Tuple[str, str]] = []
     for name, model_path in models:
+        low = model_path.lower()
+        if low == "bm25" and not HAS_BM25:
+            logger.warning(
+                "Skipping %s: rank_bm25 not installed (pip install rank-bm25)",
+                name,
+            )
+            continue
+        if low != "bm25" and not HAS_SENTENCE_TRANSFORMERS:
+            logger.warning(
+                "Skipping %s: sentence-transformers not installed",
+                name,
+            )
+            continue
+        models_to_run.append((name, model_path))
+
+    if not models_to_run:
+        raise RuntimeError(
+            "No retrievers to evaluate. Install: pip install rank-bm25 sentence-transformers"
+        )
+
+    for name, model_path in models_to_run:
         logger.info(f"Evaluating {name}...")
         
         if model_path.lower() == "bm25":

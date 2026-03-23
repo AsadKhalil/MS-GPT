@@ -27,6 +27,9 @@ accelerate>=0.30.0       # Training acceleration
 datasets>=2.19.0         # HuggingFace datasets
 torch>=2.2.0             # PyTorch
 
+# Paper / retrieval baselines (BM25)
+rank-bm25>=0.2.2         # BM25Okapi for retrieval_baselines --compare
+
 # Evaluation metrics
 rouge-score>=0.1.2       # ROUGE metric
 bert-score>=0.3.13       # BERTScore metric
