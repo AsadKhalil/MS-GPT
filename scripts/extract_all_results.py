@@ -1,0 +1,687 @@
+#!/usr/bin/env python3
+"""
+Extract and evaluate all fine-tuned model results for paper.
+
+Run this script ON THE SERVER where models are stored:
+    python scripts/extract_all_results.py
+
+It will:
+1. Discover all fine-tuned embedding models and LLM adapters
+2. Evaluate each model on the test split (base vs fine-tuned)
+3. Generate comparison tables (JSON + LaTeX)
+4. Save everything to paper_results/model_results/
+
+Output structure:
+    paper_results/model_results/
+    ├── embeddings/
+    │   ├── base_vs_finetuned.json       (all embedding comparisons)
+    │   ├── <model_name>/
+    │   │   ├── eval_results_test.json
+    │   │   └── base_eval_results_test.json
+    │   └── embedding_comparison.json
+    ├── llms/
+    │   ├── <model_name>/
+    │   │   ├── eval_results_test.json
+    │   │   └── predictions_test.jsonl
+    │   └── llm_comparison.json
+    ├── tables/
+    │   ├── table_embedding_results.tex
+    │   ├── table_llm_results.tex
+    │   └── table_combined_summary.tex
+    └── summary.json
+"""
+
+import argparse
+import json
+import logging
+import os
+import sys
+import time
+from dataclasses import asdict
+from pathlib import Path
+from typing import Any
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
+logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------------
+# Paths (adjust if your server layout differs)
+# ---------------------------------------------------------------------------
+DEFAULT_PROJECT_DIR = Path(__file__).resolve().parent.parent
+DEFAULT_DATA_JSONL = "/home/asad/output_consolidated/consolidated_qa.jsonl"
+DEFAULT_EMBEDDING_DIR = "/home/asad/models/fine_tuned_embeddings"
+DEFAULT_LLM_DIR = "/home/asad/models/fine_tuned_llms"
+DEFAULT_OUTPUT_DIR = DEFAULT_PROJECT_DIR / "paper_results" / "model_results"
+
+# Embedding models config (name -> base HF path)
+EMBEDDING_MODELS = {
+    "e5_large_v2": "intfloat/e5-large-v2",
+    "bge_large_en_v1.5": "BAAI/bge-large-en-v1.5",
+    "nomic_embed_v1.5": "nomic-ai/nomic-embed-text-v1.5",
+    "e5_base_v2": "intfloat/e5-base-v2",
+    "bge_base_en_v1.5": "BAAI/bge-base-en-v1.5",
+}
+
+# LLM models config (name -> base HF path)
+LLM_MODELS = {
+    "phi3.5_mini": "microsoft/Phi-3.5-mini-instruct",
+    "mistral_7b_v0.3": "mistralai/Mistral-7B-Instruct-v0.3",
+    "llama3.1_8b": "meta-llama/Llama-3.1-8B-Instruct",
+    "qwen2.5_7b": "Qwen/Qwen2.5-7B-Instruct",
+    "deepseek_r1_distill_7b": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+}
+
+
+# ============================================================================
+# EMBEDDING EVALUATION
+# ============================================================================
+
+def evaluate_single_embedding(
+    model_name: str,
+    base_model_path: str,
+    finetuned_model_path: str,
+    jsonl_path: str,
+    output_dir: Path,
+    sample_size: int = 5000,
+    skip_existing: bool = True,
+) -> dict[str, Any] | None:
+    """Evaluate a single embedding model (base vs fine-tuned)."""
+    result_file = output_dir / model_name / "eval_results_test.json"
+
+    if skip_existing and result_file.exists():
+        logger.info(f"[SKIP] {model_name}: results already exist at {result_file}")
+        with open(result_file) as f:
+            return json.load(f)
+
+    finetuned_path = Path(finetuned_model_path) / model_name
+    if not finetuned_path.exists():
+        # Also check for 'final_model' subdirectory
+        alt_path = finetuned_path / "final_model"
+        if alt_path.exists():
+            finetuned_path = alt_path
+        else:
+            logger.warning(f"[SKIP] {model_name}: no fine-tuned model at {finetuned_path}")
+            return None
+
+    try:
+        from sentence_transformers import SentenceTransformer
+
+        from src.embedding_trainers.evaluators import evaluate_model
+
+        model_output = output_dir / model_name
+        model_output.mkdir(parents=True, exist_ok=True)
+
+        # Evaluate base model
+        logger.info(f"Evaluating BASE model: {base_model_path}")
+        base_model = SentenceTransformer(base_model_path)
+        base_result = evaluate_model(
+            base_model, jsonl_path, split="test",
+            sample_size=sample_size, output_dir=str(model_output),
+        )
+        base_dict = base_result.to_dict()
+        with open(model_output / "base_eval_results_test.json", "w") as f:
+            json.dump(base_dict, f, indent=2)
+        del base_model
+
+        # Evaluate fine-tuned model
+        logger.info(f"Evaluating FINE-TUNED model: {finetuned_path}")
+        ft_model = SentenceTransformer(str(finetuned_path))
+        ft_result = evaluate_model(
+            ft_model, jsonl_path, split="test",
+            sample_size=sample_size, output_dir=str(model_output),
+        )
+        ft_dict = ft_result.to_dict()
+        with open(model_output / "eval_results_test.json", "w") as f:
+            json.dump(ft_dict, f, indent=2)
+        del ft_model
+
+        # Compute improvements
+        improvements = {}
+        for metric in ["recall@1", "recall@5", "recall@10", "mrr@10", "ndcg@10"]:
+            base_val = base_dict.get(metric, 0)
+            ft_val = ft_dict.get(metric, 0)
+            abs_imp = ft_val - base_val
+            rel_imp = (abs_imp / base_val * 100) if base_val > 0 else 0
+            improvements[metric] = {
+                "base": round(base_val, 4),
+                "finetuned": round(ft_val, 4),
+                "absolute": round(abs_imp, 4),
+                "relative_pct": round(rel_imp, 1),
+            }
+
+        combined = {
+            "model_name": model_name,
+            "base_model": base_model_path,
+            "finetuned_path": str(finetuned_path),
+            "base_results": base_dict,
+            "finetuned_results": ft_dict,
+            "improvements": improvements,
+        }
+        with open(model_output / "comparison.json", "w") as f:
+            json.dump(combined, f, indent=2)
+
+        logger.info(
+            f"[OK] {model_name}: Recall@10 {base_dict.get('recall@10', 0):.4f} -> "
+            f"{ft_dict.get('recall@10', 0):.4f} "
+            f"(+{improvements.get('recall@10', {}).get('relative_pct', 0):.1f}%)"
+        )
+        return combined
+
+    except Exception as e:
+        logger.error(f"[FAIL] {model_name}: {e}", exc_info=True)
+        return None
+
+    finally:
+        # Free GPU memory
+        try:
+            import torch
+            torch.cuda.empty_cache()
+        except Exception:
+            pass
+
+
+def evaluate_all_embeddings(
+    jsonl_path: str,
+    embedding_dir: str,
+    output_dir: Path,
+    sample_size: int = 5000,
+    skip_existing: bool = True,
+) -> list[dict[str, Any]]:
+    """Evaluate all embedding models."""
+    emb_output = output_dir / "embeddings"
+    emb_output.mkdir(parents=True, exist_ok=True)
+
+    all_results = []
+    for model_name, base_path in EMBEDDING_MODELS.items():
+        result = evaluate_single_embedding(
+            model_name=model_name,
+            base_model_path=base_path,
+            finetuned_model_path=embedding_dir,
+            jsonl_path=jsonl_path,
+            output_dir=emb_output,
+            sample_size=sample_size,
+            skip_existing=skip_existing,
+        )
+        if result:
+            all_results.append(result)
+
+    # Save combined comparison
+    with open(emb_output / "embedding_comparison.json", "w") as f:
+        json.dump(all_results, f, indent=2)
+
+    logger.info(f"Embedding evaluation complete: {len(all_results)}/{len(EMBEDDING_MODELS)} models")
+    return all_results
+
+
+# ============================================================================
+# LLM EVALUATION
+# ============================================================================
+
+def evaluate_single_llm(
+    model_name: str,
+    base_model_path: str,
+    llm_dir: str,
+    jsonl_path: str,
+    output_dir: Path,
+    sample_size: int = 200,
+    skip_existing: bool = True,
+) -> dict[str, Any] | None:
+    """Evaluate a single fine-tuned LLM on the test split."""
+    result_file = output_dir / model_name / "eval_results_test.json"
+
+    if skip_existing and result_file.exists():
+        logger.info(f"[SKIP] {model_name}: results already exist at {result_file}")
+        with open(result_file) as f:
+            return json.load(f)
+
+    adapter_path = Path(llm_dir) / model_name / "final_adapter"
+    if not adapter_path.exists():
+        # Check alternative paths
+        alt_paths = [
+            Path(llm_dir) / model_name / "checkpoint-best",
+            Path(llm_dir) / model_name,
+        ]
+        adapter_path = None
+        for alt in alt_paths:
+            if alt.exists() and (alt / "adapter_config.json").exists():
+                adapter_path = alt
+                break
+        if adapter_path is None:
+            logger.warning(f"[SKIP] {model_name}: no adapter found under {llm_dir}/{model_name}/")
+            return None
+
+    try:
+        import torch
+        from peft import PeftModel
+        from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+
+        from src.llm_trainers.evaluators import evaluate_model
+
+        model_output = output_dir / model_name
+        model_output.mkdir(parents=True, exist_ok=True)
+
+        logger.info(f"Loading base model: {base_model_path}")
+        bnb_config = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_compute_dtype=torch.bfloat16,
+        )
+        model = AutoModelForCausalLM.from_pretrained(
+            base_model_path,
+            quantization_config=bnb_config,
+            device_map="auto",
+            trust_remote_code=True,
+        )
+        tokenizer = AutoTokenizer.from_pretrained(
+            base_model_path, trust_remote_code=True
+        )
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token
+
+        logger.info(f"Loading adapter: {adapter_path}")
+        model = PeftModel.from_pretrained(model, str(adapter_path))
+
+        logger.info(f"Evaluating {model_name} on test split ({sample_size} samples)...")
+        result = evaluate_model(
+            model=model,
+            tokenizer=tokenizer,
+            jsonl_path=jsonl_path,
+            model_name=model_name,
+            split="test",
+            sample_size=sample_size,
+            max_new_tokens=256,
+            temperature=0.1,
+            output_dir=str(model_output),
+            compute_perplexity_flag=True,
+            compute_faithfulness_flag=True,
+            compute_bertscore_flag=True,
+        )
+
+        result_dict = result.to_dict()
+        logger.info(
+            f"[OK] {model_name}: ROUGE-L={result_dict['rougeL']:.4f}, "
+            f"BERTScore-F1={result_dict['bertscore_f1']:.4f}, "
+            f"Token-F1={result_dict['token_f1']:.4f}"
+        )
+
+        del model, tokenizer
+        torch.cuda.empty_cache()
+
+        return result_dict
+
+    except Exception as e:
+        logger.error(f"[FAIL] {model_name}: {e}", exc_info=True)
+        return None
+
+    finally:
+        try:
+            import torch
+            torch.cuda.empty_cache()
+        except Exception:
+            pass
+
+
+def evaluate_all_llms(
+    jsonl_path: str,
+    llm_dir: str,
+    output_dir: Path,
+    sample_size: int = 200,
+    skip_existing: bool = True,
+) -> list[dict[str, Any]]:
+    """Evaluate all fine-tuned LLMs."""
+    llm_output = output_dir / "llms"
+    llm_output.mkdir(parents=True, exist_ok=True)
+
+    all_results = []
+    for model_name, base_path in LLM_MODELS.items():
+        result = evaluate_single_llm(
+            model_name=model_name,
+            base_model_path=base_path,
+            llm_dir=llm_dir,
+            jsonl_path=jsonl_path,
+            output_dir=llm_output,
+            sample_size=sample_size,
+            skip_existing=skip_existing,
+        )
+        if result:
+            all_results.append(result)
+
+    # Save combined comparison
+    with open(llm_output / "llm_comparison.json", "w") as f:
+        json.dump(all_results, f, indent=2)
+
+    logger.info(f"LLM evaluation complete: {len(all_results)}/{len(LLM_MODELS)} models")
+    return all_results
+
+
+# ============================================================================
+# LaTeX TABLE GENERATION
+# ============================================================================
+
+def generate_embedding_table(results: list[dict[str, Any]], output_path: Path) -> str:
+    """Generate LaTeX table for embedding model comparison."""
+    lines = [
+        r"\begin{table}[t]",
+        r"\centering",
+        r"\caption{Retrieval performance of base vs.\ domain-adapted embedding models on the MSQA-Bench test set (5,000 queries). "
+        r"$\Delta$ denotes absolute improvement after fine-tuning on 1M+ MS-domain QA pairs.}",
+        r"\label{tab:embedding_results}",
+        r"\small",
+        r"\begin{tabular}{@{}l cc cc cc@{}}",
+        r"\toprule",
+        r"& \multicolumn{2}{c}{\textbf{Recall@10}} & \multicolumn{2}{c}{\textbf{MRR@10}} & \multicolumn{2}{c}{\textbf{NDCG@10}} \\",
+        r"\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}",
+        r"\textbf{Model} & Base & +FT ($\Delta$) & Base & +FT ($\Delta$) & Base & +FT ($\Delta$) \\",
+        r"\midrule",
+    ]
+
+    for r in results:
+        name = r["model_name"].replace("_", r"\_")
+        imp = r.get("improvements", {})
+
+        def fmt(metric: str) -> str:
+            m = imp.get(metric, {})
+            base = m.get("base", 0)
+            ft = m.get("finetuned", 0)
+            delta = m.get("absolute", 0)
+            sign = "+" if delta >= 0 else ""
+            return f"{base:.3f} & {ft:.3f} ({sign}{delta:.3f})"
+
+        row = f"  {name} & {fmt('recall@10')} & {fmt('mrr@10')} & {fmt('ndcg@10')} \\\\"
+        lines.append(row)
+
+    lines += [
+        r"\bottomrule",
+        r"\end{tabular}",
+        r"\end{table}",
+    ]
+
+    table = "\n".join(lines)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_path, "w") as f:
+        f.write(table)
+    logger.info(f"Embedding LaTeX table saved: {output_path}")
+    return table
+
+
+def generate_llm_table(results: list[dict[str, Any]], output_path: Path) -> str:
+    """Generate LaTeX table for LLM comparison."""
+    lines = [
+        r"\begin{table}[t]",
+        r"\centering",
+        r"\caption{Generation performance of QLoRA-adapted LLMs on the MSQA-Bench test set. "
+        r"Models are fine-tuned with LoRA rank~64 on 1M+ MS-domain QA pairs. "
+        r"Faithfulness measures NLI-based entailment of generated answers against source context.}",
+        r"\label{tab:llm_results}",
+        r"\small",
+        r"\begin{tabular}{@{}l ccc cc c@{}}",
+        r"\toprule",
+        r"\textbf{Model} & \textbf{ROUGE-1} & \textbf{ROUGE-L} & \textbf{BERTScore} & \textbf{Token F1} & \textbf{Faithful.} & \textbf{PPL} \\",
+        r"\midrule",
+    ]
+
+    for r in results:
+        name = r.get("model_name", "unknown").replace("_", r"\_")
+        row = (
+            f"  {name} & "
+            f"{r.get('rouge1', 0):.3f} & "
+            f"{r.get('rougeL', 0):.3f} & "
+            f"{r.get('bertscore_f1', 0):.3f} & "
+            f"{r.get('token_f1', 0):.3f} & "
+            f"{r.get('faithfulness_score', 0):.3f} & "
+            f"{r.get('perplexity', 0):.1f} \\\\"
+        )
+        lines.append(row)
+
+    lines += [
+        r"\bottomrule",
+        r"\end{tabular}",
+        r"\end{table}",
+    ]
+
+    table = "\n".join(lines)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_path, "w") as f:
+        f.write(table)
+    logger.info(f"LLM LaTeX table saved: {output_path}")
+    return table
+
+
+# ============================================================================
+# COLLECT EXISTING RESULTS (no GPU needed)
+# ============================================================================
+
+def collect_existing_results(
+    embedding_dir: str,
+    llm_dir: str,
+    output_dir: Path,
+) -> dict[str, Any]:
+    """
+    Scan model directories for existing eval_results files without running
+    any evaluation. Use this if you just want to collect results that
+    training scripts already generated.
+    """
+    summary: dict[str, Any] = {"embeddings": [], "llms": [], "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S")}
+
+    # Collect embedding results
+    emb_base = Path(embedding_dir)
+    if emb_base.exists():
+        for model_dir in sorted(emb_base.iterdir()):
+            if not model_dir.is_dir():
+                continue
+            for pattern in ["eval_results_test.json", "eval_results_val.json", "training_summary.json"]:
+                result_file = model_dir / pattern
+                if result_file.exists():
+                    with open(result_file) as f:
+                        data = json.load(f)
+                    data["_source"] = str(result_file)
+                    data["_model_dir"] = model_dir.name
+                    summary["embeddings"].append(data)
+                    logger.info(f"Found embedding result: {result_file}")
+                    break
+
+    # Collect LLM results
+    llm_base = Path(llm_dir)
+    if llm_base.exists():
+        for model_dir in sorted(llm_base.iterdir()):
+            if not model_dir.is_dir():
+                continue
+            for pattern in ["eval_results_test.json", "eval_results_val.json"]:
+                result_file = model_dir / pattern
+                if result_file.exists():
+                    with open(result_file) as f:
+                        data = json.load(f)
+                    data["_source"] = str(result_file)
+                    data["_model_dir"] = model_dir.name
+                    summary["llms"].append(data)
+                    logger.info(f"Found LLM result: {result_file}")
+                    break
+
+            # Also check for training logs with final metrics
+            trainer_state = model_dir / "final_adapter" / "trainer_state.json"
+            if trainer_state.exists():
+                try:
+                    with open(trainer_state) as f:
+                        state = json.load(f)
+                    log_history = state.get("log_history", [])
+                    if log_history:
+                        last_entry = log_history[-1]
+                        summary.setdefault("training_logs", {})[model_dir.name] = {
+                            "final_loss": last_entry.get("loss") or last_entry.get("eval_loss"),
+                            "total_steps": state.get("global_step"),
+                            "epoch": last_entry.get("epoch"),
+                            "log_entries": len(log_history),
+                        }
+                        logger.info(f"Found trainer state: {trainer_state}")
+                except Exception as e:
+                    logger.warning(f"Could not read {trainer_state}: {e}")
+
+    # Save
+    output_dir.mkdir(parents=True, exist_ok=True)
+    out_file = output_dir / "collected_results.json"
+    with open(out_file, "w") as f:
+        json.dump(summary, f, indent=2)
+    logger.info(f"Collected results saved to {out_file}")
+    logger.info(f"  Embedding results: {len(summary['embeddings'])}")
+    logger.info(f"  LLM results:       {len(summary['llms'])}")
+
+    return summary
+
+
+# ============================================================================
+# MAIN
+# ============================================================================
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Extract and evaluate all fine-tuned model results for paper",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Just collect existing results (no GPU needed):
+  python scripts/extract_all_results.py --collect-only
+
+  # Evaluate all embedding models:
+  python scripts/extract_all_results.py --embeddings-only
+
+  # Evaluate all LLM models:
+  python scripts/extract_all_results.py --llms-only
+
+  # Evaluate everything:
+  python scripts/extract_all_results.py --all
+
+  # Skip models that already have results:
+  python scripts/extract_all_results.py --all --skip-existing
+
+  # Custom paths:
+  python scripts/extract_all_results.py --all \\
+      --data /path/to/consolidated_qa.jsonl \\
+      --embedding-dir /path/to/fine_tuned_embeddings \\
+      --llm-dir /path/to/fine_tuned_llms
+        """,
+    )
+    parser.add_argument("--collect-only", action="store_true",
+                        help="Only collect existing results (no evaluation)")
+    parser.add_argument("--embeddings-only", action="store_true",
+                        help="Only evaluate embedding models")
+    parser.add_argument("--llms-only", action="store_true",
+                        help="Only evaluate LLM models")
+    parser.add_argument("--all", action="store_true",
+                        help="Evaluate both embeddings and LLMs")
+    parser.add_argument("--skip-existing", action="store_true", default=True,
+                        help="Skip models that already have results (default: True)")
+    parser.add_argument("--force", action="store_true",
+                        help="Re-evaluate even if results exist")
+    parser.add_argument("--data", default=DEFAULT_DATA_JSONL,
+                        help=f"Path to consolidated QA JSONL (default: {DEFAULT_DATA_JSONL})")
+    parser.add_argument("--embedding-dir", default=DEFAULT_EMBEDDING_DIR,
+                        help=f"Path to fine-tuned embeddings (default: {DEFAULT_EMBEDDING_DIR})")
+    parser.add_argument("--llm-dir", default=DEFAULT_LLM_DIR,
+                        help=f"Path to fine-tuned LLMs (default: {DEFAULT_LLM_DIR})")
+    parser.add_argument("--output", default=str(DEFAULT_OUTPUT_DIR),
+                        help=f"Output directory (default: {DEFAULT_OUTPUT_DIR})")
+    parser.add_argument("--emb-sample-size", type=int, default=5000,
+                        help="Number of test samples for embedding eval (default: 5000)")
+    parser.add_argument("--llm-sample-size", type=int, default=200,
+                        help="Number of test samples for LLM eval (default: 200)")
+
+    args = parser.parse_args()
+
+    if not any([args.collect_only, args.embeddings_only, args.llms_only, args.all]):
+        parser.print_help()
+        print("\nError: specify one of --collect-only, --embeddings-only, --llms-only, or --all")
+        sys.exit(1)
+
+    output_dir = Path(args.output)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    skip_existing = not args.force
+
+    # ------------------------------------------------------------------ #
+    # 1. Always collect existing results first                            #
+    # ------------------------------------------------------------------ #
+    logger.info("=" * 70)
+    logger.info("STEP 1: Collecting existing results")
+    logger.info("=" * 70)
+    collected = collect_existing_results(
+        args.embedding_dir, args.llm_dir, output_dir,
+    )
+
+    if args.collect_only:
+        print(f"\nCollected results saved to: {output_dir / 'collected_results.json'}")
+        return
+
+    # ------------------------------------------------------------------ #
+    # 2. Evaluate embeddings                                              #
+    # ------------------------------------------------------------------ #
+    emb_results: list[dict[str, Any]] = []
+    if args.embeddings_only or args.all:
+        logger.info("=" * 70)
+        logger.info("STEP 2: Evaluating embedding models")
+        logger.info("=" * 70)
+        emb_results = evaluate_all_embeddings(
+            jsonl_path=args.data,
+            embedding_dir=args.embedding_dir,
+            output_dir=output_dir,
+            sample_size=args.emb_sample_size,
+            skip_existing=skip_existing,
+        )
+
+    # ------------------------------------------------------------------ #
+    # 3. Evaluate LLMs                                                    #
+    # ------------------------------------------------------------------ #
+    llm_results: list[dict[str, Any]] = []
+    if args.llms_only or args.all:
+        logger.info("=" * 70)
+        logger.info("STEP 3: Evaluating LLM models")
+        logger.info("=" * 70)
+        llm_results = evaluate_all_llms(
+            jsonl_path=args.data,
+            llm_dir=args.llm_dir,
+            output_dir=output_dir,
+            sample_size=args.llm_sample_size,
+            skip_existing=skip_existing,
+        )
+
+    # ------------------------------------------------------------------ #
+    # 4. Generate LaTeX tables                                            #
+    # ------------------------------------------------------------------ #
+    logger.info("=" * 70)
+    logger.info("STEP 4: Generating LaTeX tables")
+    logger.info("=" * 70)
+    tables_dir = output_dir / "tables"
+    tables_dir.mkdir(parents=True, exist_ok=True)
+
+    if emb_results:
+        generate_embedding_table(emb_results, tables_dir / "table_embedding_results.tex")
+    if llm_results:
+        generate_llm_table(llm_results, tables_dir / "table_llm_results.tex")
+
+    # ------------------------------------------------------------------ #
+    # 5. Summary                                                          #
+    # ------------------------------------------------------------------ #
+    summary = {
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "embedding_models_evaluated": len(emb_results),
+        "llm_models_evaluated": len(llm_results),
+        "output_dir": str(output_dir),
+        "data_source": args.data,
+    }
+    with open(output_dir / "summary.json", "w") as f:
+        json.dump(summary, f, indent=2)
+
+    print("\n" + "=" * 70)
+    print("RESULTS EXTRACTION COMPLETE")
+    print("=" * 70)
+    print(f"  Embeddings evaluated: {len(emb_results)}/{len(EMBEDDING_MODELS)}")
+    print(f"  LLMs evaluated:       {len(llm_results)}/{len(LLM_MODELS)}")
+    print(f"  Output directory:     {output_dir}")
+    print(f"  LaTeX tables:         {tables_dir}")
+    print("=" * 70)
+
+
+if __name__ == "__main__":
+    main()
