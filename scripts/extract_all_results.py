@@ -51,9 +51,9 @@ logger = logging.getLogger(__name__)
 # Paths (adjust if your server layout differs)
 # ---------------------------------------------------------------------------
 DEFAULT_PROJECT_DIR = Path(__file__).resolve().parent.parent
-DEFAULT_DATA_JSONL = "/home/asad/output_consolidated/consolidated_qa.jsonl"
-DEFAULT_EMBEDDING_DIR = "/home/asad/models/fine_tuned_embeddings"
-DEFAULT_LLM_DIR = "/home/asad/models/fine_tuned_llms"
+DEFAULT_DATA_JSONL = "/home/asad/MS-GPT/output_consolidated/consolidated_qa.jsonl"
+DEFAULT_EMBEDDING_DIR = "/home/asad/MS-GPT/models/fine_tuned_embeddings"
+DEFAULT_LLM_DIR = "/home/asad/MS-GPT/models/fine_tuned_llms"
 DEFAULT_OUTPUT_DIR = DEFAULT_PROJECT_DIR / "paper_results" / "model_results"
 
 # Embedding models config (name -> base HF path)
@@ -96,15 +96,21 @@ def evaluate_single_embedding(
         with open(result_file) as f:
             return json.load(f)
 
-    finetuned_path = Path(finetuned_model_path) / model_name
-    if not finetuned_path.exists():
-        # Also check for 'final_model' subdirectory
-        alt_path = finetuned_path / "final_model"
-        if alt_path.exists():
-            finetuned_path = alt_path
-        else:
-            logger.warning(f"[SKIP] {model_name}: no fine-tuned model at {finetuned_path}")
-            return None
+    # Try several known layouts: subdirectory style, prefix style, and
+    # nested 'final_model' for sentence-transformers training output.
+    candidates = [
+        Path(finetuned_model_path) / model_name,
+        Path(finetuned_model_path) / model_name / "final_model",
+        Path(finetuned_model_path) / f"fine_tuned_embeddings_{model_name}",
+        Path(finetuned_model_path) / f"fine_tuned_embeddings_{model_name}" / "final_model",
+    ]
+    finetuned_path = next((p for p in candidates if p.exists()), None)
+    if finetuned_path is None:
+        logger.warning(
+            f"[SKIP] {model_name}: no fine-tuned model found. Tried: "
+            + ", ".join(str(p) for p in candidates)
+        )
+        return None
 
     try:
         from sentence_transformers import SentenceTransformer
@@ -237,21 +243,23 @@ def evaluate_single_llm(
         with open(result_file) as f:
             return json.load(f)
 
-    adapter_path = Path(llm_dir) / model_name / "final_adapter"
-    if not adapter_path.exists():
-        # Check alternative paths
-        alt_paths = [
-            Path(llm_dir) / model_name / "checkpoint-best",
-            Path(llm_dir) / model_name,
-        ]
-        adapter_path = None
-        for alt in alt_paths:
-            if alt.exists() and (alt / "adapter_config.json").exists():
-                adapter_path = alt
-                break
-        if adapter_path is None:
-            logger.warning(f"[SKIP] {model_name}: no adapter found under {llm_dir}/{model_name}/")
-            return None
+    candidates = [
+        Path(llm_dir) / model_name / "final_adapter",
+        Path(llm_dir) / f"fine_tuned_llms_{model_name}" / "final_adapter",
+        Path(llm_dir) / model_name / "checkpoint-best",
+        Path(llm_dir) / model_name,
+    ]
+    adapter_path = None
+    for cand in candidates:
+        if cand.exists() and (cand / "adapter_config.json").exists():
+            adapter_path = cand
+            break
+    if adapter_path is None:
+        logger.warning(
+            f"[SKIP] {model_name}: no adapter found. Tried: "
+            + ", ".join(str(c) for c in candidates)
+        )
+        return None
 
     try:
         import torch
@@ -363,36 +371,66 @@ def evaluate_all_llms(
 # ============================================================================
 
 def generate_embedding_table(results: list[dict[str, Any]], output_path: Path) -> str:
-    """Generate LaTeX table for embedding model comparison."""
-    lines = [
-        r"\begin{table}[t]",
-        r"\centering",
-        r"\caption{Retrieval performance of base vs.\ domain-adapted embedding models on the MSQA-Bench test set (5,000 queries). "
-        r"$\Delta$ denotes absolute improvement after fine-tuning on 1M+ MS-domain QA pairs.}",
-        r"\label{tab:embedding_results}",
-        r"\small",
-        r"\begin{tabular}{@{}l cc cc cc@{}}",
-        r"\toprule",
-        r"& \multicolumn{2}{c}{\textbf{Recall@10}} & \multicolumn{2}{c}{\textbf{MRR@10}} & \multicolumn{2}{c}{\textbf{NDCG@10}} \\",
-        r"\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}",
-        r"\textbf{Model} & Base & +FT ($\Delta$) & Base & +FT ($\Delta$) & Base & +FT ($\Delta$) \\",
-        r"\midrule",
-    ]
+    """Generate LaTeX table for embedding models.
 
-    for r in results:
-        name = r["model_name"].replace("_", r"\_")
-        imp = r.get("improvements", {})
+    If any entry has ``improvements`` populated, emit the comparison table
+    (Base / +FT / Delta). Otherwise emit a simpler fine-tuned-only table.
+    """
+    has_comparison = any(r.get("improvements") for r in results)
 
-        def fmt(metric: str) -> str:
-            m = imp.get(metric, {})
-            base = m.get("base", 0)
-            ft = m.get("finetuned", 0)
-            delta = m.get("absolute", 0)
-            sign = "+" if delta >= 0 else ""
-            return f"{base:.3f} & {ft:.3f} ({sign}{delta:.3f})"
+    if has_comparison:
+        lines = [
+            r"\begin{table}[t]",
+            r"\centering",
+            r"\caption{Retrieval performance of base vs.\ domain-adapted embedding models on the MSQA-Bench test set (5,000 queries). "
+            r"$\Delta$ denotes absolute improvement after fine-tuning on 1M+ MS-domain QA pairs.}",
+            r"\label{tab:embedding_results}",
+            r"\small",
+            r"\begin{tabular}{@{}l cc cc cc@{}}",
+            r"\toprule",
+            r"& \multicolumn{2}{c}{\textbf{Recall@10}} & \multicolumn{2}{c}{\textbf{MRR@10}} & \multicolumn{2}{c}{\textbf{NDCG@10}} \\",
+            r"\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}",
+            r"\textbf{Model} & Base & +FT ($\Delta$) & Base & +FT ($\Delta$) & Base & +FT ($\Delta$) \\",
+            r"\midrule",
+        ]
+        for r in results:
+            name = r["model_name"].replace("_", r"\_")
+            imp = r.get("improvements", {})
 
-        row = f"  {name} & {fmt('recall@10')} & {fmt('mrr@10')} & {fmt('ndcg@10')} \\\\"
-        lines.append(row)
+            def fmt(metric: str) -> str:
+                m = imp.get(metric, {})
+                base = m.get("base", 0)
+                ft = m.get("finetuned", 0)
+                delta = m.get("absolute", 0)
+                sign = "+" if delta >= 0 else ""
+                return f"{base:.3f} & {ft:.3f} ({sign}{delta:.3f})"
+
+            row = f"  {name} & {fmt('recall@10')} & {fmt('mrr@10')} & {fmt('ndcg@10')} \\\\"
+            lines.append(row)
+    else:
+        lines = [
+            r"\begin{table}[t]",
+            r"\centering",
+            r"\caption{Retrieval performance of domain-adapted embedding models on the MSQA-Bench test set (5,000 queries) after fine-tuning on 1M+ MS-domain QA pairs.}",
+            r"\label{tab:embedding_results}",
+            r"\small",
+            r"\begin{tabular}{@{}l ccc cc@{}}",
+            r"\toprule",
+            r"\textbf{Model} & \textbf{R@1} & \textbf{R@5} & \textbf{R@10} & \textbf{MRR@10} & \textbf{NDCG@10} \\",
+            r"\midrule",
+        ]
+        for r in results:
+            name = r["model_name"].replace("_", r"\_")
+            ft = r.get("finetuned_results") or r
+            row = (
+                f"  {name} & "
+                f"{ft.get('recall@1', 0):.3f} & "
+                f"{ft.get('recall@5', 0):.3f} & "
+                f"{ft.get('recall@10', 0):.3f} & "
+                f"{ft.get('mrr@10', 0):.3f} & "
+                f"{ft.get('ndcg@10', 0):.3f} \\\\"
+            )
+            lines.append(row)
 
     lines += [
         r"\bottomrule",
@@ -449,6 +487,53 @@ def generate_llm_table(results: list[dict[str, Any]], output_path: Path) -> str:
         f.write(table)
     logger.info(f"LLM LaTeX table saved: {output_path}")
     return table
+
+
+# ============================================================================
+# NORMALIZE COLLECTED RESULTS FOR TABLE GENERATORS
+# ============================================================================
+
+def _canonical_model_name(raw: str, prefix: str) -> str:
+    """Strip the optional ``fine_tuned_*_`` prefix from a folder name."""
+    if raw.startswith(prefix):
+        return raw[len(prefix):]
+    return raw
+
+
+def _collected_to_table_inputs(
+    collected: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Reshape ``collect_existing_results`` output for the table generators.
+
+    Returned entries omit base/finetuned comparison fields, so the
+    embedding table will fall back to its fine-tuned-only layout.
+    """
+    emb: list[dict[str, Any]] = []
+    for entry in collected.get("embeddings", []):
+        raw_dir = entry.get("_model_dir", "")
+        canonical = _canonical_model_name(raw_dir, "fine_tuned_embeddings_")
+        clean = {k: v for k, v in entry.items() if not k.startswith("_")}
+        emb.append({
+            "model_name": canonical or raw_dir or "unknown",
+            "finetuned_results": clean,
+            "improvements": {},
+        })
+
+    # Preserve the order declared in EMBEDDING_MODELS where possible.
+    order = list(EMBEDDING_MODELS.keys())
+    emb.sort(key=lambda r: order.index(r["model_name"]) if r["model_name"] in order else len(order))
+
+    llm: list[dict[str, Any]] = []
+    for entry in collected.get("llms", []):
+        raw_dir = entry.get("_model_dir", "")
+        canonical = _canonical_model_name(raw_dir, "fine_tuned_llms_")
+        clean = {k: v for k, v in entry.items() if not k.startswith("_")}
+        llm.append({"model_name": canonical or raw_dir or "unknown", **clean})
+
+    llm_order = list(LLM_MODELS.keys())
+    llm.sort(key=lambda r: llm_order.index(r["model_name"]) if r["model_name"] in llm_order else len(llm_order))
+
+    return emb, llm
 
 
 # ============================================================================
@@ -609,10 +694,7 @@ Examples:
     collected = collect_existing_results(
         args.embedding_dir, args.llm_dir, output_dir,
     )
-
-    if args.collect_only:
-        print(f"\nCollected results saved to: {output_dir / 'collected_results.json'}")
-        return
+    fallback_emb, fallback_llm = _collected_to_table_inputs(collected)
 
     # ------------------------------------------------------------------ #
     # 2. Evaluate embeddings                                              #
@@ -647,7 +729,8 @@ Examples:
         )
 
     # ------------------------------------------------------------------ #
-    # 4. Generate LaTeX tables                                            #
+    # 4. Generate LaTeX tables (use fresh eval, else fall back to        #
+    #    metrics collected from existing eval JSONs in step 1)            #
     # ------------------------------------------------------------------ #
     logger.info("=" * 70)
     logger.info("STEP 4: Generating LaTeX tables")
@@ -655,10 +738,27 @@ Examples:
     tables_dir = output_dir / "tables"
     tables_dir.mkdir(parents=True, exist_ok=True)
 
-    if emb_results:
-        generate_embedding_table(emb_results, tables_dir / "table_embedding_results.tex")
-    if llm_results:
-        generate_llm_table(llm_results, tables_dir / "table_llm_results.tex")
+    emb_for_table = emb_results or fallback_emb
+    if emb_for_table:
+        if not emb_results and fallback_emb:
+            logger.info(
+                f"Using {len(fallback_emb)} collected embedding result(s) for LaTeX table "
+                "(no fresh evaluation performed)"
+            )
+        generate_embedding_table(emb_for_table, tables_dir / "table_embedding_results.tex")
+    else:
+        logger.warning("No embedding results available — table_embedding_results.tex not written")
+
+    llm_for_table = llm_results or fallback_llm
+    if llm_for_table:
+        if not llm_results and fallback_llm:
+            logger.info(
+                f"Using {len(fallback_llm)} collected LLM result(s) for LaTeX table "
+                "(no fresh evaluation performed)"
+            )
+        generate_llm_table(llm_for_table, tables_dir / "table_llm_results.tex")
+    else:
+        logger.warning("No LLM results available — table_llm_results.tex not written")
 
     # ------------------------------------------------------------------ #
     # 5. Summary                                                          #
@@ -666,7 +766,9 @@ Examples:
     summary = {
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "embedding_models_evaluated": len(emb_results),
+        "embedding_models_in_table": len(emb_for_table),
         "llm_models_evaluated": len(llm_results),
+        "llm_models_in_table": len(llm_for_table),
         "output_dir": str(output_dir),
         "data_source": args.data,
     }
@@ -676,8 +778,14 @@ Examples:
     print("\n" + "=" * 70)
     print("RESULTS EXTRACTION COMPLETE")
     print("=" * 70)
-    print(f"  Embeddings evaluated: {len(emb_results)}/{len(EMBEDDING_MODELS)}")
-    print(f"  LLMs evaluated:       {len(llm_results)}/{len(LLM_MODELS)}")
+    print(
+        f"  Embeddings: evaluated {len(emb_results)}/{len(EMBEDDING_MODELS)}, "
+        f"{len(emb_for_table)} in table"
+    )
+    print(
+        f"  LLMs:       evaluated {len(llm_results)}/{len(LLM_MODELS)}, "
+        f"{len(llm_for_table)} in table"
+    )
     print(f"  Output directory:     {output_dir}")
     print(f"  LaTeX tables:         {tables_dir}")
     print("=" * 70)
