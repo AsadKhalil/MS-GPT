@@ -693,8 +693,21 @@ Examples:
     parser.add_argument("--skip-models", default="",
                         help="Comma-separated model names to skip "
                              "(e.g., 'llama3.1_8b,deepseek_r1_distill_7b')")
+    parser.add_argument("--gpu", default=None,
+                        help="GPU id(s) to use, sets CUDA_VISIBLE_DEVICES "
+                             "(e.g., '2' or '0,1'). Must be set before torch "
+                             "is imported.")
 
     args = parser.parse_args()
+
+    # Pin GPU before any torch import inside evaluate_* functions.
+    if args.gpu is not None:
+        os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+        os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu)
+        logger.info(
+            f"CUDA_VISIBLE_DEVICES={args.gpu} (PCI_BUS_ID order). "
+            "torch will see this as cuda:0."
+        )
 
     if not any([args.collect_only, args.embeddings_only, args.llms_only, args.all]):
         parser.print_help()
