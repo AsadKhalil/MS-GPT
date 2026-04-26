@@ -41,6 +41,13 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
+# Allow `from src.xxx import ...` when running this file as a script
+# (e.g. `python scripts/extract_all_results.py`). Without this, Python
+# resolves imports relative to scripts/ and `src` is not visible.
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -195,13 +202,18 @@ def evaluate_all_embeddings(
     output_dir: Path,
     sample_size: int = 5000,
     skip_existing: bool = True,
+    skip_models: set[str] | None = None,
 ) -> list[dict[str, Any]]:
     """Evaluate all embedding models."""
     emb_output = output_dir / "embeddings"
     emb_output.mkdir(parents=True, exist_ok=True)
+    skip_models = skip_models or set()
 
     all_results = []
     for model_name, base_path in EMBEDDING_MODELS.items():
+        if model_name in skip_models:
+            logger.info(f"[SKIP-CLI] {model_name}: skipped via --skip-models")
+            continue
         result = evaluate_single_embedding(
             model_name=model_name,
             base_model_path=base_path,
@@ -339,13 +351,18 @@ def evaluate_all_llms(
     output_dir: Path,
     sample_size: int = 200,
     skip_existing: bool = True,
+    skip_models: set[str] | None = None,
 ) -> list[dict[str, Any]]:
     """Evaluate all fine-tuned LLMs."""
     llm_output = output_dir / "llms"
     llm_output.mkdir(parents=True, exist_ok=True)
+    skip_models = skip_models or set()
 
     all_results = []
     for model_name, base_path in LLM_MODELS.items():
+        if model_name in skip_models:
+            logger.info(f"[SKIP-CLI] {model_name}: skipped via --skip-models")
+            continue
         result = evaluate_single_llm(
             model_name=model_name,
             base_model_path=base_path,
@@ -673,6 +690,9 @@ Examples:
                         help="Number of test samples for embedding eval (default: 5000)")
     parser.add_argument("--llm-sample-size", type=int, default=200,
                         help="Number of test samples for LLM eval (default: 200)")
+    parser.add_argument("--skip-models", default="",
+                        help="Comma-separated model names to skip "
+                             "(e.g., 'llama3.1_8b,deepseek_r1_distill_7b')")
 
     args = parser.parse_args()
 
@@ -684,6 +704,23 @@ Examples:
     output_dir = Path(args.output)
     output_dir.mkdir(parents=True, exist_ok=True)
     skip_existing = not args.force
+    skip_models = {m.strip() for m in args.skip_models.split(",") if m.strip()}
+    if skip_models:
+        logger.info(f"Will skip models: {sorted(skip_models)}")
+
+    # Allow --data to point at either the consolidated_qa.jsonl file directly
+    # or the directory that contains it.
+    data_path = Path(args.data)
+    if data_path.is_dir():
+        candidate = data_path / "consolidated_qa.jsonl"
+        if candidate.exists():
+            logger.info(f"Resolved --data directory to file: {candidate}")
+            args.data = str(candidate)
+        else:
+            logger.warning(
+                f"--data is a directory ({data_path}) and contains no "
+                "consolidated_qa.jsonl; evaluation steps will likely fail."
+            )
 
     # ------------------------------------------------------------------ #
     # 1. Always collect existing results first                            #
@@ -710,6 +747,7 @@ Examples:
             output_dir=output_dir,
             sample_size=args.emb_sample_size,
             skip_existing=skip_existing,
+            skip_models=skip_models,
         )
 
     # ------------------------------------------------------------------ #
@@ -726,6 +764,7 @@ Examples:
             output_dir=output_dir,
             sample_size=args.llm_sample_size,
             skip_existing=skip_existing,
+            skip_models=skip_models,
         )
 
     # ------------------------------------------------------------------ #
