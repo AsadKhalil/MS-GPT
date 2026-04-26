@@ -72,6 +72,11 @@ EMBEDDING_MODELS = {
     "bge_base_en_v1.5": "BAAI/bge-base-en-v1.5",
 }
 
+# Embedding models whose BASE checkpoint requires trust_remote_code=True.
+# Fine-tuned snapshots saved by sentence-transformers don't need it because
+# the custom modules are baked into the on-disk artifact.
+EMBEDDINGS_NEED_TRUST_REMOTE = {"nomic_embed_v1.5"}
+
 # LLM models config (name -> base HF path)
 LLM_MODELS = {
     "phi3.5_mini": "microsoft/Phi-3.5-mini-instruct",
@@ -80,6 +85,12 @@ LLM_MODELS = {
     "qwen2.5_7b": "Qwen/Qwen2.5-7B-Instruct",
     "deepseek_r1_distill_7b": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
 }
+
+# LLMs where the cached custom modeling code is incompatible with current
+# transformers (e.g. Phi-3.5's modeling_phi3.py references
+# DynamicCache.seen_tokens which was removed). For these we force the
+# in-tree HF implementation by passing trust_remote_code=False.
+LLMS_USE_INTREE = {"phi3.5_mini"}
 
 
 # ============================================================================
@@ -127,9 +138,11 @@ def evaluate_single_embedding(
         model_output = output_dir / model_name
         model_output.mkdir(parents=True, exist_ok=True)
 
+        trust_remote = model_name in EMBEDDINGS_NEED_TRUST_REMOTE
+
         # Evaluate base model
-        logger.info(f"Evaluating BASE model: {base_model_path}")
-        base_model = SentenceTransformer(base_model_path)
+        logger.info(f"Evaluating BASE model: {base_model_path} (trust_remote_code={trust_remote})")
+        base_model = SentenceTransformer(base_model_path, trust_remote_code=trust_remote)
         base_result = evaluate_model(
             base_model, jsonl_path, split="test",
             sample_size=sample_size, output_dir=str(model_output),
@@ -141,7 +154,7 @@ def evaluate_single_embedding(
 
         # Evaluate fine-tuned model
         logger.info(f"Evaluating FINE-TUNED model: {finetuned_path}")
-        ft_model = SentenceTransformer(str(finetuned_path))
+        ft_model = SentenceTransformer(str(finetuned_path), trust_remote_code=trust_remote)
         ft_result = evaluate_model(
             ft_model, jsonl_path, split="test",
             sample_size=sample_size, output_dir=str(model_output),
@@ -283,7 +296,10 @@ def evaluate_single_llm(
         model_output = output_dir / model_name
         model_output.mkdir(parents=True, exist_ok=True)
 
-        logger.info(f"Loading base model: {base_model_path}")
+        trust_remote = model_name not in LLMS_USE_INTREE
+        logger.info(
+            f"Loading base model: {base_model_path} (trust_remote_code={trust_remote})"
+        )
         bnb_config = BitsAndBytesConfig(
             load_in_4bit=True,
             bnb_4bit_quant_type="nf4",
@@ -294,10 +310,10 @@ def evaluate_single_llm(
             base_model_path,
             quantization_config=bnb_config,
             device_map="auto",
-            trust_remote_code=True,
+            trust_remote_code=trust_remote,
         )
         tokenizer = AutoTokenizer.from_pretrained(
-            base_model_path, trust_remote_code=True
+            base_model_path, trust_remote_code=trust_remote
         )
         if tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
@@ -412,15 +428,20 @@ def generate_embedding_table(results: list[dict[str, Any]], output_path: Path) -
         ]
         for r in results:
             name = r["model_name"].replace("_", r"\_")
-            imp = r.get("improvements", {})
+            imp = r.get("improvements") or {}
+            ft_only = r.get("finetuned_results") or {}
 
-            def fmt(metric: str) -> str:
-                m = imp.get(metric, {})
-                base = m.get("base", 0)
-                ft = m.get("finetuned", 0)
-                delta = m.get("absolute", 0)
-                sign = "+" if delta >= 0 else ""
-                return f"{base:.3f} & {ft:.3f} ({sign}{delta:.3f})"
+            def fmt(metric: str, imp=imp, ft_only=ft_only) -> str:
+                m = imp.get(metric)
+                if m:
+                    base = m.get("base", 0)
+                    ft = m.get("finetuned", 0)
+                    delta = m.get("absolute", 0)
+                    sign = "+" if delta >= 0 else ""
+                    return f"{base:.3f} & {ft:.3f} ({sign}{delta:.3f})"
+                # Fallback: only fine-tuned numbers available (from collected JSON).
+                ft = ft_only.get(metric, 0)
+                return f"--- & {ft:.3f} (---)"
 
             row = f"  {name} & {fmt('recall@10')} & {fmt('mrr@10')} & {fmt('ndcg@10')} \\\\"
             lines.append(row)
@@ -790,24 +811,44 @@ Examples:
     tables_dir = output_dir / "tables"
     tables_dir.mkdir(parents=True, exist_ok=True)
 
-    emb_for_table = emb_results or fallback_emb
+    def _merge_per_model(
+        fresh: list[dict[str, Any]],
+        fallback: list[dict[str, Any]],
+        kind: str,
+    ) -> list[dict[str, Any]]:
+        """Prefer fresh per model; fill gaps from fallback. Logs each source."""
+        fresh_by_name = {r.get("model_name"): r for r in fresh if r.get("model_name")}
+        fallback_by_name = {r.get("model_name"): r for r in fallback if r.get("model_name")}
+        merged: list[dict[str, Any]] = []
+        seen: set[str] = set()
+        # Keep the order from fallback (which already follows EMBEDDING_MODELS / LLM_MODELS).
+        for name in [*fallback_by_name.keys(), *fresh_by_name.keys()]:
+            if name in seen:
+                continue
+            seen.add(name)
+            if name in fresh_by_name:
+                merged.append(fresh_by_name[name])
+            else:
+                merged.append(fallback_by_name[name])
+                logger.info(f"  {kind}: {name} -> using collected (fresh eval missing/failed)")
+        return merged
+
+    emb_for_table = _merge_per_model(emb_results, fallback_emb, "embedding")
     if emb_for_table:
-        if not emb_results and fallback_emb:
-            logger.info(
-                f"Using {len(fallback_emb)} collected embedding result(s) for LaTeX table "
-                "(no fresh evaluation performed)"
-            )
+        logger.info(
+            f"Embedding table: {len(emb_results)} fresh + "
+            f"{len(emb_for_table) - len(emb_results)} from collected"
+        )
         generate_embedding_table(emb_for_table, tables_dir / "table_embedding_results.tex")
     else:
         logger.warning("No embedding results available — table_embedding_results.tex not written")
 
-    llm_for_table = llm_results or fallback_llm
+    llm_for_table = _merge_per_model(llm_results, fallback_llm, "llm")
     if llm_for_table:
-        if not llm_results and fallback_llm:
-            logger.info(
-                f"Using {len(fallback_llm)} collected LLM result(s) for LaTeX table "
-                "(no fresh evaluation performed)"
-            )
+        logger.info(
+            f"LLM table: {len(llm_results)} fresh + "
+            f"{len(llm_for_table) - len(llm_results)} from collected"
+        )
         generate_llm_table(llm_for_table, tables_dir / "table_llm_results.tex")
     else:
         logger.warning("No LLM results available — table_llm_results.tex not written")
