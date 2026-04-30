@@ -123,10 +123,13 @@ def main(argv=None) -> int:
         logger.error("Import failed (%s). Requires torch + transformers + peft + the project venv.", e)
         return 1
 
-    # Compat shim: newer transformers removed DynamicCache.seen_tokens, but some
-    # model archs (DeepSeek-R1-Distill) and older peft paths still read it.
+    # Compat shim: newer transformers renamed/removed several DynamicCache members
+    # that some model archs (DeepSeek-R1-Distill) and older peft paths still read.
+    #   seen_tokens          -> get_seq_length()
+    #   get_max_length()     -> get_max_cache_shape()
     try:
         from transformers.cache_utils import DynamicCache
+        patched = []
         if not hasattr(DynamicCache, "seen_tokens"):
             def _seen_tokens(self):
                 if hasattr(self, "get_seq_length"):
@@ -136,7 +139,20 @@ def main(argv=None) -> int:
                         return 0
                 return 0
             DynamicCache.seen_tokens = property(_seen_tokens)
-            logger.info("Patched DynamicCache.seen_tokens for compatibility.")
+            patched.append("seen_tokens")
+        if not hasattr(DynamicCache, "get_max_length"):
+            def _get_max_length(self):
+                fn = getattr(self, "get_max_cache_shape", None)
+                if fn is not None:
+                    try:
+                        return fn()
+                    except Exception:
+                        return None
+                return None
+            DynamicCache.get_max_length = _get_max_length
+            patched.append("get_max_length")
+        if patched:
+            logger.info("Patched DynamicCache compat: %s", ", ".join(patched))
     except Exception as e:
         logger.warning("DynamicCache compat shim skipped: %s", e)
 
