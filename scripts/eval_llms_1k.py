@@ -50,14 +50,43 @@ DEFAULT_MODELS = [
 
 
 def find_adapter_dir(model_name: str, models_root: Path):
-    final = models_root / model_name / "final_adapter"
+    """Locate a LoRA adapter for `model_name` under `models_root`.
+
+    Tries, in order:
+      1. <root>/<name>/final_adapter
+      2. <root>/<name>                (if it contains adapter_config.json)
+      3. <root>/<name>/checkpoint-*   (highest-numbered)
+      4. any descendant of <root>/<name> with adapter_config.json
+    """
+    base = models_root / model_name
+    final = base / "final_adapter"
     if final.exists():
         return final
-    candidates = sorted(
-        (models_root / model_name).glob("checkpoint-*"),
-        key=lambda p: int(p.name.split("-")[-1]) if p.name.split("-")[-1].isdigit() else 0,
-    )
-    return candidates[-1] if candidates else None
+    if (base / "adapter_config.json").exists():
+        return base
+    if base.exists():
+        candidates = sorted(
+            base.glob("checkpoint-*"),
+            key=lambda p: int(p.name.split("-")[-1]) if p.name.split("-")[-1].isdigit() else 0,
+        )
+        if candidates:
+            return candidates[-1]
+        for sub in base.rglob("adapter_config.json"):
+            return sub.parent
+    return None
+
+
+def parse_adapter_overrides(specs):
+    out = {}
+    for spec in specs or []:
+        if "=" in spec:
+            name, path = spec.split("=", 1)
+        elif ":" in spec:
+            name, path = spec.split(":", 1)
+        else:
+            raise ValueError(f"Invalid --adapter spec {spec!r} (expected NAME=PATH)")
+        out[name.strip()] = Path(path.strip()).expanduser()
+    return out
 
 
 def main(argv=None) -> int:
@@ -74,6 +103,9 @@ def main(argv=None) -> int:
                    default=Path("paper_results/model_results/llms"))
     p.add_argument("--models", nargs="*", default=None,
                    help="Model names to score (default: enabled models from config).")
+    p.add_argument("--adapter", action="append", default=[], metavar="NAME=PATH",
+                   help="Per-model adapter path override. Repeatable, e.g. "
+                        "--adapter qwen2.5_7b=/data/lora/qwen --adapter phi3.5_mini=/data/lora/phi.")
     p.add_argument("--no-bertscore", action="store_true")
     p.add_argument("--no-faithfulness", action="store_true")
     p.add_argument("--no-perplexity", action="store_true")
@@ -93,6 +125,12 @@ def main(argv=None) -> int:
 
     if not args.test_jsonl.exists():
         logger.error("Test JSONL not found: %s", args.test_jsonl)
+        return 1
+
+    try:
+        adapter_overrides = parse_adapter_overrides(args.adapter)
+    except ValueError as e:
+        logger.error("%s", e)
         return 1
 
     config = json.loads(args.config.read_text())
@@ -130,9 +168,16 @@ def main(argv=None) -> int:
                             "faithfulness_score": d.get("faithfulness_score")})
             continue
 
-        adapter_dir = find_adapter_dir(name, args.models_root)
+        if name in adapter_overrides:
+            adapter_dir = adapter_overrides[name]
+            if not adapter_dir.exists():
+                logger.warning("[%s] override path does not exist: %s — skipping.", name, adapter_dir)
+                continue
+        else:
+            adapter_dir = find_adapter_dir(name, args.models_root)
         if adapter_dir is None:
-            logger.warning("[%s] no adapter under %s — skipping.", name, args.models_root)
+            logger.warning("[%s] no adapter found under %s (override with --adapter %s=PATH) — skipping.",
+                           name, args.models_root, name)
             continue
 
         base_model_id = entry["model_path"]
