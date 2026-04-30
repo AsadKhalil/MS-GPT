@@ -123,6 +123,23 @@ def main(argv=None) -> int:
         logger.error("Import failed (%s). Requires torch + transformers + peft + the project venv.", e)
         return 1
 
+    # Compat shim: newer transformers removed DynamicCache.seen_tokens, but some
+    # model archs (DeepSeek-R1-Distill) and older peft paths still read it.
+    try:
+        from transformers.cache_utils import DynamicCache
+        if not hasattr(DynamicCache, "seen_tokens"):
+            def _seen_tokens(self):
+                if hasattr(self, "get_seq_length"):
+                    try:
+                        return self.get_seq_length()
+                    except Exception:
+                        return 0
+                return 0
+            DynamicCache.seen_tokens = property(_seen_tokens)
+            logger.info("Patched DynamicCache.seen_tokens for compatibility.")
+    except Exception as e:
+        logger.warning("DynamicCache compat shim skipped: %s", e)
+
     if not args.test_jsonl.exists():
         logger.error("Test JSONL not found: %s", args.test_jsonl)
         return 1
