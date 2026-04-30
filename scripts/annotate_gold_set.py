@@ -1,5 +1,5 @@
 """
-Annotate gold_set_sample.csv for MSQA-Bench human annotation.
+Create an automatic baseline annotation for gold_set_sample.csv.
 
 Evaluates each Q/A/context triple on four dimensions:
   - answer_correct:   Yes / Partial / No
@@ -8,7 +8,8 @@ Evaluates each Q/A/context triple on four dimensions:
   - question_clarity:  Good / Ambiguous / Bad
 
 Uses text-overlap heuristics (token, n-gram, number matching)
-plus structural checks (garbled text, truncation, question form).
+plus structural checks (garbled text, truncation, question form). This helper
+is not the human gold audit reported in the paper.
 """
 
 import csv
@@ -340,7 +341,7 @@ def annotate_row(row: dict) -> dict:
     row["evidence_support"]  = annotate_evidence_support(q, a, c, qtype)
     row["evidence_quality"]  = annotate_evidence_quality(q, c, qtype)
     row["question_clarity"]  = annotate_question_clarity(q, qtype)
-    row["annotator_id"]      = "claude_heuristic"
+    row["annotator_id"]      = "auto_overlap_baseline"
     row["notes"]             = ""
 
     # ── consistency checks ──
