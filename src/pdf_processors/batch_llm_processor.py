@@ -11,7 +11,7 @@ input_directory = "/home/tk-lpt-0806/Desktop/pdf_to_process/input/"
 output_directory = "/home/tk-lpt-0806/Desktop/pdf_to_process/output_llm/"
 log_file = "/home/tk-lpt-0806/Desktop/pdf_to_process/processing.log"
 processed_files_record = "processed_files.json"
-key="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"
+key = os.environ.get("OPENAI_API_KEY", "")
 
 # --- Initialize Logging ---
 logging.basicConfig(
@@ -22,9 +22,11 @@ logging.basicConfig(
 model_name = "o3-mini"  # Specify the model name here
 # --- Initialize OpenAI Client for Ollama ---
 try:
+    if not key:
+        raise RuntimeError("Set OPENAI_API_KEY before running this script.")
     client = OpenAI(
 
-        api_key=key,  # Required by the client library, but Ollama doesn't use it
+        api_key=key,
     )
     logging.info(
         f"OpenAI client initialized to target Ollama at http://localhost:11434/v1"
