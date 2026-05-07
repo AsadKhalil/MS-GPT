@@ -110,10 +110,14 @@ def main() -> None:
     patch_recordset(redist, REDIST_FIELDS)
     patch_recordset(restricted, RESTRICTED_FIELDS)
 
-    # C6: drop the huggingface-repo FileObject (it's a repo, not a hashable file).
+    # C6: drop the Hugging Face repo FileObject (it's a repo, not a hashable file).
     fo = cr.get("distribution", [])
     base_dir = inp_path.parent
-    fo = [d for d in fo if d.get("@id") != "huggingface-repo"]
+    fo = [
+        d
+        for d in fo
+        if d.get("@id") not in {"huggingface-repo", "huggingface-repository"}
+    ]
     for entry in fo:
         if entry.get("@type") == "cr:FileObject":
             entry.pop("containedIn", None)
@@ -124,8 +128,18 @@ def main() -> None:
                     entry["sha256"] = sha256_file(local_path)
 
     # Add cr:FileSet groupings the field sources point at.
-    redist_files = [d["@id"] for d in fo if d.get("@id", "").startswith("redistributable-")]
-    restricted_files = [d["@id"] for d in fo if d.get("@id", "").startswith("restricted-")]
+    redist_files = [
+        d["@id"]
+        for d in fo
+        if d.get("@type") == "cr:FileObject"
+        and d.get("@id", "").startswith("redistributable-")
+    ]
+    restricted_files = [
+        d["@id"]
+        for d in fo
+        if d.get("@type") == "cr:FileObject"
+        and d.get("@id", "").startswith("restricted-")
+    ]
     fo = [d for d in fo if d.get("@id") not in {"redistributable-jsonl", "restricted-jsonl"}]
     if redist_files:
         fo.append({

@@ -16,7 +16,16 @@ import csv
 import json
 import re
 from collections import Counter
-from pathlib import Path
+from pathlib import Pathcat > sample/README.md <<'EOF' # Reviewer Sample
+
+The full MSQA-Bench release is larger than 4 GB. This folder provides small reviewer-inspectable samples:
+
+- `redistributable_sample.jsonl`: text-bearing QA records from the redistributable CC-BY-4.0 tier.
+- `restricted_sample.jsonl`: metadata-only records from the restricted tier, with generated text fields withheld.
+
+These samples were created by taking the first records from each released tier after the deterministic document-level train/validation/test split and two-tier license
+partitioning performed by `scripts/prepare_neurips_release.py`.
+EOF
 from typing import Any, Dict, Iterable, Optional
 
 
