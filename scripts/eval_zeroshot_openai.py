@@ -15,7 +15,7 @@ Resumable: completed records (by ``annotation_id``) are skipped on re-run.
 
 Usage:
     source .venv/bin/activate
-    python scripts/eval_zero_shot_openai.py \\
+    python scripts/eval_zeroshot_openai.py \\
         --model gpt-4o-mini-2024-07-18 \\
         --sample-size 1000
 

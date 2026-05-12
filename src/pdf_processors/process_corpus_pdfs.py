@@ -29,7 +29,7 @@ from src.vision_extractors.fast_pdf_extractor import FastPDFExtractor
 class BulkPDFProcessor:
     """Optimized processor for very large PDF batches."""
     
-    def __init__(self, config_path: str = "config/fast_extractor_config.json"):
+    def __init__(self, config_path: str = "config/fast_extractor.json"):
         """Initialize with configuration."""
         self.config = self._load_config(config_path)
         self.start_time = None
@@ -277,7 +277,7 @@ def main():
     )
     parser.add_argument(
         "--config",
-        default="config/fast_extractor_config.json",
+        default="config/fast_extractor.json",
         help="Configuration file path"
     )
     parser.add_argument(

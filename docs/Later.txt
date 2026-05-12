@@ -1,0 +1,40 @@
+Done. Summary of what changed:
+
+  Filesystem changes
+
+  ┌────────────────────────────────────┬─────────────────────────────────────────────────────────────────────────────────┬──────────────────────────────┐
+  │               Action               │                                     Before                                      │            After             │
+  ├────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────┼──────────────────────────────┤
+  │ Deleted                            │ github_release/MSQA-Bench/ (duplicate clone of the same repo, 2 commits behind) │ —                            │
+  ├────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────┼──────────────────────────────┤
+  │ Deleted                            │ github_release/MSQA-Bench/MSQA-Bench/ (empty leftover)                          │ —                            │
+  ├────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────┼──────────────────────────────┤
+  │ Moved                              │ paper/                                                                          │ archive/paper-v1-original/   │
+  ├────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────┼──────────────────────────────┤
+  │ Moved                              │ paper_v2/                                                                       │ archive/paper-v2-prep-draft/ │
+  ├────────────────────────────────────┼─────────────────────────────────────────────────────────────────────────────────┼──────────────────────────────┤
+  │ Already renamed by you mid-session │ 2026-asad-QA/                                                                   │ submitted_version/           │
+  └────────────────────────────────────┴─────────────────────────────────────────────────────────────────────────────────┴──────────────────────────────┘
+
+  Discovery worth flagging
+
+  I initially named the archive paper-v2-neurips2026-submission/, but the file timestamps and your rename of 2026-asad-QA/ → submitted_version/ make it clear that submitted_version/ is the 
+  paper actually sent to OpenReview — submitted_version/main.tex was edited at May 5 18:11, while paper_v2/main.tex stopped at 16:57 and was 28 lines shorter. So I renamed the archive to
+  paper-v2-prep-draft/ to reflect that it was a preparation draft, not the submission.
+
+  Documentation written
+
+  - README.md (new) — workspace landing page for humans: layout, "what lives where" table, pipeline diagram, quick-start, recent cleanup log, and a table of further suggested renames you
+  can apply later (github_release/ → release-github/, msqa-bench-hf/ → release-huggingface/, paper_results/ → results/, proposals/ → proposal-innopolis-phd/, submitted_version/ →
+  paper-neurips2026-submitted/).
+  - MS-GPT/README.md (rewrite) — replaces the stale pdf_to_process README. Pipeline commands now match the actual scripts in scripts/ (including eval_llms_1k.py, run_rag_ablation.py,
+  submission_diagnostics.py, fix_croissant_schema.py etc. which were missing). Removed the chunk of free-form notes that was pasted at the bottom.
+  - CLAUDE.md (root) — updated to reflect new paths.
+  - MS-GPT/CLAUDE.md and MS-GPT/AGENTS.md — updated path references for the new layout.
+
+  What I did not do
+
+  - Did not apply the further renames listed in the README's "Suggested next renames" — they're tabled there for your decision. MS-GPT/ should stay as-is regardless (renaming would break
+  the in-tree .venv and the GitHub remote name).
+  - Did not set up a MS-GPT/ ↔ github_release/ sync script (you didn't pick that option). The two trees still drift; I'd recommend revisiting this when you next prepare a release.
+  - Did not commit any changes — MS-GPT/ already has 48 uncommitted edits unrelated to this work, so I left git state alone for you to handle.
