@@ -52,6 +52,15 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+_DEFAULT_JSONL_CANDIDATES = [
+    PROJECT_ROOT.parent / "paper_results/dataset/splits/test.jsonl",
+    PROJECT_ROOT / "paper_results/dataset/splits/test.jsonl",
+]
+DEFAULT_JSONL = next(
+    (str(p) for p in _DEFAULT_JSONL_CANDIDATES if p.exists()),
+    str(_DEFAULT_JSONL_CANDIDATES[0]),
+)
+
 
 LOG = logging.getLogger("rag_ablation")
 
@@ -107,7 +116,7 @@ class CellResult:
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--jsonl", default="paper_results/dataset/splits/test.jsonl")
+    p.add_argument("--jsonl", default=DEFAULT_JSONL)
     p.add_argument("--split", default="test", help="Use records whose split field matches this value.")
     p.add_argument("--ignore-split-field", action="store_true")
     p.add_argument("--sample-size", type=int, default=1000)
@@ -271,7 +280,7 @@ def retrieve_contexts(
                 out.append(RetrievedRecord(**json.loads(line)))
         return out
 
-    from paper.evaluation.retrieval_baselines import EmbeddingRetriever
+    from src.evaluation.retrieval_baselines import EmbeddingRetriever
 
     retriever = EmbeddingRetriever(
         model_name_or_path=model_name_or_path,
