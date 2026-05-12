@@ -7,7 +7,9 @@
 # sample_size=1000. Two backends:
 #
 #   MODE=local  (default): transformers + bitsandbytes 4-bit. ~20-28 h total on 4090.
-#   MODE=vllm           : vLLM serves base + LoRA per LLM. ~5-7 h total on 4090.
+#   MODE=vllm           : vLLM serves base (bf16) + LoRA per LLM. ~5-7 h total on 4090.
+#                         bf16 (not bnb) — vLLM 0.6.6's on-the-fly bnb path is broken
+#                         for merged-QKV GQA models (shape assert in linear.py).
 #
 # Models whose final_adapter directory is missing are skipped (not failed),
 # so a partial run is safe to restart.
@@ -37,7 +39,7 @@ OUT_BASE="${OUT_BASE:-paper_results/rag_ablation_multi_${MODE}_n${SAMPLE_SIZE}}"
 LOG_DIR="${LOG_DIR:-logs/rag_ablation}"
 
 # vLLM-only knobs
-VLLM_PORT="${VLLM_PORT:-8000}"
+VLLM_PORT="${VLLM_PORT:-9000}"
 VLLM_GPU_UTIL="${VLLM_GPU_UTIL:-0.85}"
 VLLM_MAX_MODEL_LEN="${VLLM_MAX_MODEL_LEN:-4096}"
 VLLM_MAX_LORA_RANK="${VLLM_MAX_LORA_RANK:-64}"
@@ -70,13 +72,16 @@ fi
 
 mkdir -p "$OUT_BASE" "$LOG_DIR"
 
-# (run_name, HuggingFace base model id) — must match config/llm_finetuner.json
+# (run_name, HuggingFace base model id, head_dim) — must match config/llm_finetuner.json
+# head_dim = hidden_size / num_attention_heads. Required because transformers >=4.46
+# exposes config.head_dim = None for Mistral/Llama, which vLLM 0.6.6 then multiplies
+# by num_heads and crashes (`int * None`). Injected via --hf-overrides.
 LLMS=(
-    "mistral_7b_v0.3        mistralai/Mistral-7B-Instruct-v0.3"
-    "phi3.5_mini            microsoft/Phi-3.5-mini-instruct"
-    "qwen2.5_7b             Qwen/Qwen2.5-7B-Instruct"
-    "deepseek_r1_distill_7b deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
-    "llama3.1_8b            meta-llama/Llama-3.1-8B-Instruct"
+    "mistral_7b_v0.3        mistralai/Mistral-7B-Instruct-v0.3       128"
+    "phi3.5_mini            microsoft/Phi-3.5-mini-instruct           96"
+    "qwen2.5_7b             Qwen/Qwen2.5-7B-Instruct                 128"
+    "deepseek_r1_distill_7b deepseek-ai/DeepSeek-R1-Distill-Qwen-7B  128"
+    "llama3.1_8b            meta-llama/Llama-3.1-8B-Instruct         128"
 )
 
 echo "============================================================"
@@ -120,20 +125,25 @@ start_vllm() {
     local base_llm="$1"
     local adapter="$2"
     local run_name="$3"
+    local head_dim="$4"
     local logfile="$LOG_DIR/vllm_${run_name}.log"
 
-    echo ">>> starting vLLM for $base_llm (LoRA: ${run_name}-ft)"
+    echo ">>> starting vLLM for $base_llm (LoRA: ${run_name}-ft, head_dim=$head_dim)"
     echo "    log: $logfile"
 
-    # vLLM inherits CUDA_VISIBLE_DEVICES from the script env
+    # vLLM inherits CUDA_VISIBLE_DEVICES from the script env.
+    # bf16 (default dtype) — vLLM 0.6.6's bitsandbytes on-the-fly path is broken
+    # for merged-QKV GQA models. 7-8B in bf16 fits in 24 GB at gpu_util=0.85.
+    # --hf-overrides head_dim works around transformers >=4.46 exposing
+    # config.head_dim=None on Mistral/Llama configs.
     vllm serve "$base_llm" \
-        --quantization bitsandbytes --load-format bitsandbytes \
         --enable-lora \
         --lora-modules "${run_name}-ft=${adapter}" \
         --max-loras 1 --max-lora-rank "$VLLM_MAX_LORA_RANK" \
         --port "$VLLM_PORT" \
         --gpu-memory-utilization "$VLLM_GPU_UTIL" \
         --max-model-len "$VLLM_MAX_MODEL_LEN" \
+        --hf-overrides "{\"head_dim\": $head_dim}" \
         --trust-remote-code \
         > "$logfile" 2>&1 &
     VLLM_PID=$!
@@ -163,7 +173,7 @@ SKIPPED=0
 FAILED=0
 
 for entry in "${LLMS[@]}"; do
-    read -r RUN_NAME BASE_LLM <<< "$entry"
+    read -r RUN_NAME BASE_LLM HEAD_DIM <<< "$entry"
     ADAPTER="$MODEL_ROOT/fine_tuned_llms/$RUN_NAME/final_adapter"
     OUT_DIR="$OUT_BASE/$RUN_NAME"
     LOG_FILE="$LOG_DIR/${RUN_NAME}_${MODE}.log"
@@ -187,7 +197,7 @@ for entry in "${LLMS[@]}"; do
     RC=0
 
     if [ "$MODE" = "vllm" ]; then
-        if ! start_vllm "$BASE_LLM" "$ADAPTER" "$RUN_NAME"; then
+        if ! start_vllm "$BASE_LLM" "$ADAPTER" "$RUN_NAME" "$HEAD_DIM"; then
             FAILED=$((FAILED + 1))
             cleanup_vllm
             continue
