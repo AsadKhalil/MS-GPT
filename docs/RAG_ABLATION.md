@@ -123,7 +123,7 @@ tmux new -s vllm
 CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=2 \
 vllm serve mistralai/Mistral-7B-Instruct-v0.3 \
   --enable-lora \
-  --lora-modules mistral-ft=./models/fine_tuned_llms/mistral_7b_v0.3/final_adapter \
+  --lora-modules mistral-ft=/home/asad/models/fine_tuned_llms/mistral_7b_v0.3/final_adapter \
   --max-lora-rank 64 \
   --port 9000 \
   --gpu-memory-utilization 0.85 \
@@ -163,12 +163,17 @@ python scripts/run_rag_ablation.py \
   --served-ft-llm   mistral-ft \
   --openai-base-url http://localhost:9000/v1 \
   --openai-concurrency 8 \
-  --embedding-device cpu \
+  --embedding-device cuda \
   --output-dir paper_results/rag_ablation_mistral_n1000_vllm
 # Ctrl-b d to detach
+#
+# E5-base-v2 on cuda: ~12 sec to encode the 62k-doc corpus.
+# E5 on cpu: ~3 h for the same pass. Use `--embedding-device cpu` only if
+# you hit CUDA OOM (then also drop vLLM to --gpu-memory-utilization 0.75).
 ```
 
 When the ablation finishes, stop vLLM:
+
 ```bash
 tmux attach -t vllm   # Ctrl-c, then exit
 ```
@@ -194,7 +199,8 @@ Useful env overrides:
 GPU_ID=0                                      # different GPU
 SAMPLE_SIZE=200                               # smaller / quicker
 VLLM_PORT=9000                                # vLLM port (default 9000)
-VLLM_GPU_UTIL=0.75 EMBEDDING_DEVICE=cuda      # put E5 on GPU instead of CPU
+EMBEDDING_DEVICE=cpu                          # fallback if E5 CUDA OOMs
+VLLM_GPU_UTIL=0.75                            # extra headroom if E5+vLLM are tight
 VLLM_MAX_MODEL_LEN=2048                       # tighten if Llama-3.1-8B OOMs
 ```
 
@@ -230,17 +236,19 @@ After a sweep, the cross-model table lives in `paper_results/rag_ablation_multi_
 
 ## 5. Common errors
 
-| Error | Fix |
-|---|---|
-| `FileNotFoundError: paper_results/dataset/splits/test.jsonl` | Step 2 didn't land. Verify `ls -lh paper_results/dataset/splits/test.jsonl`. |
-| `No module named 'paper'` / `'sentence_transformers'` | Wrong python. Run `source .venv/bin/activate` first. |
-| `ImportError: bitsandbytes requires CUDA, but CUDA is not available` | You're on Mac or the CPU build of bitsandbytes. Use the CUDA host. |
-| `cannot import name 'DeepseekV3Config' from 'transformers'` | vLLM is newer than your transformers. `pip install 'transformers>=4.46,<5'` (keep the upper bound — 5.x breaks vLLM 0.6.6). |
-| `LlamaTokenizer has no attribute all_special_tokens_extended` | You're on transformers 5.x. Same fix as above: pin to `<5`. |
-| `TypeError: unsupported operand type(s) for *: 'int' and 'NoneType'` in `llama.py` | transformers ≥4.46 exposes `config.head_dim=None` for Mistral/Llama. Add `--hf-overrides '{"head_dim": 128}'` (96 for Phi-3.5-mini). |
-| `AssertionError` in `vllm/.../linear.py:978` during weight load | vLLM 0.6.6's `--quantization bitsandbytes --load-format bitsandbytes` path is broken for GQA models. Drop both flags and let vLLM use bf16. |
-| vLLM OOM at startup | Drop `--gpu-memory-utilization 0.75` and `--max-model-len 2048`. |
-| `*_ft` cells error at load time | Missing FT artifact. Check `models/fine_tuned_embeddings_e5_base_v2/final_model/` and `models/fine_tuned_llms/<llm-run-name>/final_adapter/`. |
+
+| Error                                                                              | Fix                                                                                                                                           |
+| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `FileNotFoundError: paper_results/dataset/splits/test.jsonl`                       | Step 2 didn't land. Verify `ls -lh paper_results/dataset/splits/test.jsonl`.                                                                  |
+| `No module named 'paper'` / `'sentence_transformers'`                              | Wrong python. Run `source .venv/bin/activate` first.                                                                                          |
+| `ImportError: bitsandbytes requires CUDA, but CUDA is not available`               | You're on Mac or the CPU build of bitsandbytes. Use the CUDA host.                                                                            |
+| `cannot import name 'DeepseekV3Config' from 'transformers'`                        | vLLM is newer than your transformers. `pip install 'transformers>=4.46,<5'` (keep the upper bound — 5.x breaks vLLM 0.6.6).                   |
+| `LlamaTokenizer has no attribute all_special_tokens_extended`                      | You're on transformers 5.x. Same fix as above: pin to `<5`.                                                                                   |
+| `TypeError: unsupported operand type(s) for *: 'int' and 'NoneType'` in `llama.py` | transformers ≥4.46 exposes `config.head_dim=None` for Mistral/Llama. Add `--hf-overrides '{"head_dim": 128}'` (96 for Phi-3.5-mini).          |
+| `AssertionError` in `vllm/.../linear.py:978` during weight load                    | vLLM 0.6.6's `--quantization bitsandbytes --load-format bitsandbytes` path is broken for GQA models. Drop both flags and let vLLM use bf16.   |
+| vLLM OOM at startup                                                                | Drop `--gpu-memory-utilization 0.75` and `--max-model-len 2048`.                                                                              |
+| `*_ft` cells error at load time                                                    | Missing FT artifact. Check `models/fine_tuned_embeddings_e5_base_v2/final_model/` and `models/fine_tuned_llms/<llm-run-name>/final_adapter/`. |
+
 
 ---
 

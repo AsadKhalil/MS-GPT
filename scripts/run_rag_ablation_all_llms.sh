@@ -34,7 +34,7 @@ cd "$PROJECT_DIR"
 MODE="${MODE:-local}"                      # local | vllm
 GPU_ID="${GPU_ID:-2}"
 SAMPLE_SIZE="${SAMPLE_SIZE:-1000}"
-MODEL_ROOT="${MODEL_ROOT:-./models}"
+MODEL_ROOT="${MODEL_ROOT:-/home/asad/models}"
 OUT_BASE="${OUT_BASE:-paper_results/rag_ablation_multi_${MODE}_n${SAMPLE_SIZE}}"
 LOG_DIR="${LOG_DIR:-logs/rag_ablation}"
 
@@ -45,9 +45,10 @@ VLLM_MAX_MODEL_LEN="${VLLM_MAX_MODEL_LEN:-4096}"
 VLLM_MAX_LORA_RANK="${VLLM_MAX_LORA_RANK:-64}"
 VLLM_READY_TRIES="${VLLM_READY_TRIES:-120}"   # 120 * 5s = 10 min max wait
 OPENAI_CONCURRENCY="${OPENAI_CONCURRENCY:-8}"
-# In vLLM mode the GPU is owned by vLLM; default the embedding to CPU to avoid OOM.
-# Override with EMBEDDING_DEVICE=cuda if you've lowered VLLM_GPU_UTIL enough to share.
-EMBEDDING_DEVICE="${EMBEDDING_DEVICE:-cpu}"
+# E5-base-v2 fits in ~1 GB on the GPU alongside vLLM at gpu_util=0.85 (24 - 20.4 = 3.6 GB free).
+# CPU encoding is ~1000x slower (~5 docs/sec vs ~5000) and dominates wall-clock with 62k docs.
+# Drop to EMBEDDING_DEVICE=cpu only if you hit CUDA OOM during encoding.
+EMBEDDING_DEVICE="${EMBEDDING_DEVICE:-cuda}"
 
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
 export CUDA_VISIBLE_DEVICES="$GPU_ID"
