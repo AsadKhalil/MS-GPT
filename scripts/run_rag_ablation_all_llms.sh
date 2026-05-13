@@ -82,7 +82,7 @@ LLMS=(
     "phi3.5_mini            microsoft/Phi-3.5-mini-instruct           96"
     "qwen2.5_7b             Qwen/Qwen2.5-7B-Instruct                 128"
     "deepseek_r1_distill_7b deepseek-ai/DeepSeek-R1-Distill-Qwen-7B  128"
-    "llama3.1_8b            meta-llama/Llama-3.1-8B-Instruct         128"
+    "llama3.1_8b            NousResearch/Meta-Llama-3.1-8B-Instruct  128"
 )
 
 echo "============================================================"

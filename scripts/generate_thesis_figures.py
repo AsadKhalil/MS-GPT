@@ -31,7 +31,10 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 log = logging.getLogger("thesis_figures")
 
 REPO = Path(__file__).resolve().parents[1]
-FIG_DIR = REPO / "thesis" / "figures"
+# paper_results, thesis, and enriched data live one level up — the
+# top-level workspace. Resolve all of those off WORKSPACE, not REPO.
+WORKSPACE = REPO.parent
+FIG_DIR = WORKSPACE / "thesis" / "figures"
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
 # Models reported in the MSQA-Bench paper (E5 / BGE / Nomic).
@@ -63,49 +66,142 @@ def _load_json(p: Path) -> dict | None:
 
 
 def collect() -> dict:
-    """Return {'bm25': {m: v}, 'ft': {model: {m: v}}, 'base': {model: {m: v}}}."""
-    bm25 = _load_json(REPO / "paper_results" / "evaluation" / "bm25_baseline_results.json") or {}
+    """Return {'bm25': {m: v}, 'ft': {model: {m: v}}, 'base': {model: {m: v}}}.
+
+    Both ``base`` and ``ft`` are read from the same post-hoc evaluator
+    (``paper_results/model_results/embeddings/embedding_comparison.json``)
+    so the two are directly comparable. We deliberately do not read
+    base from ``training_summary.json/metrics_history[0]`` (a step-0
+    in-training evaluation) because that path uses a slightly different
+    filter chain and systematically underestimates by ~0.5 pp.
+    """
+    bm25 = _load_json(WORKSPACE / "paper_results" / "evaluation" / "bm25_baseline_results.json") or {}
+
+    cmp_json = _load_json(
+        WORKSPACE / "paper_results" / "model_results" / "embeddings" / "embedding_comparison.json"
+    ) or []
+    # Map embedding_comparison.json model_name -> friendly figure label.
+    name_map = {
+        "e5_base_v2":         "E5-base",
+        "e5_large_v2":        "E5-large",
+        "bge_base_en_v1.5":   "BGE-base",
+        "bge_large_en_v1.5":  "BGE-large",
+        "nomic_embed_v1.5":   "Nomic-v1.5",
+    }
+
+    # Canonical figure/table order (mirrors ch5_experiments.tex tab:retrieval_full).
+    canonical = ["E5-base", "E5-large", "BGE-base", "BGE-large", "Nomic-v1.5"]
+    by_label = {name_map.get(e.get("model_name", "")): e for e in cmp_json
+                if name_map.get(e.get("model_name", ""))}
 
     ft: dict[str, dict[str, float]] = {}
     base: dict[str, dict[str, float]] = {}
-
-    for name, folder in EMB_MODELS:
-        ft_json = _load_json(folder / "eval_results_test.json")
-        if ft_json:
-            ft[name] = {m: float(ft_json[m]) for m in METRICS if m in ft_json}
-        ts = _load_json(folder / "training_summary.json")
-        if ts and ts.get("metrics_history"):
-            score = ts["metrics_history"][0].get("score", {})
-            base[name] = {m: float(score[COSINE_KEYS[m]]) for m in METRICS if COSINE_KEYS[m] in score}
+    for label in canonical:
+        entry = by_label.get(label)
+        if not entry:
+            continue
+        base[label] = {m: float(entry["base_results"][m]) for m in METRICS
+                       if m in entry.get("base_results", {})}
+        ft[label]   = {m: float(entry["finetuned_results"][m]) for m in METRICS
+                       if m in entry.get("finetuned_results", {})}
 
     return {"bm25": bm25, "ft": ft, "base": base}
 
 
 def fig_recall_bar(data: dict) -> Path:
-    models = ["BM25"] + list(data["ft"].keys())
-    xs = np.arange(len(models))
-    width = 0.26
+    """Recall@10 across BM25 / Base dense / Fine-tuned dense for each backbone.
 
-    recall1, recall5, recall10 = [], [], []
-    for m in models:
-        src = data["bm25"] if m == "BM25" else data["ft"][m]
-        recall1.append(src.get("recall@1", np.nan))
-        recall5.append(src.get("recall@5", np.nan))
-        recall10.append(src.get("recall@10", np.nan))
+    The previous version of this figure showed only BM25 + the fine-tuned
+    models, which made the dense-vs-BM25 jump visible but hid the
+    incremental gain from fine-tuning. The defense panel asked for the
+    full BM25/Base/+FT triple, so each dense backbone now gets two bars
+    (base, +FT) plus a BM25 reference group on the left.
+    """
+    backbones = list(data["ft"].keys())
+    groups = ["BM25"] + backbones
+    xs = np.arange(len(groups))
+    width = 0.38
 
-    fig, ax = plt.subplots(figsize=(9.5, 4.2))
-    ax.bar(xs - width, recall1,  width, label=r"Recall@1",  color="#4c78a8")
-    ax.bar(xs,         recall5,  width, label=r"Recall@5",  color="#f58518")
-    ax.bar(xs + width, recall10, width, label=r"Recall@10", color="#54a24b")
+    base_vals: list[float] = []
+    ft_vals: list[float] = []
+    for m in groups:
+        if m == "BM25":
+            v = data["bm25"].get("recall@10", np.nan)
+            base_vals.append(v)
+            ft_vals.append(np.nan)
+        else:
+            base_vals.append(data.get("base", {}).get(m, {}).get("recall@10", np.nan))
+            ft_vals.append(data["ft"][m].get("recall@10", np.nan))
+
+    fig, ax = plt.subplots(figsize=(9.5, 4.4))
+    ax.bar(xs - width / 2, base_vals, width,
+           label="Base / BM25", color="#4c78a8")
+    ax.bar(xs + width / 2, ft_vals, width,
+           label="Fine-tuned (+FT)", color="#2b8a3e")
     ax.set_xticks(xs)
-    ax.set_xticklabels(models, rotation=15, ha="right")
+    ax.set_xticklabels(groups, rotation=15, ha="right")
     ax.set_ylim(0, 1.0)
-    ax.set_ylabel("Recall")
-    ax.set_title("Retrieval Recall@$k$ on MSQA-Bench (5{,}000 test queries)")
+    ax.set_ylabel("Recall@10")
+    ax.set_title("Retrieval Recall@10 on MSQA-Bench (5{,}000 test queries) "
+                 "-- BM25 vs Base dense vs Fine-tuned dense")
+    ax.grid(axis="y", alpha=0.3)
+    ax.legend(frameon=False, ncol=2, loc="lower right")
+    # Annotate the absolute value above each bar so the comparison is legible.
+    for i, v in enumerate(base_vals):
+        if not np.isnan(v):
+            ax.text(i - width / 2, v + 0.012, f"{v:.3f}",
+                    ha="center", va="bottom", fontsize=8)
+    for i, v in enumerate(ft_vals):
+        if not np.isnan(v):
+            ax.text(i + width / 2, v + 0.012, f"{v:.3f}",
+                    ha="center", va="bottom", fontsize=8)
+    fig.tight_layout()
+    out = FIG_DIR / "retrieval_recall_bar.png"
+    fig.savefig(out, dpi=200)
+    plt.close(fig)
+    return out
+
+
+def fig_qtype_recall_bar() -> Path | None:
+    """Grouped bar chart: per-question-type Recall@10 for BM25/Base/+FT.
+
+    Reads paper_results/diagnostics/retrieval_by_qtype.json. Buckets are
+    ordered by absolute gain (BM25 -> +FT) descending so the
+    ``worst-baseline-biggest-gain'' pattern reads top-down.
+    """
+    src = WORKSPACE / "paper_results" / "diagnostics" / "retrieval_by_qtype.json"
+    blob = _load_json(src)
+    if not blob:
+        log.warning("skipping qtype figure: %s not found", src)
+        return None
+
+    types = [t for t in blob["bm25"] if t != "__overall__"]
+
+    def r10(slot: str, t: str) -> float:
+        return blob.get(slot, {}).get(t, {}).get("recall@10", np.nan)
+
+    types.sort(key=lambda t: r10("ft_e5", t) - r10("bm25", t), reverse=True)
+
+    bm = [r10("bm25", t) for t in types]
+    bs = [r10("base_e5", t) for t in types]
+    ft = [r10("ft_e5", t) for t in types]
+
+    xs = np.arange(len(types))
+    width = 0.26
+    fig, ax = plt.subplots(figsize=(9.5, 4.4))
+    ax.bar(xs - width, bm, width, label="BM25",       color="#4c78a8")
+    ax.bar(xs,         bs, width, label="Base dense", color="#c8102e")
+    ax.bar(xs + width, ft, width, label="+FT dense",  color="#2b8a3e")
+    ax.set_xticks(xs)
+    ax.set_xticklabels([t.capitalize() for t in types], rotation=0)
+    ax.set_ylim(0.5, 1.0)
+    ax.set_ylabel("Recall@10")
+    ax.set_title("Per-question-type Recall@10 on MSQA-Bench "
+                 "(5{,}000 queries; ordered by BM25$\\to$+FT gain)")
     ax.grid(axis="y", alpha=0.3)
     ax.legend(frameon=False, ncol=3, loc="lower right")
     fig.tight_layout()
-    out = FIG_DIR / "retrieval_recall_bar.png"
+    out = FIG_DIR / "retrieval_recall_by_qtype.png"
     fig.savefig(out, dpi=200)
     plt.close(fig)
     return out
@@ -152,12 +248,14 @@ def fig_improvement_heatmap(data: dict) -> Path:
             if mk in data["ft"][m] and mk in data["base"][m]:
                 mat[i, j] = data["ft"][m][mk] - data["base"][m][mk]
 
-    fig, ax = plt.subplots(figsize=(7.5, 0.6 + 0.55 * len(models)))
-    im = ax.imshow(mat, cmap="YlGnBu", vmin=0.0, vmax=max(0.25, np.nanmax(mat)))
+    fig, ax = plt.subplots(figsize=(10.0, 0.8 + 0.7 * len(models)))
+    im = ax.imshow(mat, cmap="YlGnBu", vmin=0.0, vmax=max(0.25, np.nanmax(mat)),
+                   aspect="auto")
     ax.set_xticks(range(len(metrics)))
-    ax.set_xticklabels(mlabels)
+    ax.set_xticklabels(mlabels, rotation=0, fontsize=10)
     ax.set_yticks(range(len(models)))
-    ax.set_yticklabels(models)
+    ax.set_yticklabels(models, fontsize=10)
+    ax.tick_params(axis="x", pad=6)
     for i in range(len(models)):
         for j in range(len(metrics)):
             v = mat[i, j]
@@ -178,7 +276,7 @@ def fig_improvement_heatmap(data: dict) -> Path:
 
 def fig_publication_year_histogram() -> Path | None:
     """Per-document publication year histogram from enriched.jsonl."""
-    src = REPO / "paper_results" / "dataset" / "enriched.jsonl"
+    src = WORKSPACE / "paper_results" / "dataset" / "enriched.jsonl"
     if not src.exists():
         log.warning("skipping year histogram: %s not found", src)
         return None
@@ -220,10 +318,13 @@ def main() -> None:
     log.info("Base models found: %s", sorted(data["base"]))
     for fn in (fig_recall_bar, fig_radar, fig_improvement_heatmap):
         out = fn(data)
-        log.info("wrote %s", out.relative_to(REPO))
+        log.info("wrote %s", out.relative_to(WORKSPACE))
     hist = fig_publication_year_histogram()
     if hist is not None:
-        log.info("wrote %s", hist.relative_to(REPO))
+        log.info("wrote %s", hist.relative_to(WORKSPACE))
+    qtype = fig_qtype_recall_bar()
+    if qtype is not None:
+        log.info("wrote %s", qtype.relative_to(WORKSPACE))
 
 
 if __name__ == "__main__":
