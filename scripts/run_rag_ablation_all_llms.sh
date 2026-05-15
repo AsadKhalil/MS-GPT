@@ -41,7 +41,9 @@ LOG_DIR="${LOG_DIR:-logs/rag_ablation}"
 # vLLM-only knobs
 VLLM_PORT="${VLLM_PORT:-9000}"
 VLLM_GPU_UTIL="${VLLM_GPU_UTIL:-0.85}"
-VLLM_MAX_MODEL_LEN="${VLLM_MAX_MODEL_LEN:-4096}"
+VLLM_MAX_MODEL_LEN="${VLLM_MAX_MODEL_LEN:-6144}"   # was 4096; bumped after observing
+                                                   # mistral/phi3.5 prompts of 4545/5146
+                                                   # message tokens that returned HTTP 400.
 VLLM_MAX_LORA_RANK="${VLLM_MAX_LORA_RANK:-64}"
 VLLM_READY_TRIES="${VLLM_READY_TRIES:-120}"   # 120 * 5s = 10 min max wait
 OPENAI_CONCURRENCY="${OPENAI_CONCURRENCY:-8}"
@@ -73,16 +75,19 @@ fi
 
 mkdir -p "$OUT_BASE" "$LOG_DIR"
 
-# (run_name, HuggingFace base model id, head_dim) — must match config/llm_finetuner.json
+# (run_name, HuggingFace base model id, head_dim, max_new_tokens) — must match config/llm_finetuner.json
 # head_dim = hidden_size / num_attention_heads. Required because transformers >=4.46
 # exposes config.head_dim = None for Mistral/Llama, which vLLM 0.6.6 then multiplies
 # by num_heads and crashes (`int * None`). Injected via --hf-overrides.
+# max_new_tokens: 192 for plain instruct models; DeepSeek-R1-Distill emits a
+# <think>...</think> chain-of-thought before its final answer, so 192 tokens
+# truncates mid-reasoning -- bump to 2048 to capture both CoT and answer.
 LLMS=(
-    "mistral_7b_v0.3        mistralai/Mistral-7B-Instruct-v0.3       128"
-    "phi3.5_mini            microsoft/Phi-3.5-mini-instruct           96"
-    "qwen2.5_7b             Qwen/Qwen2.5-7B-Instruct                 128"
-    "deepseek_r1_distill_7b deepseek-ai/DeepSeek-R1-Distill-Qwen-7B  128"
-    "llama3.1_8b            NousResearch/Meta-Llama-3.1-8B-Instruct  128"
+    "mistral_7b_v0.3        mistralai/Mistral-7B-Instruct-v0.3       128  192"
+    "phi3.5_mini            microsoft/Phi-3.5-mini-instruct           96  192"
+    "qwen2.5_7b             Qwen/Qwen2.5-7B-Instruct                 128  192"
+    "deepseek_r1_distill_7b deepseek-ai/DeepSeek-R1-Distill-Qwen-7B  128 2048"
+    "llama3.1_8b            NousResearch/Meta-Llama-3.1-8B-Instruct  128  192"
 )
 
 echo "============================================================"
@@ -174,7 +179,7 @@ SKIPPED=0
 FAILED=0
 
 for entry in "${LLMS[@]}"; do
-    read -r RUN_NAME BASE_LLM HEAD_DIM <<< "$entry"
+    read -r RUN_NAME BASE_LLM HEAD_DIM MAX_NEW_TOKENS <<< "$entry"
     ADAPTER="$MODEL_ROOT/fine_tuned_llms/$RUN_NAME/final_adapter"
     OUT_DIR="$OUT_BASE/$RUN_NAME"
     LOG_FILE="$LOG_DIR/${RUN_NAME}_${MODE}.log"
@@ -183,6 +188,22 @@ for entry in "${LLMS[@]}"; do
         echo ">>> SKIP $RUN_NAME — adapter missing at $ADAPTER"
         SKIPPED=$((SKIPPED + 1))
         continue
+    fi
+
+    # Pre-flight GPU check: refuse to start vLLM if another process is holding
+    # memory (the phi3.5 OOM in the 20260513 sweep was caused by a stray PID
+    # holding 2.83 GiB on top of vLLM's 20.6 GiB allocation).
+    if [ "$MODE" = "vllm" ]; then
+        FREE_MIB=$(nvidia-smi -i "$GPU_ID" --query-gpu=memory.free \
+            --format=csv,noheader,nounits 2>/dev/null | head -1 | tr -d ' ' || echo 0)
+        if [ -n "$FREE_MIB" ] && [ "$FREE_MIB" -lt 22000 ]; then
+            echo ">>> ABORT $RUN_NAME — only ${FREE_MIB} MiB free on GPU $GPU_ID (need >=22000)."
+            echo "    Another process is holding GPU memory. Run:"
+            echo "      nvidia-smi -i $GPU_ID"
+            echo "    Kill the offending PIDs or pick a different GPU, then re-run."
+            FAILED=$((FAILED + 1))
+            continue
+        fi
     fi
 
     echo
@@ -214,6 +235,7 @@ for entry in "${LLMS[@]}"; do
             --served-ft-llm "${RUN_NAME}-ft" \
             --openai-base-url "http://localhost:${VLLM_PORT}/v1" \
             --openai-concurrency "$OPENAI_CONCURRENCY" \
+            --max-new-tokens "$MAX_NEW_TOKENS" \
             --embedding-device "$EMBEDDING_DEVICE" \
             --output-dir "$OUT_DIR" \
             2>&1 | tee "$LOG_FILE"
@@ -229,6 +251,7 @@ for entry in "${LLMS[@]}"; do
             --model-root "$MODEL_ROOT" \
             --sample-size "$SAMPLE_SIZE" \
             --load-4bit \
+            --max-new-tokens "$MAX_NEW_TOKENS" \
             --output-dir "$OUT_DIR" \
             2>&1 | tee "$LOG_FILE"
         RC=${PIPESTATUS[0]}

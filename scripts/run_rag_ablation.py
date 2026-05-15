@@ -365,6 +365,78 @@ def retrieval_metrics(retrieved_records: Sequence[RetrievedRecord]) -> Dict[str,
     }
 
 
+def validate_retrieval_ids(
+    embedding_label: str,
+    retrieved_records: Sequence[RetrievedRecord],
+    corpus: Dict[str, str],
+    dataset_path: str,
+) -> None:
+    """Fail fast when relevant_context_id can't be scored against the corpus.
+
+    Retrieval metrics (recall@k, MRR, NDCG) match each query's
+    relevant_context_id against retrieved_ids, which are corpus keys. If the
+    source records carry no usable ``context_id``, build_corpus falls back to
+    synthetic ``ctx_<i>`` keys while relevant_context_id becomes the string
+    ``"None"`` -- the two ID spaces never intersect, so every retrieval metric
+    is silently 0.0. Catch that here, before the expensive generation step,
+    instead of shipping a table full of meaningless zeros.
+    """
+    n = len(retrieved_records)
+    if n == 0:
+        raise ValueError(
+            f"[{embedding_label}] retrieval returned 0 records -- nothing to score."
+        )
+
+    missing = sum(
+        1
+        for r in retrieved_records
+        if r.relevant_context_id in (None, "", "None")
+    )
+    in_corpus = sum(
+        1 for r in retrieved_records if r.relevant_context_id in corpus
+    )
+    frac = in_corpus / n
+
+    if missing == n:
+        raise ValueError(
+            f"[{embedding_label}] relevant_context_id is missing/'None' for "
+            f"all {n} query records. The dataset at {dataset_path} has no "
+            f"usable 'context_id' field, so the corpus was keyed by synthetic "
+            f"ctx_<i> ids and every retrieval metric (recall@k/MRR/NDCG) would "
+            f"be a meaningless 0.0. Point --jsonl at a test split that carries "
+            f"'context_id' (or re-enrich the dataset), then re-run."
+        )
+    if frac < 0.5:
+        raise ValueError(
+            f"[{embedding_label}] only {in_corpus}/{n} ({frac:.1%}) "
+            f"relevant_context_id values are keys in the {len(corpus)}-doc "
+            f"retrieval corpus; retrieval metrics would be ~0 by construction. "
+            f"context_id is likely partially missing, or the corpus was built "
+            f"from a different ID space than {dataset_path}. Aborting before "
+            f"generation."
+        )
+    if missing or frac < 0.999:
+        LOG.warning(
+            "[%s] retrieval ID check: %d/%d relevant_context_id missing, "
+            "%d/%d resolve to corpus keys (%.1f%%) -- affected rows will have "
+            "understated retrieval metrics.",
+            embedding_label,
+            missing,
+            n,
+            in_corpus,
+            n,
+            frac * 100.0,
+        )
+    else:
+        LOG.info(
+            "[%s] retrieval ID check OK: %d/%d relevant_context_id values "
+            "resolve to corpus keys.",
+            embedding_label,
+            in_corpus,
+            n,
+        )
+
+
 def load_local_model(base_llm: str, adapter: Optional[str], load_4bit: bool):
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
@@ -511,6 +583,24 @@ def openai_completion(
     try:
         with urllib.request.urlopen(req, timeout=180) as resp:
             data = json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        # 400/413/422 are per-request validation failures (most commonly: prompt+
+        # max_tokens exceeded the model's max_model_len -- vLLM raises ValueError,
+        # which becomes 400). Skip this record with an empty prediction so the rest
+        # of the run finishes instead of crashing on a single bad prompt in N.
+        if exc.code in (400, 413, 422):
+            try:
+                body_preview = exc.read(2048).decode("utf-8", errors="replace")
+            except Exception:
+                body_preview = "<unreadable>"
+            LOG.warning(
+                "[skip] HTTP %d for query id=%s (context %d chars, question %d chars): %s",
+                exc.code, rec.id,
+                len(rec.retrieved_context or ""), len(rec.question or ""),
+                body_preview[:400].replace("\n", " "),
+            )
+            return "", 0.0
+        raise RuntimeError(f"OpenAI-compatible request failed for {url}: {exc}") from exc
     except urllib.error.URLError as exc:
         raise RuntimeError(f"OpenAI-compatible request failed for {url}: {exc}") from exc
     elapsed = time.perf_counter() - started
@@ -657,6 +747,7 @@ def main() -> None:
             args,
             out_dir / "retrieval_base.jsonl",
         )
+        validate_retrieval_ids("base", retrieved["base"], corpus, args.jsonl)
     if "ft" in embeddings_needed:
         retrieved["ft"] = retrieve_contexts(
             "ft",
@@ -666,6 +757,7 @@ def main() -> None:
             args,
             out_dir / "retrieval_ft.jsonl",
         )
+        validate_retrieval_ids("ft", retrieved["ft"], corpus, args.jsonl)
 
     results: List[CellResult] = []
     llm_jobs = [
