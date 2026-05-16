@@ -35,6 +35,8 @@ served model names for --served-base-llm and --served-ft-llm.
 from __future__ import annotations
 
 import argparse
+import hashlib
+import http.client
 import json
 import logging
 import math
@@ -42,8 +44,7 @@ import random
 import gc
 import sys
 import time
-import urllib.error
-import urllib.request
+import urllib.parse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -187,8 +188,25 @@ def resolve_model_paths(args: argparse.Namespace) -> None:
         args.ft_adapter = str(model_root / "fine_tuned_llms" / args.llm_run_name / "final_adapter")
 
 
+def _derive_context_id(rec: Dict[str, Any]) -> Optional[str]:
+    """Reproduce schema_enricher's context_id (MD5 of doc_id:paragraph_index, [:16]).
+
+    Lets the runner score retrieval correctly even when the split was produced by
+    a pipeline path that skipped schema_enricher. doc_id falls back to the file_name
+    stem (which is how schema_enricher itself derives it) so unenriched inputs that
+    still carry file_name + paragraph_index work without re-running the pipeline.
+    """
+    file_name = rec.get("file_name") or ""
+    doc_id = rec.get("doc_id") or (Path(file_name).stem if file_name else "")
+    if not doc_id:
+        return None
+    paragraph_index = rec.get("paragraph_index", 0)
+    return hashlib.md5(f"{doc_id}:{paragraph_index}".encode()).hexdigest()[:16]
+
+
 def load_records(args: argparse.Namespace) -> List[Dict[str, Any]]:
     records: List[Dict[str, Any]] = []
+    derived_count = 0
     with Path(args.jsonl).open("r", encoding="utf-8") as f:
         for line in f:
             if not line.strip():
@@ -198,9 +216,20 @@ def load_records(args: argparse.Namespace) -> List[Dict[str, Any]]:
                 continue
             if not rec.get("question") or not rec.get("answer") or not rec.get("context"):
                 continue
+            if not rec.get("context_id"):
+                cid = _derive_context_id(rec)
+                if cid is not None:
+                    rec["context_id"] = cid
+                    derived_count += 1
             records.append(rec)
     if not records:
         raise ValueError(f"No usable records loaded from {args.jsonl}")
+    if derived_count:
+        LOG.info(
+            "Derived context_id on-the-fly for %d/%d records (doc_id:paragraph_index MD5); "
+            "splits had no context_id field. Retrieval metrics will be correct.",
+            derived_count, len(records),
+        )
     return records
 
 
@@ -562,6 +591,21 @@ def openai_completion(
     args: argparse.Namespace,
 ) -> Tuple[str, float]:
     url = args.openai_base_url.rstrip("/") + "/chat/completions"
+    parsed = urllib.parse.urlparse(url)
+    # http.client is used (instead of urllib.request.urlopen) so the base URL
+    # cannot smuggle a file:// or ftp:// scheme -- http.client speaks HTTP(S) only.
+    if parsed.scheme == "http":
+        conn_cls: Any = http.client.HTTPConnection
+        default_port = 80
+    elif parsed.scheme == "https":
+        conn_cls = http.client.HTTPSConnection
+        default_port = 443
+    else:
+        raise ValueError(
+            f"--openai-base-url must be http(s); got {args.openai_base_url!r}"
+        )
+    if not parsed.hostname:
+        raise ValueError(f"--openai-base-url has no host: {args.openai_base_url!r}")
     messages = format_messages(rec.question, rec.retrieved_context)
     body = {
         "model": served_model,
@@ -570,39 +614,43 @@ def openai_completion(
         "max_tokens": args.max_new_tokens,
     }
     payload = json.dumps(body).encode("utf-8")
-    req = urllib.request.Request(
-        url,
-        data=payload,
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {args.openai_api_key}",
-        },
-        method="POST",
-    )
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {args.openai_api_key}",
+    }
+    request_path = parsed.path or "/"
+    if parsed.query:
+        request_path = f"{request_path}?{parsed.query}"
+    conn = conn_cls(parsed.hostname, parsed.port or default_port, timeout=180)
     started = time.perf_counter()
     try:
-        with urllib.request.urlopen(req, timeout=180) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        # 400/413/422 are per-request validation failures (most commonly: prompt+
-        # max_tokens exceeded the model's max_model_len -- vLLM raises ValueError,
-        # which becomes 400). Skip this record with an empty prediction so the rest
-        # of the run finishes instead of crashing on a single bad prompt in N.
-        if exc.code in (400, 413, 422):
-            try:
-                body_preview = exc.read(2048).decode("utf-8", errors="replace")
-            except Exception:
-                body_preview = "<unreadable>"
+        try:
+            conn.request("POST", request_path, body=payload, headers=headers)
+            resp = conn.getresponse()
+            raw = resp.read()
+        except (OSError, http.client.HTTPException) as exc:
+            raise RuntimeError(f"OpenAI-compatible request failed for {url}: {exc}") from exc
+        if resp.status in (400, 413, 422):
+            # Per-request validation failures (most commonly: prompt+max_tokens
+            # exceeded the model's max_model_len -- vLLM raises ValueError, which
+            # becomes 400). Skip this record with an empty prediction so the rest
+            # of the run finishes instead of crashing on a single bad prompt in N.
+            body_preview = raw[:2048].decode("utf-8", errors="replace")
             LOG.warning(
                 "[skip] HTTP %d for query id=%s (context %d chars, question %d chars): %s",
-                exc.code, rec.id,
+                resp.status, rec.id,
                 len(rec.retrieved_context or ""), len(rec.question or ""),
                 body_preview[:400].replace("\n", " "),
             )
             return "", 0.0
-        raise RuntimeError(f"OpenAI-compatible request failed for {url}: {exc}") from exc
-    except urllib.error.URLError as exc:
-        raise RuntimeError(f"OpenAI-compatible request failed for {url}: {exc}") from exc
+        if resp.status >= 400:
+            raise RuntimeError(
+                f"OpenAI-compatible request failed for {url}: "
+                f"HTTP {resp.status} {resp.reason}: {raw[:400].decode('utf-8', errors='replace')}"
+            )
+        data = json.loads(raw.decode("utf-8"))
+    finally:
+        conn.close()
     elapsed = time.perf_counter() - started
     text = data["choices"][0]["message"]["content"].strip()
     usage = data.get("usage") or {}
