@@ -621,37 +621,71 @@ def openai_completion(
     request_path = parsed.path or "/"
     if parsed.query:
         request_path = f"{request_path}?{parsed.query}"
-    conn = conn_cls(parsed.hostname, parsed.port or default_port, timeout=180)
     started = time.perf_counter()
-    try:
+
+    def _attempt() -> Tuple[int, str, bytes]:
+        """Single POST. Returns (status, reason, body). Raises on transport error."""
+        conn = conn_cls(parsed.hostname, parsed.port or default_port, timeout=180)
         try:
             conn.request("POST", request_path, body=payload, headers=headers)
             resp = conn.getresponse()
-            raw = resp.read()
+            return resp.status, resp.reason, resp.read()
+        finally:
+            conn.close()
+
+    last_err: Optional[str] = None
+    status = 0
+    reason = ""
+    raw = b""
+    # Retry once on transport error or on transient server-side failure (5xx /
+    # 408 / 429). One bad request shouldn't kill an N=1000 sweep; if vLLM
+    # genuinely died, the next call will also fail and we'll skip that record.
+    for attempt in range(2):
+        try:
+            status, reason, raw = _attempt()
         except (OSError, http.client.HTTPException) as exc:
-            raise RuntimeError(f"OpenAI-compatible request failed for {url}: {exc}") from exc
-        if resp.status in (400, 413, 422):
-            # Per-request validation failures (most commonly: prompt+max_tokens
-            # exceeded the model's max_model_len -- vLLM raises ValueError, which
-            # becomes 400). Skip this record with an empty prediction so the rest
-            # of the run finishes instead of crashing on a single bad prompt in N.
-            body_preview = raw[:2048].decode("utf-8", errors="replace")
-            LOG.warning(
-                "[skip] HTTP %d for query id=%s (context %d chars, question %d chars): %s",
-                resp.status, rec.id,
-                len(rec.retrieved_context or ""), len(rec.question or ""),
-                body_preview[:400].replace("\n", " "),
-            )
-            return "", 0.0
-        if resp.status >= 400:
-            raise RuntimeError(
-                f"OpenAI-compatible request failed for {url}: "
-                f"HTTP {resp.status} {resp.reason}: {raw[:400].decode('utf-8', errors='replace')}"
-            )
-        data = json.loads(raw.decode("utf-8"))
-    finally:
-        conn.close()
+            last_err = f"{type(exc).__name__}: {exc}"
+            status = 0
+            if attempt == 0:
+                time.sleep(1.0)
+                continue
+            break
+        if status < 500 and status not in (408, 429):
+            break
+        last_err = f"HTTP {status} {reason}: {raw[:400].decode('utf-8', errors='replace')}"
+        if attempt == 0:
+            time.sleep(1.0)
+            continue
+
     elapsed = time.perf_counter() - started
+
+    # Per-request validation failures (most commonly: prompt+max_tokens exceeded
+    # max_model_len -- vLLM raises ValueError, which becomes 400). Skip rather
+    # than crash so the remaining records still finish.
+    if status in (400, 413, 422):
+        body_preview = raw[:2048].decode("utf-8", errors="replace")
+        LOG.warning(
+            "[skip:4xx] HTTP %d for query id=%s (context %d chars, question %d chars): %s",
+            status, rec.id,
+            len(rec.retrieved_context or ""), len(rec.question or ""),
+            body_preview[:400].replace("\n", " "),
+        )
+        return "", 0.0
+    # Transient/server-side failure that survived the retry -- still skip, do not
+    # crash. The vLLM server log holds the real traceback for diagnosis.
+    if status == 0 or status >= 500 or status in (408, 429):
+        LOG.warning(
+            "[skip:5xx] persistent server-side failure for query id=%s after 2 attempts: %s",
+            rec.id, (last_err or "unknown")[:400],
+        )
+        return "", 0.0
+    if status >= 400:
+        raise RuntimeError(
+            f"OpenAI-compatible request failed for {url}: "
+            f"HTTP {status} {reason}: {raw[:400].decode('utf-8', errors='replace')}"
+        )
+
+    data = json.loads(raw.decode("utf-8"))
     text = data["choices"][0]["message"]["content"].strip()
     usage = data.get("usage") or {}
     completion_tokens = usage.get("completion_tokens") or max(1, len(text.split()))
