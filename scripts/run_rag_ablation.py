@@ -43,6 +43,7 @@ import math
 import random
 import gc
 import sys
+import threading
 import time
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -186,6 +187,32 @@ def resolve_model_paths(args: argparse.Namespace) -> None:
         args.ft_embedding = str(model_root / args.ft_embedding_name / "final_model")
     if args.ft_adapter is None:
         args.ft_adapter = str(model_root / "fine_tuned_llms" / args.llm_run_name / "final_adapter")
+
+
+def _release_gpu_caches() -> None:
+    """Free everything PyTorch has on GPU in this process.
+
+    Used after the retrieval pass to evict the sentence-transformer encoder
+    and the corpus embedding matrix before any LLM generation backend runs.
+    If a vLLM server is co-resident on the same GPU, its activation budget
+    was sized against an empty card at startup; leaving ~3 GiB of our own
+    state resident causes vLLM to OOM mid-batch under concurrent load. We
+    therefore drop our caches explicitly here. Cheap and idempotent: if
+    torch isn't loaded or there's no CUDA we silently return.
+    """
+    try:
+        import torch  # type: ignore
+    except ImportError:
+        gc.collect()
+        return
+    gc.collect()
+    if hasattr(torch, "cuda") and torch.cuda.is_available():
+        try:
+            torch.cuda.empty_cache()
+            torch.cuda.ipc_collect()
+        except Exception as exc:  # pragma: no cover - best-effort cleanup
+            LOG.warning("torch.cuda cache release raised %s; continuing", exc)
+    LOG.info("Released embedder GPU caches before generation phase")
 
 
 def _derive_context_id(rec: Dict[str, Any]) -> Optional[str]:
@@ -552,11 +579,89 @@ def generate_local(
     return predictions, tps
 
 
+# ---------------------------------------------------------------------------
+# Circuit breaker for the OpenAI-compatible backend.
+#
+# Two failure modes need different treatment:
+#   * per-request HTTP 4xx / single 5xx with body  -> server is alive, this
+#     request is bad; skip with empty prediction and keep going.
+#   * persistent transport errors (ECONNREFUSED, ConnectionReset, repeated
+#     timeouts)                                    -> server is dead. Skipping
+#     here corrupts the output silently (N "completed" records with empty
+#     predictions). Trip a breaker after a small number of consecutive hard
+#     failures so generate_openai() raises and the shell driver fails-fast.
+# ---------------------------------------------------------------------------
+_CIRCUIT_LOCK = threading.Lock()
+_CIRCUIT_STATE: Dict[str, Any] = {"consec_hard": 0, "tripped": False, "last_err": ""}
+_CIRCUIT_THRESHOLD = 10  # consecutive hard failures before we declare death
+
+
+def _circuit_record_success() -> None:
+    with _CIRCUIT_LOCK:
+        _CIRCUIT_STATE["consec_hard"] = 0
+
+
+def _circuit_record_hard_failure(err: str) -> int:
+    with _CIRCUIT_LOCK:
+        _CIRCUIT_STATE["consec_hard"] = int(_CIRCUIT_STATE["consec_hard"]) + 1
+        _CIRCUIT_STATE["last_err"] = err
+        if _CIRCUIT_STATE["consec_hard"] >= _CIRCUIT_THRESHOLD:
+            _CIRCUIT_STATE["tripped"] = True
+        return int(_CIRCUIT_STATE["consec_hard"])
+
+
+def _circuit_is_tripped() -> bool:
+    with _CIRCUIT_LOCK:
+        return bool(_CIRCUIT_STATE["tripped"])
+
+
+def _circuit_reset() -> None:
+    """Reset between conditions so a previous death doesn't poison the next run."""
+    with _CIRCUIT_LOCK:
+        _CIRCUIT_STATE["consec_hard"] = 0
+        _CIRCUIT_STATE["tripped"] = False
+        _CIRCUIT_STATE["last_err"] = ""
+
+
+def _ping_openai_backend(args: argparse.Namespace, timeout: float = 5.0) -> Optional[str]:
+    """Returns None on success, or an error string. Used as pre-flight before
+    submitting a batch -- catches the case where vLLM never came up."""
+    base = args.openai_base_url.rstrip("/")
+    parsed = urllib.parse.urlparse(base + "/models")
+    if parsed.scheme not in ("http", "https") or not parsed.hostname:
+        return f"bad base url {args.openai_base_url!r}"
+    conn_cls: Any = http.client.HTTPSConnection if parsed.scheme == "https" else http.client.HTTPConnection
+    default_port = 443 if parsed.scheme == "https" else 80
+    path = parsed.path or "/"
+    if parsed.query:
+        path = f"{path}?{parsed.query}"
+    conn = conn_cls(parsed.hostname, parsed.port or default_port, timeout=timeout)
+    try:
+        try:
+            conn.request("GET", path, headers={"Authorization": f"Bearer {args.openai_api_key}"})
+            resp = conn.getresponse()
+            resp.read()
+        except (OSError, http.client.HTTPException) as exc:
+            return f"{type(exc).__name__}: {exc}"
+        if resp.status >= 500:
+            return f"HTTP {resp.status} {resp.reason}"
+        return None
+    finally:
+        conn.close()
+
+
 def generate_openai(
     served_model: str,
     records: Sequence[RetrievedRecord],
     args: argparse.Namespace,
 ) -> Tuple[List[str], List[float]]:
+    _circuit_reset()
+    ping_err = _ping_openai_backend(args)
+    if ping_err is not None:
+        raise RuntimeError(
+            f"Pre-flight check failed for {args.openai_base_url}: {ping_err}. "
+            "vLLM is not reachable; refusing to submit a batch that would all fail."
+        )
     if args.openai_concurrency <= 1:
         predictions: List[str] = []
         tps: List[float] = []
@@ -621,6 +726,17 @@ def openai_completion(
     request_path = parsed.path or "/"
     if parsed.query:
         request_path = f"{request_path}?{parsed.query}"
+    # Once the circuit is open we are certain the server is down -- fail fast
+    # rather than queueing thousands of doomed connection attempts that would
+    # otherwise be silently skipped and produce a corrupt output file.
+    if _circuit_is_tripped():
+        raise RuntimeError(
+            f"Backend circuit breaker open: vLLM at {args.openai_base_url} is "
+            f"unreachable after {_CIRCUIT_THRESHOLD} consecutive hard failures. "
+            f"Last error: {_CIRCUIT_STATE.get('last_err', 'unknown')!r}. "
+            "Inspect the vLLM server log for the crash traceback."
+        )
+
     started = time.perf_counter()
 
     def _attempt() -> Tuple[int, str, bytes]:
@@ -634,18 +750,22 @@ def openai_completion(
             conn.close()
 
     last_err: Optional[str] = None
+    last_transport_error = False  # True iff both attempts died at TCP/HTTP layer (server-down signal)
     status = 0
     reason = ""
     raw = b""
     # Retry once on transport error or on transient server-side failure (5xx /
-    # 408 / 429). One bad request shouldn't kill an N=1000 sweep; if vLLM
-    # genuinely died, the next call will also fail and we'll skip that record.
+    # 408 / 429). One flaky request shouldn't kill the sweep; conversely, a
+    # transport error that survives the retry is strong evidence the server
+    # itself is gone and the circuit breaker should learn about it.
     for attempt in range(2):
         try:
             status, reason, raw = _attempt()
+            last_transport_error = False
         except (OSError, http.client.HTTPException) as exc:
             last_err = f"{type(exc).__name__}: {exc}"
             status = 0
+            last_transport_error = True
             if attempt == 0:
                 time.sleep(1.0)
                 continue
@@ -660,8 +780,8 @@ def openai_completion(
     elapsed = time.perf_counter() - started
 
     # Per-request validation failures (most commonly: prompt+max_tokens exceeded
-    # max_model_len -- vLLM raises ValueError, which becomes 400). Skip rather
-    # than crash so the remaining records still finish.
+    # max_model_len -- vLLM raises ValueError, which becomes 400). Server is
+    # alive; just skip this record.
     if status in (400, 413, 422):
         body_preview = raw[:2048].decode("utf-8", errors="replace")
         LOG.warning(
@@ -670,15 +790,38 @@ def openai_completion(
             len(rec.retrieved_context or ""), len(rec.question or ""),
             body_preview[:400].replace("\n", " "),
         )
+        # 4xx doesn't reset the circuit either way -- it's neither success nor
+        # a transport failure. Leave the breaker state alone.
         return "", 0.0
-    # Transient/server-side failure that survived the retry -- still skip, do not
-    # crash. The vLLM server log holds the real traceback for diagnosis.
-    if status == 0 or status >= 500 or status in (408, 429):
+
+    # Transport-layer failure that survived the retry -> server is (probably)
+    # down. Count toward the circuit breaker; if too many in a row, raise.
+    if last_transport_error:
+        n = _circuit_record_hard_failure(last_err or "unknown")
+        if n >= _CIRCUIT_THRESHOLD:
+            raise RuntimeError(
+                f"Backend circuit breaker tripped after {n} consecutive transport "
+                f"errors. Latest: {last_err}. vLLM at {args.openai_base_url} is "
+                "almost certainly dead -- check its server log for the traceback."
+            )
         LOG.warning(
-            "[skip:5xx] persistent server-side failure for query id=%s after 2 attempts: %s",
-            rec.id, (last_err or "unknown")[:400],
+            "[skip:transport] query id=%s after 2 attempts: %s  (consec_hard=%d/%d)",
+            rec.id, (last_err or "unknown")[:400], n, _CIRCUIT_THRESHOLD,
         )
         return "", 0.0
+
+    # 5xx-with-body that survived the retry: server is alive enough to answer
+    # but this request keeps failing. Don't trip the circuit, just skip.
+    if status >= 500 or status in (408, 429):
+        LOG.warning(
+            "[skip:5xx] server-side failure for query id=%s after 2 attempts: %s",
+            rec.id, (last_err or "unknown")[:400],
+        )
+        # A 5xx-with-body proves the server is responding, so reset any
+        # accumulated transport-failure count we might have built up.
+        _circuit_record_success()
+        return "", 0.0
+
     if status >= 400:
         raise RuntimeError(
             f"OpenAI-compatible request failed for {url}: "
@@ -690,6 +833,7 @@ def openai_completion(
     usage = data.get("usage") or {}
     completion_tokens = usage.get("completion_tokens") or max(1, len(text.split()))
     speed = float(completion_tokens) / elapsed if elapsed > 0 else 0.0
+    _circuit_record_success()
     return text, speed
 
 
@@ -840,6 +984,15 @@ def main() -> None:
             out_dir / "retrieval_ft.jsonl",
         )
         validate_retrieval_ids("ft", retrieved["ft"], corpus, args.jsonl)
+
+    # Release the embedder's GPU footprint before any generation backend is
+    # touched. Empirically the encoder + corpus tensor sit at ~2.8 GiB on
+    # cuda; co-residence with a vLLM server that was started against an
+    # otherwise-empty GPU leaves no headroom for vLLM's activation bursts at
+    # concurrency > 3, and produces a CUDA OOM inside vLLM that kills the
+    # engine. The retrieval caches are already written to disk; the embedder
+    # has no remaining purpose in the run.
+    _release_gpu_caches()
 
     results: List[CellResult] = []
     llm_jobs = [

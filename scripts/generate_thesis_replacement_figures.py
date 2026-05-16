@@ -8,36 +8,40 @@ from pathlib import Path
 from statistics import mean
 
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
 
 
 ROOT = Path(__file__).resolve().parents[2]
 FIGURE_DIR = ROOT / "thesis" / "figures"
 
 
+# Figure 5.5: only the two LLM runs that completed a full one-epoch pass.
+# Partial / early-stopped runs (Phi-3.5-mini, Qwen2.5-3B, DeepSeek-R1-7B) are
+# documented in Table 5.3 but omitted here so the trace stays apples-to-apples.
 RUNS = [
     (
-        "Phi-3.5-mini (15k)",
-        ROOT / "MS-GPT/models/fine_tuned_llms/phi3.5_mini/final_adapter/trainer_state.json",
-    ),
-    (
-        "Qwen2.5-3B (47k)",
-        ROOT / "MS-GPT/models/fine_tuned_llms/qwen2.5_3b/final_adapter/trainer_state.json",
-    ),
-    (
-        "Mistral-7B (31.6k)",
+        "Mistral-7B-Instruct-v0.3",
         ROOT
         / "MS-GPT/models/fine_tuned_llms/mistral_7b_v0.3/checkpoint-31619/trainer_state.json",
     ),
     (
-        "Qwen2.5-7B (31.6k)",
+        "Qwen2.5-7B-Instruct",
         ROOT / "MS-GPT/models/fine_tuned_llms/qwen2.5_7b/checkpoint-31619/trainer_state.json",
     ),
-    (
-        "DeepSeek-R1-7B (5k)",
-        ROOT
-        / "MS-GPT/models/fine_tuned_llms/deepseek_r1_distill_7b/checkpoint-5000/trainer_state.json",
-    ),
 ]
+
+RUN_COLORS = ["#1f77b4", "#d62728"]
+
+# Models in the 1k generation slice whose adapters come from partial or
+# early-stopped checkpoints — their bars are hatched in Figure 5.6.
+PARTIAL_RUN_NAMES = {"phi3.5_mini", "deepseek_r1_distill_7b"}
+
+DISPLAY_NAMES = {
+    "phi3.5_mini": "Phi-3.5-mini",
+    "mistral_7b_v0.3": "Mistral-7B",
+    "qwen2.5_7b": "Qwen2.5-7B",
+    "deepseek_r1_distill_7b": "DeepSeek-R1-7B",
+}
 
 
 def rolling(values: list[float], window: int = 25) -> list[float]:
@@ -65,23 +69,48 @@ def training_trace() -> None:
     plt.style.use("seaborn-v0_8-whitegrid")
     fig, axes = plt.subplots(1, 2, figsize=(12, 4.4))
 
-    for label, path in RUNS:
+    for (label, path), color in zip(RUNS, RUN_COLORS):
         steps, losses, lrs = read_history(path)
-        axes[0].plot(steps, losses, alpha=0.12, linewidth=0.5)
-        axes[0].plot(steps, rolling(losses), label=label, linewidth=1.8)
-        axes[1].plot(steps, lrs, label=label, linewidth=1.8)
+        smoothed = rolling(losses)
+        axes[0].plot(steps, losses, alpha=0.18, linewidth=0.5, color=color)
+        axes[0].plot(steps, smoothed, label=label, linewidth=2.2, color=color)
+        axes[1].plot(steps, lrs, label=label, linewidth=2.2, color=color)
+        # Annotate the final smoothed loss at the right edge.
+        axes[0].annotate(
+            f"{smoothed[-1]:.3f}",
+            xy=(steps[-1], smoothed[-1]),
+            xytext=(6, 0),
+            textcoords="offset points",
+            fontsize=9,
+            color=color,
+            va="center",
+        )
 
     axes[0].set_title("Training Loss")
     axes[0].set_xlabel("Optimizer step")
     axes[0].set_ylabel("Loss")
-    axes[0].set_ylim(bottom=1.35)
-    axes[0].legend(frameon=False, fontsize=8)
+    axes[0].set_ylim(bottom=1.4)
+    axes[0].legend(
+        frameon=True,
+        fontsize=10,
+        loc="upper right",
+        facecolor="white",
+        framealpha=0.95,
+        edgecolor="lightgray",
+    )
 
     axes[1].set_title("Learning Rate")
     axes[1].set_xlabel("Optimizer step")
     axes[1].set_ylabel("Learning rate")
     axes[1].ticklabel_format(axis="y", style="sci", scilimits=(0, 0))
-    axes[1].legend(frameon=False, fontsize=8)
+    axes[1].legend(
+        frameon=True,
+        fontsize=10,
+        loc="upper right",
+        facecolor="white",
+        framealpha=0.95,
+        edgecolor="lightgray",
+    )
 
     fig.tight_layout()
     fig.savefig(FIGURE_DIR / "qlora_training_trace.png", dpi=220, bbox_inches="tight")
@@ -89,9 +118,11 @@ def training_trace() -> None:
 
 
 def generation_quality() -> None:
-    summary_path = ROOT / "paper_results/model_results/llms/summary_n1000.json"
+    summary_path = (
+        ROOT / "MS-GPT/paper_results/evaluation/llms_eval_1k/summary_n1000.json"
+    )
     rows = json.loads(summary_path.read_text())
-    names = [row["name"].replace("_", "\n") for row in rows]
+    labels = [DISPLAY_NAMES.get(row["name"], row["name"]) for row in rows]
     metrics = [
         ("ROUGE-L", "rougeL"),
         ("BERTScore F1", "bertscore_f1"),
@@ -99,21 +130,54 @@ def generation_quality() -> None:
     ]
 
     plt.style.use("seaborn-v0_8-whitegrid")
-    fig, ax = plt.subplots(figsize=(9.5, 4.6))
+    fig, ax = plt.subplots(figsize=(10.5, 5.0))
     x = list(range(len(rows)))
-    width = 0.24
+    width = 0.26
 
     for offset, (metric_name, key) in enumerate(metrics):
         values = [float(row[key]) for row in rows]
         positions = [item + (offset - 1) * width for item in x]
-        ax.bar(positions, values, width=width, label=metric_name)
+        bars = ax.bar(positions, values, width=width, label=metric_name)
+        # Hatch bars whose underlying adapter is partial / early-stopped.
+        for bar, row in zip(bars, rows):
+            if row["name"] in PARTIAL_RUN_NAMES:
+                bar.set_hatch("///")
+                bar.set_edgecolor("white")
+        # Numeric value on top of each bar.
+        for bar, value in zip(bars, values):
+            ax.text(
+                bar.get_x() + bar.get_width() / 2.0,
+                value + 0.012,
+                f"{value:.2f}",
+                ha="center",
+                va="bottom",
+                fontsize=8,
+            )
 
     ax.set_xticks(x)
-    ax.set_xticklabels(names, fontsize=8)
+    ax.set_xticklabels(labels, fontsize=10)
     ax.set_ylabel("Score")
-    ax.set_ylim(0, 1.0)
-    ax.set_title("Generation Quality on 1,000 Test Examples")
-    ax.legend(frameon=False, ncol=3, loc="upper center", bbox_to_anchor=(0.5, 1.12))
+    ax.set_ylim(0, 1.08)
+
+    metric_handles, metric_labels = ax.get_legend_handles_labels()
+    partial_patch = Patch(
+        facecolor="lightgray",
+        hatch="///",
+        edgecolor="white",
+        label="Partial / early-stopped run",
+    )
+    ax.legend(
+        metric_handles + [partial_patch],
+        metric_labels + ["Partial / early-stopped run"],
+        frameon=True,
+        ncol=4,
+        loc="upper center",
+        bbox_to_anchor=(0.5, 1.08),
+        facecolor="white",
+        framealpha=0.95,
+        edgecolor="lightgray",
+        fontsize=10,
+    )
 
     fig.tight_layout()
     fig.savefig(FIGURE_DIR / "llm_generation_quality.png", dpi=220, bbox_inches="tight")
